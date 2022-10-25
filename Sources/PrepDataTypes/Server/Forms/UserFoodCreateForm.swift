@@ -44,7 +44,7 @@ public struct UserFoodCreateForm: Codable {
 
 public extension UserFoodCreateForm {
     
-    func validate() throws {
+    func validate() throws -> Bool {
         /// `emoji` should be an emoji
         guard emoji.isSingleEmoji else {
             throw UserFoodCreateFormError.invalidEmoji
@@ -96,6 +96,8 @@ public extension UserFoodCreateForm {
         guard status == .notPublished || status == .pendingReview else {
             throw UserFoodCreateFormError.initialStatusMustPendingReviewOrNotPublished
         }
+        
+        return true
     }
 }
 

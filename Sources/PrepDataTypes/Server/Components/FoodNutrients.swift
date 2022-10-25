@@ -51,6 +51,13 @@ public struct FoodNutrient: Codable {
     public var usdaType: Int16?
     public var value: Double
     public var nutrientUnit: NutrientUnit
+    
+    public init(nutrientType: NutrientType? = nil, usdaType: Int16? = nil, value: Double, nutrientUnit: NutrientUnit) {
+        self.nutrientType = nutrientType
+        self.usdaType = usdaType
+        self.value = value
+        self.nutrientUnit = nutrientUnit
+    }
 }
 
 public enum FoodNutrientsError: Error {

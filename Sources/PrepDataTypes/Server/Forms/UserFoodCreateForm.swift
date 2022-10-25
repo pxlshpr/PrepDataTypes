@@ -45,6 +45,9 @@ public struct UserFoodCreateForm: Codable {
 public extension UserFoodCreateForm {
     
     func validate() throws -> Bool {
+        guard !name.isEmpty else {
+            throw UserFoodCreateFormError.nameIsEmpty
+        }
         /// `emoji` should be an emoji
         guard emoji.isSingleEmoji else {
             throw UserFoodCreateFormError.invalidEmoji
@@ -102,6 +105,7 @@ public extension UserFoodCreateForm {
 }
 
 public enum UserFoodCreateFormError: Error {
+    case nameIsEmpty
     case invalidEmoji
     case amountError(FoodValueError)
     case servingError(FoodValueError)

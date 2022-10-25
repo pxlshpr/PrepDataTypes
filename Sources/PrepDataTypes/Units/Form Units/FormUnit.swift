@@ -87,6 +87,42 @@ public extension FormUnit {
             return .serving
         }
     }
+    
+    var weightUnit: WeightUnit? {
+        switch self {
+        case .weight(let weightUnit):
+            return weightUnit
+        default:
+            return nil
+        }
+    }
+    
+    var volumeUnit: VolumeUnit? {
+        switch self {
+        case .volume(let volumeUnit):
+            return volumeUnit
+        default:
+            return nil
+        }
+    }
+    
+    var sizeUnitVolumePrefixUnit: VolumeUnit? {
+        switch self {
+        case .size(_, let volumeUnit):
+            return volumeUnit
+        default:
+            return nil
+        }
+    }
+    
+    var formSize: FormSize? {
+        switch self {
+        case .size(let formSize, _):
+            return formSize
+        default:
+            return nil
+        }
+    }
 }
 
 extension FormUnit: CustomStringConvertible {

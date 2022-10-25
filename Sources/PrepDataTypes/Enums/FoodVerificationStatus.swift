@@ -1,7 +1,8 @@
 import Foundation
 
-public enum FoodVerificationStatus: Int16, Codable {
-    case pending = 1
+public enum UserFoodStatus: Int16, Codable {
+    case notPublished = 1
+    case pendingReview
     case verified
     case rejected
 }

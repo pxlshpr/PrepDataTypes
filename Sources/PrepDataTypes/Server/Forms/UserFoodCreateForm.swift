@@ -44,7 +44,7 @@ public struct UserFoodCreateForm: Codable {
 
 public extension UserFoodCreateForm {
     
-    func validate() async throws {
+    func validate() throws {
         /// `emoji` should be an emoji
         guard emoji.isSingleEmoji else {
             throw UserFoodCreateFormError.invalidEmoji

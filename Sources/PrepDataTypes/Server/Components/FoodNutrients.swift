@@ -7,7 +7,14 @@ public struct FoodNutrients: Codable {
     public var protein: Double
     public var fat: Double
     public var micros: [FoodNutrient]
-    
+ 
+    public init(energyInKcal: Double, carb: Double, protein: Double, fat: Double, micros: [FoodNutrient]) {
+        self.energyInKcal = energyInKcal
+        self.carb = carb
+        self.protein = protein
+        self.fat = fat
+        self.micros = micros
+    }
 }
 
 public extension FoodNutrients {

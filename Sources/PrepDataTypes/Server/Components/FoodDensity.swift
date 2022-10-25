@@ -5,6 +5,13 @@ public struct FoodDensity: Codable {
     public var weightUnit: WeightUnit
     public var volumeAmount: Double
     public var volumeExplicitUnit: VolumeExplicitUnit
+    
+    public init(weightAmount: Double, weightUnit: WeightUnit, volumeAmount: Double, volumeExplicitUnit: VolumeExplicitUnit) {
+        self.weightAmount = weightAmount
+        self.weightUnit = weightUnit
+        self.volumeAmount = volumeAmount
+        self.volumeExplicitUnit = volumeExplicitUnit
+    }
 }
 
 public extension FoodDensity {

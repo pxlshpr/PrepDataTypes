@@ -7,6 +7,15 @@ public struct FoodValue: Codable {
     public var volumeExplicitUnit: VolumeExplicitUnit?
     public var sizeUnitId: String?
     public var sizeUnitVolumePrefixExplicitUnit: VolumeExplicitUnit?
+    
+    public init(value: Double, unitType: UnitType, weightUnit: WeightUnit? = nil, volumeExplicitUnit: VolumeExplicitUnit? = nil, sizeUnitId: String? = nil, sizeUnitVolumePrefixExplicitUnit: VolumeExplicitUnit? = nil) {
+        self.value = value
+        self.unitType = unitType
+        self.weightUnit = weightUnit
+        self.volumeExplicitUnit = volumeExplicitUnit
+        self.sizeUnitId = sizeUnitId
+        self.sizeUnitVolumePrefixExplicitUnit = sizeUnitVolumePrefixExplicitUnit
+    }
 }
 
 public extension FoodValue {

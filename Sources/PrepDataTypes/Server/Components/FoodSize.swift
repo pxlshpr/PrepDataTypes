@@ -14,6 +14,13 @@ public struct FoodSize: Codable {
             return name
         }
     }
+    
+    public init(name: String, volumePrefixExplicitUnit: VolumeExplicitUnit? = nil, quantity: Double, value: FoodValue) {
+        self.name = name
+        self.volumePrefixExplicitUnit = volumePrefixExplicitUnit
+        self.quantity = quantity
+        self.value = value
+    }
 }
 
 public extension FoodSize {

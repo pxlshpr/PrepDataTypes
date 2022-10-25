@@ -63,12 +63,12 @@ public extension UserFoodCreateForm {
         }
         
         if let linkUrl {
-            guard linkUrl.isValidURL else {
+            guard linkUrl.isValidUrl else {
                 throw UserFoodCreateFormError.invalidLinkUrl
             }
         }
         if let prefilledUrl {
-            guard prefilledUrl.isValidURL else {
+            guard prefilledUrl.isValidUrl else {
                 throw UserFoodCreateFormError.invalidPrefilledUrl
             }
         }

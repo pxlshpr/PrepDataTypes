@@ -1,25 +1,25 @@
 import Foundation
 
 public struct UserFoodCreateForm: Codable {
-    var name: String
-    var emoji: String
-    var detail: String?
-    var brand: String?
-    var amount: FoodValue
-    var serving: FoodValue?
-    var nutrients: FoodNutrients
-    var sizes: [FoodSize]
-    var density: FoodDensity?
-    var linkUrl: String?
-    var prefilledUrl: String?
-    var imageIds: [UUID]?
-    var status: UserFoodStatus
-    
-    var spawnedUserFoodId: UUID?
-    var spawnedDatabaseFoodId: UUID?
-    var userId: UUID
-    
-    var barcodes: [FoodBarcode]
+    public var name: String
+    public var emoji: String
+    public var detail: String?
+    public var brand: String?
+    public var amount: FoodValue
+    public var serving: FoodValue?
+    public var nutrients: FoodNutrients
+    public var sizes: [FoodSize]
+    public var density: FoodDensity?
+    public var linkUrl: String?
+    public var prefilledUrl: String?
+    public var imageIds: [UUID]?
+    public var status: UserFoodStatus
+
+    public var spawnedUserFoodId: UUID?
+    public var spawnedDatabaseFoodId: UUID?
+    public var userId: UUID
+
+    public var barcodes: [FoodBarcode]
 }
 
 public extension UserFoodCreateForm {

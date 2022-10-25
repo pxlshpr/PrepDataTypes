@@ -20,6 +20,26 @@ public struct UserFoodCreateForm: Codable {
     public var userId: UUID
 
     public var barcodes: [FoodBarcode]
+    
+    public init(name: String, emoji: String, detail: String? = nil, brand: String? = nil, amount: FoodValue, serving: FoodValue? = nil, nutrients: FoodNutrients, sizes: [FoodSize], density: FoodDensity? = nil, linkUrl: String? = nil, prefilledUrl: String? = nil, imageIds: [UUID]? = nil, status: UserFoodStatus, spawnedUserFoodId: UUID? = nil, spawnedDatabaseFoodId: UUID? = nil, userId: UUID, barcodes: [FoodBarcode]) {
+        self.name = name
+        self.emoji = emoji
+        self.detail = detail
+        self.brand = brand
+        self.amount = amount
+        self.serving = serving
+        self.nutrients = nutrients
+        self.sizes = sizes
+        self.density = density
+        self.linkUrl = linkUrl
+        self.prefilledUrl = prefilledUrl
+        self.imageIds = imageIds
+        self.status = status
+        self.spawnedUserFoodId = spawnedUserFoodId
+        self.spawnedDatabaseFoodId = spawnedDatabaseFoodId
+        self.userId = userId
+        self.barcodes = barcodes
+    }
 }
 
 public extension UserFoodCreateForm {

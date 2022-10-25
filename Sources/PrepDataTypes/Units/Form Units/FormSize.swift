@@ -2,7 +2,7 @@ import Foundation
 
 public struct FormSize: Hashable, Codable {
     
-    public var id: UUID
+//    public var id: UUID
     public var volumePrefixUnit: FormUnit?
     public var name: String
     public var unit: FormUnit
@@ -21,13 +21,21 @@ public struct FormSize: Hashable, Codable {
     public var internalQuantity: Double?
     public var internalAmount: Double?
 
+    public var id: String {
+        if let volumeUnit = volumePrefixUnit?.volumeUnit {
+            return "\(name)\(volumeUnit.rawValue)"
+        } else {
+            return name
+        }
+    }
+
     public init(quantity: Double = 1,
          volumePrefixUnit: FormUnit? = nil,
          name: String = "",
          amount: Double? = nil,
          unit: FormUnit = .serving
     ) {
-        self.id = UUID()
+//        self.id = UUID()
         self.volumePrefixUnit = volumePrefixUnit
         self.name = name
         self.unit = unit

@@ -5,16 +5,14 @@ public struct UserFoodCreateForm: Codable {
     public var emoji: String
     public var detail: String?
     public var brand: String?
-    public var barcodes: [FoodBarcode]
     public var status: UserFoodStatus
     public var info: UserFoodInfo
     
-    public init(name: String, emoji: String, detail: String? = nil, brand: String? = nil, barcodes: [FoodBarcode], status: UserFoodStatus, info: UserFoodInfo) {
+    public init(name: String, emoji: String, detail: String? = nil, brand: String? = nil, status: UserFoodStatus, info: UserFoodInfo) {
         self.name = name
         self.emoji = emoji
         self.detail = detail
         self.brand = brand
-        self.barcodes = barcodes
         self.status = status
         self.info = info
     }
@@ -29,11 +27,12 @@ public struct UserFoodInfo: Codable {
     public var linkUrl: String?
     public var prefilledUrl: String?
     public var imageIds: [UUID]?
+    public var barcodes: [FoodBarcode]
     public var spawnedUserFoodId: UUID?
     public var spawnedDatabaseFoodId: UUID?
     public var userId: UUID
     
-    public init(amount: FoodValue, serving: FoodValue? = nil, nutrients: FoodNutrients, sizes: [FoodSize], density: FoodDensity? = nil, linkUrl: String? = nil, prefilledUrl: String? = nil, imageIds: [UUID]? = nil, spawnedUserFoodId: UUID? = nil, spawnedDatabaseFoodId: UUID? = nil, userId: UUID) {
+    public init(amount: FoodValue, serving: FoodValue? = nil, nutrients: FoodNutrients, sizes: [FoodSize], density: FoodDensity? = nil, linkUrl: String? = nil, prefilledUrl: String? = nil, imageIds: [UUID]? = nil, barcodes: [FoodBarcode], spawnedUserFoodId: UUID? = nil, spawnedDatabaseFoodId: UUID? = nil, userId: UUID) {
         self.amount = amount
         self.serving = serving
         self.nutrients = nutrients
@@ -42,6 +41,7 @@ public struct UserFoodInfo: Codable {
         self.linkUrl = linkUrl
         self.prefilledUrl = prefilledUrl
         self.imageIds = imageIds
+        self.barcodes = barcodes
         self.spawnedUserFoodId = spawnedUserFoodId
         self.spawnedDatabaseFoodId = spawnedDatabaseFoodId
         self.userId = userId

@@ -1,6 +1,6 @@
 import Foundation
 
-public struct UserFoodCreateForm: Codable {
+public struct UserFoodData: Codable {
     public var name: String
     public var emoji: String
     public var detail: String?
@@ -42,69 +42,69 @@ public struct UserFoodCreateForm: Codable {
     }
 }
 
-public extension UserFoodCreateForm {
+public extension UserFoodData {
     
     func validate() throws -> Bool {
         guard !name.isEmpty else {
-            throw UserFoodCreateFormError.nameIsEmpty
+            throw UserFoodDataError.nameIsEmpty
         }
         /// `emoji` should be an emoji
         guard emoji.isSingleEmoji else {
-            throw UserFoodCreateFormError.invalidEmoji
+            throw UserFoodDataError.invalidEmoji
         }
         
         /// `amount` should have a valid `FoodValue`
         do {
             try amount.validate(within: self)
         } catch let error as FoodValueError {
-            throw UserFoodCreateFormError.amountError(error)
+            throw UserFoodDataError.amountError(error)
         }
         
         /// `serving` should have a valid `FoodValue` if provided
         do {
             try serving?.validate(within: self)
         } catch let error as FoodValueError {
-            throw UserFoodCreateFormError.servingError(error)
+            throw UserFoodDataError.servingError(error)
         }
 
         do {
             try nutrients.validate()
         } catch let error as FoodNutrientsError {
-            throw UserFoodCreateFormError.nutrientsError(error)
+            throw UserFoodDataError.nutrientsError(error)
         }
 
         do {
             try sizes.validate(within: self)
         } catch let error as FoodSizeError {
-            throw UserFoodCreateFormError.sizesError(error)
+            throw UserFoodDataError.sizesError(error)
         }
         
         do {
             try density?.validate()
         } catch let error as FoodDensityError {
-            throw UserFoodCreateFormError.densityError(error)
+            throw UserFoodDataError.densityError(error)
         }
         
         if let linkUrl {
             guard linkUrl.isValidUrl else {
-                throw UserFoodCreateFormError.invalidLinkUrl
+                throw UserFoodDataError.invalidLinkUrl
             }
         }
         if let prefilledUrl {
             guard prefilledUrl.isValidUrl else {
-                throw UserFoodCreateFormError.invalidPrefilledUrl
+                throw UserFoodDataError.invalidPrefilledUrl
             }
         }
         
         guard status == .notPublished || status == .pendingReview else {
-            throw UserFoodCreateFormError.initialStatusMustPendingReviewOrNotPublished
+            throw UserFoodDataError.initialStatusMustPendingReviewOrNotPublished
         }
         
         return true
     }
 }
 
-public enum UserFoodCreateFormError: Error {
+public enum UserFoodDataError: Error {
     case nameIsEmpty
     case invalidEmoji
     case amountError(FoodValueError)

@@ -19,7 +19,7 @@ public struct FoodValue: Codable {
 }
 
 public extension FoodValue {
-    func validate(within form: UserFoodCreateForm) throws {
+    func validate(within userFoodData: UserFoodData) throws {
         
         guard value > 0 else {
             throw FoodValueError.nonPositiveValue
@@ -60,7 +60,7 @@ public extension FoodValue {
             }
 
             /// we should have a size matched that `sizeUnitId`
-            guard let size = form.sizes.size(for: sizeUnitId) else {
+            guard let size = userFoodData.sizes.size(for: sizeUnitId) else {
                 throw FoodValueError.invalidSizeId
             }
             

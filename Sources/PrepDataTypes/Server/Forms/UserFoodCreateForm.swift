@@ -114,7 +114,6 @@ public enum UserFoodCreateFormError: Error {
     case densityError(FoodDensityError)
     case invalidLinkUrl
     case invalidPrefilledUrl
-    case duplicateBarcodes
     case existingBarcode
     case initialStatusMustPendingReviewOrNotPublished
     case nonExistentUser

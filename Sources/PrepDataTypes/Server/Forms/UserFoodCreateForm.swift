@@ -1,10 +1,26 @@
 import Foundation
 
-public struct UserFoodData: Codable {
+public struct UserFoodCreateForm: Codable {
     public var name: String
     public var emoji: String
     public var detail: String?
     public var brand: String?
+    public var barcodes: [FoodBarcode]
+    public var status: UserFoodStatus
+    public var info: UserFoodInfo
+    
+    public init(name: String, emoji: String, detail: String? = nil, brand: String? = nil, barcodes: [FoodBarcode], status: UserFoodStatus, info: UserFoodInfo) {
+        self.name = name
+        self.emoji = emoji
+        self.detail = detail
+        self.brand = brand
+        self.barcodes = barcodes
+        self.status = status
+        self.info = info
+    }
+}
+
+public struct UserFoodInfo: Codable {
     public var amount: FoodValue
     public var serving: FoodValue?
     public var nutrients: FoodNutrients
@@ -13,19 +29,11 @@ public struct UserFoodData: Codable {
     public var linkUrl: String?
     public var prefilledUrl: String?
     public var imageIds: [UUID]?
-    public var status: UserFoodStatus
-
     public var spawnedUserFoodId: UUID?
     public var spawnedDatabaseFoodId: UUID?
     public var userId: UUID
-
-    public var barcodes: [FoodBarcode]
     
-    public init(name: String, emoji: String, detail: String? = nil, brand: String? = nil, amount: FoodValue, serving: FoodValue? = nil, nutrients: FoodNutrients, sizes: [FoodSize], density: FoodDensity? = nil, linkUrl: String? = nil, prefilledUrl: String? = nil, imageIds: [UUID]? = nil, status: UserFoodStatus, spawnedUserFoodId: UUID? = nil, spawnedDatabaseFoodId: UUID? = nil, userId: UUID, barcodes: [FoodBarcode]) {
-        self.name = name
-        self.emoji = emoji
-        self.detail = detail
-        self.brand = brand
+    public init(amount: FoodValue, serving: FoodValue? = nil, nutrients: FoodNutrients, sizes: [FoodSize], density: FoodDensity? = nil, linkUrl: String? = nil, prefilledUrl: String? = nil, imageIds: [UUID]? = nil, spawnedUserFoodId: UUID? = nil, spawnedDatabaseFoodId: UUID? = nil, userId: UUID) {
         self.amount = amount
         self.serving = serving
         self.nutrients = nutrients
@@ -34,15 +42,13 @@ public struct UserFoodData: Codable {
         self.linkUrl = linkUrl
         self.prefilledUrl = prefilledUrl
         self.imageIds = imageIds
-        self.status = status
         self.spawnedUserFoodId = spawnedUserFoodId
         self.spawnedDatabaseFoodId = spawnedDatabaseFoodId
         self.userId = userId
-        self.barcodes = barcodes
     }
 }
 
-public extension UserFoodData {
+public extension UserFoodCreateForm {
     
     func validate() throws -> Bool {
         guard !name.isEmpty else {
@@ -53,6 +59,17 @@ public extension UserFoodData {
             throw UserFoodDataError.invalidEmoji
         }
         
+        
+        guard status == .notPublished || status == .pendingReview else {
+            throw UserFoodDataError.initialStatusMustPendingReviewOrNotPublished
+        }
+        
+        return true
+    }
+}
+
+public extension UserFoodInfo {
+    func validate() throws -> Bool {
         /// `amount` should have a valid `FoodValue`
         do {
             try amount.validate(within: self)
@@ -95,11 +112,6 @@ public extension UserFoodData {
                 throw UserFoodDataError.invalidPrefilledUrl
             }
         }
-        
-        guard status == .notPublished || status == .pendingReview else {
-            throw UserFoodDataError.initialStatusMustPendingReviewOrNotPublished
-        }
-        
         return true
     }
 }

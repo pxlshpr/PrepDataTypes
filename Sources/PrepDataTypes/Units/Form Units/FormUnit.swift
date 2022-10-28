@@ -170,3 +170,34 @@ extension FormUnit: Equatable {
     }
 }
 
+
+public extension FormUnit {
+    var foodLabelUnit: FoodLabelUnit? {
+        switch self {
+        case .weight(let weightUnit):
+            switch weightUnit {
+            case .g:
+                return .g
+            case .oz:
+                return .oz
+            case .mg:
+                return .mg
+            default:
+                return nil
+            }
+        case .volume(let volumeUnit):
+            switch volumeUnit {
+            case .cup:
+                return .cup
+            case .tablespoon:
+                return .tbsp
+            case .mL:
+                return .ml
+            default:
+                return nil
+            }
+        default:
+            return nil
+        }
+    }
+}

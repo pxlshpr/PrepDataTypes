@@ -41,3 +41,14 @@ public extension EnergyUnit {
         kcal * 4.184
     }
 }
+
+public extension EnergyUnit {
+    var foodLabelUnit: FoodLabelUnit? {
+        switch self {
+        case .kcal:
+            return .kcal
+        case .kJ:
+            return .kj
+        }
+    }
+}

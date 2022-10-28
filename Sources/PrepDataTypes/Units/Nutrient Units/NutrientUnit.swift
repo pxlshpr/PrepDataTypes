@@ -95,3 +95,29 @@ extension NutrientUnit: DescribableUnit {
         description
     }
 }
+
+public extension NutrientUnit {
+    var foodLabelUnit: FoodLabelUnit? {
+        switch self {
+        case .g:
+            return .g
+        case .mcg, .mcgDFE, .mcgRAE:
+            return .mcg
+        case .mg, .mgAT, .mgNE:
+            return .mg
+        case .p:
+            return .p
+        case .IU:
+//            return .iu
+            return nil
+        case .kcal:
+            return .kcal
+        case .kJ:
+            return .kj
+                        
+        /// Used by the USDA Database
+        case .pH, .SG, .mcmolTE, .mgGAE:
+            return nil
+        }
+    }
+}

@@ -10,7 +10,7 @@ public struct FoodFormOutput {
     public let shouldPublish: Bool
     public let createForm: UserFoodCreateForm
     
-    init(createForm: UserFoodCreateForm,
+    public init(createForm: UserFoodCreateForm,
          fieldsAndSourcesJSONData: Data,
          images: [UUID : UIImage],
          shouldPublish: Bool

@@ -42,10 +42,10 @@ public struct UserFoodInfo: Codable {
     public var imageIds: [UUID]?
     public var barcodes: [FoodBarcode]
     public var spawnedUserFoodId: UUID?
-    public var spawnedDatabaseFoodId: UUID?
+    public var spawnedPresetFoodId: UUID?
     public var cloudKitId: String
     
-    public init(amount: FoodValue, serving: FoodValue? = nil, nutrients: FoodNutrients, sizes: [FoodSize], density: FoodDensity? = nil, linkUrl: String? = nil, prefilledUrl: String? = nil, imageIds: [UUID]? = nil, barcodes: [FoodBarcode], spawnedUserFoodId: UUID? = nil, spawnedDatabaseFoodId: UUID? = nil, cloudKitId: String) {
+    public init(amount: FoodValue, serving: FoodValue? = nil, nutrients: FoodNutrients, sizes: [FoodSize], density: FoodDensity? = nil, linkUrl: String? = nil, prefilledUrl: String? = nil, imageIds: [UUID]? = nil, barcodes: [FoodBarcode], spawnedUserFoodId: UUID? = nil, spawnedPresetFoodId: UUID? = nil, cloudKitId: String) {
         self.amount = amount
         self.serving = serving
         self.nutrients = nutrients
@@ -56,7 +56,7 @@ public struct UserFoodInfo: Codable {
         self.imageIds = imageIds
         self.barcodes = barcodes
         self.spawnedUserFoodId = spawnedUserFoodId
-        self.spawnedDatabaseFoodId = spawnedDatabaseFoodId
+        self.spawnedPresetFoodId = spawnedPresetFoodId
         self.cloudKitId = cloudKitId
     }
 }
@@ -142,6 +142,6 @@ public enum UserFoodDataError: Error {
     case initialStatusNotHiddenOrPendingReview
     case nonExistentUser
     case nonExistentSpawnedUserFood
-    case nonExistentSpawnedDatabaseFood
-    case bothSpawnedUserAndDatabaseFoodsWereProvided
+    case nonExistentSpawnedPresetFood
+    case bothSpawnedUserFoodAndPresetFoodWasProvided
 }

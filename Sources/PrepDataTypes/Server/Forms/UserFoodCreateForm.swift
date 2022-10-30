@@ -6,16 +6,16 @@ public struct UserFoodCreateForm: Codable {
     public var emoji: String
     public var detail: String?
     public var brand: String?
-    public var status: UserFoodStatus
+    public var publishStatus: UserFoodPublishStatus
     public var info: UserFoodInfo
     
-    public init(id: UUID, name: String, emoji: String, detail: String? = nil, brand: String? = nil, status: UserFoodStatus, info: UserFoodInfo) {
+    public init(id: UUID, name: String, emoji: String, detail: String? = nil, brand: String? = nil, publishStatus: UserFoodPublishStatus, info: UserFoodInfo) {
         self.id = id
         self.name = name
         self.emoji = emoji
         self.detail = detail
         self.brand = brand
-        self.status = status
+        self.publishStatus = publishStatus
         self.info = info
     }
 }
@@ -62,8 +62,8 @@ public extension UserFoodCreateForm {
         }
         
         
-        guard status == .notPublished || status == .pendingReview else {
-            throw UserFoodDataError.initialStatusMustPendingReviewOrNotPublished
+        guard publishStatus == .hidden || publishStatus == .pendingReview else {
+            throw UserFoodDataError.initialStatusNotHiddenOrPendingReview
         }
         
         return true
@@ -128,7 +128,7 @@ public enum UserFoodDataError: Error {
     case densityError(FoodDensityError)
     case invalidLinkUrl
     case invalidPrefilledUrl
-    case initialStatusMustPendingReviewOrNotPublished
+    case initialStatusNotHiddenOrPendingReview
     case nonExistentUser
     case nonExistentSpawnedUserFood
     case nonExistentSpawnedDatabaseFood

@@ -32,9 +32,9 @@ public struct UserFoodInfo: Codable {
     public var barcodes: [FoodBarcode]
     public var spawnedUserFoodId: UUID?
     public var spawnedDatabaseFoodId: UUID?
-    public var cloudKitRecordId: String
+    public var cloudKitId: String
     
-    public init(amount: FoodValue, serving: FoodValue? = nil, nutrients: FoodNutrients, sizes: [FoodSize], density: FoodDensity? = nil, linkUrl: String? = nil, prefilledUrl: String? = nil, imageIds: [UUID]? = nil, barcodes: [FoodBarcode], spawnedUserFoodId: UUID? = nil, spawnedDatabaseFoodId: UUID? = nil, cloudKitRecordId: String) {
+    public init(amount: FoodValue, serving: FoodValue? = nil, nutrients: FoodNutrients, sizes: [FoodSize], density: FoodDensity? = nil, linkUrl: String? = nil, prefilledUrl: String? = nil, imageIds: [UUID]? = nil, barcodes: [FoodBarcode], spawnedUserFoodId: UUID? = nil, spawnedDatabaseFoodId: UUID? = nil, cloudKitId: String) {
         self.amount = amount
         self.serving = serving
         self.nutrients = nutrients
@@ -46,7 +46,7 @@ public struct UserFoodInfo: Codable {
         self.barcodes = barcodes
         self.spawnedUserFoodId = spawnedUserFoodId
         self.spawnedDatabaseFoodId = spawnedDatabaseFoodId
-        self.cloudKitRecordId = cloudKitRecordId
+        self.cloudKitId = cloudKitId
     }
 }
 

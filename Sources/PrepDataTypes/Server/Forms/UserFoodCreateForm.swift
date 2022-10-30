@@ -32,9 +32,9 @@ public struct UserFoodInfo: Codable {
     public var barcodes: [FoodBarcode]
     public var spawnedUserFoodId: UUID?
     public var spawnedDatabaseFoodId: UUID?
-    public var userId: UUID
+    public var userId: String
     
-    public init(amount: FoodValue, serving: FoodValue? = nil, nutrients: FoodNutrients, sizes: [FoodSize], density: FoodDensity? = nil, linkUrl: String? = nil, prefilledUrl: String? = nil, imageIds: [UUID]? = nil, barcodes: [FoodBarcode], spawnedUserFoodId: UUID? = nil, spawnedDatabaseFoodId: UUID? = nil, userId: UUID) {
+    public init(amount: FoodValue, serving: FoodValue? = nil, nutrients: FoodNutrients, sizes: [FoodSize], density: FoodDensity? = nil, linkUrl: String? = nil, prefilledUrl: String? = nil, imageIds: [UUID]? = nil, barcodes: [FoodBarcode], spawnedUserFoodId: UUID? = nil, spawnedDatabaseFoodId: UUID? = nil, userId: String) {
         self.amount = amount
         self.serving = serving
         self.nutrients = nutrients

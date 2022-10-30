@@ -1,6 +1,7 @@
 import Foundation
 
 public struct UserFoodCreateForm: Codable {
+    public var id: UUID
     public var name: String
     public var emoji: String
     public var detail: String?
@@ -8,7 +9,8 @@ public struct UserFoodCreateForm: Codable {
     public var status: UserFoodStatus
     public var info: UserFoodInfo
     
-    public init(name: String, emoji: String, detail: String? = nil, brand: String? = nil, status: UserFoodStatus, info: UserFoodInfo) {
+    public init(id: UUID, name: String, emoji: String, detail: String? = nil, brand: String? = nil, status: UserFoodStatus, info: UserFoodInfo) {
+        self.id = id
         self.name = name
         self.emoji = emoji
         self.detail = detail

@@ -2,6 +2,7 @@ import Foundation
 
 public struct UserFoodCreateForm: Codable {
     public var id: UUID
+    public var foodType: FoodType
     public var name: String
     public var emoji: String
     public var detail: String?
@@ -9,8 +10,18 @@ public struct UserFoodCreateForm: Codable {
     public var publishStatus: UserFoodPublishStatus
     public var info: UserFoodInfo
     
-    public init(id: UUID, name: String, emoji: String, detail: String? = nil, brand: String? = nil, publishStatus: UserFoodPublishStatus, info: UserFoodInfo) {
+    public init(
+        id: UUID,
+        foodType: FoodType = .rawFood,
+        name: String,
+        emoji: String,
+        detail: String? = nil,
+        brand: String? = nil,
+        publishStatus: UserFoodPublishStatus,
+        info: UserFoodInfo
+    ) {
         self.id = id
+        self.foodType = foodType
         self.name = name
         self.emoji = emoji
         self.detail = detail

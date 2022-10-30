@@ -1,3 +1,4 @@
+#if os(iOS)
 import SwiftUI
 
 /**
@@ -21,3 +22,4 @@ public struct FoodFormOutput {
         self.createForm = createForm
     }
 }
+#endif

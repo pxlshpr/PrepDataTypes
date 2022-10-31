@@ -1,6 +1,6 @@
 import Foundation
 
-public struct UserExplicitVolumeUnits: Codable {
+public struct UserExplicitVolumeUnits: Codable, Hashable {
     public let cup: VolumeExplicitUnit
     public let teaspoon: VolumeExplicitUnit
     public let tablespoon: VolumeExplicitUnit

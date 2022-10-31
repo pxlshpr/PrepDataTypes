@@ -1,11 +1,6 @@
 import Foundation
-import CoreData
 
-public struct Goal: Identifiable {
-    public let id: UUID
-}
-
-public struct Day: Identifiable {
+public struct Day: Identifiable, Hashable {
     public let id: UUID
     public let date: Date
     
@@ -15,5 +10,5 @@ public struct Day: Identifiable {
     public var goalBonusEnergySplitRatio: GoalBonusEnergySplitRatio?
     
     public var syncStatus: SyncStatus
-    public var lastSyncedAt: Date?
+    public var updatedAt: Date
 }

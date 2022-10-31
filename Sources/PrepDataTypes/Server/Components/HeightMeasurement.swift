@@ -1,6 +1,6 @@
 import Foundation
 
-public struct HeightMeasurement: Codable {
+public struct HeightMeasurement: Codable, Hashable {
     public let amount: Double
     public let heightUnit: HeightUnit
     public let timestamp: Int32

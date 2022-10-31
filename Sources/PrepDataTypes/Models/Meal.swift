@@ -1,8 +1,14 @@
-//
-//  File.swift
-//  
-//
-//  Created by Ahmed Khalaf on 31/10/2022.
-//
-
 import Foundation
+
+public struct Meal: Identifiable, Hashable {
+    public let id: UUID
+    
+    public var day: Day
+    public var name: String
+    public var time: Date
+    public var markedAsEatenAt: Date?
+
+    public var syncStatus: SyncStatus
+    public var updatedAt: Date
+    public var deletedAt: Date?
+}

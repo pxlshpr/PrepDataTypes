@@ -1,8 +1,9 @@
-//
-//  File.swift
-//  
-//
-//  Created by Ahmed Khalaf on 31/10/2022.
-//
-
 import Foundation
+
+public struct Barcode: Identifiable, Hashable {
+    public let id: UUID
+    public let food: Food
+    public let payload: String
+    public let symbology: BarcodeSymbology
+}
+

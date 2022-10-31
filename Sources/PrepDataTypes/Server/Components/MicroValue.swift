@@ -1,6 +1,6 @@
 import Foundation
 
-public struct MicroValue: Codable {
+public struct MicroValue: Codable, Hashable {
     public let nutrientType: NutrientType
     public let amount: Double
     public let nutrientUnit: NutrientUnit

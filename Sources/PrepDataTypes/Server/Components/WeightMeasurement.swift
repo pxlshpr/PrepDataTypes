@@ -1,6 +1,6 @@
 import Foundation
 
-public struct WeightMeasurement: Codable {
+public struct WeightMeasurement: Codable, Hashable {
     public let amount: Double
     public let weightUnit: WeightUnit
     public let timestamp: Int32

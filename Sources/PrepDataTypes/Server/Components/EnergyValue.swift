@@ -1,6 +1,6 @@
 import Foundation
 
-public struct EnergyValue: Codable {
+public struct EnergyValue: Codable, Hashable {
     public let amount: Double
     public let energyUnit: EnergyUnit
     

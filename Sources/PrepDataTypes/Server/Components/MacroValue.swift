@@ -1,6 +1,6 @@
 import Foundation
 
-public struct MacroValue: Codable {
+public struct MacroValue: Codable, Hashable {
     let macro: Macro
     let amount: Double
     

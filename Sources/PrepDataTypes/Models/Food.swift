@@ -2,6 +2,7 @@ import Foundation
 
 public struct Food: Identifiable, Hashable {
     public let id: UUID
+    public let type: FoodType
     public let dataset: FoodDataset?
     public let name: String
     public let emoji: String

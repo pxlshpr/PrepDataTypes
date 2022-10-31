@@ -9,6 +9,9 @@ public struct Day: Identifiable, Hashable {
     public var goalBonusEnergySplit: GoalBonusEnergySplit?
     public var goalBonusEnergySplitRatio: GoalBonusEnergySplitRatio?
     
+    public var energyExpenditures: [EnergyExpenditure]
+    public var meals: [Meal]
+    
     public var syncStatus: SyncStatus
     public var updatedAt: Date
 }

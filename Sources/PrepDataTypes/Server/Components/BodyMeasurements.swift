@@ -1,6 +1,6 @@
 import Foundation
 
-public struct AnthropometricRecords: Codable {
+public struct BodyMeasurements: Codable {
     public let currentWeight: WeightMeasurement?
     public let currentHeight: HeightMeasurement?
     public let pastWeights: [WeightMeasurement]

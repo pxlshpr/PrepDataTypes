@@ -1,4 +1,4 @@
-public enum GoalEnergySplit: Int16, Codable {
+public enum GoalBonusEnergySplit: Int16, Codable {
     case carb = 1
     case fat
     case protein

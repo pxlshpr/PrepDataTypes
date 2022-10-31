@@ -1,6 +1,6 @@
 public struct GoalMicro: Codable {
-    public let type: GoalMicroType
+    public let nutrientType: NutrientType
     public let micro: GoalMicroType
     public let value: Double
-    public let unit: NutrientUnit
+    public let nutrientUnit: NutrientUnit
 }

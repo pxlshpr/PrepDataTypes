@@ -15,6 +15,8 @@ public struct Food: Identifiable, Hashable {
     public let firstUsedAt: Date?
     public let info: UserFoodInfo
     
+    public let childrenFoods: [Food]
+    
     public var syncStatus: SyncStatus
     public var jsonSyncStatus: SyncStatus
     public var updatedAt: Date

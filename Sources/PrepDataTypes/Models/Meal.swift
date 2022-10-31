@@ -8,6 +8,8 @@ public struct Meal: Identifiable, Hashable {
     public var time: Date
     public var markedAsEatenAt: Date?
 
+    public var foods: [Food]
+
     public var syncStatus: SyncStatus
     public var updatedAt: Date
     public var deletedAt: Date?

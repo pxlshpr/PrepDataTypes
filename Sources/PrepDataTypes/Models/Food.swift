@@ -1,0 +1,22 @@
+import Foundation
+
+public struct Food: Identifiable, Hashable {
+    public let id: UUID
+    public let dataset: FoodDataset?
+    public let name: String
+    public let emoji: String
+    public let detail: String?
+    public let brand: String?
+    public let publishStatus: UserFoodPublishStatus
+    public let numberOfTimesConsumedGlobally: Int
+    public let numberOfTimesConsumed: Int
+    public let lastUsedAt: Date?
+    public let firstUsedAt: Date?
+    public let info: UserFoodInfo
+    
+    public var syncStatus: SyncStatus
+    public var jsonSyncStatus: SyncStatus
+    public var updatedAt: Date
+    public var deletedAt: Date?
+}
+

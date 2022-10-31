@@ -1,6 +1,6 @@
 import Foundation
 
-public struct FoodNutrients: Codable {
+public struct FoodNutrients: Codable, Hashable {
     
     public var energyInKcal: Double
     public var carb: Double
@@ -39,7 +39,7 @@ public extension FoodNutrients {
     }
 }
 
-public struct FoodNutrient: Codable {
+public struct FoodNutrient: Codable, Hashable {
     /**
      This can only be `nil` for USDA imported nutrients that aren't yet supported (and must therefore have a `usdaType` if so).
      */

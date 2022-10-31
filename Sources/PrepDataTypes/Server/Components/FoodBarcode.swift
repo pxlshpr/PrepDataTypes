@@ -1,6 +1,6 @@
 import Foundation
 
-public struct FoodBarcode: Codable {
+public struct FoodBarcode: Codable, Hashable {
     public var payload: String
     public var symbology: BarcodeSymbology
     

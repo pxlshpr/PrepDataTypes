@@ -1,6 +1,6 @@
 import Foundation
 
-public struct FoodDensity: Codable {
+public struct FoodDensity: Codable, Hashable {
     public var weightAmount: Double
     public var weightUnit: WeightUnit
     public var volumeAmount: Double

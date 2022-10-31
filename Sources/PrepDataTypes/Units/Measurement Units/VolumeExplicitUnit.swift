@@ -1,6 +1,6 @@
 import SwiftSugar
 
-public enum VolumeExplicitUnit: Int16, Codable {
+public enum VolumeExplicitUnit: Int16, Codable, Hashable {
     
     case ml = 1
 

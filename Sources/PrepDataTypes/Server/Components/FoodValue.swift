@@ -1,6 +1,6 @@
 import Foundation
 
-public struct FoodValue: Codable {
+public struct FoodValue: Codable, Hashable {
     public var value: Double
     public var unitType: UnitType
     public var weightUnit: WeightUnit?

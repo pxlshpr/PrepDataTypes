@@ -1,7 +1,7 @@
 import Foundation
 import SwiftSugar
 
-public struct FoodSize: Codable {
+public struct FoodSize: Codable, Hashable {
     public var name: String
     public var volumePrefixExplicitUnit: VolumeExplicitUnit?
     public var quantity: Double

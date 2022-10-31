@@ -1,6 +1,6 @@
 import Foundation
 
-public enum UnitType: Int16, Codable, CaseIterable {
+public enum UnitType: Int16, Codable, CaseIterable, Hashable {
     case weight = 1
     case volume
     case serving

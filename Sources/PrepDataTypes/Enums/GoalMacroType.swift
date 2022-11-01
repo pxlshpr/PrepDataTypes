@@ -1,4 +1,4 @@
-import SwiftUI
+import Foundation
 
 public enum GoalMacroType: Int16, Codable, CaseIterable {
     case absolute = 1

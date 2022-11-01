@@ -1,5 +1,4 @@
 import Foundation
-import CoreData
 
 //MARK: - Stop using these
 public struct UserFood: Identifiable {

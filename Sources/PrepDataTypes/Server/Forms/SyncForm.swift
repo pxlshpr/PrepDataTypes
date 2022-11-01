@@ -90,8 +90,11 @@ extension SyncForm {
 
 public extension SyncForm {
     var description: String {
-        
-        "Updates: \(updates?.count ?? 0), Deletions: \(deletions?.count ?? 0), Version: \(versionTimestamp)"
+        if isEmpty {
+            return "Version: \(Int(versionTimestamp))"
+        } else {
+            return "Updates: \(updates?.count ?? 0), Deletions: \(deletions?.count ?? 0), Version: \(versionTimestamp)"
+        }
     }
     
     var isEmpty: Bool {

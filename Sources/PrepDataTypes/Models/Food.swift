@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Food: Identifiable, Hashable {
+public struct Food: Identifiable, Hashable, Codable {
     public let id: UUID
     public let type: FoodType
     public let dataset: FoodDataset?

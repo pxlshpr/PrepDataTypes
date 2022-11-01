@@ -1,6 +1,6 @@
 import Foundation
 
-public struct TokenRedemptions: Identifiable, Hashable {
+public struct TokenRedemptions: Identifiable, Hashable, Codable {
     public let id: UUID
     public var tokensRedeemed: Int
 }

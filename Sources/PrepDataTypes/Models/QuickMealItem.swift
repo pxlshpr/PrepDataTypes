@@ -1,6 +1,6 @@
 import Foundation
 
-public struct QuickMealItem: Identifiable, Hashable {
+public struct QuickMealItem: Identifiable, Hashable, Codable {
     public let id: UUID
     
     public var meal: Meal

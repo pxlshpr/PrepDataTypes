@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Meal: Identifiable, Hashable {
+public struct Meal: Identifiable, Hashable, Codable {
     public let id: UUID
     
     public var day: Day

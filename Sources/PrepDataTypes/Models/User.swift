@@ -1,6 +1,6 @@
 import Foundation
 
-public struct User: Identifiable, Hashable {
+public struct User: Identifiable, Hashable, Codable {
     public let id: UUID
     public let cloudKitId: String?
     

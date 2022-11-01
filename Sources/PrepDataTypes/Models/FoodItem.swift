@@ -1,6 +1,6 @@
 import Foundation
 
-public struct FoodItem: Identifiable, Hashable {
+public struct FoodItem: Identifiable, Hashable, Codable {
     public let id: UUID
     public let food: Food
     public let parentFood: Food?

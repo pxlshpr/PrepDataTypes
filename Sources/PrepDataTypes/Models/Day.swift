@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Day: Identifiable, Hashable {
+public struct Day: Identifiable, Hashable, Codable {
     public let id: UUID
     public let date: Date
     

@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Goal: Identifiable, Hashable {
+public struct Goal: Identifiable, Hashable, Codable {
     public let id: UUID
     public let isPreset: Bool
     

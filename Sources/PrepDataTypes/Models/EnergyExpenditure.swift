@@ -1,6 +1,6 @@
 import Foundation
 
-public struct EnergyExpenditure: Identifiable, Hashable {
+public struct EnergyExpenditure: Identifiable, Hashable, Codable {
     public let id: UUID
     public let healthKitWorkout: HealthKitWorkout?
     

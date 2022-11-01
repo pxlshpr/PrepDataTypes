@@ -83,5 +83,42 @@ extension SyncForm {
             self.quickMealItemIds = quickMealItemIds
         }
     }
+}
 
+public extension SyncForm {
+    var description: String {
+        
+        "Updates: \(updates?.count ?? 0), Deletions: \(deletions?.count ?? 0), Version: \(versionTimestamp)"
+    }
+}
+
+public extension SyncForm.Updates {
+    var count: Int {
+        var count = 0
+        if user != nil { count += 1 }
+        if let barcodes { count += barcodes.count }
+        if let days { count += days.count }
+        if let energyExpenditures { count += energyExpenditures.count }
+        if let foods { count += foods.count }
+        if let foodItems { count += foodItems.count }
+        if let goals { count += goals.count }
+        if let meals { count += meals.count }
+        if let quickMealItems { count += quickMealItems.count }
+        return count
+    }
+}
+
+public extension SyncForm.Deletions {
+    var count: Int {
+        var count = 0
+        if let barcodeIds { count += barcodeIds.count }
+        if let dayIds { count += dayIds.count }
+        if let energyExpenditureIds { count += energyExpenditureIds.count }
+        if let foodIds { count += foodIds.count }
+        if let foodItemIds { count += foodItemIds.count }
+        if let goalIds { count += goalIds.count }
+        if let mealIds { count += mealIds.count }
+        if let quickMealItemIds { count += quickMealItemIds.count }
+        return count
+    }
 }

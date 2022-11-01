@@ -22,3 +22,16 @@ public struct User: Identifiable, Hashable {
     }
 }
 
+public extension User {
+    init(cloudKitId: String) {
+        self.init(
+            id: UUID(),
+            cloudKitId: cloudKitId,
+            preferredEnergyUnit: .kcal,
+            prefersMetricUnits: true,
+            explicitVolumeUnits: .defaultUnits,
+            bodyMeasurements: .empty,
+            updatedAt: Date()
+        )
+    }
+}

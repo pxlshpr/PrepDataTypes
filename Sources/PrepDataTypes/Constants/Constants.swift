@@ -14,3 +14,5 @@ public struct MacroRDA {
     public static let carb = 78.0
     public static let fat = 275.0
 }
+
+public typealias EmptyHandler = (() -> ())

@@ -93,6 +93,12 @@ public extension SyncForm {
         
         "Updates: \(updates?.count ?? 0), Deletions: \(deletions?.count ?? 0), Version: \(versionTimestamp)"
     }
+    
+    var isEmpty: Bool {
+        if let updates, updates.count > 0 { return false }
+        if let deletions, deletions.count > 0 { return false }
+        return true
+    }
 }
 
 public extension SyncForm.Updates {

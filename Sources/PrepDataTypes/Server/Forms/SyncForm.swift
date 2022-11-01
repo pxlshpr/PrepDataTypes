@@ -3,15 +3,18 @@ import Foundation
 public struct SyncForm: Codable {
     public let updates: Updates?
     public let deletions: Deletions?
+    public let userId: UUID
     public let versionTimestamp: Double
-    
+
     public init(
         updates: Updates? = nil,
         deletions: Deletions? = nil,
+        userId: UUID,
         versionTimestamp: Double
     ) {
         self.updates = updates
         self.deletions = deletions
+        self.userId = userId
         self.versionTimestamp = versionTimestamp
     }
 }

@@ -9,6 +9,6 @@ public struct QuickMealItem: Identifiable, Hashable, Codable {
     public var imageIds: [UUID]?
 
     public var syncStatus: SyncStatus
-    public var updatedAt: Date
-    public var deletedAt: Date?
+    public var updatedAt: Double
+    public var deletedAt: Double?
 }

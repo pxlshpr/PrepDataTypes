@@ -11,15 +11,15 @@ public struct Food: Identifiable, Hashable, Codable {
     public let publishStatus: UserFoodPublishStatus
     public let numberOfTimesConsumedGlobally: Int
     public let numberOfTimesConsumed: Int
-    public let lastUsedAt: Date?
-    public let firstUsedAt: Date?
+    public let lastUsedAt: Double?
+    public let firstUsedAt: Double?
     public let info: UserFoodInfo
     
     public let childrenFoods: [Food]?
     
     public var syncStatus: SyncStatus
     public var jsonSyncStatus: SyncStatus
-    public var updatedAt: Date
-    public var deletedAt: Date?
+    public var updatedAt: Double
+    public var deletedAt: Double?
 }
 

@@ -11,6 +11,6 @@ public struct Goal: Identifiable, Hashable, Codable {
     public var micros: [GoalMicro]?
     
     public var syncStatus: SyncStatus
-    public var updatedAt: Date
-    public var deletedAt: Date?
+    public var updatedAt: Double
+    public var deletedAt: Double?
 }

@@ -8,11 +8,11 @@ public struct EnergyExpenditure: Identifiable, Hashable, Codable {
     public var name: String
     public var type: EnergyExpenditureType
     public var energyBurned: Double
-    public var startedAt: Date?
-    public var endedAt: Date?
+    public var startedAt: Double?
+    public var endedAt: Double?
     public var duration: Int?
 
     public var syncStatus: SyncStatus
-    public var updatedAt: Date
-    public var deletedAt: Date?
+    public var updatedAt: Double
+    public var deletedAt: Double?
 }

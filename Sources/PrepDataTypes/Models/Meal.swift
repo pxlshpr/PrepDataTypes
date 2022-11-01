@@ -5,12 +5,12 @@ public struct Meal: Identifiable, Hashable, Codable {
     
     public var day: Day
     public var name: String
-    public var time: Date
-    public var markedAsEatenAt: Date?
+    public var time: Double
+    public var markedAsEatenAt: Double?
 
     public var foodItems: [FoodItem]
 
     public var syncStatus: SyncStatus
-    public var updatedAt: Date
-    public var deletedAt: Date?
+    public var updatedAt: Double
+    public var deletedAt: Double?
 }

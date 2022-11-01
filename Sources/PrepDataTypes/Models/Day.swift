@@ -2,7 +2,7 @@ import Foundation
 
 public struct Day: Identifiable, Hashable, Codable {
     public let id: UUID
-    public let date: Date
+    public let date: Double
     
     public var goal: Goal?
     public var addEnergyExpendituresToGoal: Bool
@@ -13,5 +13,5 @@ public struct Day: Identifiable, Hashable, Codable {
     public var meals: [Meal]
     
     public var syncStatus: SyncStatus
-    public var updatedAt: Date
+    public var updatedAt: Double
 }

@@ -9,9 +9,9 @@ public struct User: Identifiable, Hashable, Codable {
     public var explicitVolumeUnits: UserExplicitVolumeUnits
     public var bodyMeasurements: BodyMeasurements
     
-    public var updatedAt: Date
+    public var updatedAt: Double
     
-    public init(id: UUID, cloudKitId: String?, preferredEnergyUnit: EnergyUnit, prefersMetricUnits: Bool, explicitVolumeUnits: UserExplicitVolumeUnits, bodyMeasurements: BodyMeasurements, updatedAt: Date) {
+    public init(id: UUID, cloudKitId: String?, preferredEnergyUnit: EnergyUnit, prefersMetricUnits: Bool, explicitVolumeUnits: UserExplicitVolumeUnits, bodyMeasurements: BodyMeasurements, updatedAt: Double) {
         self.id = id
         self.cloudKitId = cloudKitId
         self.preferredEnergyUnit = preferredEnergyUnit
@@ -31,7 +31,7 @@ public extension User {
             prefersMetricUnits: true,
             explicitVolumeUnits: .defaultUnits,
             bodyMeasurements: .empty,
-            updatedAt: Date()
+            updatedAt: Date().timeIntervalSince1970
         )
     }
 }

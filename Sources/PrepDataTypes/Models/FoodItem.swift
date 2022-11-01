@@ -7,10 +7,10 @@ public struct FoodItem: Identifiable, Hashable, Codable {
     
     public var meal: Meal?
     public var amount: FoodValue
-    public var markedAsEatenAt: Date?
+    public var markedAsEatenAt: Double?
     public var sortPosition: Int
     
     public var syncStatus: SyncStatus
-    public var updatedAt: Date
-    public var deletedAt: Date?
+    public var updatedAt: Double
+    public var deletedAt: Double?
 }

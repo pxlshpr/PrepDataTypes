@@ -14,4 +14,17 @@ public struct Day: Identifiable, Hashable, Codable {
     
     public var syncStatus: SyncStatus
     public var updatedAt: Double
+    
+    public init(id: UUID, date: Double, goal: Goal? = nil, addEnergyExpendituresToGoal: Bool, goalBonusEnergySplit: GoalBonusEnergySplit? = nil, goalBonusEnergySplitRatio: GoalBonusEnergySplitRatio? = nil, energyExpenditures: [EnergyExpenditure], meals: [Meal], syncStatus: SyncStatus, updatedAt: Double) {
+        self.id = id
+        self.date = date
+        self.goal = goal
+        self.addEnergyExpendituresToGoal = addEnergyExpendituresToGoal
+        self.goalBonusEnergySplit = goalBonusEnergySplit
+        self.goalBonusEnergySplitRatio = goalBonusEnergySplitRatio
+        self.energyExpenditures = energyExpenditures
+        self.meals = meals
+        self.syncStatus = syncStatus
+        self.updatedAt = updatedAt
+    }
 }

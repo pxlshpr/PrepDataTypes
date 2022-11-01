@@ -20,3 +20,17 @@ public struct UserExplicitVolumeUnits: Codable, Hashable {
         self.gallon = gallon
     }
 }
+
+public extension UserExplicitVolumeUnits {
+    static var defaultUnits: UserExplicitVolumeUnits {
+        UserExplicitVolumeUnits(
+            cup: .cupMetric,
+            teaspoon: .teaspoonMetric,
+            tablespoon: .tablespoonMetric,
+            fluidOunce: .fluidOunceUSNutritionLabeling,
+            pint: .pintMetric,
+            quart: .quartUSLiquid,
+            gallon: .gallonUSLiquid
+        )
+    }
+}

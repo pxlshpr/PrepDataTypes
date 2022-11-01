@@ -13,3 +13,14 @@ public struct BodyMeasurements: Codable, Hashable {
         self.pastHeights = pastHeights
     }
 }
+
+public extension BodyMeasurements {
+    static var empty: BodyMeasurements {
+        BodyMeasurements(
+            currentWeight: nil,
+            currentHeight: nil,
+            pastWeights: [],
+            pastHeights: []
+        )
+    }
+}

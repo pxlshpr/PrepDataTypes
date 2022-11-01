@@ -26,11 +26,11 @@ public extension Notification.Name {
 
 public extension Notification {
     struct Keys {
-        static let foodItem = "foodItem"
-        static let date = "date"
-        static let summaryViewTypeRawValue = "summaryViewTypeRawValue"
-        static let sender = "sender"
-        static let url = "url"
-        static let meal = "meal"
+        public static let foodItem = "foodItem"
+        public static let date = "date"
+        public static let summaryViewTypeRawValue = "summaryViewTypeRawValue"
+        public static let sender = "sender"
+        public static let url = "url"
+        public static let meal = "meal"
     }
 }

@@ -5,14 +5,14 @@ public class TimelineItem: ObservableObject {
     
     @Published public var date: Date
     public var isNew: Bool
-    var id: String
-    var name: String
-    var duration: TimeInterval?
-    var emojis: [Emoji]
-    var type: TimelineItemType
-    var isEmptyItem: Bool
-    var groupedWorkouts: [TimelineItem]
-    var isNow: Bool
+    public var id: String
+    public var name: String
+    public var duration: TimeInterval?
+    public var emojis: [Emoji]
+    public var type: TimelineItemType
+    public var isEmptyItem: Bool
+    public var groupedWorkouts: [TimelineItem]
+    public var isNow: Bool
     
     public required init(id: String? = nil, name: String, date: Date, duration: TimeInterval? = nil, emojis: [Emoji] = [], type: TimelineItemType = .meal, isNew: Bool = false, isEmptyItem: Bool = false, isNow: Bool = false) {
         self.id = id ?? UUID().uuidString

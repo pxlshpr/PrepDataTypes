@@ -58,7 +58,7 @@ extension SyncForm {
 extension SyncForm {
     public struct Deletions: Codable {
         public let barcodeIds: [UUID]?
-        public let dayIds: [UUID]?
+        public let dayIds: [String]?
         public let energyExpenditureIds: [UUID]?
         public let foodIds: [UUID]?
         public let foodItemIds: [UUID]?
@@ -68,7 +68,7 @@ extension SyncForm {
         
         public init(
             barcodeIds: [UUID]? = nil,
-            dayIds: [UUID]? = nil,
+            dayIds: [String]? = nil,
             energyExpenditureIds: [UUID]? = nil,
             foodIds: [UUID]? = nil,
             foodItemIds: [UUID]? = nil,

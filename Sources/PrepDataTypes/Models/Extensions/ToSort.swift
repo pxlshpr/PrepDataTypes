@@ -43,10 +43,6 @@ public extension Meal {
 //        return nextPlannedMeal.id == id
     }
     
-    var isCompleted: Bool {
-        markedAsEatenAt != nil
-    }
-    
     var energyAmount: Double {
         foodItems.reduce(0) { $0 + $1.energyAmount }
     }

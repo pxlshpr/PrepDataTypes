@@ -1,7 +1,7 @@
 import Foundation
 
 public struct Day: Identifiable, Hashable, Codable {
-    public let id: UUID
+    public let id: String
     public let date: Double
     
     public var goal: Goal?
@@ -15,7 +15,7 @@ public struct Day: Identifiable, Hashable, Codable {
     public var syncStatus: SyncStatus
     public var updatedAt: Double
     
-    public init(id: UUID, date: Double, goal: Goal? = nil, addEnergyExpendituresToGoal: Bool, goalBonusEnergySplit: GoalBonusEnergySplit? = nil, goalBonusEnergySplitRatio: GoalBonusEnergySplitRatio? = nil, energyExpenditures: [EnergyExpenditure], meals: [Meal], syncStatus: SyncStatus, updatedAt: Double) {
+    public init(id: String, date: Double, goal: Goal? = nil, addEnergyExpendituresToGoal: Bool, goalBonusEnergySplit: GoalBonusEnergySplit? = nil, goalBonusEnergySplitRatio: GoalBonusEnergySplitRatio? = nil, energyExpenditures: [EnergyExpenditure], meals: [Meal], syncStatus: SyncStatus, updatedAt: Double) {
         self.id = id
         self.date = date
         self.goal = goal

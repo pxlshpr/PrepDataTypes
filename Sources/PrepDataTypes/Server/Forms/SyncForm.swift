@@ -21,15 +21,21 @@ public struct SyncForm: Codable {
 
 extension SyncForm {
     public struct Updates: Codable {
+        
+        /// **Always synced**
         public let user: User?
-        public let barcodes: [Barcode]?
-        public let days: [Day]?
-        public let energyExpenditures: [EnergyExpenditure]?
-        public let foods: [Food]?
-        public let foodItems: [FoodItem]?
         public let goals: [Goal]?
+        
+        /// **Sliding window of previous 14 days and next 7 days kept in sync**
+        public let days: [Day]?
         public let meals: [Meal]?
+        public let foodItems: [FoodItem]?
+        public let energyExpenditures: [EnergyExpenditure]?
         public let quickMealItems: [QuickMealItem]?
+
+        /// **User Foods owned by the user and previously used foods kept in sync**
+        public let foods: [Food]?
+        public let barcodes: [Barcode]?
         
         public init(
             user: User? = nil,

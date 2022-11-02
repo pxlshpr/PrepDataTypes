@@ -22,6 +22,8 @@ public extension Notification.Name {
     /// Backend related
     static var didUpdateUser: Notification.Name { return .init("didUpdateUser") }
     static var didAddMeal: Notification.Name { return .init("didAddMeal") }
+    
+    static var didUpdateMeals: Notification.Name { return .init("didUpdateMeals") }
 }
 
 public extension Notification {

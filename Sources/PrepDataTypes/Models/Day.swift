@@ -10,12 +10,12 @@ public struct Day: Identifiable, Hashable, Codable {
     public var goalBonusEnergySplitRatio: GoalBonusEnergySplitRatio?
     
     public var energyExpenditures: [EnergyExpenditure]
-    public var meals: [Meal]
+    public var meals: [DayMeal]
     
     public var syncStatus: SyncStatus
     public var updatedAt: Double
     
-    public init(id: String, calendarDayString: String, goal: Goal? = nil, addEnergyExpendituresToGoal: Bool, goalBonusEnergySplit: GoalBonusEnergySplit? = nil, goalBonusEnergySplitRatio: GoalBonusEnergySplitRatio? = nil, energyExpenditures: [EnergyExpenditure], meals: [Meal], syncStatus: SyncStatus, updatedAt: Double) {
+    public init(id: String, calendarDayString: String, goal: Goal? = nil, addEnergyExpendituresToGoal: Bool, goalBonusEnergySplit: GoalBonusEnergySplit? = nil, goalBonusEnergySplitRatio: GoalBonusEnergySplitRatio? = nil, energyExpenditures: [EnergyExpenditure], meals: [DayMeal], syncStatus: SyncStatus, updatedAt: Double) {
         self.id = id
         self.calendarDayString = calendarDayString
         self.goal = goal

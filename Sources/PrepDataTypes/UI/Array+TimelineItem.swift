@@ -1,3 +1,4 @@
+#if os(iOS)
 import Foundation
 
 public extension Array where Element == TimelineItem {
@@ -65,3 +66,4 @@ public extension Array where Element == TimelineItem {
         return nil
     }
 }
+#endif

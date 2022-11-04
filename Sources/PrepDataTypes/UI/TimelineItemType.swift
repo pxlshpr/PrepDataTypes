@@ -1,3 +1,4 @@
+#if os(iOS)
 import Foundation
 
 public enum TimelineItemType {
@@ -13,3 +14,4 @@ public enum TimelineItemType {
         }
     }
 }
+#endif

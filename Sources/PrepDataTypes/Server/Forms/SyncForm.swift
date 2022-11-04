@@ -3,17 +3,24 @@ import Foundation
 public struct SyncForm: Codable {
     public let updates: Updates?
     public let deletions: Deletions?
+    /// ** Describes range of sliding window ** that user would like updates for—using explicit `calendarDayString`'s of the dates
+    public let daysLowerBound: String?
+    public let daysUpperBound: String?
     public let userId: UUID
     public let versionTimestamp: Double
 
     public init(
         updates: Updates? = nil,
         deletions: Deletions? = nil,
+        daysLowerBound: String? = nil,
+        daysUpperBound: String? = nil,
         userId: UUID,
         versionTimestamp: Double
     ) {
         self.updates = updates
         self.deletions = deletions
+        self.daysLowerBound = daysLowerBound
+        self.daysUpperBound = daysUpperBound
         self.userId = userId
         self.versionTimestamp = versionTimestamp
     }
@@ -26,10 +33,6 @@ extension SyncForm {
         /// ** Always synced **
         public let user: User?
         public let goals: [Goal]?
-        
-        /// ** Describes range of sliding window using explicit calendarDayString's of the dates **
-        public let daysLowerBound: String?
-        public let daysUpperBound: String?
         
         /// ** Sliding window of days and its childrens to keep in sync **
         public let days: [Day]?
@@ -51,9 +54,7 @@ extension SyncForm {
             foodItems: [FoodItem]? = nil,
             goals: [Goal]? = nil,
             meals: [Meal]? = nil,
-            quickMealItems: [QuickMealItem]? = nil,
-            daysLowerBound: String? = nil,
-            daysUpperbound: String? = nil
+            quickMealItems: [QuickMealItem]? = nil
         ) {
             self.user = user
             self.barcodes = barcodes
@@ -64,8 +65,6 @@ extension SyncForm {
             self.goals = goals
             self.meals = meals
             self.quickMealItems = quickMealItems
-            self.daysLowerBound = daysLowerBound
-            self.daysUpperBound = daysUpperbound
         }
     }
 }

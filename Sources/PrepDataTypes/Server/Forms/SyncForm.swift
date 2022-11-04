@@ -26,7 +26,6 @@ public struct SyncForm: Codable {
     }
 }
 
-
 extension SyncForm {
     public struct Updates: Codable {
         
@@ -115,7 +114,40 @@ public extension SyncForm {
         if let updates, updates.count > 0 { return false }
         if let deletions, deletions.count > 0 { return false }
         return true
-    }    
+    }
+    
+    var requestedDateRange: Range<Date>? {
+        guard let daysLowerBound, let daysUpperBound,
+              let lowerDate = Date(fromCalendarDayString: daysLowerBound),
+              let upperDate = Date(fromCalendarDayString: daysUpperBound),
+              lowerDate < upperDate
+        else {
+            return nil
+        }
+        return lowerDate..<upperDate.moveDayBy(1)
+    }
+    
+    /// Returns an array of all the `calendarDayString`s representing dates in the range specified by `daysLowerBound...daysUpperBound`
+    var requestedCalendarDayStrings: [String] {
+        guard let requestedDateRange else { return [] }
+        
+        let dayDurationInSeconds: TimeInterval = 60*60*24
+        var strings: [String] = []
+        for date in stride(from: requestedDateRange.lowerBound, to: requestedDateRange.upperBound, by: dayDurationInSeconds) {
+            strings.append(date.calendarDayString)
+        }
+        return strings
+    }
+}
+
+extension Date: Strideable {
+    public func distance(to other: Date) -> TimeInterval {
+        return other.timeIntervalSinceReferenceDate - self.timeIntervalSinceReferenceDate
+    }
+
+    public func advanced(by n: TimeInterval) -> Date {
+        return self + n
+    }
 }
 
 public extension SyncForm.Updates {

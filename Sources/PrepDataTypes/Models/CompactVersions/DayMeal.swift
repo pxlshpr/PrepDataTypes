@@ -19,3 +19,14 @@ public struct DayMeal: Identifiable, Hashable, Codable {
         self.foodItems = foodItems
     }
 }
+
+public extension DayMeal {
+    init(from meal: Meal) {
+        self.init(
+            id: meal.id,
+            name: meal.name,
+            time: meal.time,
+            foodItems: meal.foodItems
+        )
+    }
+}

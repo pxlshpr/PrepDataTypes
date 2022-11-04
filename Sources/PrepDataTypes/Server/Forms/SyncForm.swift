@@ -115,7 +115,7 @@ public extension SyncForm {
         if let updates, updates.count > 0 { return false }
         if let deletions, deletions.count > 0 { return false }
         return true
-    }
+    }    
 }
 
 public extension SyncForm.Updates {

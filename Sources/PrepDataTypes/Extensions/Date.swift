@@ -7,11 +7,11 @@ public extension Date {
         return dateFormatter.string(from: self).lowercased()
     }
     
-    init?(from calendarDayString: String) {
+    init?(fromCalendarDayString string: String) {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         dateFormatter.dateFormat = "yyyy_MM_dd"
-        guard let date = dateFormatter.date(from: calendarDayString) else {
+        guard let date = dateFormatter.date(from: string) else {
             return nil
         }
         self = date

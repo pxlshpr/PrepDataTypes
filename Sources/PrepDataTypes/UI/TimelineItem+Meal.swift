@@ -1,3 +1,4 @@
+#if os(iOS)
 import Foundation
 
 public extension TimelineItem {
@@ -23,3 +24,4 @@ public extension TimelineItem {
         )
     }
 }
+#endif

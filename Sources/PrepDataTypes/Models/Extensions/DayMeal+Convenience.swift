@@ -21,12 +21,6 @@ public extension DayMeal {
         foodItems.reduce(0) { $0 + $1.energyAmount }
     }
     
-#if os(iOS) || os(macOS)
-    var timeString: String {
-        Date(timeIntervalSince1970: time).formatted(date: .omitted, time: .shortened).lowercased()
-    }
-#endif
-    
 //    var timeDate: Date {
 //        get { Date(timeIntervalSince1970: TimeInterval(time)) }
 //        set { time = Int64(newValue.timeIntervalSince1970) }
@@ -34,3 +28,11 @@ public extension DayMeal {
 
 }
 
+
+#if os(iOS)
+public extension DayMeal {
+    var timeString: String {
+        Date(timeIntervalSince1970: time).formatted(date: .omitted, time: .shortened).lowercased()
+    }
+}
+#endif

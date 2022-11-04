@@ -19,21 +19,26 @@ public struct SyncForm: Codable {
     }
 }
 
+
 extension SyncForm {
     public struct Updates: Codable {
         
-        /// **Always synced**
+        /// ** Always synced **
         public let user: User?
         public let goals: [Goal]?
         
-        /// **Sliding window of previous 14 days and next 7 days kept in sync**
+        /// ** Describes range of sliding window using explicit calendarDayString's of the dates **
+        public let daysLowerBound: String?
+        public let daysUpperBound: String?
+        
+        /// ** Sliding window of days and its childrens to keep in sync **
         public let days: [Day]?
         public let meals: [Meal]?
         public let foodItems: [FoodItem]?
-        public let energyExpenditures: [EnergyExpenditure]?
         public let quickMealItems: [QuickMealItem]?
+        public let energyExpenditures: [EnergyExpenditure]?
 
-        /// **User Foods owned by the user and previously used foods kept in sync**
+        /// ** User Foods owned by the user and previously used foods kept in sync **
         public let foods: [Food]?
         public let barcodes: [Barcode]?
         
@@ -46,7 +51,9 @@ extension SyncForm {
             foodItems: [FoodItem]? = nil,
             goals: [Goal]? = nil,
             meals: [Meal]? = nil,
-            quickMealItems: [QuickMealItem]? = nil
+            quickMealItems: [QuickMealItem]? = nil,
+            daysLowerBound: String? = nil,
+            daysUpperbound: String? = nil
         ) {
             self.user = user
             self.barcodes = barcodes
@@ -57,6 +64,8 @@ extension SyncForm {
             self.goals = goals
             self.meals = meals
             self.quickMealItems = quickMealItems
+            self.daysLowerBound = daysLowerBound
+            self.daysUpperBound = daysUpperbound
         }
     }
 }

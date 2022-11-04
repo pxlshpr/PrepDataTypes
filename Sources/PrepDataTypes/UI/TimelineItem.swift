@@ -1,3 +1,4 @@
+#if os(iOS)
 import SwiftUI
 import SwiftSugar
 
@@ -136,3 +137,4 @@ public extension TimelineItem {
         TimelineItem(name: "", date: Date(), isNow: true)
     }
 }
+#endif

@@ -6,15 +6,15 @@ public struct UserFoodInfo: Codable, Hashable {
     public var nutrients: FoodNutrients
     public var sizes: [FoodSize]
     public var density: FoodDensity?
+    
     public var linkUrl: String?
     public var prefilledUrl: String?
     public var imageIds: [UUID]?
     public var barcodes: [FoodBarcode]
     public var spawnedUserFoodId: UUID?
     public var spawnedPresetFoodId: UUID?
-    public var cloudKitId: String
     
-    public init(amount: FoodValue, serving: FoodValue? = nil, nutrients: FoodNutrients, sizes: [FoodSize], density: FoodDensity? = nil, linkUrl: String? = nil, prefilledUrl: String? = nil, imageIds: [UUID]? = nil, barcodes: [FoodBarcode], spawnedUserFoodId: UUID? = nil, spawnedPresetFoodId: UUID? = nil, cloudKitId: String) {
+    public init(amount: FoodValue, serving: FoodValue? = nil, nutrients: FoodNutrients, sizes: [FoodSize], density: FoodDensity? = nil, linkUrl: String? = nil, prefilledUrl: String? = nil, imageIds: [UUID]? = nil, barcodes: [FoodBarcode], spawnedUserFoodId: UUID? = nil, spawnedPresetFoodId: UUID? = nil) {
         self.amount = amount
         self.serving = serving
         self.nutrients = nutrients
@@ -26,6 +26,5 @@ public struct UserFoodInfo: Codable, Hashable {
         self.barcodes = barcodes
         self.spawnedUserFoodId = spawnedUserFoodId
         self.spawnedPresetFoodId = spawnedPresetFoodId
-        self.cloudKitId = cloudKitId
     }
 }

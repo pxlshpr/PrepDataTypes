@@ -19,7 +19,12 @@ public struct Meal: Identifiable, Hashable, Codable {
         day: Day,
         name: String,
         time: Double,
-        markedAsEatenAt: Double? = nil, foodItems: [FoodItem], syncStatus: SyncStatus, updatedAt: Double, deletedAt: Double? = nil) {
+        markedAsEatenAt: Double? = nil,
+        foodItems: [FoodItem],
+        syncStatus: SyncStatus,
+        updatedAt: Double,
+        deletedAt: Double? = nil
+    ) {
         self.id = id
         self.day = day
         self.name = name

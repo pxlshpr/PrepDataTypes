@@ -26,5 +26,27 @@ public struct Food: Identifiable, Hashable, Codable {
     public var syncStatus: SyncStatus
     public var updatedAt: Double
     public var deletedAt: Double?
+    
+    public init(id: UUID, type: FoodType, name: String, emoji: String, detail: String?, brand: String?, numberOfTimesConsumedGlobally: Int, numberOfTimesConsumed: Int, lastUsedAt: Double?, firstUsedAt: Double?, info: FoodInfo, publishStatus: UserFoodPublishStatus?, jsonSyncStatus: SyncStatus, childrenFoods: [Food]?, dataset: FoodDataset?, barcodes: [Barcode]?, syncStatus: SyncStatus, updatedAt: Double, deletedAt: Double? = nil) {
+        self.id = id
+        self.type = type
+        self.name = name
+        self.emoji = emoji
+        self.detail = detail
+        self.brand = brand
+        self.numberOfTimesConsumedGlobally = numberOfTimesConsumedGlobally
+        self.numberOfTimesConsumed = numberOfTimesConsumed
+        self.lastUsedAt = lastUsedAt
+        self.firstUsedAt = firstUsedAt
+        self.info = info
+        self.publishStatus = publishStatus
+        self.jsonSyncStatus = jsonSyncStatus
+        self.childrenFoods = childrenFoods
+        self.dataset = dataset
+        self.barcodes = barcodes
+        self.syncStatus = syncStatus
+        self.updatedAt = updatedAt
+        self.deletedAt = deletedAt
+    }
 }
 

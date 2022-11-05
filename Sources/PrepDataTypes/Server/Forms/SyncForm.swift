@@ -40,13 +40,11 @@ extension SyncForm {
         public let quickMealItems: [QuickMealItem]?
         public let energyExpenditures: [EnergyExpenditure]?
 
-        /// ** User Foods owned by the user and previously used foods kept in sync **
+        /// ** User Foods owned kept in sync **
         public let foods: [Food]?
-        public let barcodes: [Barcode]?
         
         public init(
             user: User? = nil,
-            barcodes: [Barcode]? = nil,
             days: [Day]? = nil,
             energyExpenditures: [EnergyExpenditure]? = nil,
             foods: [Food]? = nil,
@@ -56,7 +54,6 @@ extension SyncForm {
             quickMealItems: [QuickMealItem]? = nil
         ) {
             self.user = user
-            self.barcodes = barcodes
             self.days = days
             self.energyExpenditures = energyExpenditures
             self.foods = foods
@@ -70,7 +67,6 @@ extension SyncForm {
 
 extension SyncForm {
     public struct Deletions: Codable {
-        public let barcodeIds: [UUID]?
         public let dayIds: [String]?
         public let energyExpenditureIds: [UUID]?
         public let foodIds: [UUID]?
@@ -80,7 +76,6 @@ extension SyncForm {
         public let quickMealItemIds: [UUID]?
         
         public init(
-            barcodeIds: [UUID]? = nil,
             dayIds: [String]? = nil,
             energyExpenditureIds: [UUID]? = nil,
             foodIds: [UUID]? = nil,
@@ -89,7 +84,6 @@ extension SyncForm {
             mealIds: [UUID]? = nil,
             quickMealItemIds: [UUID]? = nil
         ) {
-            self.barcodeIds = barcodeIds
             self.dayIds = dayIds
             self.energyExpenditureIds = energyExpenditureIds
             self.foodIds = foodIds
@@ -154,7 +148,6 @@ public extension SyncForm.Updates {
     var count: Int {
         var count = 0
         if user != nil { count += 1 }
-        if let barcodes { count += barcodes.count }
         if let days { count += days.count }
         if let energyExpenditures { count += energyExpenditures.count }
         if let foods { count += foods.count }
@@ -169,7 +162,6 @@ public extension SyncForm.Updates {
 public extension SyncForm.Deletions {
     var count: Int {
         var count = 0
-        if let barcodeIds { count += barcodeIds.count }
         if let dayIds { count += dayIds.count }
         if let energyExpenditureIds { count += energyExpenditureIds.count }
         if let foodIds { count += foodIds.count }

@@ -22,7 +22,8 @@ public extension Notification.Name {
     /// Backend related
     static var didUpdateUser: Notification.Name { return .init("didUpdateUser") }
     static var didAddMeal: Notification.Name { return .init("didAddMeal") }
-    
+    static var didAddFood: Notification.Name { return .init("didAddFood") }
+
     static var didUpdateMeals: Notification.Name { return .init("didUpdateMeals") }
 }
 
@@ -35,5 +36,6 @@ public extension Notification {
         public static let url = "url"
         public static let meal = "meal"
         public static let meals = "meals"
+        public static let food = "food"
     }
 }

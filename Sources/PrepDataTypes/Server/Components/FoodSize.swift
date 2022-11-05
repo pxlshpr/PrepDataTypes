@@ -24,7 +24,7 @@ public struct FoodSize: Codable, Hashable {
 }
 
 public extension FoodSize {
-    func validate(within userFoodInfo: UserFoodInfo) throws {
+    func validate(within userFoodInfo: FoodInfo) throws {
         /// Check that the quantity is positive
         guard quantity > 0 else {
             throw FoodSizeError.nonPositiveQuantity
@@ -46,7 +46,7 @@ public extension FoodSize {
 }
 
 public extension Array where Element == FoodSize {
-    func validate(within userFoodInfo: UserFoodInfo) throws {
+    func validate(within userFoodInfo: FoodInfo) throws {
         guard map({$0.id}).isDistinct() else {
             throw FoodSizeError.duplicateSize
         }

@@ -19,7 +19,7 @@ public struct FoodValue: Codable, Hashable {
 }
 
 public extension FoodValue {
-    func validate(within userFoodInfo: UserFoodInfo) throws {
+    func validate(within foodInfo: FoodInfo) throws {
         
         guard value > 0 else {
             throw FoodValueError.nonPositiveValue
@@ -60,7 +60,7 @@ public extension FoodValue {
             }
 
             /// we should have a size matched that `sizeUnitId`
-            guard let size = userFoodInfo.sizes.size(for: sizeUnitId) else {
+            guard let size = foodInfo.sizes.size(for: sizeUnitId) else {
                 throw FoodValueError.invalidSizeId
             }
             

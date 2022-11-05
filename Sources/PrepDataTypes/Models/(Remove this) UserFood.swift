@@ -10,7 +10,7 @@ public struct UserFood: Identifiable {
     public var brand: String?
     public var barcodes: String
     public var publishStatus: UserFoodPublishStatus
-    public var info: UserFoodInfo
+    public var info: FoodInfo
     public var syncStatus: SyncStatus
     
 }

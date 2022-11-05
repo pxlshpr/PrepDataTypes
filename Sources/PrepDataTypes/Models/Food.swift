@@ -8,13 +8,14 @@ public struct Food: Identifiable, Hashable, Codable {
     public let emoji: String
     public let detail: String?
     public let brand: String?
-    public let publishStatus: UserFoodPublishStatus
     public let numberOfTimesConsumedGlobally: Int
     public let numberOfTimesConsumed: Int
     public let lastUsedAt: Double?
     public let firstUsedAt: Double?
-    public let info: UserFoodInfo
-    
+    public let info: FoodInfo
+
+    public let publishStatus: UserFoodPublishStatus?
+
     public let childrenFoods: [Food]?
     
     public var syncStatus: SyncStatus

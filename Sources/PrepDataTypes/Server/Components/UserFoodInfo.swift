@@ -1,6 +1,6 @@
 import Foundation
 
-public struct UserFoodInfo: Codable, Hashable {
+public struct FoodInfo: Codable, Hashable {
     public var amount: FoodValue
     public var serving: FoodValue?
     public var nutrients: FoodNutrients

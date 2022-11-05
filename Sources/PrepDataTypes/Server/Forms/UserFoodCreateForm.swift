@@ -8,7 +8,7 @@ public struct UserFoodCreateForm: Codable {
     public var detail: String?
     public var brand: String?
     public var publishStatus: UserFoodPublishStatus
-    public var info: UserFoodInfo
+    public var info: FoodInfo
     
     public init(
         id: UUID,
@@ -18,7 +18,7 @@ public struct UserFoodCreateForm: Codable {
         detail: String? = nil,
         brand: String? = nil,
         publishStatus: UserFoodPublishStatus,
-        info: UserFoodInfo
+        info: FoodInfo
     ) {
         self.id = id
         self.foodType = foodType
@@ -51,7 +51,7 @@ public extension UserFoodCreateForm {
     }
 }
 
-public extension UserFoodInfo {
+public extension FoodInfo {
     func validate() throws -> Bool {
         /// `amount` should have a valid `FoodValue`
         do {

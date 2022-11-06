@@ -10,9 +10,9 @@ public enum FoodType: Int16, Codable, CaseIterable {
         case .food:
             return "carrot"
         case .plate:
-            return "frying.pan"
-        case .recipe:
             return "fork.knife"
+        case .recipe:
+            return "frying.pan"
         }
     }
 }

@@ -12,7 +12,7 @@ public struct UserFoodCreateForm: Codable {
     
     public init(
         id: UUID,
-        foodType: FoodType = .rawFood,
+        foodType: FoodType = .food,
         name: String,
         emoji: String,
         detail: String? = nil,

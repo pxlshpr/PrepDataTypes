@@ -1,6 +1,6 @@
 import Foundation
 
-func newMealName(for date: Date = Date()) -> String {
+public func newMealName(for date: Date = Date()) -> String {
     switch date.h {
     /// Midnight
     case 0...3:

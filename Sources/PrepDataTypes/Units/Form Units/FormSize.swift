@@ -181,3 +181,14 @@ public extension FormSize {
         }
     }
 }
+
+public extension Array where Element == FormSize {
+    var standardSizes: [FormSize] {
+        filter({ $0.volumePrefixUnit == nil })
+    }
+    
+    var volumePrefixedSizes: [FormSize] {
+        filter({ $0.volumePrefixUnit != nil })
+    }
+}
+

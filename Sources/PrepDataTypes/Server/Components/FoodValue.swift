@@ -85,6 +85,64 @@ public extension FoodValue {
     }
 }
 
+public extension FoodValue {
+    func unitDescription(sizes: [FoodSize]) -> String {
+        switch self.unitType {
+        case .serving:
+            return "serving"
+        case .weight:
+            guard let weightUnit else {
+                return "invalid weight"
+            }
+            return weightUnit.shortDescription
+        case .volume:
+            guard let volumeUnit = volumeExplicitUnit?.volumeUnit else {
+                return "invalid volume"
+            }
+            return volumeUnit.shortDescription
+        case .size:
+            guard let size = sizes.sizeMatchingUnitSizeInFoodValue(self) else {
+                return "invalid size"
+            }
+            if let volumePrefixUnit = size.volumePrefixExplicitUnit?.volumeUnit {
+                return "\(volumePrefixUnit.shortDescription) \(size.name)"
+            } else {
+                return size.name
+            }
+        }
+    }
+}
+
+public extension FoodValue {
+
+    func foodSizeUnit(in food: Food) -> FoodSize? {
+        food.info.sizes.first(where: { $0.id == self.sizeUnitId })
+    }
+    
+    func formSizeUnit(in food: Food) -> FormSize? {
+        guard let foodSize = foodSizeUnit(in: food) else {
+            return nil
+        }
+        return FormSize(foodSize: foodSize, in: food.info.sizes)
+    }
+    
+    func isWeightBased(in food: Food) -> Bool {
+        unitType == .weight || hasWeightBasedSizeUnit(in: food)
+    }
+
+    func isVolumeBased(in food: Food) -> Bool {
+        unitType == .volume || hasVolumeBasedSizeUnit(in: food)
+    }
+    
+    func hasVolumeBasedSizeUnit(in food: Food) -> Bool {
+        formSizeUnit(in: food)?.isVolumeBased == true
+    }
+    
+    func hasWeightBasedSizeUnit(in food: Food) -> Bool {
+        formSizeUnit(in: food)?.isWeightBased == true
+    }
+}
+
 public enum FoodValueError: Error {
     case nonPositiveValue
     case extraneousUnits

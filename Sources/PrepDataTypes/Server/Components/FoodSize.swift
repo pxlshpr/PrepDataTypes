@@ -63,6 +63,10 @@ public extension Array where Element == FoodSize {
     func containsSize(with sizeId: String) -> Bool {
         contains(where: { $0.id == sizeId })
     }
+    
+    func sizeMatchingUnitSizeInFoodValue(_ foodValue: FoodValue) -> FoodSize? {
+        first(where: { $0.id == foodValue.sizeUnitId })
+    }
 }
 
 public enum FoodSizeError: Error {

@@ -3,7 +3,7 @@ import XCTest
 @testable import SwiftSugar
 
 extension FoodQuantityConvertTests {
-    func testWeightToSize() throws {
+    func _testWeightToSize() throws {
         for testCase in TestCases.Weight_Size {
             
             for (sizeId, expectedValue) in testCase.equivalentSizes {
@@ -38,9 +38,9 @@ extension TestCases {
                 )
             ),
             equivalentSizes: [
-                "ball" : (1, nil),
-                "box" : (1, nil),
-                "carton" : (1, nil)
+                "ball" : (37.5, nil),
+                "box" : (1.875, nil),
+                "carton" : (0.625, nil)
             ]
         ),
         

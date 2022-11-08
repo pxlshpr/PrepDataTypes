@@ -38,11 +38,9 @@ public extension FoodQuantity {
         case .weight(let weightUnit):
             // ✅ Tests Passing
             return weight.convert(to: weightUnit)
-            //            return weight.unit.convert(amount: amount, to: weightUnit)
             
         case .volume(let volumeExplicitUnit):
             // ✅ Tests Passing
-
             /// Get explicit unit and density
             guard let density = food.info.density else { return nil }
             /// Weight → Volume
@@ -50,10 +48,12 @@ public extension FoodQuantity {
             /// Volume → VolumeExplicitUnit
             return volume.convert(to: volumeExplicitUnit)
             
-        case .size(let size, let volumeUnit):
+        case .size(let size, let volumePrefixUnit):
+            let unitWeight = size.unitWeight(in: food)
             return nil
             
         case .serving:
+            // ✅ Tests Passing
             guard let servingWeight = food.servingWeight else { return nil }
             let converted = servingWeight.convert(to: weight.unit)
             guard value > 0 else { return nil }
@@ -166,6 +166,37 @@ extension Food {
             
         case .serving:
             /// We should never reach here, as a serving of a serving is not possible
+            return nil
+        }
+    }
+}
+
+extension FoodQuantity.Size {
+    /**
+     Returns the unit weight of this size (ie what 1 of it weighs), if applicable. Drills down to the base size if necessary.
+     */
+    func unitWeight(in food: Food) -> WeightQuantity? {
+        
+        switch unit {
+        case .weight(let weightUnit):
+            return .init(value: (value / quantity), unit: weightUnit)
+
+        case .serving:
+            guard let servingWeight = food.servingWeight else { return nil }
+            return .init(
+                value: (servingWeight.value * value) / quantity,
+                unit: servingWeight.unit
+            )
+
+        case .size(let sizeUnit, let volumePrefixUnit):
+            guard let unitWeight = sizeUnit.unitWeight(in: food) else { return nil }
+            return .init(
+                value: (unitWeight.value * value) / quantity,
+                unit: unitWeight.unit
+            )
+
+            //TODO: What do we do about the volumePrefixUnit
+        default:
             return nil
         }
     }

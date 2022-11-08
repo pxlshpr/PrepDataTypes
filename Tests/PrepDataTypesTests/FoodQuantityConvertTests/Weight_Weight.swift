@@ -8,10 +8,7 @@ extension FoodQuantityConvertTests {
     func testWeightToWeight() throws {
         for testCase in TestCases.Weight {
             for (weightUnit, expectation) in testCase.equivalentWeights {
-                guard let result = testCase.quantity.convert(
-                    to: .weight(weightUnit),
-                    with: testCase.explicitVolumeUnits
-                ) else {
+                guard let result = testCase.quantity.convert(to: .weight(weightUnit)) else {
                     XCTFail()
                     return
                 }

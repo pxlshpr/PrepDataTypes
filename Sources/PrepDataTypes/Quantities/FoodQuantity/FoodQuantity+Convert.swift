@@ -1,10 +1,7 @@
 import Foundation
 
 public extension FoodQuantity {
-    func convert(
-        to unit: Unit,
-        with explicitVolumeUnits: UserExplicitVolumeUnits = .defaultUnits
-    ) -> FoodQuantity? {
+    func convert(to unit: Unit) -> FoodQuantity? {
         
         let converted: Double?
         
@@ -12,16 +9,16 @@ public extension FoodQuantity {
             
         case .weight(let weightUnit):
             let weight = WeightQuantity(value: value, unit: weightUnit)
-            converted = convertWeight(weight, toUnit: unit, with: explicitVolumeUnits)
+            converted = convertWeight(weight, toUnit: unit)
             
         case .volume(let volumeUnit):
             converted = nil
             
         case .serving:
-            converted = convertFromServings(amount: value, toUnit: unit, with: explicitVolumeUnits)
+            converted = convertFromServings(amount: value, toUnit: unit)
             
         case .size(let sizeUnit, let sizeVolumePrefix):
-            converted = convertSize(sizeUnit, amount: value, toUnit: unit, with: explicitVolumeUnits)
+            converted = convertSize(sizeUnit, amount: value, toUnit: unit)
         }
         
         guard let converted else { return nil }
@@ -35,11 +32,7 @@ public extension FoodQuantity {
 
 public extension FoodQuantity {
     
-    func convertWeight(
-        _ weight: WeightQuantity,
-        toUnit: Unit,
-        with userVolumeUnits: UserExplicitVolumeUnits
-    ) -> Double? {
+    func convertWeight(_ weight: WeightQuantity, toUnit: Unit) -> Double? {
         switch toUnit {
             
         case .weight(let weightUnit):
@@ -68,11 +61,7 @@ public extension FoodQuantity {
         }
     }
     
-    func convertFromServings(
-        amount: Double,
-        toUnit: Unit,
-        with explicitVolumeUnits: UserExplicitVolumeUnits
-    ) -> Double? {
+    func convertFromServings(amount: Double, toUnit: Unit) -> Double? {
         
         guard let serving = food.info.serving, let servingUnit = food.servingUnit else {
             return nil
@@ -83,7 +72,7 @@ public extension FoodQuantity {
             
         case .weight(let weightUnit):
             let weight = WeightQuantity(value: serving.value, unit: weightUnit)
-            converted = convertWeight(weight,toUnit: unit, with: explicitVolumeUnits)
+            converted = convertWeight(weight,toUnit: unit)
             
         case .volume(let volumeUnit):
             converted = nil
@@ -99,12 +88,7 @@ public extension FoodQuantity {
         return converted * amount
     }
     
-    func convertSize(
-        _ size: Size,
-        amount: Double,
-        toUnit: Unit,
-        with explicitVolumeUnits: UserExplicitVolumeUnits
-    ) -> Double? {
+    func convertSize(_ size: Size, amount: Double, toUnit: Unit) -> Double? {
         
         return nil
         
@@ -117,8 +101,7 @@ public extension FoodQuantity {
 //                let fromWeightUnit = unitWeightQuantity.unit.weightUnit,
 //                let unitWeightAmount = convertWeight(
 //                    WeightQuantity(value: amount, unit: fromWeightUnit),
-//                    toFormUnit: toUnit,
-//                    with: explicitVolumeUnits
+//                    toFormUnit: toUnit
 //                )
 //            else {
 //                return nil
@@ -147,34 +130,6 @@ extension Food {
     
     func size(for id: String) -> FoodSize? {
         info.sizes.first(where: { $0.id == id })
-    }
-    
-    //TODO: Quarantined
-    var servingWeightQuantity: FoodQuantity? {
-        guard let serving = info.serving,
-              let servingUnit
-        else {
-            return nil
-        }
-        switch servingUnit {
-        case .weight(let weightUnit):
-            return FoodQuantity(
-                amount: serving.value,
-                unit: .weight(weightUnit),
-                food: self
-            )
-        case .size(let sizeUnit, let sizeVolumePrefix):
-            guard let sizeUnitWeightQuantity = sizeUnit.unitWeightQuantity(in: self) else {
-                return nil
-            }
-            return FoodQuantity(
-                amount: sizeUnitWeightQuantity.value * serving.value,
-                unit: sizeUnitWeightQuantity.unit,
-                food: self
-            )
-        default:
-            return nil
-        }
     }
     
     var servingWeight: WeightQuantity? {
@@ -216,126 +171,109 @@ extension Food {
     }
 }
 
-extension FormSize {
-    /**
-     Returns how many servings this size represents, if applicable. Drills down to the base size if necessary.
-     
-     Basic case:
-     - 3 x **balls** = 1 serving
-     *This would imply that 1 ball is 1/3 servings*
-     
-     Hierarchical case:
-     - 2 x **sleeves** = 16 balls
-     - 3 x balls = 1 serving
-     *This implies that 1 sleeve would be  2.5 servings*
-     */
-    var unitServings: Double? {
-        guard isServingBased, let amount, let quantity else { return nil }
-        if unit == .serving {
-            return amount / quantity
-        } else if case .size(let sizeUnit, let volumePrefixUnit) = unit {
-            guard let unitServings = sizeUnit.unitServings else {
-                return nil
-            }
-            return (unitServings * amount) / quantity
-            
-            //TODO: What do we do about the volumePrefixUnit
-        } else {
-            return nil
-        }
-    }
-    
-    /**
-     Returns the quantity representing how much 1 of this size weights, if applicable. Drills down to the base size if necessary.
-     This is **Quarantined**
-     */
-    func unitWeightQuantity(in food: Food) -> FoodQuantity? {
-        guard let amount, let quantity else { return nil }
-        
-        switch unit {
-        case .weight(let weightUnit):
-            return FoodQuantity(
-                amount: (amount / quantity),
-                unit: .weight(weightUnit),
-                food: food
-            )
-            
-        case .serving:
-            guard let servingWeightQuantity = food.servingWeightQuantity else {
-                return nil
-            }
-            
-            return FoodQuantity(
-                amount: (servingWeightQuantity.value * amount) / quantity,
-                unit: servingWeightQuantity.unit,
-                food: food
-            )
-            
-        case .size(let sizeUnit, let volumePrefixUnit):
-            guard let unitWeightQuantity = sizeUnit.unitWeightQuantity(in: food) else {
-                return nil
-            }
-            return FoodQuantity(
-                amount: (unitWeightQuantity.value * amount) / quantity,
-                unit: unitWeightQuantity.unit,
-                food: food
-            )
-            
-            //TODO: What do we do about the volumePrefixUnit
-        default:
-            return nil
-        }
-    }
-    
-    /**
-     Returns the quantity representing how much 1 of this size weights, if applicable. Drills down to the base size if necessary.
-     */
-    func unitWeight(in food: Food) -> WeightQuantity? {
-        guard let amount, let quantity else { return nil }
-        
-        switch unit {
-        case .weight(let weightUnit):
-            return .init(value: (amount / quantity), unit: weightUnit)
-            
-        case .serving:
-            guard let servingWeight = food.servingWeight else {
-                return nil
-            }
-            
-            return .init(
-                value: (servingWeight.value * amount) / quantity,
-                unit: servingWeight.unit
-            )
-            
-        case .size(let sizeUnit, let volumePrefixUnit):
-            guard let unitWeight = sizeUnit.unitWeight(in: food) else {
-                return nil
-            }
-            return .init(
-                value: (unitWeight.value * amount) / quantity,
-                unit: unitWeight.unit
-            )
-            
-            //TODO: What do we do about the volumePrefixUnit
-        default:
-            return nil
-        }
-    }
-}
-
-//extension WeightUnit {
-//    func convert(amount: Double, to otherWeightUnit: WeightUnit) -> Double {
-//        let grams = self.g * amount
-//        let otherGrams = otherWeightUnit.g
-//        return grams / otherGrams
+//extension FormSize {
+//    /**
+//     Returns how many servings this size represents, if applicable. Drills down to the base size if necessary.
+//
+//     Basic case:
+//     - 3 x **balls** = 1 serving
+//     *This would imply that 1 ball is 1/3 servings*
+//
+//     Hierarchical case:
+//     - 2 x **sleeves** = 16 balls
+//     - 3 x balls = 1 serving
+//     *This implies that 1 sleeve would be  2.5 servings*
+//     */
+//    var unitServings: Double? {
+//        guard isServingBased, let amount, let quantity else { return nil }
+//        if unit == .serving {
+//            return amount / quantity
+//        } else if case .size(let sizeUnit, let volumePrefixUnit) = unit {
+//            guard let unitServings = sizeUnit.unitServings else {
+//                return nil
+//            }
+//            return (unitServings * amount) / quantity
+//
+//            //TODO: What do we do about the volumePrefixUnit
+//        } else {
+//            return nil
+//        }
 //    }
-//}
-
-
-//extension VolumeExplicitUnit {
-//    func convert(amount: Double, to otherVolumeExplicitUnit: VolumeExplicitUnit) -> Double {
-//        let ml = self.ml * amount
-//        let otherMls = otherVolumeExplicitUnit.ml
-//        return ml / otherMls
+//
+//    /**
+//     Returns the quantity representing how much 1 of this size weights, if applicable. Drills down to the base size if necessary.
+//     This is **Quarantined**
+//     */
+//    func unitWeightQuantity(in food: Food) -> FoodQuantity? {
+//        guard let amount, let quantity else { return nil }
+//
+//        switch unit {
+//        case .weight(let weightUnit):
+//            return FoodQuantity(
+//                amount: (amount / quantity),
+//                unit: .weight(weightUnit),
+//                food: food
+//            )
+//
+//        case .serving:
+//            guard let servingWeightQuantity = food.servingWeightQuantity else {
+//                return nil
+//            }
+//
+//            return FoodQuantity(
+//                amount: (servingWeightQuantity.value * amount) / quantity,
+//                unit: servingWeightQuantity.unit,
+//                food: food
+//            )
+//
+//        case .size(let sizeUnit, let volumePrefixUnit):
+//            guard let unitWeightQuantity = sizeUnit.unitWeightQuantity(in: food) else {
+//                return nil
+//            }
+//            return FoodQuantity(
+//                amount: (unitWeightQuantity.value * amount) / quantity,
+//                unit: unitWeightQuantity.unit,
+//                food: food
+//            )
+//
+//            //TODO: What do we do about the volumePrefixUnit
+//        default:
+//            return nil
+//        }
+//    }
+//
+//    /**
+//     Returns the quantity representing how much 1 of this size weights, if applicable. Drills down to the base size if necessary.
+//     */
+//    func unitWeight(in food: Food) -> WeightQuantity? {
+//        guard let amount, let quantity else { return nil }
+//
+//        switch unit {
+//        case .weight(let weightUnit):
+//            return .init(value: (amount / quantity), unit: weightUnit)
+//
+//        case .serving:
+//            guard let servingWeight = food.servingWeight else {
+//                return nil
+//            }
+//
+//            return .init(
+//                value: (servingWeight.value * amount) / quantity,
+//                unit: servingWeight.unit
+//            )
+//
+//        case .size(let sizeUnit, let volumePrefixUnit):
+//            guard let unitWeight = sizeUnit.unitWeight(in: food) else {
+//                return nil
+//            }
+//            return .init(
+//                value: (unitWeight.value * amount) / quantity,
+//                unit: unitWeight.unit
+//            )
+//
+//            //TODO: What do we do about the volumePrefixUnit
+//        default:
+//            return nil
+//        }
 //    }
 //}

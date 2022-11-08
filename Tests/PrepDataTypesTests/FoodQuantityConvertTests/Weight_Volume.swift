@@ -7,9 +7,7 @@ extension FoodQuantityConvertTests {
     func testWeightToVolume() throws {
         for testCase in TestCases.WeightWithDensity {
             for (volumeUnit, expectation) in testCase.equivalentVolumes {
-                guard let result = testCase.quantity.convert(
-                    to: .volume(volumeUnit),
-                    with: testCase.explicitVolumeUnits)
+                guard let result = testCase.quantity.convert(to: .volume(volumeUnit))
                 else {
                     XCTFail()
                     return

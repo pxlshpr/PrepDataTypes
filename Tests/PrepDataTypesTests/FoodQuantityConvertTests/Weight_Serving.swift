@@ -5,10 +5,8 @@ import XCTest
 extension FoodQuantityConvertTests {
     func testWeightToServings() throws {
         for testCase in TestCases.Weight_Serving {
-            let result = testCase.quantity.convert(
-                to: .serving,
-                with: testCase.explicitVolumeUnits
-            )
+            
+            let result = testCase.quantity.convert(to: .serving)
             
             if let expectedServing = testCase.equivalentServing {
                 guard let result else {

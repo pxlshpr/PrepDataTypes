@@ -6,6 +6,7 @@ public extension Food {
         emoji: String = "",
         detail: String? = nil,
         brand: String? = nil,
+        serving: FoodValue? = nil,
         density: FoodDensity? = nil
     ) {
         let energy = Double.random(in: 30...500)
@@ -26,6 +27,7 @@ public extension Food {
             firstUsedAt: nil,
             info: .init(
                 amount: .init(value: 1, unitType: .serving),
+                serving: serving,
                 nutrients: .init(
                     energyInKcal: energy,
                     carb: carb,

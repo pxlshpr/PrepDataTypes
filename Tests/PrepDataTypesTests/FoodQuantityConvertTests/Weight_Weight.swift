@@ -16,7 +16,7 @@ final class FoodQuantityConvertTests: XCTestCase {
                     return
                 }
                 XCTAssertEqual(
-                    result.amount.rounded(toPlaces: 2),
+                    result.value.rounded(toPlaces: 2),
                     expectation.rounded(toPlaces: 2)
                 )
             }

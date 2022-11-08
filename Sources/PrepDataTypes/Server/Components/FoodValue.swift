@@ -19,6 +19,32 @@ public struct FoodValue: Codable, Hashable {
 }
 
 public extension FoodValue {
+    init(_ amount: Double, _ unit: WeightUnit) {
+        self.init(.init(value: amount, unit: unit))
+    }
+    
+    init(_ amount: Double, _ unit: VolumeExplicitUnit) {
+        self.init(.init(value: amount, unit: unit))
+    }
+    
+    init(_ weight: WeightQuantity) {
+        self.init(
+            value: weight.value,
+            unitType: .weight,
+            weightUnit: weight.unit
+        )
+    }
+    
+    init(_ volume: VolumeQuantity) {
+        self.init(
+            value: volume.value,
+            unitType: .volume,
+            volumeExplicitUnit: volume.unit
+        )
+    }
+}
+
+public extension FoodValue {
     func validate(within foodInfo: FoodInfo) throws {
         
         guard value > 0 else {

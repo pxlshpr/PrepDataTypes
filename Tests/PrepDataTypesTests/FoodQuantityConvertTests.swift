@@ -7,6 +7,7 @@ struct FoodQuantityTestCase {
     var explicitVolumeUnits: UserExplicitVolumeUnits = .defaultUnits
     var equivalentWeights: [WeightUnit: Double] = [:]
     var equivalentVolumes: [VolumeUnit: Double] = [:]
+    var equivalentServing: Double = 0
 }
 
 struct TestCases {

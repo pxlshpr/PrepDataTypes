@@ -12,17 +12,17 @@ public extension FoodQuantity {
         switch self.unit {
             
         case .weight(let weightUnit):
-            let weight = WeightQuantity(value: amount, unit: weightUnit)
+            let weight = WeightQuantity(value: value, unit: weightUnit)
             converted = convertWeight(weight, toFormUnit: toFormUnit, with: explicitVolumeUnits)
             
         case .volume(let volumeUnit):
             converted = nil
             
         case .serving:
-            converted = convertFromServings(amount: amount, toFormUnit: toFormUnit, with: explicitVolumeUnits)
+            converted = convertFromServings(amount: value, toFormUnit: toFormUnit, with: explicitVolumeUnits)
             
         case .size(let sizeUnit, let sizeVolumePrefix):
-            converted = convertSize(sizeUnit, amount: amount, toFormUnit: toFormUnit, with: explicitVolumeUnits)
+            converted = convertSize(sizeUnit, amount: value, toFormUnit: toFormUnit, with: explicitVolumeUnits)
             
         }
         
@@ -65,8 +65,8 @@ public extension FoodQuantity {
         case .serving:
             guard let servingWeight = food.servingWeight else { return nil }
             let converted = servingWeight.convert(to: weight.unit)
-            guard amount > 0 else { return nil }
-            return amount / converted
+            guard value > 0 else { return nil }
+            return value / converted
         }
     }
     
@@ -123,7 +123,7 @@ public extension FoodQuantity {
             else {
                 return nil
             }
-            return unitWeightAmount * unitWeightQuantity.amount
+            return unitWeightAmount * unitWeightQuantity.value
         case .volume(let volumeUnit):
             return nil
         case .size(let formSize, let volumeUnit):
@@ -162,7 +162,7 @@ extension Food {
                 return nil
             }
             return FoodQuantity(
-                amount: sizeUnitWeightQuantity.amount * serving.value,
+                amount: sizeUnitWeightQuantity.value * serving.value,
                 unit: sizeUnitWeightQuantity.unit,
                 food: self
             )
@@ -187,7 +187,7 @@ extension Food {
                 return nil
             }
             return .init(
-                value: sizeUnitWeightQuantity.amount * serving.value,
+                value: sizeUnitWeightQuantity.value * serving.value,
                 unit: sizeUnitWeightUnit
             )
         default:
@@ -246,7 +246,7 @@ extension FormSize {
             }
             
             return FoodQuantity(
-                amount: (servingWeightQuantity.amount * amount) / quantity,
+                amount: (servingWeightQuantity.value * amount) / quantity,
                 unit: servingWeightQuantity.unit,
                 food: food
             )
@@ -256,7 +256,7 @@ extension FormSize {
                 return nil
             }
             return FoodQuantity(
-                amount: (unitWeightQuantity.amount * amount) / quantity,
+                amount: (unitWeightQuantity.value * amount) / quantity,
                 unit: unitWeightQuantity.unit,
                 food: food
             )

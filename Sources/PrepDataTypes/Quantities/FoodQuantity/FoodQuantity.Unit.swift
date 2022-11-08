@@ -10,7 +10,7 @@ public extension FoodQuantity {
     }
 }
 
-extension FoodQuantity.Unit {
+public extension FoodQuantity.Unit {
     init?(foodValue: FoodValue, in food: Food) {
         switch foodValue.unitType {
             
@@ -34,7 +34,7 @@ extension FoodQuantity.Unit {
     }
 }
 
-extension FoodQuantity.Unit {
+public extension FoodQuantity.Unit {
     init?(formUnit: FormUnit, food: Food, userVolumeUnits: UserExplicitVolumeUnits) {
         switch formUnit {
             
@@ -63,7 +63,7 @@ extension FoodQuantity.Unit {
     }
 }
 
-extension FoodQuantity.Unit {
+public extension FoodQuantity.Unit {
     
     var unitType: UnitType {
         switch self {

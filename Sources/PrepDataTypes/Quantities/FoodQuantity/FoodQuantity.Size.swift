@@ -11,7 +11,7 @@ public extension FoodQuantity {
     }
 }
 
-extension FoodQuantity.Size {
+public extension FoodQuantity.Size {
     init?(foodSize: FoodSize, in food: Food) {
         guard let unit = FoodQuantity.Unit(foodValue: foodSize.value, in: food) else {
             return nil
@@ -56,7 +56,7 @@ extension FoodQuantity.Size {
     }
 }
 
-extension FoodQuantity.Size {
+public extension FoodQuantity.Size {
     
     func namePrefixed(with volumeExplicitUnit: VolumeExplicitUnit?) -> String {
         if let volumeExplicitUnit {

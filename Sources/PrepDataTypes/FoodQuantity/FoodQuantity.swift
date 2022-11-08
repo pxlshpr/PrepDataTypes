@@ -1,9 +1,9 @@
 import Foundation
 
 public struct FoodQuantity {
-    let amount: Double
-    let unit: FormUnit
-    let food: Food
+    public let amount: Double
+    public let unit: FormUnit
+    public let food: Food
     
     public init(amount: Double, unit: FormUnit, food: Food) {
         self.amount = amount

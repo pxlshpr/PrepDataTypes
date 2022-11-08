@@ -13,6 +13,26 @@ public struct FoodQuantity {
 }
 
 public extension FoodQuantity {
+    
+    indirect enum Unit: Hashable {
+        case weight(WeightUnit)
+        case volume(VolumeExplicitUnit)
+        case size(Size, VolumeExplicitUnit?)
+        case serving
+    }
+
+    struct Size: Hashable {
+        let quantity: Double
+        let volumePrefixExplicitUnit: VolumeExplicitUnit?
+        let name: String
+        let value: Double
+        let unit: Unit
+    }
+}
+
+//MARK: - Convenience
+
+public extension FoodQuantity {
     init(_ value: Double, _ weightUnit: WeightUnit, food: Food) {
         self.init(
             amount: value,

@@ -27,6 +27,15 @@ public extension FoodValue {
         self.init(.init(value: amount, unit: unit))
     }
     
+    init(_ amount: Double, _ sizeUnitId: String, sizeUnitVolumePrefixExplicitUnit: VolumeExplicitUnit? = nil) {
+        self.init(
+            value: amount,
+            unitType: .size,
+            sizeUnitId: sizeUnitId,
+            sizeUnitVolumePrefixExplicitUnit: sizeUnitVolumePrefixExplicitUnit
+        )
+    }
+    
     init(_ weight: WeightQuantity) {
         self.init(
             value: weight.value,

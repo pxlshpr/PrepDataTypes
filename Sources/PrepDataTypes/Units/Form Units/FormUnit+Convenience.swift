@@ -6,6 +6,8 @@ public extension FormUnit {
         self.init(foodValue: foodValue, in: food.info.sizes)
     }
     
+    //TODO: Quarantined *** TO BE REMOVED ***
+    /// We can't use this as converting it to a `FormUnit` loses the explicit volume units
     init?(foodValue: FoodValue, in sizes: [FoodSize]) {
         switch foodValue.unitType {
         case .serving:

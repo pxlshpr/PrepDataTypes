@@ -7,7 +7,8 @@ public extension Food {
         detail: String? = nil,
         brand: String? = nil,
         serving: FoodValue? = nil,
-        density: FoodDensity? = nil
+        density: FoodDensity? = nil,
+        sizes: [FoodSize] = []
     ) {
         let energy = Double.random(in: 30...500)
         let carb = Double.random(in: 0...100)
@@ -34,7 +35,7 @@ public extension Food {
                     protein: protein,
                     fat: fat,
                     micros: []),
-                sizes: [],
+                sizes: sizes,
                 density: density,
                 barcodes: []
             ),

@@ -2,7 +2,7 @@ import XCTest
 @testable import PrepDataTypes
 @testable import SwiftSugar
 
-final class FoodQuantityConvertTests: XCTestCase {
+extension FoodQuantityConvertTests {
     
     //MARK: - Weight → Weight
     func testWeightToWeight() throws {

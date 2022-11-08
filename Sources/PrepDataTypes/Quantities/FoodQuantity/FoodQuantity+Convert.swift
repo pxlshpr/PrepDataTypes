@@ -23,7 +23,6 @@ public extension FoodQuantity {
             
         case .size(let sizeUnit, let sizeVolumePrefix):
             converted = convertSize(sizeUnit, amount: value, toFormUnit: toFormUnit, with: explicitVolumeUnits)
-            
         }
         
         guard let converted else { return nil }
@@ -60,8 +59,6 @@ public extension FoodQuantity {
         case .size(let formSize, let volumeUnit):
             return nil
             
-            //MARK: Weight → Serving
-            /// 60g -> x servings
         case .serving:
             guard let servingWeight = food.servingWeight else { return nil }
             let converted = servingWeight.convert(to: weight.unit)
@@ -138,9 +135,15 @@ public extension FoodQuantity {
 
 extension Food {
     
+    //TODO: Quarantined *** TO BE REMOVED ***
+    /// We can't use this as converting it to a `FormUnit` loses the explicit volume units
     var servingUnit: FormUnit? {
         guard let serving = info.serving else { return nil }
         return FormUnit(foodValue: serving, in: self)
+    }
+    
+    func size(for id: String) -> FoodSize? {
+        info.sizes.first(where: { $0.id == id })
     }
     
     //TODO: Quarantined
@@ -172,25 +175,39 @@ extension Food {
     }
     
     var servingWeight: WeightQuantity? {
-        guard let serving = info.serving, let servingUnit else {
-            return nil
-        }
         
-        switch servingUnit {
-        case .weight(let weightUnit):
+        guard let serving = info.serving else { return nil }
+        
+        switch serving.unitType {
+        case .weight:
+            guard let weightUnit = serving.weightUnit else { return nil }
             return .init(value: serving.value, unit: weightUnit)
-        case .size(let sizeUnit, let sizeVolumePrefix):
-            guard
-                let sizeUnitWeightQuantity = sizeUnit.unitWeightQuantity(in: self),
-                let sizeUnitWeightUnit = sizeUnitWeightQuantity.unit.weightUnit
+        case .volume:
+            /// If the serving is expressed as a volume, *and* we have a density...
+            guard let volumeExplicitUnit = serving.volumeExplicitUnit,
+                  let density = info.density else {
+                return nil
+            }
+            
+            let volume = VolumeQuantity(value: serving.value, unit: volumeExplicitUnit)
+            return density.convert(volume: volume)
+
+        case .size:
+            
+            guard let sizeId = serving.sizeUnitId,
+                  let size = size(for: sizeId),
+                  let unitWeightOfSize = size.unitWeight(in: self)
             else {
                 return nil
             }
+            
             return .init(
-                value: sizeUnitWeightQuantity.value * serving.value,
-                unit: sizeUnitWeightUnit
+                value: unitWeightOfSize.value * serving.value,
+                unit: unitWeightOfSize.unit
             )
-        default:
+            
+        case .serving:
+            /// We should never reach here, as a serving of a serving is not possible
             return nil
         }
     }

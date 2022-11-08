@@ -52,6 +52,8 @@ public extension Food {
         if let serving = info.serving, serving.isVolumeBased(in: self) {
             return true
         }
+        
+        //TODO: Copy `isVolumeBased` etc to FoodQuantity.Size and use foodQuantitySizes here instead (and remove formSizes)
         for size in formSizes {
             if size.isVolumeBased {
                 return true

@@ -50,7 +50,7 @@ public extension FoodQuantity {
             /// Volume → VolumeExplicitUnit
             return volume.convert(to: volumeExplicitUnit)
             
-        case .size(let formSize, let volumeUnit):
+        case .size(let size, let volumeUnit):
             return nil
             
         case .serving:
@@ -77,7 +77,7 @@ public extension FoodQuantity {
         case .volume(let volumeUnit):
             converted = nil
             
-        case .size(let formSize, let volumeUnit):
+        case .size(let size, let volumeUnit):
             converted = nil
             
         case .serving:

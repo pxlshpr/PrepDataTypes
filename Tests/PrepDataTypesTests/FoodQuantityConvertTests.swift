@@ -11,7 +11,7 @@ struct FoodQuantityTestCase {
     var equivalentWeights: [WeightUnit: Double] = [:]
     var equivalentVolumes: [VolumeExplicitUnit: Double] = [:]
     var equivalentServing: Double? = nil
-    var equivalentSizes: [String: Double] = [:]
+    var equivalentSizes: [String: (Double, VolumeExplicitUnit?)] = [:]
 }
 
 struct TestCases {

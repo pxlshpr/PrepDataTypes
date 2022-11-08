@@ -12,6 +12,17 @@ public struct FoodQuantity {
     }
 }
 
+public extension FoodQuantity.Unit {
+    var sizeVolumePrefixExplicitUnit: VolumeExplicitUnit? {
+        switch self {
+        case .size(_, let volumeExplicitUnit):
+            return volumeExplicitUnit
+        default:
+            return nil
+        }
+    }
+}
+
 public extension FoodQuantity {
     
     indirect enum Unit: Hashable {

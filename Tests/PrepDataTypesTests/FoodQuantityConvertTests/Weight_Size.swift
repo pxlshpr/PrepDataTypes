@@ -5,22 +5,18 @@ import XCTest
 extension FoodQuantityConvertTests {
     func testWeightToSize() throws {
         for testCase in TestCases.Weight_Size {
-//            for (sizeId, expectedValue) in testCase.equivalentSizes {
-//                
-//                guard let size = testCase.quantity.food.size(for: sizeId),
-//                      let result = testCase.quantity.convert(
-//                        to: .size(size, nil),
-//                        with: testCase.explicitVolumeUnits
-//                      )
-//                else {
-//                    XCTFail()
-//                    return
-//                }
-//                XCTAssertEqual(
-//                    result.value.rounded(toPlaces: 2),
-//                    expectation.rounded(toPlaces: 2)
-//                )
-//            }
+            
+            for (sizeId, expectedValue) in testCase.equivalentSizes {
+                guard let foodSize = testCase.quantity.food.size(for: sizeId),
+                      let size = FoodQuantity.Size(foodSize: foodSize, in: testCase.quantity.food),
+                      let result = testCase.quantity.convert(to: .size(size, nil))
+                else {
+                    XCTFail()
+                    return
+                }
+                assertEqual(result.value, expectedValue.0)
+                XCTAssertEqual(result.unit.sizeVolumePrefixExplicitUnit, expectedValue.1)
+            }
         }
     }
 }
@@ -42,16 +38,22 @@ extension TestCases {
                 )
             ),
             equivalentSizes: [
-                "ball" : 1,
-                "box" : 1,
-                "carton" : 1
+                "ball" : (1, nil),
+                "box" : (1, nil),
+                "carton" : (1, nil)
             ]
         ),
         
         /// test amount too in all others?
         
         /// vps-based serving
-        
+        /// something like ...
+//        equivalentVolumePrefixedSizes: [
+//            "ball" : (1, .cupMetric),
+//            "box" : (1, .cupMetric),
+//            "carton" : (1, .cupMetric)
+//        ]
+
         /// volume-size-size-size based serving
         
         /// serving-based serving (should be nil)

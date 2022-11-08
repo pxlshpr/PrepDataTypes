@@ -25,6 +25,35 @@ extension FoodQuantity.Size {
             unit: unit
         )
     }
+    
+    init?(formSize: FormSize, in food: Food, userVolumeUnits: UserExplicitVolumeUnits) {
+        guard let quantity = formSize.quantity,
+              let amount = formSize.amount,
+              let unit = FoodQuantity.Unit(
+                formUnit: formSize.unit,
+                food: food,
+                userVolumeUnits: userVolumeUnits
+              )
+        else { return nil }
+        
+        let volumePrefixUnit: VolumeExplicitUnit?
+        if let volumePrefixFormUnit = formSize.volumePrefixUnit {
+            guard let volumeExplicitUnit = userVolumeUnits.volumeExplicitUnit(for: volumePrefixFormUnit) else {
+                return nil
+            }
+            volumePrefixUnit = volumeExplicitUnit
+        } else {
+            volumePrefixUnit = nil
+        }
+        
+        self.init(
+            quantity: quantity,
+            volumePrefixExplicitUnit: volumePrefixUnit,
+            name: formSize.name,
+            value: amount,
+            unit: unit
+        )
+    }
 }
 
 extension FoodQuantity.Size {

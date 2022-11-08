@@ -34,7 +34,50 @@ extension FoodQuantity.Unit {
     }
 }
 
-public extension FoodQuantity.Unit {
+extension FoodQuantity.Unit {
+    init?(formUnit: FormUnit, food: Food, userVolumeUnits: UserExplicitVolumeUnits) {
+        switch formUnit {
+            
+        case .weight(let weightUnit):
+            self = .weight(weightUnit)
+            
+        case .volume(let volumeUnit):
+            self = .volume(userVolumeUnits.volumeExplicitUnit(for: volumeUnit))
+            
+        case .size(let formSize, let volumeUnit):
+            guard let size = FoodQuantity.Size(
+                formSize: formSize,
+                in: food,
+                userVolumeUnits: userVolumeUnits
+            ) else { return nil }
+            
+            if let volumeUnit {
+                self = .size(size, userVolumeUnits.volumeExplicitUnit(for: volumeUnit))
+            } else {
+                self = .size(size, nil)
+            }
+            
+        case .serving:
+            self = .serving
+        }
+    }
+}
+
+extension FoodQuantity.Unit {
+    
+    var unitType: UnitType {
+        switch self {
+        case .weight:
+            return .weight
+        case .volume:
+            return .volume
+        case .size:
+            return .size
+        case .serving:
+            return .serving
+        }
+    }
+
     var sizeVolumePrefixExplicitUnit: VolumeExplicitUnit? {
         switch self {
         case .size(_, let volumeExplicitUnit):

@@ -46,24 +46,20 @@ public extension UserExplicitVolumeUnits {
 public extension UserExplicitVolumeUnits {
     func volumeExplicitUnit(for volumeUnit: VolumeUnit) -> VolumeExplicitUnit {
         switch volumeUnit {
-        case .gallon:
-            return gallon
-        case .quart:
-            return quart
-        case .pint:
-            return pint
-        case .cup:
-            return cup
-        case .fluidOunce:
-            return fluidOunce
-        case .tablespoon:
-            return tablespoon
-        case .teaspoon:
-            return teaspoon
-        case .mL:
-            return .ml
-        case .liter:
-            return .liter
+        case .gallon:       return gallon
+        case .quart:        return quart
+        case .pint:         return pint
+        case .cup:          return cup
+        case .fluidOunce:   return fluidOunce
+        case .tablespoon:   return tablespoon
+        case .teaspoon:     return teaspoon
+        case .mL:           return .ml
+        case .liter:        return .liter
         }
+    }
+    
+    func volumeExplicitUnit(for volumeFormUnit: FormUnit) -> VolumeExplicitUnit? {
+        guard let volumeUnit = volumeFormUnit.volumeUnit else { return nil }
+        return volumeExplicitUnit(for: volumeUnit)
     }
 }

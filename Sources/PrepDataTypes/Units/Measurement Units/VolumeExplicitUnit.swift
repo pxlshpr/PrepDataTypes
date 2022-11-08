@@ -192,3 +192,9 @@ extension VolumeExplicitUnit: DescribableUnit {
         volumeUnit.regex
     }
 }
+
+public extension VolumeExplicitUnit {
+    var formUnit: FormUnit {
+        .volume(volumeUnit)
+    }
+}

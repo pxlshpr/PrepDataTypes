@@ -7,6 +7,22 @@ public indirect enum FormUnit: Hashable, Codable {
     case serving
 }
 
+
+public extension FormUnit {
+    init(foodQuantityUnit: FoodQuantity.Unit) {
+        switch foodQuantityUnit {
+        case .weight(let weightUnit):
+            self = .weight(weightUnit)
+        case .volume(let volumeExplicitUnit):
+            self = .volume(volumeExplicitUnit.volumeUnit)
+        case .size(let size, let volumeExplicitUnit):
+            self = .size(FormSize(foodQuantitySize: size), volumeExplicitUnit?.volumeUnit)
+        case .serving:
+            self = .serving
+        }
+    }
+}
+
 public extension FormUnit {
     var size: FormSize? {
         get {

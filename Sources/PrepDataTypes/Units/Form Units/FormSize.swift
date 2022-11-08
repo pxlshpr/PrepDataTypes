@@ -55,6 +55,18 @@ public struct FormSize: Hashable, Codable {
 }
 
 public extension FormSize {
+    init(foodQuantitySize size: FoodQuantity.Size) {
+        self.init(
+            quantity: size.quantity,
+            volumePrefixUnit: size.volumePrefixExplicitUnit?.formUnit,
+            name: size.name,
+            amount: size.value,
+            unit: FormUnit(foodQuantityUnit: size.unit)
+        )
+    }
+}
+
+public extension FormSize {
     
     var quantity: Double? {
         get {

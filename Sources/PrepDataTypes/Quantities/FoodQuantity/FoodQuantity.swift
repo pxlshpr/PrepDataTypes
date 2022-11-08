@@ -2,10 +2,10 @@ import Foundation
 
 public struct FoodQuantity {
     public let value: Double
-    public let unit: FormUnit
+    public let unit: Unit
     public let food: Food
     
-    public init(amount: Double, unit: FormUnit, food: Food) {
+    public init(amount: Double, unit: Unit, food: Food) {
         self.value = amount
         self.unit = unit
         self.food = food
@@ -41,18 +41,10 @@ public extension FoodQuantity {
         )
     }
 
-    init(_ value: Double, _ volumeUnit: VolumeUnit, food: Food) {
-        self.init(
-            amount: value,
-            unit: .volume(volumeUnit),
-            food: food
-        )
-    }
-
     init(_ value: Double, _ volumeExplicitUnit: VolumeExplicitUnit, food: Food) {
         self.init(
             amount: value,
-            unit: .volume(volumeExplicitUnit.volumeUnit),
+            unit: .volume(volumeExplicitUnit),
             food: food
         )
     }
@@ -60,6 +52,6 @@ public extension FoodQuantity {
 
 extension FoodQuantity: CustomStringConvertible {
     public var description: String {
-        "\(value.cleanAmount) \(unit.shortDescription)"
+        "\(value.cleanAmount) (unit)"
     }
 }

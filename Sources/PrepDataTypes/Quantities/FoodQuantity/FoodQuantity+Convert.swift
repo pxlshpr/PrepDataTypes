@@ -1,9 +1,8 @@
 import Foundation
 
 public extension FoodQuantity {
-    
     func convert(
-        to toFormUnit: FormUnit,
+        to unit: Unit,
         with explicitVolumeUnits: UserExplicitVolumeUnits = .defaultUnits
     ) -> FoodQuantity? {
         
@@ -13,43 +12,45 @@ public extension FoodQuantity {
             
         case .weight(let weightUnit):
             let weight = WeightQuantity(value: value, unit: weightUnit)
-            converted = convertWeight(weight, toFormUnit: toFormUnit, with: explicitVolumeUnits)
+            converted = convertWeight(weight, toUnit: unit, with: explicitVolumeUnits)
             
         case .volume(let volumeUnit):
             converted = nil
             
         case .serving:
-            converted = convertFromServings(amount: value, toFormUnit: toFormUnit, with: explicitVolumeUnits)
+            converted = convertFromServings(amount: value, toUnit: unit, with: explicitVolumeUnits)
             
         case .size(let sizeUnit, let sizeVolumePrefix):
-            converted = convertSize(sizeUnit, amount: value, toFormUnit: toFormUnit, with: explicitVolumeUnits)
+            converted = convertSize(sizeUnit, amount: value, toUnit: unit, with: explicitVolumeUnits)
         }
         
         guard let converted else { return nil }
         return FoodQuantity(
             amount: converted,
-            unit: toFormUnit,
+            unit: unit,
             food: self.food
         )
     }
+}
+
+public extension FoodQuantity {
     
     func convertWeight(
         _ weight: WeightQuantity,
-        toFormUnit: FormUnit,
+        toUnit: Unit,
         with userVolumeUnits: UserExplicitVolumeUnits
     ) -> Double? {
-        switch toFormUnit {
+        switch toUnit {
             
         case .weight(let weightUnit):
             // ✅ Tests Passing
             return weight.convert(to: weightUnit)
             //            return weight.unit.convert(amount: amount, to: weightUnit)
             
-        case .volume(let volumeUnit):
+        case .volume(let volumeExplicitUnit):
             // ✅ Tests Passing
 
             /// Get explicit unit and density
-            let volumeExplicitUnit = userVolumeUnits.volumeExplicitUnit(for: volumeUnit)
             guard let density = food.info.density else { return nil }
             /// Weight → Volume
             let volume = density.convert(weight: weight)
@@ -69,7 +70,7 @@ public extension FoodQuantity {
     
     func convertFromServings(
         amount: Double,
-        toFormUnit: FormUnit,
+        toUnit: Unit,
         with explicitVolumeUnits: UserExplicitVolumeUnits
     ) -> Double? {
         
@@ -82,7 +83,7 @@ public extension FoodQuantity {
             
         case .weight(let weightUnit):
             let weight = WeightQuantity(value: serving.value, unit: weightUnit)
-            converted = convertWeight(weight,toFormUnit: toFormUnit, with: explicitVolumeUnits)
+            converted = convertWeight(weight,toUnit: unit, with: explicitVolumeUnits)
             
         case .volume(let volumeUnit):
             converted = nil
@@ -99,36 +100,38 @@ public extension FoodQuantity {
     }
     
     func convertSize(
-        _ size: FormSize,
+        _ size: Size,
         amount: Double,
-        toFormUnit: FormUnit,
+        toUnit: Unit,
         with explicitVolumeUnits: UserExplicitVolumeUnits
     ) -> Double? {
         
-        switch toFormUnit {
-            
-        case .weight:
-            //MARK: Size → Weight
-            guard
-                let unitWeightQuantity = size.unitWeightQuantity(in: food),
-                let fromWeightUnit = unitWeightQuantity.unit.weightUnit,
-                let unitWeightAmount = convertWeight(
-                    WeightQuantity(value: amount, unit: fromWeightUnit),
-                    toFormUnit: toFormUnit,
-                    with: explicitVolumeUnits
-                )
-            else {
-                return nil
-            }
-            return unitWeightAmount * unitWeightQuantity.value
-        case .volume(let volumeUnit):
-            return nil
-        case .size(let formSize, let volumeUnit):
-            return nil
-        case .serving:
-            guard let unitServings = size.unitServings else { return nil }
-            return unitServings * amount
-        }
+        return nil
+        
+//        switch toUnit {
+//
+//        case .weight:
+//            //MARK: Size → Weight
+//            guard
+//                let unitWeightQuantity = size.unitWeightQuantity(in: food),
+//                let fromWeightUnit = unitWeightQuantity.unit.weightUnit,
+//                let unitWeightAmount = convertWeight(
+//                    WeightQuantity(value: amount, unit: fromWeightUnit),
+//                    toFormUnit: toUnit,
+//                    with: explicitVolumeUnits
+//                )
+//            else {
+//                return nil
+//            }
+//            return unitWeightAmount * unitWeightQuantity.value
+//        case .volume(let volumeUnit):
+//            return nil
+//        case .size(let formSize, let volumeUnit):
+//            return nil
+//        case .serving:
+//            guard let unitServings = size.unitServings else { return nil }
+//            return unitServings * amount
+//        }
     }
     
 }

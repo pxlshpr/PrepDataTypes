@@ -33,7 +33,7 @@ extension TestCases {
             ),
             explicitVolumeUnits: .defaultUnits,
             equivalentVolumes: [
-                .cup : 1,
+                .cupMetric : 1,
             ]
         ),
         FoodQuantityTestCase(
@@ -47,8 +47,8 @@ extension TestCases {
                 tablespoon: .tablespoonUS   /// 14.79 ml
             ),
             equivalentVolumes: [
-                .cup : 1.38588614,
-                .tablespoon: 16.90331305
+                .cupJapanTraditional : 1.38588614,
+                .tablespoonUS: 16.90331305
             ]
         ),
         FoodQuantityTestCase(
@@ -62,8 +62,8 @@ extension TestCases {
                 tablespoon: .tablespoonUS   /// 14.79 ml
             ),
             equivalentVolumes: [
-                .cup : 0.69294307,
-                .tablespoon: 8.45165652
+                .cupJapanTraditional : 0.69294307,
+                .tablespoonUS: 8.45165652
             ]
         )
 

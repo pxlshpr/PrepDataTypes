@@ -1,6 +1,14 @@
 import Foundation
 
 public extension Food {
+    
+    var foodQuantitySizes: [FoodQuantity.Size] {
+        info.sizes.compactMap { foodSize in
+            FoodQuantity.Size(foodSize: foodSize, in: self)
+        }
+    }
+    
+    //TODO: Stop using this *** TO BE REMOVED ***
     var formSizes: [FormSize] {
         info.sizes.compactMap { foodSize in
             FormSize(foodSize: foodSize, in: info.sizes)

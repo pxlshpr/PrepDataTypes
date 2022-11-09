@@ -3,7 +3,7 @@ import XCTest
 @testable import SwiftSugar
 
 final class FoodServingsTests: XCTestCase {
-    
+
     func testWeight() throws {
         let food = Food(
             serving: .init(0.282192, .oz), /// 8g
@@ -111,14 +111,15 @@ final class FoodServingsTests: XCTestCase {
             serving: .init(1, .cupJapanTraditional, "chopped4"), /// 180.39 mL
             sizes: [
                 .init(2, .cupJapanTraditional, "chopped", .init(370, .g)), /// 30 mL
-                .init(1.5, "packet", .init(3, "chopped4")),
-                .init(5, "carton", .init(15, "packet"))
+                .init(1.5, "packet", .init(3, "chopped4")), /// 2 chopped
+                .init(5, "carton", .init(15, "packet")) /// 3 packets
             ]
         )
 
         let expectedSizes: [(VolumeExplicitUnit?, String, Double)] = [
             (.cupJapanTraditional, "chopped4", 1), /// 180.39 mL
             (.fluidOunceUSNutritionLabeling, "chopped4", 6.013),
+            (nil, "carton", 0.16666667)
         ]
 
         for sizeTest in expectedSizes {
@@ -140,14 +141,15 @@ final class FoodServingsTests: XCTestCase {
             serving: .init(1, .cupJapanTraditional, "chopped5"), /// 180.39 mL
             sizes: [
                 .init(2, .fluidOunceUSNutritionLabeling, "chopped", .init(370, .g)), /// 30 mL
-                .init(1.5, "packet", .init(3, "chopped5")),
-                .init(5, "carton", .init(15, "packet"))
+                .init(1.5, "packet", .init(3, "chopped5")), /// 2 chopped
+                .init(5, "carton", .init(15, "packet")) /// 3 packet
             ]
         )
 
         let expectedSizes: [(VolumeExplicitUnit?, String, Double)] = [
             (.cupJapanTraditional, "chopped5", 1), /// 180.39 mL
             (.fluidOunceUSNutritionLabeling, "chopped5", 6.013),
+            (nil, "carton", 0.16666667)
         ]
 
         for sizeTest in expectedSizes {
@@ -242,7 +244,7 @@ final class FoodServingsTests: XCTestCase {
             assertEqual(servings, expectedServings)
         }
     }
-    
+
     /// serving-based-size-based-size based size
     func testServingBasedSizeBasedSizeBasedSize() throws {
         let food = Food(

@@ -6,6 +6,7 @@ extension FoodQuantityConvertTests {
     
     func test_Size_Weight() throws {
         for testCase in TestCases.Size_Weight {
+            
             for (weightUnit, expectedWeight) in testCase.equivalentWeights {
                 guard let weight = testCase.quantity.convert(to: .weight(weightUnit)) else {
                     XCTFail()
@@ -21,7 +22,7 @@ extension TestCases {
     
     static let Size_Weight = [
         
-        /// volumeprefixedsize-size based serving
+        /// volumeprefixedsize
         FoodQuantityTestCase(
             quantity: FoodQuantity(
                 1.25, .tablespoonUS, "chopped4", /// 14.79
@@ -32,10 +33,42 @@ extension TestCases {
                 )
             )!,
             equivalentWeights: [
-                .g : 14.065471913437
+                .g : 14.065471913437,
+                .oz : 0.4961449210774687
             ]
         ),
 
+        /// weight-size
+        FoodQuantityTestCase(
+            quantity: FoodQuantity(
+                1, "scoop",
+                Food(
+                    sizes: [
+                        .init(2, "scoop", .init(60.8, .g)),
+                    ]
+                )
+            )!,
+            equivalentWeights: [
+                .g : 30.4,
+                .oz : 1.072328
+            ]
+        ),
+
+        /// volume-size with density
+        FoodQuantityTestCase(
+            quantity: FoodQuantity(
+                3, "bottle",
+                Food(
+                    density: .init(100, .g, 50, .ml),
+                    sizes: [
+                        .init(1.5, "bottle", .init(335, .ml)),
+                    ]
+                )
+            )!,
+            equivalentWeights: [
+                .g : 1339.99999998
+            ]
+        ),
 //        FoodQuantityTestCase(
 //            quantity: FoodQuantity(
 //                amount: 100,

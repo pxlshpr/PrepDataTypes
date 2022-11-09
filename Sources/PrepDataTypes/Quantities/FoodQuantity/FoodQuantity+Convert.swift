@@ -36,28 +36,52 @@ extension FoodQuantity {
     
     func convert(_ sizeQuantity: SizeQuantity, to unit: Unit) -> Double? {
         
+        /// This is used to hold the unit value of this size in the provided unit (ie. how much of that unit 1 of this size equals)
+        let unitValue: Double
+        
         switch unit {
         case .weight(let weightUnit):
+            // ✅ Tests Passing
             /// Get the unit weight of the size (how much 1 unit of it weighs)
             guard let unitWeight = sizeQuantity.size.unitWeight(in: food) else { return nil }
             /// Convert this to the weight unit provided
-            let unitWeightInUnitProvided = unitWeight.convert(to: weightUnit)
-            /// Now scale the number of sizes provided to make it match what the size specifies
-            let scale = sizeQuantity.volumePrefixScale
-            guard scale > 0 else { return nil }
-            let scaledSizesProvided = sizeQuantity.value / scale
-            /// Use that and the unit weight (in the provided weight unit) to calculate the weight
-            let weight = unitWeightInUnitProvided * scaledSizesProvided
-            return weight
+            unitValue = unitWeight.convert(to: weightUnit)
 
         case .volume(let volumeUnit):
-            return nil
-        case .serving:
-            return nil
+            // ✅ Tests Passing
+            /// Get the unit volume of the size (how much the volume of 1 unit of it is)
+            guard let unitVolume = sizeQuantity.size.unitVolume(in: food) else { return nil }
+            /// Convert this to the volume unit provided
+            unitValue = unitVolume.convert(to: volumeUnit)
+
         case .size(let size, let volumePrefixUnit):
+
+            guard let unitSize = sizeQuantity.size.unitSizeValue(
+                of: size, in: volumePrefixUnit, in: food)
+            else { return nil }
+
+            let volumePrefixScale = sizeQuantity.volumePrefixScale
+            
+            /// This is the value in the default volumePrefixSize of the target size
+            let value = (unitSize * sizeQuantity.value) / volumePrefixScale
+
+            /// Now convert it to the size provided
+            let targetScale = size.volumePrefixScale(for: volumePrefixUnit)
+            let scaledValue = value * targetScale
+
+            return scaledValue
+
+        case .serving:
             return nil
         }
         
+        /// Now scale the number of sizes provided to make it match what the size specifies
+        let scale = sizeQuantity.volumePrefixScale
+        guard scale > 0 else { return nil }
+        let scaledSizeValue = sizeQuantity.value / scale
+        /// Use that and the unit weight (in the provided weight unit) to calculate the weight
+        return unitValue * scaledSizeValue
+
 //        switch toUnit {
 //
 //        case .weight:
@@ -264,8 +288,6 @@ extension FoodQuantity.Size {
             return WeightQuantity((unitWeight.value * value) / quantity, unitWeight.unit)
 
             //TODO: What do we do about the volumePrefixUnit
-        default:
-            return nil
         }
     }
     
@@ -292,8 +314,40 @@ extension FoodQuantity.Size {
             return VolumeQuantity((unitVolume.value * value) / quantity, unitVolume.unit)
 
             //TODO: What do we do about the volumePrefixUnit
-        default:
+        }
+    }
+    
+    /// Returns the unit size of this size (ie what 1 of this size is in the provided size, in the specified volumePrefixUnit). Drills down to the base size if necessary.
+    func unitSizeValue(
+        of size: FoodQuantity.Size,
+        in volumePrefixUnit: VolumeExplicitUnit? = nil,
+        in food: Food
+        
+    ) -> Double? {
+        
+        switch size.unit {
+            
+        case .weight(let weightUnit):
+            /// Get the unit weights of both sizes
+            guard let unitWeight = size.unitWeight(in: food) else { return nil }
+            guard let thisWeightUnit = self.unitWeight(in: food) else { return nil }
+
+            /// Convert the destination unit weight to match ours
+            let converted = unitWeight.convert(to: thisWeightUnit.unit)
+            
+            guard converted > 0 else { return nil }
+            return thisWeightUnit.value / converted
+
+        case .volume(let volumeExplicitUnit):
             return nil
+
+        case .serving:
+            return nil
+
+        case .size(let sizeUnit, let volumePrefixUnit):
+            return nil
+
+            //TODO: What do we do about the volumePrefixUnit
         }
     }
 }

@@ -3,69 +3,100 @@ import XCTest
 @testable import SwiftSugar
 
 extension FoodQuantityConvertTests {
-//    func testWeightToVolume() throws {
-//        for testCase in TestCases.WeightWithDensity {
-//            for (volumeUnit, expectation) in testCase.equivalentVolumes {
-//                guard let result = testCase.quantity.convert(
-//                    to: .volume(volumeUnit),
-//                    with: testCase.explicitVolumeUnits)
-//                else {
-//                    XCTFail()
-//                    return
-//                }
-//                XCTAssertEqual(
-//                    result.amount.rounded(toPlaces: 2),
-//                    expectation.rounded(toPlaces: 2)
-//                )
-//            }
-//        }
-//    }
+    
+    func test_Size_Size() throws {
+        for testCase in TestCases.Size_Size {
+            for sizeTest in testCase.equivalentSizes {
+                let volumePrefixUnit = sizeTest.0
+                let sizeId = sizeTest.1
+                let expectedValue = sizeTest.2
+                
+                guard let foodSize = testCase.quantity.food.size(for: sizeId),
+                      let size = FoodQuantity.Size(foodSize: foodSize, in: testCase.quantity.food),
+                      let result = testCase.quantity.convert(to: .size(size, volumePrefixUnit))
+                else {
+                    XCTFail()
+                    return
+                }
+                assertEqual(result.value, expectedValue)
+            }
+        }
+    }
 }
 
 extension TestCases {
-//    static let WeightWithDensity = [
+    
+    static let Size_Size = [
+        
+        /// volumeprefixedsize (weight-based)
+        FoodQuantityTestCase(
+            quantity: FoodQuantity(
+                1.5, .cupJapanTraditional, "chopped4", /// 180.39 mL
+                Food(
+                    sizes: [
+                        .init(0.5, .cupUSCustomary, "chopped", .init(135, .g)), /// 236.59 mL
+                        .init(2, .cupUSCustomary, "pureed", .init(600, .g)),    /// 236.59 mL
+                        .init(1, .cupUSCustomary, "sliced", .init(200, .g)),    /// 236.59 mL
+                        .init(2, "medium", .init(100, .g)),
+                        .init(2, "small", .init(75, .g)),
+                    ]
+                )
+            )!,
+            equivalentSizes: [
+                (nil, "medium", 6.17591192),
+                (.cupUSCustomary, "pureed4", 1.02931865),
+                (.tablespoonUS, "pureed4", 16.46561866),
+            ]
+        ),
+
+        
+//        /// weight-based size
 //        FoodQuantityTestCase(
 //            quantity: FoodQuantity(
-//                amount: 100,
-//                unit: .weight(.g),
-//                food: Food(density: FoodDensity(100, .g, 1, .cupMetric))
-//            ),
-//            explicitVolumeUnits: .defaultUnits,
-//            equivalentVolumes: [
-//                .cup : 1,
+//                1.5, "scoop",
+//                Food(
+//                    sizes: [
+//                        .init(1, "scoop", .init(30.4, .g)),
+//                        .init(1, "container", .init(74, "scoop")),
+//                    ]
+//                )
+//            )!,
+//            equivalentSizes: [
+//                (nil, "container", 0.02027027027027),
 //            ]
 //        ),
+        
+//        /// volumeprefixedsize
 //        FoodQuantityTestCase(
 //            quantity: FoodQuantity(
-//                amount: 100,
-//                unit: .weight(.g),
-//                food: Food(density: FoodDensity(100, .g, 1, .cupMetric)) /// 250 ml
-//            ),
-//            explicitVolumeUnits: UserExplicitVolumeUnits(
-//                cup: .cupJapanTraditional,   /// 180.39 ml
-//                tablespoon: .tablespoonUS   /// 14.79 ml
-//            ),
-//            equivalentVolumes: [
-//                .cup : 1.38588614,
-//                .tablespoon: 16.90331305
+//                1.25, .tablespoonUS, "chopped4", /// 14.79
+//                Food(
+//                    sizes: [
+//                        .init(1.5, .cupUSCustomary, "chopped", .init(270, .g)), /// 236.59
+//                    ]
+//                )
+//            )!,
+//            equivalentWeights: [
+//                .g : 14.065471913437,
+//                .oz : 0.4961449210774687
 //            ]
 //        ),
-//        FoodQuantityTestCase(
-//            quantity: FoodQuantity(
-//                amount: 50,
-//                unit: .weight(.g),
-//                food: Food(density: FoodDensity(100, .g, 1, .cupMetric)) /// 250 ml
-//            ),
-//            explicitVolumeUnits: UserExplicitVolumeUnits(
-//                cup: .cupJapanTraditional,   /// 180.39 ml
-//                tablespoon: .tablespoonUS   /// 14.79 ml
-//            ),
-//            equivalentVolumes: [
-//                .cup : 0.69294307,
-//                .tablespoon: 8.45165652
-//            ]
-//        )
 //
-//    ]
+//        /// weight-size
+//        FoodQuantityTestCase(
+//            quantity: FoodQuantity(
+//                1, "scoop",
+//                Food(
+//                    sizes: [
+//                        .init(2, "scoop", .init(60.8, .g)),
+//                    ]
+//                )
+//            )!,
+//            equivalentWeights: [
+//                .g : 30.4,
+//                .oz : 1.072328
+//            ]
+//        ),
+    ]
 }
 

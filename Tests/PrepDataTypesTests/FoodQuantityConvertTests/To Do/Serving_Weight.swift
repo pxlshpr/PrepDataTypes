@@ -3,69 +3,46 @@ import XCTest
 @testable import SwiftSugar
 
 extension FoodQuantityConvertTests {
-//    func testWeightToVolume() throws {
-//        for testCase in TestCases.WeightWithDensity {
-//            for (volumeUnit, expectation) in testCase.equivalentVolumes {
-//                guard let result = testCase.quantity.convert(
-//                    to: .volume(volumeUnit),
-//                    with: testCase.explicitVolumeUnits)
-//                else {
-//                    XCTFail()
-//                    return
-//                }
-//                XCTAssertEqual(
-//                    result.amount.rounded(toPlaces: 2),
-//                    expectation.rounded(toPlaces: 2)
-//                )
-//            }
-//        }
-//    }
+    
+    //MARK: - Serving → Weight
+    func test_Serving_Weight() throws {
+        for testCase in TestCases.Serving_Weight {
+            for (weightUnit, expectation) in testCase.equivalentWeights {
+                guard let result = testCase.quantity.convert(to: .weight(weightUnit)) else {
+                    XCTFail()
+                    return
+                }
+                assertEqual(result.value, expectation)
+            }
+        }
+    }
 }
+
 
 extension TestCases {
-//    static let WeightWithDensity = [
-//        FoodQuantityTestCase(
-//            quantity: FoodQuantity(
-//                amount: 100,
-//                unit: .weight(.g),
-//                food: Food(density: FoodDensity(100, .g, 1, .cupMetric))
-//            ),
-//            explicitVolumeUnits: .defaultUnits,
-//            equivalentVolumes: [
-//                .cup : 1,
-//            ]
-//        ),
-//        FoodQuantityTestCase(
-//            quantity: FoodQuantity(
-//                amount: 100,
-//                unit: .weight(.g),
-//                food: Food(density: FoodDensity(100, .g, 1, .cupMetric)) /// 250 ml
-//            ),
-//            explicitVolumeUnits: UserExplicitVolumeUnits(
-//                cup: .cupJapanTraditional,   /// 180.39 ml
-//                tablespoon: .tablespoonUS   /// 14.79 ml
-//            ),
-//            equivalentVolumes: [
-//                .cup : 1.38588614,
-//                .tablespoon: 16.90331305
-//            ]
-//        ),
-//        FoodQuantityTestCase(
-//            quantity: FoodQuantity(
-//                amount: 50,
-//                unit: .weight(.g),
-//                food: Food(density: FoodDensity(100, .g, 1, .cupMetric)) /// 250 ml
-//            ),
-//            explicitVolumeUnits: UserExplicitVolumeUnits(
-//                cup: .cupJapanTraditional,   /// 180.39 ml
-//                tablespoon: .tablespoonUS   /// 14.79 ml
-//            ),
-//            equivalentVolumes: [
-//                .cup : 0.69294307,
-//                .tablespoon: 8.45165652
-//            ]
-//        )
-//
-//    ]
+    static let Serving_Weight = [
+        FoodQuantityTestCase(
+            quantity: FoodQuantity(
+                0.5,
+                Food(
+                    serving: .init(100, .g)
+                )
+            ),
+            equivalentWeights: [
+                .g : 50,
+            ]
+        ),
+        FoodQuantityTestCase(
+            quantity: FoodQuantity(
+                2.3,
+                Food(
+                    serving: .init(22, .tablespoonMetric), /// 15
+                    density: .init(1.2, .oz, 0.8, .cupJapanTraditional) // 180.39
+                )
+            ),
+            equivalentWeights: [
+                .g : 50,
+            ]
+        ),
+    ]
 }
-

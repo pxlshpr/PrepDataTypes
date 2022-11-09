@@ -57,8 +57,9 @@ public extension FoodQuantity.Size {
 }
 
 public extension VolumeExplicitUnit {
-    func scale(against other: VolumeExplicitUnit) -> Double {
-        ml / other.ml
+    func scale(against other: VolumeExplicitUnit?) -> Double {
+        guard let other else { return 1 }
+        return ml / other.ml
     }
 }
 

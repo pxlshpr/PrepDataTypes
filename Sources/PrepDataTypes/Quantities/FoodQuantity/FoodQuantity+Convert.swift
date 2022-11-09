@@ -118,6 +118,7 @@ extension Food {
                 guard let unitServings = quantityInOneServing(
                     of: servingSizeQuantity.size,
                     with: volumePrefixUnit)
+//                    with: servingSizeQuantity.volumePrefixUnit)
                 else {
                     return nil
                 }
@@ -426,6 +427,7 @@ extension FoodQuantity.Size {
         }
     }
     
+    //⚠️ TODO: Document this properly, possibly rename it to quantityOf...
     func unitSizeValue(of size: FoodQuantity.Size) -> Double? {
         guard unitValue > 0 else {
             return nil
@@ -436,7 +438,10 @@ extension FoodQuantity.Size {
 //            return nil
         }
         if sizeUnit == size {
-            return 1 / unitValue
+            let scale = self.unit
+                .sizeVolumePrefixExplicitUnit?
+                .scale(against: size.volumePrefixExplicitUnit) ?? 1
+            return 1 / unitValue / scale
         } else {
             /// Recursively keep drilling down till we hit the size unit
             guard let unitSizeValue = sizeUnit.unitSizeValue(of: size) else { return nil }

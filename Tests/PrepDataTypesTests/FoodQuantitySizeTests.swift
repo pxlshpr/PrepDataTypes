@@ -21,7 +21,7 @@ final class FoodQuantitySizeTests: XCTestCase {
         ]
         
         for (sizeId, expectedUnitWeight) in testCases {
-            guard let size = food.size(for: sizeId),
+            guard let size = food.quantitySize(for: sizeId),
                   let unitWeight = size.unitWeight(in: food)
             else {
                 XCTFail()

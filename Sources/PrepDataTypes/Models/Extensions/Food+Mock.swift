@@ -6,6 +6,7 @@ public extension Food {
         emoji: String = "",
         detail: String? = nil,
         brand: String? = nil,
+        amount: FoodValue = .init(1),
         serving: FoodValue? = nil,
         density: FoodDensity? = nil,
         sizes: [FoodSize] = []
@@ -27,7 +28,7 @@ public extension Food {
             lastUsedAt: nil,
             firstUsedAt: nil,
             info: .init(
-                amount: .init(value: 1, unitType: .serving),
+                amount: amount,
                 serving: serving,
                 nutrients: .init(
                     energyInKcal: energy,

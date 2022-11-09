@@ -51,6 +51,13 @@ public extension FoodValue {
             volumeExplicitUnit: volume.unit
         )
     }
+    
+    init(_ servings: Double) {
+        self.init(
+            value: servings,
+            unitType: .serving
+        )
+    }
 }
 
 public extension FoodValue {

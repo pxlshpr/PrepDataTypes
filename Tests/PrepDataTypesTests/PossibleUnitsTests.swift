@@ -13,7 +13,7 @@ final class PossibleUnitsTests: XCTestCase {
             ]
         )
         
-        let quantity = FoodQuantity(30.4, .g, food: wheyProtein)
+        let quantity = FoodQuantity(30.4, .g, wheyProtein)
         
         let possibleQuantities = quantity.equivalentQuantities()
 

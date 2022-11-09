@@ -25,7 +25,7 @@ extension FoodQuantityConvertTests {
 extension TestCases {
     static let Weight = [
         FoodQuantityTestCase(
-            quantity: FoodQuantity(value: 1, unit: .weight(.g), food: Food()),
+            quantity: FoodQuantity(1, .g, Food()),
             equivalentWeights: [
                 .g : 1,
                 .kg : 0.001,
@@ -35,7 +35,7 @@ extension TestCases {
             ]
         ),
         FoodQuantityTestCase(
-            quantity: FoodQuantity(value: 30, unit: .weight(.oz), food: Food()),
+            quantity: FoodQuantity(30, .oz, Food()),
             equivalentWeights: [
                 .g : 850.486,
                 .kg : 0.850486,

@@ -15,7 +15,7 @@ public struct FoodQuantity: Hashable {
 //MARK: - Convenience
 
 public extension FoodQuantity {
-    init(_ value: Double, _ weightUnit: WeightUnit, food: Food) {
+    init(_ value: Double, _ weightUnit: WeightUnit, _ food: Food) {
         self.init(
             value: value,
             unit: .weight(weightUnit),
@@ -23,7 +23,7 @@ public extension FoodQuantity {
         )
     }
     
-    init(_ value: Double, _ volumeExplicitUnit: VolumeExplicitUnit, food: Food) {
+    init(_ value: Double, _ volumeExplicitUnit: VolumeExplicitUnit, _ food: Food) {
         self.init(
             value: value,
             unit: .volume(volumeExplicitUnit),

@@ -7,7 +7,6 @@ final class FoodQuantityConvertTests: XCTestCase {
 
 struct FoodQuantityTestCase {
     let quantity: FoodQuantity
-    var explicitVolumeUnits: UserExplicitVolumeUnits = .defaultUnits
     var equivalentWeights: [WeightUnit: Double] = [:]
     var equivalentVolumes: [VolumeExplicitUnit: Double] = [:]
     var equivalentServing: Double? = nil

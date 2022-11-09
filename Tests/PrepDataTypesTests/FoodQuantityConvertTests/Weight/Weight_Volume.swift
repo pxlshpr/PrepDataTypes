@@ -29,7 +29,6 @@ extension TestCases {
                 unit: .weight(.g),
                 food: Food(density: FoodDensity(100, .g, 1, .cupMetric))
             ),
-            explicitVolumeUnits: .defaultUnits,
             equivalentVolumes: [
                 .cupMetric : 1,
             ]
@@ -39,10 +38,6 @@ extension TestCases {
                 value: 100,
                 unit: .weight(.g),
                 food: Food(density: FoodDensity(100, .g, 1, .cupMetric)) /// 250 ml
-            ),
-            explicitVolumeUnits: UserExplicitVolumeUnits(
-                cup: .cupJapanTraditional,   /// 180.39 ml
-                tablespoon: .tablespoonUS   /// 14.79 ml
             ),
             equivalentVolumes: [
                 .cupJapanTraditional : 1.38588614,
@@ -55,16 +50,11 @@ extension TestCases {
                 unit: .weight(.g),
                 food: Food(density: FoodDensity(100, .g, 1, .cupMetric)) /// 250 ml
             ),
-            explicitVolumeUnits: UserExplicitVolumeUnits(
-                cup: .cupJapanTraditional,   /// 180.39 ml
-                tablespoon: .tablespoonUS   /// 14.79 ml
-            ),
             equivalentVolumes: [
                 .cupJapanTraditional : 0.69294307,
                 .tablespoonUS: 8.45165652
             ]
         )
-
     ]
 }
 

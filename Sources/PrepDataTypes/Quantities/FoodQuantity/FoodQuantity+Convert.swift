@@ -23,7 +23,7 @@ public extension FoodQuantity {
         
         guard let converted else { return nil }
         return FoodQuantity(
-            amount: converted,
+            value: converted,
             unit: unit,
             food: self.food
         )
@@ -133,7 +133,12 @@ extension Food {
     func size(for id: String) -> FoodSize? {
         info.sizes.first(where: { $0.id == id })
     }
-    
+
+    func quantitySize(for id: String) -> FoodQuantity.Size? {
+        guard let size = size(for: id) else { return nil }
+        return FoodQuantity.Size(foodSize: size, in: self)
+    }
+
     var servingWeight: WeightQuantity? {
         
         guard let serving = info.serving else { return nil }

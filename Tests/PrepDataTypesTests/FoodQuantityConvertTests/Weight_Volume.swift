@@ -25,7 +25,7 @@ extension TestCases {
     static let WeightWithDensity = [
         FoodQuantityTestCase(
             quantity: FoodQuantity(
-                amount: 100,
+                value: 100,
                 unit: .weight(.g),
                 food: Food(density: FoodDensity(100, .g, 1, .cupMetric))
             ),
@@ -36,7 +36,7 @@ extension TestCases {
         ),
         FoodQuantityTestCase(
             quantity: FoodQuantity(
-                amount: 100,
+                value: 100,
                 unit: .weight(.g),
                 food: Food(density: FoodDensity(100, .g, 1, .cupMetric)) /// 250 ml
             ),
@@ -51,7 +51,7 @@ extension TestCases {
         ),
         FoodQuantityTestCase(
             quantity: FoodQuantity(
-                amount: 50,
+                value: 50,
                 unit: .weight(.g),
                 food: Food(density: FoodDensity(100, .g, 1, .cupMetric)) /// 250 ml
             ),

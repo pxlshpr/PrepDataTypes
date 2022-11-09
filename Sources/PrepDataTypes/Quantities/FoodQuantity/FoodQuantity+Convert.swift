@@ -48,8 +48,13 @@ extension FoodQuantity {
             return volume.convert(to: volumeExplicitUnit)
 
         case .size(let size, let volumePrefixUnit):
-            return nil
-            
+            // ✅ Tests Passing
+            guard let unitVolume = size.unitVolume(in: food) else { return nil }
+            let converted = unitVolume.convert(to: volume.unit)
+            guard converted > 0 else { return nil }
+            let volume = volume.value / converted
+            return volume * size.volumePrefixScale(for: volumePrefixUnit)
+
         case .serving:
             // ✅ Tests Passing
             guard let servingVolume = food.servingVolume else { return nil }

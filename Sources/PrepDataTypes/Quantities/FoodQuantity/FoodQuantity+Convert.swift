@@ -18,8 +18,10 @@ public extension FoodQuantity {
         case .serving:
             converted = convertFromServings(amount: value, toUnit: unit)
             
-        case .size(let sizeUnit, let sizeVolumePrefix):
-            converted = convertSize(sizeUnit, amount: value, toUnit: unit)
+        case .size(let size, let volumePrefixUnit):
+            let sizeQuantity = SizeQuantity(value, size, volumePrefixUnit)
+//            converted = convertSize(sizeUnit, amount: value, toUnit: unit)
+            converted = convert(sizeQuantity, to: unit)
         }
         
         guard let converted else { return nil }
@@ -33,7 +35,7 @@ public extension FoodQuantity {
 
 extension FoodQuantity {
     
-    func convertSize(_ size: Size, amount: Double, toUnit: Unit) -> Double? {
+    func convert(_ sizeQuantity: SizeQuantity, to unit: Unit) -> Double? {
         
         return nil
         
@@ -60,6 +62,39 @@ extension FoodQuantity {
 //            guard let unitServings = size.unitServings else { return nil }
 //            return unitServings * amount
 //        }
+    }
+    
+    // ✅ Tests Passing
+    func convert(_ volume: VolumeQuantity, to unit: Unit) -> Double? {
+        switch unit {
+            
+        case .weight(let weightUnit):
+            // ✅ Tests Passing
+            guard let density = food.info.density else { return nil }
+            /// Volume → Weight
+            let weight = density.convert(volume: volume)
+            /// Volume → VolumeExplicitUnit
+            return weight.convert(to: weightUnit)
+
+        case .volume(let volumeExplicitUnit):
+            // ✅ Tests Passing
+            return volume.convert(to: volumeExplicitUnit)
+
+        case .size(let size, let volumePrefixUnit):
+            // ✅ Tests Passing
+            guard let unitVolume = size.unitVolume(in: food) else { return nil }
+            let converted = unitVolume.convert(to: volume.unit)
+            guard converted > 0 else { return nil }
+            let volume = volume.value / converted
+            return volume * size.volumePrefixScale(for: volumePrefixUnit)
+
+        case .serving:
+            // ✅ Tests Passing
+            guard let servingVolume = food.servingVolume else { return nil }
+            let converted = servingVolume.convert(to: volume.unit)
+            guard value > 0 else { return nil }
+            return value / converted
+        }
     }
     
     func convertFromServings(amount: Double, toUnit: Unit) -> Double? {
@@ -447,39 +482,6 @@ public extension FoodQuantity {
             // ✅ Tests Passing
             guard let servingWeight = food.servingWeight else { return nil }
             let converted = servingWeight.convert(to: weight.unit)
-            guard value > 0 else { return nil }
-            return value / converted
-        }
-    }
-    
-    // ✅ Tests Passing
-    func convert(_ volume: VolumeQuantity, to unit: Unit) -> Double? {
-        switch unit {
-            
-        case .weight(let weightUnit):
-            // ✅ Tests Passing
-            guard let density = food.info.density else { return nil }
-            /// Volume → Weight
-            let weight = density.convert(volume: volume)
-            /// Volume → VolumeExplicitUnit
-            return weight.convert(to: weightUnit)
-
-        case .volume(let volumeExplicitUnit):
-            // ✅ Tests Passing
-            return volume.convert(to: volumeExplicitUnit)
-
-        case .size(let size, let volumePrefixUnit):
-            // ✅ Tests Passing
-            guard let unitVolume = size.unitVolume(in: food) else { return nil }
-            let converted = unitVolume.convert(to: volume.unit)
-            guard converted > 0 else { return nil }
-            let volume = volume.value / converted
-            return volume * size.volumePrefixScale(for: volumePrefixUnit)
-
-        case .serving:
-            // ✅ Tests Passing
-            guard let servingVolume = food.servingVolume else { return nil }
-            let converted = servingVolume.convert(to: volume.unit)
             guard value > 0 else { return nil }
             return value / converted
         }

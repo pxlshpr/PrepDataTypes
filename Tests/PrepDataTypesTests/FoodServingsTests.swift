@@ -165,31 +165,31 @@ final class FoodServingsTests: XCTestCase {
     }
     
     /// volume-based-size
-//    func testVolumeBasedSize() throws {
-//        let food = Food(
-//            serving: .init(2, "bottle"),
-//            sizes: [
-//                .init(2, "bottle", .init(3.5, .cupMetric)), /// 250 mL
-//                .init(1.5, "box", .init(30, "bottle")), /// 20 bottles
-//                .init(5, "carton", .init(15, "box")),   /// 3 boxes
-//            ]
-//        )
-//
-//
-//        let expectedServings: [String: Double] = [
-//            "bottle": 2,
-//            "box": 10,
-//            "carton": 30
-//        ]
-//
-//        for (sizeId, expectedServing) in expectedServings {
-//            guard let servings = food.quantityInOneServing(of: sizeId) else {
-//                XCTFail()
-//                return
-//            }
-//            assertEqual(servings, expectedServing)
-//        }
-//    }
+    func testVolumeBasedSize() throws {
+        let food = Food(
+            serving: .init(2, "bottle"),
+            sizes: [
+                .init(2, "bottle", .init(3.5, .cupMetric)), /// 250 mL
+                .init(1.5, "box", .init(30, "bottle")), /// 20 bottles
+                .init(5, "carton", .init(15, "box")),   /// 3 boxes
+            ]
+        )
+
+
+        let expectedServings: [String: Double] = [
+            "bottle": 2,
+            "box": 0.1,
+            "carton": 0.03333333
+        ]
+
+        for (sizeId, expectedServing) in expectedServings {
+            guard let servings = food.quantityInOneServing(of: sizeId) else {
+                XCTFail()
+                return
+            }
+            assertEqual(servings, expectedServing)
+        }
+    }
     
     /// volume-based-size-based size
     

@@ -131,7 +131,9 @@ extension Food {
                     guard unitSizeValue > 0 else { return nil }
                     servings = unitServings / unitSizeValue
                 }
-                return servings
+                
+                let scale = 1.0 / servingSizeQuantity.volumePrefixScale
+                return servings * scale
             }
             
         default:

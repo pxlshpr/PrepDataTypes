@@ -149,7 +149,7 @@ final class FoodServingsTests: XCTestCase {
         let expectedSizes: [(VolumeExplicitUnit?, String, Double)] = [
             (.cupJapanTraditional, "chopped5", 1), /// 180.39 mL
             (.fluidOunceUSNutritionLabeling, "chopped5", 6.013),
-            (nil, "carton", 0.16666667)
+            (nil, "carton", 1.00216667)
         ]
 
         for sizeTest in expectedSizes {

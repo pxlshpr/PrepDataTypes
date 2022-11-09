@@ -257,7 +257,12 @@ extension FoodQuantity {
             return scaledValue
 
         case .serving:
-            return nil
+            guard let servings = food.quantityInOneServing(
+                of: sizeQuantity.size, with: sizeQuantity.volumePrefixUnit)
+            else { return nil }
+            
+            guard servings > 0 else { return nil }
+            return value / servings
         }
         
         /// Now scale the number of sizes provided to make it match what the size specifies
@@ -296,7 +301,7 @@ extension FoodQuantity {
             // ✅ Tests Passing
             guard let servingVolume = food.servingVolume else { return nil }
             let converted = servingVolume.convert(to: volume.unit)
-            guard value > 0 else { return nil }
+            guard converted > 0 else { return nil }
             return value / converted
         }
     }
@@ -736,7 +741,7 @@ public extension FoodQuantity {
             // ✅ Tests Passing
             guard let servingWeight = food.servingWeight else { return nil }
             let converted = servingWeight.convert(to: weight.unit)
-            guard value > 0 else { return nil }
+            guard converted > 0 else { return nil }
             return value / converted
         }
     }

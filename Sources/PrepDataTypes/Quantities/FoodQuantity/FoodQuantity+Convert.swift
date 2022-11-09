@@ -126,8 +126,10 @@ extension Food {
                 if size.isParent(of: servingSizeQuantity.size) {
                     servings = unitServings * unitSizeValue
                 } else {
-                    guard unitServings > 0 else { return nil }
-                    servings = unitSizeValue / unitServings
+//                    guard unitServings > 0 else { return nil }
+//                    servings = unitSizeValue / unitServings
+                    guard unitSizeValue > 0 else { return nil }
+                    servings = unitServings / unitSizeValue
                 }
                 return servings
             }

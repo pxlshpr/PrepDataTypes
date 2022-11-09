@@ -91,7 +91,7 @@ final class FoodServingsTests: XCTestCase {
         )
 
         let expectations: [String: Double] = [
-            "ball": 0.03333333,
+            "ball": 30,
             "box": 1.5,
             "carton": 0.5
         ]
@@ -163,7 +163,7 @@ final class FoodServingsTests: XCTestCase {
             assertEqual(servings, expectedValue)
         }
     }
-    
+
     /// volume-based-size
     func testVolumeBasedSize() throws {
         let food = Food(
@@ -190,7 +190,7 @@ final class FoodServingsTests: XCTestCase {
             assertEqual(servings, expectedServing)
         }
     }
-    
+
     /// volume-based-size-based size
     func testVolumeBasedSizeBasedSize() throws {
         let food = Food(
@@ -203,7 +203,7 @@ final class FoodServingsTests: XCTestCase {
         )
 
         let expectations: [String: Double] = [
-            "bottle": 0.03333333,
+            "bottle": 30,
             "box": 1.5,
             "carton": 0.5
         ]
@@ -216,7 +216,7 @@ final class FoodServingsTests: XCTestCase {
             assertEqual(servings, expectedServings)
         }
     }
-    
+
     /// serving-based-size based size
     func testServingBasedSizeBasedSize() throws {
         let food = Food(
@@ -244,5 +244,28 @@ final class FoodServingsTests: XCTestCase {
     }
     
     /// serving-based-size-based-size based size
-    
+    func testServingBasedSizeBasedSizeBasedSize() throws {
+        let food = Food(
+            serving: .init(10, "box"),
+            sizes: [
+                .init(2, "bottle", .init(1)),
+                .init(1.5, "box", .init(30, "bottle")), /// 20 bottles
+                .init(5, "carton", .init(15, "box")),   /// 3 boxes
+            ]
+        )
+
+        let expectations: [String: Double] = [
+            "bottle": 200,
+            "box": 10,
+            "carton": 3.33333333
+        ]
+
+        for (sizeId, expectedServings) in expectations {
+            guard let servings = food.quantityInOneServing(of: sizeId) else {
+                XCTFail()
+                return
+            }
+            assertEqual(servings, expectedServings)
+        }
+    }
 }

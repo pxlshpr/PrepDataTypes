@@ -433,9 +433,16 @@ extension FoodQuantity.Size {
             return nil
         }
         
+        //⛔️ FIXME: ** Infinite recursion with protein when container is used **
+        /// This is because we haven't account for that case where the container is in terms of `serving`
+        /// [ ] Fix this without breaking unit tests
+        /// [ ] Write a test case specifically for protein so it doesn't get stuck in the recursion ever again
         guard let sizeUnit = self.unit.size else {
-            return size.unitSizeValue(of: self)
-//            return nil
+            if size.unit.size != nil {
+                return size.unitSizeValue(of: self)
+            } else {
+                return nil
+            }
         }
         if sizeUnit == size {
             let scale = self.unit

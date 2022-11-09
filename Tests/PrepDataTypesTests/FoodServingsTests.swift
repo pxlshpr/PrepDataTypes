@@ -192,8 +192,56 @@ final class FoodServingsTests: XCTestCase {
     }
     
     /// volume-based-size-based size
+    func testVolumeBasedSizeBasedSize() throws {
+        let food = Food(
+            serving: .init(1.5, "box"),
+            sizes: [
+                .init(2, "bottle", .init(3.5, .cupMetric)), /// 250 mL
+                .init(1.5, "box", .init(30, "bottle")), /// 20 bottles
+                .init(5, "carton", .init(15, "box")),   /// 3 boxes
+            ]
+        )
+
+        let expectations: [String: Double] = [
+            "bottle": 0.03333333,
+            "box": 1.5,
+            "carton": 0.5
+        ]
+
+        for (sizeId, expectedServings) in expectations {
+            guard let servings = food.quantityInOneServing(of: sizeId) else {
+                XCTFail()
+                return
+            }
+            assertEqual(servings, expectedServings)
+        }
+    }
     
     /// serving-based-size based size
+    func testServingBasedSizeBasedSize() throws {
+        let food = Food(
+            serving: .init(4, "bottle"),
+            sizes: [
+                .init(2, "bottle", .init(1)),
+                .init(1.5, "box", .init(30, "bottle")), /// 20 bottles
+                .init(5, "carton", .init(15, "box")),   /// 3 boxes
+            ]
+        )
+
+        let expectations: [String: Double] = [
+            "bottle": 4,
+            "box": 0.2,
+            "carton": 0.06666667
+        ]
+
+        for (sizeId, expectedServings) in expectations {
+            guard let servings = food.quantityInOneServing(of: sizeId) else {
+                XCTFail()
+                return
+            }
+            assertEqual(servings, expectedServings)
+        }
+    }
     
     /// serving-based-size-based-size based size
     

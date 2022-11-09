@@ -1,6 +1,6 @@
 import Foundation
 
-public struct FoodQuantity {
+public struct FoodQuantity: Hashable {
     public let value: Double
     public let unit: Unit
     public let food: Food

@@ -40,7 +40,7 @@ public extension FoodQuantity {
         )
     }
     
-    init?(_ value: Double, volumePrefixUnit: VolumeExplicitUnit, _ sizeId: String, _ food: Food) {
+    init?(_ value: Double, _ volumePrefixUnit: VolumeExplicitUnit, _ sizeId: String, _ food: Food) {
         guard let size = food.quantitySize(for: sizeId) else { return nil}
         self.init(
             value: value,

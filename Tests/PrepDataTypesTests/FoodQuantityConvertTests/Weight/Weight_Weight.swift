@@ -12,10 +12,7 @@ extension FoodQuantityConvertTests {
                     XCTFail()
                     return
                 }
-                XCTAssertEqual(
-                    result.value.rounded(toPlaces: 2),
-                    expectation.rounded(toPlaces: 2)
-                )
+                assertEqual(result.value, expectation)
             }
         }
     }

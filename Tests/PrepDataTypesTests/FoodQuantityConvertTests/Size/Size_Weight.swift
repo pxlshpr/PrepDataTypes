@@ -3,27 +3,39 @@ import XCTest
 @testable import SwiftSugar
 
 extension FoodQuantityConvertTests {
-//    func testWeightToVolume() throws {
-//        for testCase in TestCases.WeightWithDensity {
-//            for (volumeUnit, expectation) in testCase.equivalentVolumes {
-//                guard let result = testCase.quantity.convert(
-//                    to: .volume(volumeUnit),
-//                    with: testCase.explicitVolumeUnits)
-//                else {
-//                    XCTFail()
-//                    return
-//                }
-//                XCTAssertEqual(
-//                    result.amount.rounded(toPlaces: 2),
-//                    expectation.rounded(toPlaces: 2)
-//                )
-//            }
-//        }
-//    }
+    
+    func test_Size_Weight() throws {
+        for testCase in TestCases.Size_Weight {
+            for (weightUnit, expectedWeight) in testCase.equivalentWeights {
+                guard let weight = testCase.quantity.convert(to: .weight(weightUnit)) else {
+                    XCTFail()
+                    return
+                }
+                assertEqual(weight.value, expectedWeight)
+            }
+        }
+    }
 }
 
 extension TestCases {
-//    static let WeightWithDensity = [
+    
+    static let Size_Weight = [
+        
+        /// volumeprefixedsize-size based serving
+        FoodQuantityTestCase(
+            quantity: FoodQuantity(
+                1.25, .tablespoonUS, "chopped4", /// 14.79
+                Food(
+                    sizes: [
+                        .init(1.5, .cupUSCustomary, "chopped", .init(270, .g)), /// 236.59
+                    ]
+                )
+            )!,
+            equivalentWeights: [
+                .g : 14.065471913437
+            ]
+        ),
+
 //        FoodQuantityTestCase(
 //            quantity: FoodQuantity(
 //                amount: 100,
@@ -66,6 +78,6 @@ extension TestCases {
 //            ]
 //        )
 //
-//    ]
+    ]
 }
 

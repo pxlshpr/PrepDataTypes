@@ -32,64 +32,6 @@ public extension FoodQuantity {
 }
 
 extension FoodQuantity {
-    func convert(_ volume: VolumeQuantity, to unit: Unit) -> Double? {
-        switch unit {
-            
-        case .weight(let weightUnit):
-            // ✅ Tests Passing
-            guard let density = food.info.density else { return nil }
-            /// Volume → Weight
-            let weight = density.convert(volume: volume)
-            /// Volume → VolumeExplicitUnit
-            return weight.convert(to: weightUnit)
-
-        case .volume(let volumeExplicitUnit):
-            // ✅ Tests Passing
-            return volume.convert(to: volumeExplicitUnit)
-
-        case .size(let size, let volumePrefixUnit):
-            // ✅ Tests Passing
-            guard let unitVolume = size.unitVolume(in: food) else { return nil }
-            let converted = unitVolume.convert(to: volume.unit)
-            guard converted > 0 else { return nil }
-            let volume = volume.value / converted
-            return volume * size.volumePrefixScale(for: volumePrefixUnit)
-
-        case .serving:
-            // ✅ Tests Passing
-            guard let servingVolume = food.servingVolume else { return nil }
-            let converted = servingVolume.convert(to: volume.unit)
-            guard value > 0 else { return nil }
-            return value / converted
-        }
-    }
-    
-    func convertFromServings(amount: Double, toUnit: Unit) -> Double? {
-        
-        guard let serving = food.info.serving, let servingUnit = food.servingUnit else {
-            return nil
-        }
-        //TODO: Reuse servingWeight etc here
-        let converted: Double?
-        switch servingUnit {
-            
-        case .weight(let weightUnit):
-            let weight = WeightQuantity(value: serving.value, unit: weightUnit)
-            converted = convertWeight(weight,toUnit: unit)
-            
-        case .volume(let volumeUnit):
-            converted = nil
-            
-        case .size(let size, let volumeUnit):
-            converted = nil
-            
-        case .serving:
-            /// We shouldn't encounter this
-            return nil
-        }
-        guard let converted else { return nil }
-        return converted * amount
-    }
     
     func convertSize(_ size: Size, amount: Double, toUnit: Unit) -> Double? {
         
@@ -120,6 +62,32 @@ extension FoodQuantity {
 //        }
     }
     
+    func convertFromServings(amount: Double, toUnit: Unit) -> Double? {
+        
+        guard let serving = food.info.serving, let servingUnit = food.servingUnit else {
+            return nil
+        }
+        //TODO: Reuse servingWeight etc here
+        let converted: Double?
+        switch servingUnit {
+            
+        case .weight(let weightUnit):
+            let weight = WeightQuantity(value: serving.value, unit: weightUnit)
+            converted = convertWeight(weight,toUnit: unit)
+            
+        case .volume(let volumeUnit):
+            converted = nil
+            
+        case .size(let size, let volumeUnit):
+            converted = nil
+            
+        case .serving:
+            /// We shouldn't encounter this
+            return nil
+        }
+        guard let converted else { return nil }
+        return converted * amount
+    }
 }
 
 extension Food {
@@ -483,4 +451,38 @@ public extension FoodQuantity {
             return value / converted
         }
     }
+    
+    // ✅ Tests Passing
+    func convert(_ volume: VolumeQuantity, to unit: Unit) -> Double? {
+        switch unit {
+            
+        case .weight(let weightUnit):
+            // ✅ Tests Passing
+            guard let density = food.info.density else { return nil }
+            /// Volume → Weight
+            let weight = density.convert(volume: volume)
+            /// Volume → VolumeExplicitUnit
+            return weight.convert(to: weightUnit)
+
+        case .volume(let volumeExplicitUnit):
+            // ✅ Tests Passing
+            return volume.convert(to: volumeExplicitUnit)
+
+        case .size(let size, let volumePrefixUnit):
+            // ✅ Tests Passing
+            guard let unitVolume = size.unitVolume(in: food) else { return nil }
+            let converted = unitVolume.convert(to: volume.unit)
+            guard converted > 0 else { return nil }
+            let volume = volume.value / converted
+            return volume * size.volumePrefixScale(for: volumePrefixUnit)
+
+        case .serving:
+            // ✅ Tests Passing
+            guard let servingVolume = food.servingVolume else { return nil }
+            let converted = servingVolume.convert(to: volume.unit)
+            guard value > 0 else { return nil }
+            return value / converted
+        }
+    }
 }
+

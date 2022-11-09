@@ -24,6 +24,22 @@ public struct FoodSize: Codable, Hashable {
 }
 
 extension FoodSize {
+    public init(_ quantity: Double, _ name: String, _ value: FoodValue) {
+        self.name = name
+        self.volumePrefixExplicitUnit = nil
+        self.quantity = quantity
+        self.value = value
+    }
+
+    public init(_ quantity: Double, _ volumePrefixExplicitUnit: VolumeExplicitUnit?, _ name: String, _ value: FoodValue) {
+        self.name = name
+        self.volumePrefixExplicitUnit = volumePrefixExplicitUnit
+        self.quantity = quantity
+        self.value = value
+    }
+}
+
+extension FoodSize {
     /**
      Returns the quantity representing how much 1 of this size weights, if applicable. Drills down to the base size if necessary.
      */

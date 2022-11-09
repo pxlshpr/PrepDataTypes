@@ -27,7 +27,7 @@ public extension FoodValue {
         self.init(.init(value: amount, unit: unit))
     }
     
-    init(_ amount: Double, _ sizeUnitId: String, sizeUnitVolumePrefixExplicitUnit: VolumeExplicitUnit? = nil) {
+    init(_ amount: Double, _ sizeUnitVolumePrefixExplicitUnit: VolumeExplicitUnit? = nil, _ sizeUnitId: String) {
         self.init(
             value: amount,
             unitType: .size,
@@ -35,7 +35,16 @@ public extension FoodValue {
             sizeUnitVolumePrefixExplicitUnit: sizeUnitVolumePrefixExplicitUnit
         )
     }
-    
+
+    init(_ amount: Double, _ sizeUnitId: String) {
+        self.init(
+            value: amount,
+            unitType: .size,
+            sizeUnitId: sizeUnitId,
+            sizeUnitVolumePrefixExplicitUnit: nil
+        )
+    }
+
     init(_ weight: WeightQuantity) {
         self.init(
             value: weight.value,

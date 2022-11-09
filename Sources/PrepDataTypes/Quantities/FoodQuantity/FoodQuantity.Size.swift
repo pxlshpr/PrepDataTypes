@@ -56,6 +56,21 @@ public extension FoodQuantity.Size {
     }
 }
 
+public extension VolumeExplicitUnit {
+    func scale(against other: VolumeExplicitUnit) -> Double {
+        ml / other.ml
+    }
+}
+
+public extension SizeQuantity {
+    func volumePrefixScale(for otherVolumePrefix: VolumeExplicitUnit?) -> Double {
+        guard let volumePrefixUnit, let otherVolumePrefix else {
+            return 1
+        }
+        return volumePrefixUnit.ml / otherVolumePrefix.ml
+    }
+}
+
 public extension FoodQuantity.Size {
     
     func volumePrefixScale(for otherVolumePrefix: VolumeExplicitUnit?) -> Double {

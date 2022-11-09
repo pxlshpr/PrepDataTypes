@@ -51,7 +51,7 @@ extension FoodQuantity {
             converted = servingVolume.convert(to: volumeExplicitUnit)
             
         case .size(let size, let volumePrefixUnit):
-            converted = food.servings(in: size, with: volumePrefixUnit)
+            converted = food.quantityInOneServing(of: size, with: volumePrefixUnit)
             
         case .serving:
             /// We shouldn't encounter this
@@ -73,15 +73,15 @@ extension Food {
         guard let serving else { return nil }
         guard let id = serving.sizeUnitId else { return nil }
         guard let size = quantitySize(for: id) else { return nil }
-        return .init(serving.value, size)
+        return .init(serving.value, size, serving.sizeUnitVolumePrefixExplicitUnit)
     }
     
-    func servings(in sizeId: String, with volumePrefixUnit: VolumeExplicitUnit? = nil) -> Double? {
+    func quantityInfOneServing(of sizeId: String, with volumePrefixUnit: VolumeExplicitUnit? = nil) -> Double? {
         guard let size = quantitySize(for: sizeId) else { return nil }
-        return servings(in: size, with: volumePrefixUnit)
+        return quantityInOneServing(of: size, with: volumePrefixUnit)
     }
     
-    func servings(in size: FoodQuantity.Size, with volumePrefixUnit: VolumeExplicitUnit? = nil) -> Double? {
+    func quantityInOneServing(of size: FoodQuantity.Size, with volumePrefixUnit: VolumeExplicitUnit? = nil) -> Double? {
         guard let serving = info.serving else { return nil }
         
         switch serving.unitType {
@@ -105,7 +105,7 @@ extension Food {
             guard let servingSizeQuantity else { return nil }
             
             if servingSizeQuantity.size == size {
-                let scale = size.volumePrefixScale(for: servingSizeQuantity.volumePrefixUnit)
+                let scale = servingSizeQuantity.volumePrefixScale(for: volumePrefixUnit)
                 return servingSizeQuantity.value * scale
             } else {
                 
@@ -115,14 +115,20 @@ extension Food {
                 }
                 
                 /// We get this value by recursively keep drilling down till we hit the serving size or a raw measurement
-                guard let unitServings = servings(
-                    in: servingSizeQuantity.size,
+                guard let unitServings = quantityInOneServing(
+                    of: servingSizeQuantity.size,
                     with: volumePrefixUnit)
                 else {
                     return nil
                 }
                 
-                let servings = unitServings * unitSizeValue
+                let servings: Double
+                if size.isParent(of: servingSizeQuantity.size) {
+                    servings = unitServings * unitSizeValue
+                } else {
+                    guard unitServings > 0 else { return nil }
+                    servings = unitSizeValue / unitServings
+                }
                 return servings
             }
             
@@ -402,10 +408,24 @@ extension FoodQuantity.Unit {
 
 extension FoodQuantity.Size {
     
+    func isParent(of size: FoodQuantity.Size) -> Bool {
+        guard let sizeUnit = self.unit.size else { return false }
+        if sizeUnit == size {
+            return true
+        } else {
+            return sizeUnit.isParent(of: size)
+        }
+    }
+    
     func unitSizeValue(of size: FoodQuantity.Size) -> Double? {
-        guard unitValue > 0 else { return nil }
+        guard unitValue > 0 else {
+            return nil
+        }
         
-        guard let sizeUnit = self.unit.size else { return nil }
+        guard let sizeUnit = self.unit.size else {
+            return size.unitSizeValue(of: self)
+//            return nil
+        }
         if sizeUnit == size {
             return 1 / unitValue
         } else {

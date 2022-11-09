@@ -85,4 +85,8 @@ public extension FoodQuantity.Size {
         volumePrefixExplicitUnit?.shortDescription
     }
 
+    var unitValue: Double {
+        guard quantity > 0 else { return 0 }
+        return value / quantity
+    }
 }

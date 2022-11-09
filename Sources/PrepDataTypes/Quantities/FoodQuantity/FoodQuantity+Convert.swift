@@ -37,7 +37,7 @@ extension FoodQuantity {
         
         let converted: Double?
         switch unit {
-        
+            
         case .weight(let weightUnit):
             /// Get the weight of 1 serving
             guard let servingWeight = food.servingWeight else { return nil}
@@ -49,9 +49,9 @@ extension FoodQuantity {
             guard let servingVolume = food.servingVolume else { return nil}
             /// Now convert it to the weight unit provided
             converted = servingVolume.convert(to: volumeExplicitUnit)
-
-        case .size:
-            return nil
+            
+        case .size(let size, let volumePrefixUnit):
+            converted = food.servings(in: size, with: volumePrefixUnit)
             
         case .serving:
             /// We shouldn't encounter this
@@ -61,6 +61,155 @@ extension FoodQuantity {
         guard let converted else { return nil }
         return converted * quantity
     }
+}
+
+extension Food {
+
+    var serving: FoodValue? {
+        info.serving
+    }
+    
+    var servingSizeQuantity: SizeQuantity? {
+        guard let serving else { return nil }
+        guard let id = serving.sizeUnitId else { return nil }
+        guard let size = quantitySize(for: id) else { return nil }
+        return .init(serving.value, size)
+    }
+    
+    func servings(in sizeId: String, with volumePrefixUnit: VolumeExplicitUnit? = nil) -> Double? {
+        guard let size = quantitySize(for: sizeId) else { return nil }
+        return servings(in: size, with: volumePrefixUnit)
+    }
+    
+    func servings(in size: FoodQuantity.Size, with volumePrefixUnit: VolumeExplicitUnit? = nil) -> Double? {
+        guard let serving = info.serving else { return nil }
+        
+        switch serving.unitType {
+        case .weight:
+            guard let sizeUnitWeight = size.unitWeight(in: self) else { return nil }
+            guard sizeUnitWeight.value > 0 else { return nil }
+            guard let servingWeight = servingWeight else { return nil }
+            let converted = servingWeight.convert(to: sizeUnitWeight.unit)
+            let servings = converted / sizeUnitWeight.value
+            return servings
+
+        case .volume:
+            guard let sizeUnitVolume = size.unitVolume(in: self) else { return nil }
+            guard sizeUnitVolume.value > 0 else { return nil }
+            guard let servingVolume = servingVolume else { return nil }
+            let converted = sizeUnitVolume.convert(to: servingVolume.unit)
+            let servings = converted / servingVolume.value
+            return servings
+
+        case .size:
+            guard let servingSizeQuantity else { return nil }
+            
+            if servingSizeQuantity.size == size {
+                let scale = size.volumePrefixScale(for: servingSizeQuantity.volumePrefixUnit)
+                return servingSizeQuantity.value * scale
+            } else {
+                
+                /// This is how many of the serving size 1 of the provided size equals
+                guard let unitSizeValue = size.unitSizeValue(of: servingSizeQuantity.size) else {
+                    return nil
+                }
+                
+                /// We get this value by recursively keep drilling down till we hit the serving size or a raw measurement
+                guard let unitServings = servings(
+                    in: servingSizeQuantity.size,
+                    with: volumePrefixUnit)
+                else {
+                    return nil
+                }
+                
+                let servings = unitServings * unitSizeValue
+                return servings
+            }
+            
+        default:
+            return nil
+        }
+        
+        /// convert servings to the sepcified size, volumePrefixUnit
+        // for that we'll need to get the
+
+//        guard let servingValue = food.info.serving?.value else { return nil }
+//
+////            if size.unit.unitType == .size {
+//            guard let servingUnitQuantity = food.servingSizeQuantity(
+//                of: size, volumePrefixUnit: volumePrefixUnit)
+//            else { return nil }
+//
+//            let numberOfSizeInEachServing = servingValue / servingUnitQuantity
+//            converted = numberOfSizeInEachServing
+//            } else {
+//                converted = servingValue
+//            }
+        
+    }
+}
+
+
+extension Food {
+    //TODO: ****** TO BE REMOVED *********
+    /// Returns the quantity of the provided size that 1 serving equates to
+    func servingSizeQuantity(of size: FoodQuantity.Size, volumePrefixUnit: VolumeExplicitUnit? = nil) -> Double? {
+        
+        guard let serving = info.serving else { return nil }
+        switch serving.unitType {
+        case .weight:
+            guard let servingWeight, let sizeUnitWeight = size.unitWeight(in: self) else { return nil }
+            let converted = servingWeight.convert(to: sizeUnitWeight.unit)
+            let x = servingWeight.value / sizeUnitWeight.value
+            return x
+        case .volume:
+            return serving.value
+        case .size:
+            /// Now see if this size is the serving size (and if so we stop here), otherwise keep drilling down
+            if let servingSizeId = serving.sizeUnitId {
+                guard let servingSize = self.quantitySize(for: servingSizeId) else {
+                    return nil
+                }
+                if size == servingSize {
+                    let value = serving.value * size.unitValue
+                    return value
+                }
+            }
+
+            switch size.unit {
+            case .weight(let weightUnit):
+                return nil
+            case .volume(let volumeUnit):
+                return nil
+            case .serving:
+                /// we will stop here and return it
+                return nil
+            case .size(let sizeUnit, let volumePrefixUnit):
+                
+                /// Now see if this size is the serving size (and if so we stop here), otherwise keep drilling down
+                if let servingSizeId = serving.sizeUnitId {
+                    guard let servingSize = self.quantitySize(for: servingSizeId) else {
+                        return nil
+                    }
+                    if sizeUnit == servingSize {
+                        let value = serving.value * size.unitValue
+                        return value
+                    }
+                }
+                
+                guard let quantity = servingSizeQuantity(of: sizeUnit, volumePrefixUnit: volumePrefixUnit) else {
+                    return nil
+                }
+                return quantity * size.unitValue
+            }
+        case .serving:
+            /// We should never reach here, as a serving of a serving is not possible
+            return nil
+        }
+    }
+}
+
+extension FoodQuantity {
     
     func convert(_ sizeQuantity: SizeQuantity, to unit: Unit) -> Double? {
         
@@ -240,7 +389,31 @@ extension Food {
     }
 }
 
+extension FoodQuantity.Unit {
+    var size: FoodQuantity.Size? {
+        switch self {
+        case .size(let size, _):
+            return size
+        default:
+            return nil
+        }
+    }
+}
+
 extension FoodQuantity.Size {
+    
+    func unitSizeValue(of size: FoodQuantity.Size) -> Double? {
+        guard unitValue > 0 else { return nil }
+        
+        guard let sizeUnit = self.unit.size else { return nil }
+        if sizeUnit == size {
+            return 1 / unitValue
+        } else {
+            /// Recursively keep drilling down till we hit the size unit
+            guard let unitSizeValue = sizeUnit.unitSizeValue(of: size) else { return nil }
+            return unitSizeValue / unitValue
+        }
+    }
     
     /// Returns the unit weight of this size (ie what 1 of it weighs), if applicable. Drills down to the base size if necessary.
     func unitWeight(in food: Food) -> WeightQuantity? {
@@ -294,6 +467,7 @@ extension FoodQuantity.Size {
         }
     }
     
+    //TODO: ***** TO BE REMOVED *******
     /// Returns the unit size of this size (ie what 1 of this size is in the provided size, in the specified volumePrefixUnit). Drills down to the base size if necessary.
     func unitSizeValue(
         of size: FoodQuantity.Size,

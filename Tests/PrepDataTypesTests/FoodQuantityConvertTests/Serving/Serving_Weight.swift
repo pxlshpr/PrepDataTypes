@@ -41,7 +41,7 @@ extension TestCases {
                 )
             ),
             equivalentWeights: [
-                .g : 50,
+                .g : 178.92292135,
             ]
         ),
     ]

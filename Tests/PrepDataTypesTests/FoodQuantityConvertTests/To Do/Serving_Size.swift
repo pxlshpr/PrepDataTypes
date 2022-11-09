@@ -1,71 +1,70 @@
-import XCTest
-@testable import PrepDataTypes
-@testable import SwiftSugar
-
-extension FoodQuantityConvertTests {
-//    func testWeightToVolume() throws {
-//        for testCase in TestCases.WeightWithDensity {
-//            for (volumeUnit, expectation) in testCase.equivalentVolumes {
-//                guard let result = testCase.quantity.convert(
-//                    to: .volume(volumeUnit),
-//                    with: testCase.explicitVolumeUnits)
+//import XCTest
+//@testable import PrepDataTypes
+//@testable import SwiftSugar
+//
+//extension FoodQuantityConvertTests {
+//    func test_Serving_Size() throws {
+//        for testCase in TestCases.Serving_Size {
+//
+//            for sizeTest in testCase.equivalentSizes {
+//
+//                let volumePrefixUnit = sizeTest.0
+//                let sizeId = sizeTest.1
+//                let expectedValue = sizeTest.2
+//
+//                guard let foodSize = testCase.quantity.food.size(for: sizeId),
+//                      let size = FoodQuantity.Size(foodSize: foodSize, in: testCase.quantity.food),
+//                      let result = testCase.quantity.convert(to: .size(size, volumePrefixUnit))
 //                else {
 //                    XCTFail()
 //                    return
 //                }
-//                XCTAssertEqual(
-//                    result.amount.rounded(toPlaces: 2),
-//                    expectation.rounded(toPlaces: 2)
-//                )
+//                assertEqual(result.value, expectedValue)
 //            }
 //        }
 //    }
-}
-
-extension TestCases {
-//    static let WeightWithDensity = [
-//        FoodQuantityTestCase(
-//            quantity: FoodQuantity(
-//                amount: 100,
-//                unit: .weight(.g),
-//                food: Food(density: FoodDensity(100, .g, 1, .cupMetric))
-//            ),
-//            explicitVolumeUnits: .defaultUnits,
-//            equivalentVolumes: [
-//                .cup : 1,
-//            ]
-//        ),
-//        FoodQuantityTestCase(
-//            quantity: FoodQuantity(
-//                amount: 100,
-//                unit: .weight(.g),
-//                food: Food(density: FoodDensity(100, .g, 1, .cupMetric)) /// 250 ml
-//            ),
-//            explicitVolumeUnits: UserExplicitVolumeUnits(
-//                cup: .cupJapanTraditional,   /// 180.39 ml
-//                tablespoon: .tablespoonUS   /// 14.79 ml
-//            ),
-//            equivalentVolumes: [
-//                .cup : 1.38588614,
-//                .tablespoon: 16.90331305
-//            ]
-//        ),
-//        FoodQuantityTestCase(
-//            quantity: FoodQuantity(
-//                amount: 50,
-//                unit: .weight(.g),
-//                food: Food(density: FoodDensity(100, .g, 1, .cupMetric)) /// 250 ml
-//            ),
-//            explicitVolumeUnits: UserExplicitVolumeUnits(
-//                cup: .cupJapanTraditional,   /// 180.39 ml
-//                tablespoon: .tablespoonUS   /// 14.79 ml
-//            ),
-//            equivalentVolumes: [
-//                .cup : 0.69294307,
-//                .tablespoon: 8.45165652
-//            ]
-//        )
+//}
 //
+//extension TestCases {
+//    static let Serving_Size = [
+//
+//        /// weight based sizes
+////        FoodQuantityTestCase(
+////            quantity: FoodQuantity(
+////                3,
+////                Food(
+////                    serving: .init(2, "ball"),
+////                    sizes: [
+////                        .init(3, "ball", .init(12, .g)),
+////                        .init(1.5, "box", .init(30, "ball")),
+////                        .init(5, "carton", .init(15, "box")),
+////                    ]
+////                )
+////            ),
+////            equivalentSizes: [
+////                (nil, "ball", 6),
+////                (nil, "box", 0.15),
+////                (nil, "carton", 0.05)
+////            ]
+////        ),
+//
+//        FoodQuantityTestCase(
+//            quantity: FoodQuantity(
+//                3,
+//                Food(
+//                    serving: .init(8, .g),
+//                    sizes: [
+//                        .init(3, "ball", .init(12, .g)),
+//                        .init(1.5, "box", .init(30, "ball")),
+//                        .init(5, "carton", .init(15, "box")),
+//                    ]
+//                )
+//            ),
+//            equivalentSizes: [
+//                (nil, "ball", 6),
+//                (nil, "box", 0.15),
+//                (nil, "carton", 0.05)
+//            ]
+//        ),
 //    ]
-}
-
+//}

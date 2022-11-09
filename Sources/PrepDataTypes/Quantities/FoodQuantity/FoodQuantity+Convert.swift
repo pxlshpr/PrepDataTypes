@@ -76,7 +76,7 @@ extension Food {
         return .init(serving.value, size, serving.sizeUnitVolumePrefixExplicitUnit)
     }
     
-    func quantityInfOneServing(of sizeId: String, with volumePrefixUnit: VolumeExplicitUnit? = nil) -> Double? {
+    func quantityInOneServing(of sizeId: String, with volumePrefixUnit: VolumeExplicitUnit? = nil) -> Double? {
         guard let size = quantitySize(for: sizeId) else { return nil }
         return quantityInOneServing(of: size, with: volumePrefixUnit)
     }

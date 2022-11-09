@@ -7,6 +7,13 @@ public struct SizeQuantity: Hashable {
 }
 
 public extension SizeQuantity {
+    /// The scale to be applied, to convert values from the `size.volumePrefixUnit` to the specified `volumePrefixUnit`
+    var volumePrefixScale: Double {
+        size.volumePrefixScale(for: volumePrefixUnit)
+    }
+}
+
+public extension SizeQuantity {
     init(_ value: Double, _ size: FoodQuantity.Size, _ volumePrefixUnit: VolumeExplicitUnit?) {
         self.init(value: value, size: size, volumePrefixUnit: volumePrefixUnit)
     }

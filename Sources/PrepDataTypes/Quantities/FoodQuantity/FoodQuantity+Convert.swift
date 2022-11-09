@@ -20,7 +20,6 @@ public extension FoodQuantity {
             
         case .size(let size, let volumePrefixUnit):
             let sizeQuantity = SizeQuantity(value, size, volumePrefixUnit)
-//            converted = convertSize(sizeUnit, amount: value, toUnit: unit)
             converted = convert(sizeQuantity, to: unit)
         }
         
@@ -37,7 +36,27 @@ extension FoodQuantity {
     
     func convert(_ sizeQuantity: SizeQuantity, to unit: Unit) -> Double? {
         
-        return nil
+        switch unit {
+        case .weight(let weightUnit):
+            /// Get the unit weight of the size (how much 1 unit of it weighs)
+            guard let unitWeight = sizeQuantity.size.unitWeight(in: food) else { return nil }
+            /// Convert this to the weight unit provided
+            let unitWeightInUnitProvided = unitWeight.convert(to: weightUnit)
+            /// Now scale the number of sizes provided to make it match what the size specifies
+            let scale = sizeQuantity.volumePrefixScale
+            guard scale > 0 else { return nil }
+            let scaledSizesProvided = sizeQuantity.value / scale
+            /// Use that and the unit weight (in the provided weight unit) to calculate the weight
+            let weight = unitWeightInUnitProvided * scaledSizesProvided
+            return weight
+
+        case .volume(let volumeUnit):
+            return nil
+        case .serving:
+            return nil
+        case .size(let size, let volumePrefixUnit):
+            return nil
+        }
         
 //        switch toUnit {
 //

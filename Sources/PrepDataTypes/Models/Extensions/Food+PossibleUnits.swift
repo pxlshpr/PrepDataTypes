@@ -9,7 +9,7 @@ public extension Food {
         possibleUnits(using: userVolumeUnits).filter {
             /// If the units are both sizes—compare the sizes alone to exclude any potential different volume prefixes
             if let possibleSize = $0.size, let size = unit.size {
-                return possibleSize.id == size.id
+                return possibleSize.id != size.id
             } else {
                 return $0 != unit
             }

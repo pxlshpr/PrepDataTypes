@@ -1,8 +1,8 @@
 import Foundation
 
 public extension FoodQuantity {
-    func equivalentQuantities(using: UserExplicitVolumeUnits = .defaultUnits) -> [FoodQuantity] {
-        let units = food.possibleUnits(without: unit, using: .defaultUnits)
+    func equivalentQuantities(using userVolumeUnits: UserExplicitVolumeUnits = .defaultUnits) -> [FoodQuantity] {
+        let units = food.possibleUnits(without: unit, using: userVolumeUnits)
         var quantites = units
             .compactMap { convert(to: $0) }
             .filter({ $0.value >= 0.1 && $0.value < 1000 })

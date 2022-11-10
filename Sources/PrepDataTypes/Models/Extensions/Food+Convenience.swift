@@ -19,6 +19,32 @@ public extension Food {
         guard let serving = info.serving else { return nil }
         return "\(serving.value.cleanAmount) \(serving.unitDescription(sizes: info.sizes))"
     }
+    
+    func servingDescription(using userVolumeUnits: UserExplicitVolumeUnits) -> String? {
+        guard let serving = info.serving, let servingDescription else { return nil }
+
+        var volumeSuffix: String = ""
+        /// if the serving has a descriptive volume unit, and it isn't one of the user's units, include it in brackets
+        if let volumeExplicitUnit = serving.descriptiveVolumeUnit,
+            !userVolumeUnits.contains(volumeExplicitUnit)
+        {
+            volumeSuffix = " (\(volumeExplicitUnit.ml.clean) mL)"
+        }
+        return servingDescription + volumeSuffix
+    }
+}
+
+extension UserExplicitVolumeUnits {
+    func contains(_ volumeExplicitUnit: VolumeExplicitUnit) -> Bool {
+        false
+    }
+}
+
+extension FoodValue {
+    /// returns either the volume prefix of the size or the volume unit
+    var descriptiveVolumeUnit: VolumeExplicitUnit? {
+        sizeUnitVolumePrefixExplicitUnit ?? volumeExplicitUnit
+    }
 }
 
 public extension Food {

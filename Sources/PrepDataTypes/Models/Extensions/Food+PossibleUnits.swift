@@ -31,8 +31,9 @@ public extension Food {
         if canBeMeasuredInWeight {
             units.append(contentsOf: WeightUnit.allCases.map { .weight($0) })
         }
+        let volumeUnits: [VolumeUnit] = [.mL, .liter, .cup, .fluidOunce, .tablespoon, .teaspoon]
         if canBeMeasuredInVolume {
-            units.append(contentsOf: VolumeUnit.allCases.map { .volume(userVolumeUnits.volumeExplicitUnit(for: $0)) })
+            units.append(contentsOf: volumeUnits.map { .volume(userVolumeUnits.volumeExplicitUnit(for: $0)) })
         }
         return units
     }

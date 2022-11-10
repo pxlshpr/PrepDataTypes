@@ -40,9 +40,9 @@ final class FoodServingsTests: XCTestCase {
         )
 
         let expectations: [String: Double] = [
-            "bottle": 2.66090138,
-            "pack": 5.32180276,
-            "box": 63.86163313
+            "bottle": 0.3758125,
+            "pack": 0.18790625,
+            "box": 0.01565885
         ]
 
         for (sizeId, expectedServings) in expectations {

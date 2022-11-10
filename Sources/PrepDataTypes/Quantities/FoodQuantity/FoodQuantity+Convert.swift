@@ -98,7 +98,8 @@ extension Food {
             guard sizeUnitVolume.value > 0 else { return nil }
             guard let servingVolume = servingVolume else { return nil }
             let converted = sizeUnitVolume.convert(to: servingVolume.unit)
-            let servings = converted / servingVolume.value
+//            let servings = converted / servingVolume.value
+            let servings = servingVolume.value / converted
             return servings
 
         case .size:
@@ -260,12 +261,14 @@ extension FoodQuantity {
             return scaledValue
 
         case .serving:
-            guard let servings = food.quantityInOneServing(
-                of: sizeQuantity.size, with: sizeQuantity.volumePrefixUnit)
-            else { return nil }
+            guard let quantitPerServing = food
+                .quantityInOneServing(
+                    of: sizeQuantity.size,
+                    with: sizeQuantity.volumePrefixUnit
+                ) else { return nil }
             
-            guard servings > 0 else { return nil }
-            return value / servings
+            guard quantitPerServing > 0 else { return nil }
+            return value / quantitPerServing
         }
         
         /// Now scale the number of sizes provided to make it match what the size specifies
@@ -435,7 +438,7 @@ extension FoodQuantity.Size {
         
         //⛔️ FIXME: ** Infinite recursion with protein when container is used **
         /// This is because we haven't account for that case where the container is in terms of `serving`
-        /// [ ] Fix this without breaking unit tests
+        /// [x] Fix this without breaking unit tests
         /// [ ] Write a test case specifically for protein so it doesn't get stuck in the recursion ever again
         guard let sizeUnit = self.unit.size else {
             if size.unit.size != nil {

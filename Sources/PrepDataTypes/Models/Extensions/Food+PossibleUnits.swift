@@ -29,15 +29,10 @@ public extension Food {
             units.append(.serving)
         }
         if canBeMeasuredInWeight {
-            units.append(.weight(.g))
-            units.append(.weight(.oz))
+            units.append(contentsOf: WeightUnit.allCases.map { .weight($0) })
         }
         if canBeMeasuredInVolume {
-            units.append(.volume(.ml))
-            units.append(.volume(userVolumeUnits.fluidOunce))
-            units.append(.volume(userVolumeUnits.cup))
-            units.append(.volume(userVolumeUnits.tablespoon))
-            units.append(.volume(userVolumeUnits.teaspoon))
+            units.append(contentsOf: VolumeUnit.allCases.map { .volume(userVolumeUnits.volumeExplicitUnit(for: $0)) })
         }
         return units
     }

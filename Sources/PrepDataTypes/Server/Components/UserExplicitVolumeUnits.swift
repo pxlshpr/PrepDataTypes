@@ -1,13 +1,13 @@
 import Foundation
 
 public struct UserExplicitVolumeUnits: Codable, Hashable {
-    public let cup: VolumeExplicitUnit
-    public let teaspoon: VolumeExplicitUnit
-    public let tablespoon: VolumeExplicitUnit
-    public let fluidOunce: VolumeExplicitUnit
-    public let pint: VolumeExplicitUnit
-    public let quart: VolumeExplicitUnit
-    public let gallon: VolumeExplicitUnit
+    public var cup: VolumeExplicitUnit
+    public var teaspoon: VolumeExplicitUnit
+    public var tablespoon: VolumeExplicitUnit
+    public var fluidOunce: VolumeExplicitUnit
+    public var pint: VolumeExplicitUnit
+    public var quart: VolumeExplicitUnit
+    public var gallon: VolumeExplicitUnit
     
     public init(
         cup: VolumeExplicitUnit = .cupMetric,
@@ -26,6 +26,36 @@ public struct UserExplicitVolumeUnits: Codable, Hashable {
         self.pint = pint
         self.quart = quart
         self.gallon = gallon
+    }
+}
+
+
+public extension UserExplicitVolumeUnits {
+    mutating func set(_ volumeExplicitUnit: VolumeExplicitUnit) {
+        switch volumeExplicitUnit.volumeUnit {
+        case .gallon:
+            gallon = volumeExplicitUnit
+        case .quart:
+            quart = volumeExplicitUnit
+        case .pint:
+            pint = volumeExplicitUnit
+        case .cup:
+            cup = volumeExplicitUnit
+        case .fluidOunce:
+            fluidOunce = volumeExplicitUnit
+        case .tablespoon:
+            tablespoon = volumeExplicitUnit
+        case .teaspoon:
+            teaspoon = volumeExplicitUnit
+        default:
+            return
+        }
+    }
+}
+
+public extension UserExplicitVolumeUnits {
+    func contains(_ volumeExplicitUnit: VolumeExplicitUnit) -> Bool {
+        false
     }
 }
 

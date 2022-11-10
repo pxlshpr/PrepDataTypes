@@ -34,12 +34,6 @@ public extension Food {
     }
 }
 
-extension UserExplicitVolumeUnits {
-    func contains(_ volumeExplicitUnit: VolumeExplicitUnit) -> Bool {
-        false
-    }
-}
-
 extension FoodValue {
     /// returns either the volume prefix of the size or the volume unit
     var descriptiveVolumeUnit: VolumeExplicitUnit? {

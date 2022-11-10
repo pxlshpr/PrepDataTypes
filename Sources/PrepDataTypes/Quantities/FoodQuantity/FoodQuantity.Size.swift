@@ -27,32 +27,36 @@ public extension FoodQuantity.Size {
     }
     
     init?(formSize: FormSize, in food: Food, userVolumeUnits: UserExplicitVolumeUnits) {
-        guard let quantity = formSize.quantity,
-              let amount = formSize.amount,
-              let unit = FoodQuantity.Unit(
-                formUnit: formSize.unit,
-                food: food,
-                userVolumeUnits: userVolumeUnits
-              )
-        else { return nil }
-        
-        let volumePrefixUnit: VolumeExplicitUnit?
-        if let volumePrefixFormUnit = formSize.volumePrefixUnit {
-            guard let volumeExplicitUnit = userVolumeUnits.volumeExplicitUnit(for: volumePrefixFormUnit) else {
-                return nil
-            }
-            volumePrefixUnit = volumeExplicitUnit
-        } else {
-            volumePrefixUnit = nil
+        guard let size = food.quantitySize(for: formSize.id) else {
+            return nil
         }
-        
-        self.init(
-            quantity: quantity,
-            volumePrefixExplicitUnit: volumePrefixUnit,
-            name: formSize.name,
-            value: amount,
-            unit: unit
-        )
+        self = size
+//        guard let quantity = formSize.quantity,
+//              let amount = formSize.amount,
+//              let unit = FoodQuantity.Unit(
+//                formUnit: formSize.unit,
+//                food: food,
+//                userVolumeUnits: userVolumeUnits
+//              )
+//        else { return nil }
+//        
+//        let volumePrefixUnit: VolumeExplicitUnit?
+//        if let volumePrefixFormUnit = formSize.volumePrefixUnit {
+//            guard let volumeExplicitUnit = userVolumeUnits.volumeExplicitUnit(for: volumePrefixFormUnit) else {
+//                return nil
+//            }
+//            volumePrefixUnit = volumeExplicitUnit
+//        } else {
+//            volumePrefixUnit = nil
+//        }
+//        
+//        self.init(
+//            quantity: quantity,
+//            volumePrefixExplicitUnit: volumePrefixUnit,
+//            name: formSize.name,
+//            value: amount,
+//            unit: unit
+//        )
     }
 }
 

@@ -4,23 +4,30 @@ import XCTest
 
 final class PossibleUnitsTests: XCTestCase {
     
-    func _testPossibleUnits() throws {
-        let wheyProtein = Food(
-            serving: .init(1, "scoop"),
-            sizes: [
-                .init(1, "scoop", .init(30.4, .g)),
-                .init(1, "container", .init(74, "scoop"))
-            ]
+    func testPossibleUnitsWithout() throws {
+        
+        let quantity = FoodQuantity(
+            1.5, .cupMetric, "chopped4",
+            Food(
+                mockName: "Carrot",
+                sizes: [
+                    .init(0.5, .cupUSLegal, "chopped", .init(135, .g)),
+                    .init(2, "medium", .init(100, .g)),
+                ]
+            )
+        )!
+        
+        let choppedSize = quantity.food.quantitySize(for: "chopped4")!
+//        let unit = FoodQuantity.Unit.size(choppedSize, .chop)
+        
+        let possibleUnits = quantity.food.possibleUnits(
+            without: .size(choppedSize, nil),
+            using: .defaultUnits
         )
-        
-        let quantity = FoodQuantity(30.4, .g, wheyProtein)
-        
-        let possibleQuantities = quantity.equivalentQuantities()
 
-        for quantity in possibleQuantities {
-            print(quantity.description)
+        for possibleUnit in possibleUnits {
+            print(possibleUnit.shortDescription)
         }
+        print("We here")
     }
 }
-
-

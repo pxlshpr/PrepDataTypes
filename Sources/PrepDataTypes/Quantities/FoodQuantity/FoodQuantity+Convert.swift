@@ -260,14 +260,14 @@ extension FoodQuantity {
             return scaledValue
 
         case .serving:
-            guard let quantitPerServing = food
+            guard let quantityPerServing = food
                 .quantityInOneServing(
                     of: sizeQuantity.size,
                     with: sizeQuantity.volumePrefixUnit
                 ) else { return nil }
             
-            guard quantitPerServing > 0 else { return nil }
-            return value / quantitPerServing
+            guard quantityPerServing > 0 else { return nil }
+            return value / quantityPerServing
         }
         
         /// Now scale the number of sizes provided to make it match what the size specifies

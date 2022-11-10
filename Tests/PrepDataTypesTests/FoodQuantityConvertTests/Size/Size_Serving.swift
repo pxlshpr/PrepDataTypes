@@ -24,6 +24,19 @@ extension FoodQuantityConvertTests {
 extension TestCases {
     static let Size_Serving = [
 
+       FoodQuantityTestCase(
+            quantity: FoodQuantity(
+                2.3, "carton",  /// 102.051 mL
+                Food(
+                    serving: .init(1, .cupJapanTraditional, "chopped5"), /// 180.39 mL
+                    sizes: [
+                        .init(2, .fluidOunceUSNutritionLabeling, "chopped", .init(370, .g)), /// 30 mL
+                        .init(1.5, "packet", .init(3, .tablespoonUS, "chopped5")), /// 2 tbsp chopped = 14.79 mL
+                        .init(5, "carton", .init(15, "packet")) /// 3 packet = 44.37 mL
+                    ]
+                ))!,
+            equivalentServing: 1.13144853
+        ),
         /// volume-based serving
         FoodQuantityTestCase(
             quantity: FoodQuantity(
@@ -37,7 +50,7 @@ extension TestCases {
             )!,
             equivalentServing: 2.23333333
         ),
-        
+
         FoodQuantityTestCase(
             quantity: FoodQuantity(
                 1, "leaf",
@@ -96,24 +109,5 @@ extension TestCases {
                 ))!,
             equivalentServing: 2.29502744
         ),
-
-        //⚠️ TODO: ********* FAILING **************
-        /// When specifying a volume-prefixed size with a volume-prefix different to what it's save in the food as, it doesn't work
-        /// [ ] Check values first
-        /// [ ] Fix this while keeping other tests intact
-//        FoodQuantityTestCase(
-//            quantity: FoodQuantity(
-//                2.3, "carton",  /// 102.051 mL
-//                Food(
-//                    serving: .init(1, .cupJapanTraditional, "chopped5"), /// 180.39 mL
-//                    sizes: [
-//                        .init(2, .fluidOunceUSNutritionLabeling, "chopped", .init(370, .g)), /// 30 mL
-//                        .init(1.5, "packet", .init(3, .tablespoonUS, "chopped5")), /// 2 tbsp chopped = 14.79 mL
-//                        .init(5, "carton", .init(15, "packet")) /// 3 packet = 44.37 mL
-//                    ]
-//                ))!,
-//            equivalentServing: 0.56572426
-//        ),
-
     ]
 }

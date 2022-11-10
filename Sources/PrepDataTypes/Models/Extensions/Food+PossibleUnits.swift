@@ -19,7 +19,11 @@ public extension Food {
     func possibleUnits(using userVolumeUnits: UserExplicitVolumeUnits) -> [FoodQuantity.Unit] {
         var units: [FoodQuantity.Unit] = []
         for size in foodQuantitySizes {
-            units.append(.size(size, nil))
+            var volumePrefix: VolumeExplicitUnit? = nil
+            if let volumeUnit = size.volumePrefixExplicitUnit?.volumeUnit {
+                volumePrefix = userVolumeUnits.volumeExplicitUnit(for: volumeUnit)
+            }
+            units.append(.size(size, volumePrefix))
         }
         if info.serving != nil {
             units.append(.serving)

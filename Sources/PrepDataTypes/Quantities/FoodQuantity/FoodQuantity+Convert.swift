@@ -1,6 +1,13 @@
 import Foundation
 
+public extension FoodQuantity.Unit {
+    var volumePrefixScale: Double {
+        guard let sizeVolumePrefixExplicitUnit else { return 1 }
+        return size?.volumePrefixScale(for: sizeVolumePrefixExplicitUnit) ?? 1
+    }
+}
 public extension FoodQuantity {
+    
     func convert(to unit: Unit) -> FoodQuantity? {
         
         let converted: Double?
@@ -17,15 +24,19 @@ public extension FoodQuantity {
             
         case .serving:
             converted = convertServings(value, to: unit)
-            
+
         case .size(let size, let volumePrefixUnit):
             let sizeQuantity = SizeQuantity(value, size, volumePrefixUnit)
             converted = convert(sizeQuantity, to: unit)
         }
         
         guard let converted else { return nil }
+        
+//        let scale = unit.volumePrefixScale
+        let scale = 1.0
+
         return FoodQuantity(
-            value: converted,
+            value: converted * scale,
             unit: unit,
             food: self.food
         )

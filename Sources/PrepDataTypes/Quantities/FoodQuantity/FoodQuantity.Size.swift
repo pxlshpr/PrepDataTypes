@@ -39,7 +39,7 @@ public extension FoodQuantity.Size {
 //                userVolumeUnits: userVolumeUnits
 //              )
 //        else { return nil }
-//        
+//
 //        let volumePrefixUnit: VolumeExplicitUnit?
 //        if let volumePrefixFormUnit = formSize.volumePrefixUnit {
 //            guard let volumeExplicitUnit = userVolumeUnits.volumeExplicitUnit(for: volumePrefixFormUnit) else {
@@ -49,7 +49,7 @@ public extension FoodQuantity.Size {
 //        } else {
 //            volumePrefixUnit = nil
 //        }
-//        
+//
 //        self.init(
 //            quantity: quantity,
 //            volumePrefixExplicitUnit: volumePrefixUnit,
@@ -68,11 +68,16 @@ public extension VolumeExplicitUnit {
 }
 
 public extension SizeQuantity {
+    var sizeVolumeScale: Double {
+        size.volumePrefixScale(for: volumePrefixUnit)
+    }
+    
     func volumePrefixScale(for otherVolumePrefix: VolumeExplicitUnit?) -> Double {
         guard let volumePrefixUnit, let otherVolumePrefix else {
             return 1
         }
-        return volumePrefixUnit.ml / otherVolumePrefix.ml
+//        return (volumePrefixUnit.ml / otherVolumePrefix.ml) * sizeVolumeScale
+        return (volumePrefixUnit.ml / otherVolumePrefix.ml)
     }
 }
 

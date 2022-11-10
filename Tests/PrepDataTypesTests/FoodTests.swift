@@ -21,8 +21,8 @@ final class FoodQuantityConvertMiscTests: XCTestCase {
         
         let oneServing = FoodQuantity(1, food)
         guard let leaf = food.quantitySize(for: "leaf") else { XCTFail(); return }
-        guard let leaves = oneServing.convert(to: leaf.unit) else { XCTFail(); return }
-//        assertEqual(leaves.value, 3)
+        guard let leaves = oneServing.convert(to: .size(leaf, nil)) else { XCTFail(); return }
+        assertEqual(leaves.value, 3)
 
         print("We're here")
     }

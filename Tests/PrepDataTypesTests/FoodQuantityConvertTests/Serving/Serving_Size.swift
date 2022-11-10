@@ -47,7 +47,7 @@ extension TestCases {
                 (nil, "carton", 0.1)
             ]
         ),
-        
+
         /// weight based sizes
         FoodQuantityTestCase(
             quantity: FoodQuantity(
@@ -67,7 +67,7 @@ extension TestCases {
                 (nil, "carton", 0.1)
             ]
         ),
-        
+
         /// now bring in the rest from `FoodServingsTests`
         FoodQuantityTestCase(
             quantity: FoodQuantity(
@@ -85,6 +85,24 @@ extension TestCases {
                 (.cupJapanTraditional, "chopped5", 2),
                 (.fluidOunceUSNutritionLabeling, "chopped5", 12.026),
                 (nil, "carton", 2.00433334)
+            ]
+        ),
+        
+        /// spinach
+        FoodQuantityTestCase(
+            quantity: FoodQuantity(
+                1,
+                Food(
+                    mockName: "Spinach",
+                    serving: .init(1, .cupMetric),
+                    density: .init(30, .g, 1, .cupMetric),
+                    sizes: [
+                        .init(1, "leaf", .init(10, .g)),
+                    ]
+                )
+            ),
+            equivalentSizes: [
+                (nil, "leaf", 3),
             ]
         ),
     ]

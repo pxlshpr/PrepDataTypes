@@ -98,7 +98,6 @@ extension Food {
             guard sizeUnitVolume.value > 0 else { return nil }
             guard let servingVolume = servingVolume else { return nil }
             let converted = sizeUnitVolume.convert(to: servingVolume.unit)
-//            let servings = converted / servingVolume.value
             let servings = servingVolume.value / converted
             return servings
 

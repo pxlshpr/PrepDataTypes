@@ -25,18 +25,18 @@ extension TestCases {
     static let Size_Serving = [
 
         /// volume-based serving
-//        FoodQuantityTestCase(
-//            quantity: FoodQuantity(
-//                1, "bottle",
-//                Food(
-//                    serving: .init(100, .ml),
-//                    sizes: [
-//                        .init(1.5, "bottle", .init(335, .ml)),
-//                    ]
-//                )
-//            )!,
-//            equivalentServing: 2.23333333
-//        ),
+        FoodQuantityTestCase(
+            quantity: FoodQuantity(
+                1, "bottle",
+                Food(
+                    serving: .init(100, .ml),
+                    sizes: [
+                        .init(1.5, "bottle", .init(335, .ml)),
+                    ]
+                )
+            )!,
+            equivalentServing: 2.23333333
+        ),
         
         FoodQuantityTestCase(
             quantity: FoodQuantity(
@@ -54,48 +54,48 @@ extension TestCases {
         ),
 
         /// weight-size-size-size based serving
-//        FoodQuantityTestCase(
-//            quantity: FoodQuantity(
-//                15, "bottle",
-//                Food(
-//                    serving: .init(0.2, "box"), /// 0.8 pack =  1.6 bottle
-//                    density: .init(100, .g, 1, .cupJapanTraditional),
-//                    sizes: [
-//                        .init(2, "bottle", .init(4, .oz)),
-//                        .init(1.5, "pack", .init(3, "bottle")), ///  2 bottle
-//                        .init(0.5, "box", .init(2, "pack")) /// 4 pack
-//                    ]
-//                ))!,
-//            equivalentServing: 9.375
-//        ),
+        FoodQuantityTestCase(
+            quantity: FoodQuantity(
+                15, "bottle",
+                Food(
+                    serving: .init(0.2, "box"), /// 0.8 pack =  1.6 bottle
+                    density: .init(100, .g, 1, .cupJapanTraditional),
+                    sizes: [
+                        .init(2, "bottle", .init(4, .oz)),
+                        .init(1.5, "pack", .init(3, "bottle")), ///  2 bottle
+                        .init(0.5, "box", .init(2, "pack")) /// 4 pack
+                    ]
+                ))!,
+            equivalentServing: 9.375
+        ),
 
-//        FoodQuantityTestCase(
-//            quantity: FoodQuantity(
-//                0.75, .cupMetric, "chopped5",  /// 250 mL
-//                Food(
-//                    serving: .init(1, .cupJapanTraditional, "chopped5"), /// 180.39 mL
-//                    sizes: [
-//                        .init(2, .fluidOunceUSNutritionLabeling, "chopped", .init(370, .g)), /// 30 mL
-//                        .init(1.5, "packet", .init(3, "chopped5")), /// 2 chopped
-//                        .init(5, "carton", .init(15, "packet")) /// 3 packet
-//                    ]
-//                ))!,
-//            equivalentServing: 1.0394146
-//        ),
-//
-//        FoodQuantityTestCase(
-//            quantity: FoodQuantity(
-//                2.3, "carton",  /// 250 mL
-//                Food(
-//                    serving: .init(1, .cupJapanTraditional, "chopped5"), /// 180.39 mL
-//                    sizes: [
-//                        .init(2, .fluidOunceUSNutritionLabeling, "chopped", .init(370, .g)), /// 30 mL
-//                        .init(1.5, "packet", .init(3, "chopped5")), /// 2 floz chopped = 60 mL
-//                        .init(5, "carton", .init(15, "packet")) /// 3 packet =  180 mL
-//                    ]
-//                ))!,
-//            equivalentServing: 2.29502744
-//        ),
+        FoodQuantityTestCase(
+            quantity: FoodQuantity(
+                0.75, .cupMetric, "chopped5",  /// 250 mL
+                Food(
+                    serving: .init(1, .cupJapanTraditional, "chopped5"), /// 180.39 mL
+                    sizes: [
+                        .init(2, .fluidOunceUSNutritionLabeling, "chopped", .init(370, .g)), /// 30 mL
+                        .init(1.5, "packet", .init(3, "chopped5")), /// 2 chopped
+                        .init(5, "carton", .init(15, "packet")) /// 3 packet
+                    ]
+                ))!,
+            equivalentServing: 1.0394146
+        ),
+
+        FoodQuantityTestCase(
+            quantity: FoodQuantity(
+                2.3, "carton",  /// 250 mL
+                Food(
+                    serving: .init(1, .cupJapanTraditional, "chopped5"), /// 180.39 mL
+                    sizes: [
+                        .init(2, .fluidOunceUSNutritionLabeling, "chopped", .init(370, .g)), /// 30 mL
+                        .init(1.5, "packet", .init(3, "chopped5")), /// 2 floz chopped = 60 mL
+                        .init(5, "carton", .init(15, "packet")) /// 3 packet =  180 mL
+                    ]
+                ))!,
+            equivalentServing: 2.29502744
+        ),
 
         //⚠️ TODO: ********* FAILING **************
         /// When specifying a volume-prefixed size with a volume-prefix different to what it's save in the food as, it doesn't work

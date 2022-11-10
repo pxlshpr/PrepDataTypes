@@ -3,14 +3,14 @@ import XCTest
 @testable import SwiftSugar
 
 extension FoodQuantityConvertTests {
-    
+
     func test_Size_Size() throws {
         for testCase in TestCases.Size_Size {
             for sizeTest in testCase.equivalentSizes {
                 let volumePrefixUnit = sizeTest.0
                 let sizeId = sizeTest.1
                 let expectedValue = sizeTest.2
-                
+
                 guard let foodSize = testCase.quantity.food.size(for: sizeId),
                       let size = FoodQuantity.Size(foodSize: foodSize, in: testCase.quantity.food),
                       let result = testCase.quantity.convert(to: .size(size, volumePrefixUnit))
@@ -25,36 +25,43 @@ extension FoodQuantityConvertTests {
 }
 
 extension TestCases {
-    
-    static let food = Food(
-        density: .init(100, .g, 90, .ml),
-        sizes: [
-            .init(0.5, .cupUSCustomary, "chopped", .init(135, .g)), /// 236.59 mL
-            .init(2, .cupUSCustomary, "pureed", .init(600, .g)),    /// 236.59 mL
-            .init(1, .cupUSCustomary, "sliced", .init(200, .g)),    /// 236.59 mL
-            .init(2, "medium", .init(100, .g)),
-            .init(2, "small", .init(75, .g)),
-            .init(3, "bottle", .init(200, .ml)),
-        ]
-    )
-    
+
     static let Size_Size = [
-        
-        /// volumeprefixedsize (weight-based)
+        /// serving-based size
         FoodQuantityTestCase(
             quantity: FoodQuantity(
-                1.5, .cupJapanTraditional, "chopped4", /// 180.39 mL
-                food
+                2, "container",
+                Food(
+                    serving: .init(30, .g),
+                    sizes: [
+                        .init(1, "scoop", .init(1)),
+                        .init(1, "container", .init(74, "scoop")),
+                    ]
+                )
             )!,
             equivalentSizes: [
-                (nil, "medium", 6.17591192),
-                (.cupUSCustomary, "pureed4", 1.02931865),
-                (.tablespoonUS, "pureed4", 16.46561866),
-                (nil, "bottle", 4.16874054),
+                (nil, "scoop", 148),
             ]
         ),
-
-//        /// weight-based size
+        
+        /// serving-based size
+        FoodQuantityTestCase(
+            quantity: FoodQuantity(
+                1.5, "scoop",
+                Food(
+                    serving: .init(30, .g),
+                    sizes: [
+                        .init(1, "scoop", .init(1)),
+                        .init(1, "container", .init(74, "scoop")),
+                    ]
+                )
+            )!,
+            equivalentSizes: [
+                (nil, "container", 0.02027027027027),
+            ]
+        ),
+        
+        /// weight-based size
 //        FoodQuantityTestCase(
 //            quantity: FoodQuantity(
 //                1.5, "scoop",
@@ -69,6 +76,40 @@ extension TestCases {
 //                (nil, "container", 0.02027027027027),
 //            ]
 //        ),
+//
+//        /// volumeprefixedsize (weight-based)
+//        FoodQuantityTestCase(
+//            quantity: FoodQuantity(
+//                1.5, .cupJapanTraditional, "chopped4", /// 180.39 mL
+//                Food(
+//                    density: .init(100, .g, 90, .ml),
+//                    sizes: [
+//                        .init(0.5, .cupUSCustomary, "chopped", .init(135, .g)), /// 236.59 mL
+//                        .init(2, .cupUSCustomary, "pureed", .init(600, .g)),    /// 236.59 mL
+//                        .init(1, .cupUSCustomary, "sliced", .init(200, .g)),    /// 236.59 mL
+//                        .init(2, "medium", .init(100, .g)),
+//                        .init(2, "small", .init(75, .g)),
+//                        .init(3, "bottle", .init(200, .ml)),
+//                    ]
+//                )
+//            )!,
+//            equivalentSizes: [
+//                (nil, "medium", 6.17591192),
+//                (.cupUSCustomary, "pureed4", 1.02931865),
+//                (.tablespoonUS, "pureed4", 16.46561866),
+//                (nil, "bottle", 4.16874054),
+//            ]
+//        ),
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
 //        /// volumeprefixedsize
 //        FoodQuantityTestCase(

@@ -24,7 +24,7 @@ final class UnitSizeTests: XCTestCase {
         for (sizeId, expectedUnitSize) in expectations {
             guard let servingSize = food.servingSizeQuantity?.size else { XCTFail(); return }
             guard let size = food.quantitySize(for: sizeId) else { XCTFail(); return }
-            guard let servings = size.unitSizeValue(of: servingSize) else { XCTFail(); return }
+            guard let servings = servingSize.quantityPerSize(of: size, in: food) else { XCTFail(); return }
             assertEqual(toPlaces: 4, servings, expectedUnitSize)
         }
     }
@@ -47,7 +47,7 @@ final class UnitSizeTests: XCTestCase {
         for (sizeId, expectedUnitSize) in expectations {
             guard let servingSize = food.servingSizeQuantity?.size else { XCTFail(); return }
             guard let size = food.quantitySize(for: sizeId) else { XCTFail(); return }
-            guard let servings = size.unitSizeValue(of: servingSize) else { XCTFail(); return }
+            guard let servings = size.quantityPerSize(of: servingSize, in: food) else { XCTFail(); return }
             assertEqual(toPlaces: 4, servings, expectedUnitSize)
         }
     }

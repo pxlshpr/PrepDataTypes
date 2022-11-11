@@ -25,3 +25,28 @@ public enum NutrientTypeGroup: Int16, CaseIterable, Codable {
         }
     }
 }
+
+
+public extension NutrientType {
+    func matchesSearchString(_ string: String) -> Bool {
+        description.lowercased().contains(string.lowercased())
+    }
+}
+
+public extension NutrientTypeGroup {
+    var nutrients: [NutrientType] {
+        NutrientType.allCases.filter({ $0.group == self })
+    }
+}
+
+extension NutrientType: Identifiable {
+    public var id: Int16 {
+        return rawValue
+    }
+}
+
+extension NutrientTypeGroup: Identifiable {
+    public var id: Int16 {
+        return rawValue
+    }
+}

@@ -108,19 +108,19 @@ public extension RestingEnergyFormula {
         return max(restingEnergy, 0)
     }
 
-    func calculate(age: Int, weightInKg: Double, sex: HKBiologicalSex, energyUnit: EnergyUnit) -> Double? {
+    func calculate(age: Int, weightInKg: Double, sexIsFemale: Bool, energyUnit: EnergyUnit) -> Double? {
         let energy: Double
         let ageGroup = AgeGroup(age)
         switch self {
             
         case .henryOxford:
-            let a = OxfordCoefficients.a(sex: sex, ageGroup: ageGroup)
-            let c = OxfordCoefficients.c(sex: sex, ageGroup: ageGroup)
+            let a = OxfordCoefficients.a(sexIsFemale: sexIsFemale, ageGroup: ageGroup)
+            let c = OxfordCoefficients.c(sexIsFemale: sexIsFemale, ageGroup: ageGroup)
             energy = (a * weightInKg) + c
             
         case .schofield:
-            let a = SchofieldCoefficients.a(sex: sex, ageGroup: ageGroup)
-            let c = SchofieldCoefficients.c(sex: sex, ageGroup: ageGroup)
+            let a = SchofieldCoefficients.a(sexIsFemale: sexIsFemale, ageGroup: ageGroup)
+            let c = SchofieldCoefficients.c(sexIsFemale: sexIsFemale, ageGroup: ageGroup)
             energy = (a * weightInKg) + c
 
         default:
@@ -130,31 +130,31 @@ public extension RestingEnergyFormula {
         return max(restingEnergy, 0)
     }
     
-    func calculate(age: Int, weightInKg: Double, heightInCm: Double, sex: HKBiologicalSex, energyUnit: EnergyUnit) -> Double? {
+    func calculate(age: Int, weightInKg: Double, heightInCm: Double, sexIsFemale: Bool, energyUnit: EnergyUnit) -> Double? {
         let energy: Double
         switch self {
             
         case .henryOxford:
-            return calculate(age: age, weightInKg: weightInKg, sex: sex, energyUnit: energyUnit)
+            return calculate(age: age, weightInKg: weightInKg, sexIsFemale: sexIsFemale, energyUnit: energyUnit)
         case .schofield:
-            return calculate(age: age, weightInKg: weightInKg, sex: sex, energyUnit: energyUnit)
+            return calculate(age: age, weightInKg: weightInKg, sexIsFemale: sexIsFemale, energyUnit: energyUnit)
 
         case .mifflinStJeor:
-            if sex == .female {
+            if sexIsFemale {
                 energy = (9.99 * weightInKg) + (6.25 * heightInCm) - (4.92 * Double(age)) - 161
             } else {
                 energy = (9.99 * weightInKg) + (6.25 * heightInCm) - (4.92 * Double(age)) + 5
             }
             
         case .rozaShizgal:
-            if sex == .female {
+            if sexIsFemale {
                 energy = 447.593 + (9.247 * weightInKg) + (3.098 * heightInCm) - (4.33 * Double(age))
             } else {
                 energy = 88.362 + (13.397 * weightInKg) + (4.799 * heightInCm) - (5.677 * Double(age))
             }
 
         case .harrisBenedict:
-            if sex == .female {
+            if sexIsFemale {
                 energy = 655.0955 + (9.5634 * weightInKg) + (1.8496 * heightInCm) - (4.6756 * Double(age))
             } else {
                 energy = 66.4730 + (13.7516 * weightInKg) + (5.0033 * heightInCm) - (6.7550 * Double(age))
@@ -196,9 +196,9 @@ enum AgeGroup {
 
 struct OxfordCoefficients {
     
-    static func a(sex: HKBiologicalSex, ageGroup: AgeGroup) -> Double {
-        switch sex {
-        case .female:
+    static func a(sexIsFemale: Bool, ageGroup: AgeGroup) -> Double {
+        switch sexIsFemale {
+        case true:
             switch ageGroup {
             case .zeroToTwo:
                 return 58.9
@@ -231,9 +231,9 @@ struct OxfordCoefficients {
         }
     }
     
-    static func c(sex: HKBiologicalSex, ageGroup: AgeGroup) -> Double {
-        switch sex {
-        case .female:
+    static func c(sexIsFemale: Bool, ageGroup: AgeGroup) -> Double {
+        switch sexIsFemale {
+        case true:
             switch ageGroup {
             case .zeroToTwo:
                 return -23.1
@@ -268,9 +268,9 @@ struct OxfordCoefficients {
 }
 
 struct SchofieldCoefficients {
-    static func a(sex: HKBiologicalSex, ageGroup: AgeGroup) -> Double {
-        switch sex {
-        case .female:
+    static func a(sexIsFemale: Bool, ageGroup: AgeGroup) -> Double {
+        switch sexIsFemale {
+        case true:
             switch ageGroup {
             case .zeroToTwo:
                 return 58.317
@@ -303,9 +303,9 @@ struct SchofieldCoefficients {
         }
     }
     
-    static func c(sex: HKBiologicalSex, ageGroup: AgeGroup) -> Double {
-        switch sex {
-        case .female:
+    static func c(sexIsFemale: Bool, ageGroup: AgeGroup) -> Double {
+        switch sexIsFemale {
+        case true:
             switch ageGroup {
             case .zeroToTwo:
                 return -31.1

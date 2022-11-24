@@ -1,4 +1,4 @@
-import SwiftUI
+import Foundation
 
 public enum GoalType: Hashable, Codable {
     
@@ -90,19 +90,6 @@ public extension GoalType {
         }
     }
     
-#if os(iOS)
-    func labelColor(for colorScheme: ColorScheme) -> Color {
-        switch self {
-        case .energy:
-            return .accentColor
-        case .macro(_, let macro):
-            return macro.textColor(for: colorScheme)
-        case .micro:
-            return .gray
-        }
-    }
-#endif
-    
     var unitString: String {
         switch self {
         case .energy(let type):
@@ -163,3 +150,22 @@ public extension GoalType {
     }
     
 }
+
+#if os(iOS)
+import SwiftUI
+
+public extension GoalType {
+    
+    func labelColor(for colorScheme: ColorScheme) -> Color {
+        switch self {
+        case .energy:
+            return .accentColor
+        case .macro(_, let macro):
+            return macro.textColor(for: colorScheme)
+        case .micro:
+            return .gray
+        }
+    }
+}
+#endif
+    

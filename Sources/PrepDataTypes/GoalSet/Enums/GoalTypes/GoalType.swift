@@ -8,6 +8,9 @@ public enum GoalType: Hashable, Codable {
     case macro(NutrientGoalType, Macro)
     
     case micro(NutrientGoalType, NutrientType, NutrientUnit)
+}
+
+public extension GoalType {
     
     /// A hash value that is independent of the associated values
     var identifyingHashValue: String {

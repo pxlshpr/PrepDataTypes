@@ -6,7 +6,8 @@ public struct User: Identifiable, Hashable, Codable {
     
     public var units: UserUnits
     public var bodyProfile: BodyProfile?
-    
+    public var bodyProfileUpdatedAt: Double?
+
     public var updatedAt: Double
     public var syncStatus: SyncStatus
 
@@ -15,6 +16,7 @@ public struct User: Identifiable, Hashable, Codable {
         cloudKitId: String?,
         units: UserUnits,
         bodyProfile: BodyProfile? = nil,
+        bodyProfileUpdatedAt: Double? = nil,
         syncStatus: SyncStatus,
         updatedAt: Double
     ) {
@@ -34,6 +36,7 @@ public extension User {
             cloudKitId: cloudKitId,
             units: UserUnits.standard,
             bodyProfile: nil,
+            bodyProfileUpdatedAt: nil,
             syncStatus: .notSynced,
             updatedAt: Date().timeIntervalSince1970
         )

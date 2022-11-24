@@ -7,7 +7,9 @@ public struct Meal: Identifiable, Hashable, Codable {
     public var name: String
     public var time: Double
     public var markedAsEatenAt: Double?
+    
     public var goalSet: GoalSet?
+    public var goalWorkoutMinutes: Int?
 
     public var foodItems: [FoodItem]
 
@@ -22,6 +24,7 @@ public struct Meal: Identifiable, Hashable, Codable {
         time: Double,
         markedAsEatenAt: Double? = nil,
         goalSet: GoalSet? = nil,
+        goalWorkoutMinutes: Int? = nil,
         foodItems: [FoodItem],
         syncStatus: SyncStatus,
         updatedAt: Double,
@@ -33,6 +36,7 @@ public struct Meal: Identifiable, Hashable, Codable {
         self.time = time
         self.markedAsEatenAt = markedAsEatenAt
         self.goalSet = goalSet
+        self.goalWorkoutMinutes = goalWorkoutMinutes
         self.foodItems = foodItems
         self.syncStatus = syncStatus
         self.updatedAt = updatedAt

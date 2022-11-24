@@ -1,5 +1,4 @@
 import Foundation
-import PrepDataTypes
 
 public enum EnergyGoalType: Hashable, Codable {
     case fixed(EnergyUnit)

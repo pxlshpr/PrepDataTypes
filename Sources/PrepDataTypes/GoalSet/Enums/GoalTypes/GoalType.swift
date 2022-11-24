@@ -1,5 +1,4 @@
 import SwiftUI
-import PrepDataTypes
 
 public enum GoalType: Hashable, Codable {
     
@@ -91,6 +90,7 @@ public extension GoalType {
         }
     }
     
+#if os(iOS)
     func labelColor(for colorScheme: ColorScheme) -> Color {
         switch self {
         case .energy:
@@ -101,6 +101,7 @@ public extension GoalType {
             return .gray
         }
     }
+#endif
     
     var unitString: String {
         switch self {

@@ -1,4 +1,4 @@
-import PrepDataTypes
+import Foundation
 
 public enum NutrientGoalType: Codable, Hashable {
     

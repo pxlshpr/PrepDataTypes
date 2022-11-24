@@ -31,14 +31,13 @@ extension SyncForm {
         
         /// ** Always synced **
         public let user: User?
-        public let goals: [Goal]?
+        public let goalSets: [GoalSet]?
         
         /// ** Sliding window of days and its childrens to keep in sync **
         public let days: [Day]?
         public let meals: [Meal]?
         public let foodItems: [FoodItem]?
         public let quickMealItems: [QuickMealItem]?
-        public let energyExpenditures: [EnergyExpenditure]?
 
         /// ** User Foods owned kept in sync **
         public let foods: [Food]?
@@ -46,19 +45,17 @@ extension SyncForm {
         public init(
             user: User? = nil,
             days: [Day]? = nil,
-            energyExpenditures: [EnergyExpenditure]? = nil,
             foods: [Food]? = nil,
             foodItems: [FoodItem]? = nil,
-            goals: [Goal]? = nil,
+            goalSets: [GoalSet]? = nil,
             meals: [Meal]? = nil,
             quickMealItems: [QuickMealItem]? = nil
         ) {
             self.user = user
             self.days = days
-            self.energyExpenditures = energyExpenditures
             self.foods = foods
             self.foodItems = foodItems
-            self.goals = goals
+            self.goalSets = goalSets
             self.meals = meals
             self.quickMealItems = quickMealItems
         }
@@ -68,27 +65,24 @@ extension SyncForm {
 extension SyncForm {
     public struct Deletions: Codable {
         public let dayIds: [String]?
-        public let energyExpenditureIds: [UUID]?
         public let foodIds: [UUID]?
         public let foodItemIds: [UUID]?
-        public let goalIds: [UUID]?
+        public let goalSetIds: [UUID]?
         public let mealIds: [UUID]?
         public let quickMealItemIds: [UUID]?
         
         public init(
             dayIds: [String]? = nil,
-            energyExpenditureIds: [UUID]? = nil,
             foodIds: [UUID]? = nil,
             foodItemIds: [UUID]? = nil,
-            goalIds: [UUID]? = nil,
+            goalSetIds: [UUID]? = nil,
             mealIds: [UUID]? = nil,
             quickMealItemIds: [UUID]? = nil
         ) {
             self.dayIds = dayIds
-            self.energyExpenditureIds = energyExpenditureIds
             self.foodIds = foodIds
             self.foodItemIds = foodItemIds
-            self.goalIds = goalIds
+            self.goalSetIds = goalSetIds
             self.mealIds = mealIds
             self.quickMealItemIds = quickMealItemIds
         }
@@ -149,10 +143,9 @@ public extension SyncForm.Updates {
         var count = 0
         if user != nil { count += 1 }
         if let days { count += days.count }
-        if let energyExpenditures { count += energyExpenditures.count }
         if let foods { count += foods.count }
         if let foodItems { count += foodItems.count }
-        if let goals { count += goals.count }
+        if let goalSets { count += goalSets.count }
         if let meals { count += meals.count }
         if let quickMealItems { count += quickMealItems.count }
         return count
@@ -163,10 +156,9 @@ public extension SyncForm.Deletions {
     var count: Int {
         var count = 0
         if let dayIds { count += dayIds.count }
-        if let energyExpenditureIds { count += energyExpenditureIds.count }
         if let foodIds { count += foodIds.count }
         if let foodItemIds { count += foodItemIds.count }
-        if let goalIds { count += goalIds.count }
+        if let goalSetIds { count += goalSetIds.count }
         if let mealIds { count += mealIds.count }
         if let quickMealItemIds { count += quickMealItemIds.count }
         return count

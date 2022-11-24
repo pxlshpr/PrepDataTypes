@@ -9,13 +9,22 @@ public struct DayMeal: Identifiable, Hashable, Codable {
     public var name: String
     public var time: Double
     public var markedAsEatenAt: Double?
+    public var goalSet: GoalSet?
     public var foodItems: [FoodItem]
 
-    public init(id: UUID, name: String, time: Double, markedAsEatenAt: Double? = nil, foodItems: [FoodItem]) {
+    public init(
+        id: UUID,
+        name: String,
+        time: Double,
+        markedAsEatenAt: Double? = nil,
+        goalSet: GoalSet? = nil,
+        foodItems: [FoodItem]
+    ) {
         self.id = id
         self.name = name
         self.time = time
         self.markedAsEatenAt = markedAsEatenAt
+        self.goalSet = goalSet
         self.foodItems = foodItems
     }
 }
@@ -26,6 +35,8 @@ public extension DayMeal {
             id: meal.id,
             name: meal.name,
             time: meal.time,
+            markedAsEatenAt: meal.markedAsEatenAt,
+            goalSet: meal.goalSet,
             foodItems: meal.foodItems
         )
     }

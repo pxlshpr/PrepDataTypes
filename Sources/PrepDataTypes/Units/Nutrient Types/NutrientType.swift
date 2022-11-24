@@ -571,3 +571,24 @@ extension NutrientType {
         return ((dailyValue.0) * percentage / 100.0, dailyValue.1)
     }
 }
+
+public extension NutrientType {
+    func grams(equallingPercent percent: Double, of energy: Double) -> Double? {
+        guard let kcalsPerGram else { return nil }
+        guard percent >= 0, percent <= 100, energy > 0 else { return 0 }
+        let energyPortion = energy * (percent / 100)
+        return energyPortion / kcalsPerGram
+    }
+    
+    var kcalsPerGram: Double? {
+        switch self {
+        case .saturatedFat, .monounsaturatedFat, .polyunsaturatedFat, .transFat:
+            return KcalsPerGramOfFat
+        case .sugars, .addedSugars:
+            return KcalsPerGramOfCarb
+        default:
+            return nil
+        }
+    }
+
+}

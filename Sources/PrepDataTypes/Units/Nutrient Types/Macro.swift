@@ -95,3 +95,36 @@ public extension Macro {
     }
 }
 #endif
+
+public extension Macro {
+    
+    func grams(equallingPercent percent: Double, of energy: Double) -> Double {
+        guard percent >= 0, percent <= 100, energy > 0 else { return 0 }
+        let energyPortion = energy * (percent / 100)
+        return energyPortion / kcalsPerGram
+    }
+    
+    var kcalsPerGram: Double {
+        switch self {
+        case .carb:
+            return KcalsPerGramOfCarb
+        case .fat:
+            return KcalsPerGramOfFat
+        case .protein:
+            return KcalsPerGramOfProtein
+        }
+    }
+}
+
+public extension Macro {
+    var minimumValueForAutoGoals: Double {
+        switch self {
+        case .carb:
+            return 10
+        case .fat:
+            return 5
+        case .protein:
+            return 10
+        }
+    }
+}

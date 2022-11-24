@@ -52,3 +52,17 @@ public extension EnergyUnit {
         }
     }
 }
+
+public extension EnergyUnit {
+    func minimumValueForAutoGoals(params: GoalCalcParams) -> Double {
+        /// Default to male in the case not being passed a value to err on the side of larger values
+        /// (as we would rather suggest larger values than is required to a female than smaller values for a male's energy)
+        let sexIsFemale = params.bodyProfile?.sexIsFemale ?? false
+        switch self {
+        case .kcal:
+            return sexIsFemale ? 1200 : 1500
+        case .kJ:
+            return sexIsFemale ? (1200 * KcalsPerKilojule) : (1500 * KcalsPerKilojule)
+        }
+    }
+}

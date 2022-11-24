@@ -1,5 +1,4 @@
 import Foundation
-import HealthKit
 
 public enum RestingEnergyFormula: Int16, Hashable, Codable, CaseIterable {
     case katchMcardle = 1

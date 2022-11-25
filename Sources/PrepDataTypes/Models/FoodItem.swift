@@ -13,4 +13,28 @@ public struct FoodItem: Identifiable, Hashable, Codable {
     public var syncStatus: SyncStatus
     public var updatedAt: Double
     public var deletedAt: Double?
+    
+    public init(
+        id: UUID,
+        food: Food,
+        parentFood: Food?,
+        meal: Meal? = nil,
+        amount: FoodValue,
+        markedAsEatenAt: Double? = nil,
+        sortPosition: Int,
+        syncStatus: SyncStatus,
+        updatedAt: Double,
+        deletedAt: Double? = nil
+    ) {
+        self.id = id
+        self.food = food
+        self.parentFood = parentFood
+        self.meal = meal
+        self.amount = amount
+        self.markedAsEatenAt = markedAsEatenAt
+        self.sortPosition = sortPosition
+        self.syncStatus = syncStatus
+        self.updatedAt = updatedAt
+        self.deletedAt = deletedAt
+    }
 }

@@ -14,6 +14,10 @@ public struct FoodItem: Identifiable, Hashable, Codable {
     public var updatedAt: Double
     public var deletedAt: Double?
     
+    
+    
+    
+    
     public init(
         id: UUID,
         food: Food,

@@ -3,14 +3,14 @@ import Foundation
 /// This is a summarised version of a Meal to be placed inside a `Day` object
 /// It is stripped off the relation back to the `Day` so as to not clear a cyclical recursion error,
 /// in addition to not having the `syncStatus`, `updatedAt`, `deletedAt` metadata.
-/// This is only to be used as a child of a `Meal` to be used in the UI.
+/// This is only to be used as a child of a `Day` to be used in the UI.
 public struct DayMeal: Identifiable, Hashable, Codable {
     public let id: UUID
     public var name: String
     public var time: Double
     public var markedAsEatenAt: Double?
     public var goalSet: GoalSet?
-    public var foodItems: [FoodItem]
+    public var foodItems: [MealFoodItem]
 
     public init(
         id: UUID,
@@ -18,7 +18,7 @@ public struct DayMeal: Identifiable, Hashable, Codable {
         time: Double,
         markedAsEatenAt: Double? = nil,
         goalSet: GoalSet? = nil,
-        foodItems: [FoodItem]
+        foodItems: [MealFoodItem]
     ) {
         self.id = id
         self.name = name
@@ -37,7 +37,7 @@ public extension DayMeal {
             time: meal.time,
             markedAsEatenAt: meal.markedAsEatenAt,
             goalSet: meal.goalSet,
-            foodItems: meal.foodItems
+            foodItems: meal.foodItems.map { MealFoodItem(from: $0) }
         )
     }
 }

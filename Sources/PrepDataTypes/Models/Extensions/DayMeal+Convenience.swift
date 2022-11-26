@@ -18,7 +18,9 @@ public extension DayMeal {
     }
     
     var energyAmount: Double {
-        foodItems.reduce(0) { $0 + $1.energyAmount }
+//        foodItems.reduce(0) { $0 + $1.energyAmount }
+        //TODO: Do energyAmount and fix this
+        foodItems.reduce(0) { x, y in  x + 0 }
     }
     
 //    var timeDate: Date {

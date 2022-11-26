@@ -14,7 +14,7 @@ public struct MealFoodItem: Identifiable, Hashable, Codable {
 //    public let parentFood: Food?
 //    public var meal: Meal?
 
-    init(id: UUID, food: Food, amount: FoodValue, markedAsEatenAt: Double? = nil, sortPosition: Int) {
+    public init(id: UUID = UUID(), food: Food, amount: FoodValue, markedAsEatenAt: Double? = nil, sortPosition: Int = 0) {
         self.id = id
         self.food = food
         self.amount = amount

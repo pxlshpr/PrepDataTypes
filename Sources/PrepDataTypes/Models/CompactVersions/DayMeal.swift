@@ -13,12 +13,12 @@ public struct DayMeal: Identifiable, Hashable, Codable {
     public var foodItems: [MealFoodItem]
 
     public init(
-        id: UUID,
+        id: UUID = UUID(),
         name: String,
         time: Double,
         markedAsEatenAt: Double? = nil,
         goalSet: GoalSet? = nil,
-        foodItems: [MealFoodItem]
+        foodItems: [MealFoodItem] = []
     ) {
         self.id = id
         self.name = name

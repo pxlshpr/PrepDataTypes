@@ -314,6 +314,75 @@ extension NutrientType {
 }
 
 extension NutrientType {
+    public var vitaminChemicalName: String? {
+        switch self {
+        case .vitaminB1_thiamine:
+            return "Thiamine"
+        case .vitaminB2_riboflavin:
+            return "Riboflavin"
+        case .vitaminB3_niacin:
+            return "Niacin"
+        case .vitaminB5_pantothenicAcid:
+            return "Pantothenic Acid"
+        case .vitaminB6_pyridoxine:
+            return "Pyridoxine"
+        case .vitaminB7_biotin:
+            return "Biotin"
+        case .vitaminB9_folate:
+            return "Folate"
+        case .vitaminB9_folicAcid:
+            return "Folic Acid"
+        case .vitaminB12_cobalamin:
+            return "Cobalamin"
+        case .vitaminC_ascorbicAcid:
+            return "Ascorbic Acid"
+        case .vitaminD_calciferol:
+            return "Calciferol"
+        case .vitaminK1_phylloquinone:
+            return "Phylloquinone"
+        case .vitaminK2_menaquinone:
+            return "Menaquinone"
+        default:
+            return nil
+        }
+    }
+    
+    public var vitaminLetterName: String? {
+        switch self {
+        case .vitaminA:
+            return "A"
+        case .vitaminB1_thiamine:
+            return "B1"
+        case .vitaminB2_riboflavin:
+            return "B2"
+        case .vitaminB3_niacin:
+            return "B3"
+        case .vitaminB5_pantothenicAcid:
+            return "B5"
+        case .vitaminB6_pyridoxine:
+            return "B6"
+        case .vitaminB7_biotin:
+            return "B7"
+        case .vitaminB9_folate:
+            return "B9"
+        case .vitaminB9_folicAcid:
+            return "B9"
+        case .vitaminB12_cobalamin:
+            return "B12"
+        case .vitaminC_ascorbicAcid:
+            return "C"
+        case .vitaminD_calciferol:
+            return "D"
+        case .vitaminE:
+            return "E"
+        case .vitaminK1_phylloquinone:
+            return "K1"
+        case .vitaminK2_menaquinone:
+            return "K2"
+        default:
+            return nil
+        }
+    }
     public var description: String {
         switch self {
         case .saturatedFat:
@@ -371,33 +440,33 @@ extension NutrientType {
         case .vitaminA:
             return "Vitamin A"
         case .vitaminB1_thiamine:
-            return "Vitamin B1 (Thiamine)"
+            return "Thiamine (B1)"
         case .vitaminB2_riboflavin:
-            return "Vitamin B2 (Riboflavin)"
+            return "Riboflavin (B2)"
         case .vitaminB3_niacin:
-            return "Vitamin B3 (Niacin)"
+            return "Niacin (B3)"
         case .vitaminB5_pantothenicAcid:
-            return "Vitamin B5 (Pantothenic Acid)"
+            return "Pantothenic Acid (B5)"
         case .vitaminB6_pyridoxine:
-            return "Vitamin B6 (Pyridoxine)"
+            return "Pyridoxine (B6)"
         case .vitaminB7_biotin:
-            return "Vitamin B7 (Biotin)"
+            return "Biotin (B7)"
         case .vitaminB9_folate:
-            return "Vitamin B9 (Folate)"
+            return "Folate (B9)"
         case .vitaminB9_folicAcid:
-            return "Vitamin B9 (Folic Acid)"
+            return "Folic Acid (B9)"
         case .vitaminB12_cobalamin:
-            return "Vitamin B12 (Cobalamin)"
+            return "Cobalamin (B12)"
         case .vitaminC_ascorbicAcid:
-            return "Vitamin C (Ascorbic Acid)"
+            return "Vitamin C"
         case .vitaminD_calciferol:
-            return "Vitamin D (Calciferol)"
+            return "Vitamin D"
         case .vitaminE:
             return "Vitamin E"
         case .vitaminK1_phylloquinone:
-            return "Vitamin K1 (Phylloquinone)"
+            return "Vitamin K1"
         case .vitaminK2_menaquinone:
-            return "Vitamin K2 (Menaquinone)"
+            return "Vitamin K2"
             
         case .caffeine:
             return "Caffeine"

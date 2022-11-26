@@ -44,7 +44,9 @@ public extension Meal {
     }
     
     var energyAmount: Double {
-        foodItems.reduce(0) { $0 + $1.energyAmount }
+        //TODO: Do this
+//        foodItems.reduce(0) { $0 + $1.energyAmount }
+        foodItems.reduce(0) { x, y in x + 0 }
     }
     
 #if os(iOS)

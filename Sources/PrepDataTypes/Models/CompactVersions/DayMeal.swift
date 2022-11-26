@@ -37,7 +37,7 @@ public extension DayMeal {
             time: meal.time,
             markedAsEatenAt: meal.markedAsEatenAt,
             goalSet: meal.goalSet,
-            foodItems: meal.foodItems.map { MealFoodItem(from: $0) }
+            foodItems: meal.foodItems
         )
     }
 }

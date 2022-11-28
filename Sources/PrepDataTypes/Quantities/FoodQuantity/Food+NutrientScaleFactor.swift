@@ -1,11 +1,11 @@
 import Foundation
 
-extension Food {
+public extension Food {
     
     /**
      Given a quantity that we are after, this returns the nutrient scale factor to apply to its nutrients in order to get scaled values.
      */
-    public func nutrientScaleFactor(for quantity: FoodQuantity) -> Double? {
+    func nutrientScaleFactor(for quantity: FoodQuantity) -> Double? {
         
         guard let amountQuantity, quantity.food.id == self.id else { return nil }
         
@@ -23,7 +23,7 @@ extension Food {
     }
     
     /**
-     Used internally to determine the `nutrientScaleFactor(for:)`—this returns the `FoodQuantity` that represents what the nutrients have been described for.
+     Returns the `FoodQuantity` that represents what the nutrients have been described for.
      
      Note: If the unit is `.serving` and we have the `servingQuantity: FoodQuantity?`, then that is returned—otherwise we simply return the `FoodQuantity` in terms of `.serving`s.
      */

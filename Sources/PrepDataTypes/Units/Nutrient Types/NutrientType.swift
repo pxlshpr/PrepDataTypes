@@ -538,8 +538,7 @@ extension NutrientType {
             return (21.99, .g)
         case .transFat:
             /// https://www.who.int/news-room/questions-and-answers/item/nutrition-trans-fat
-//            return (2.19, .g)
-            return nil
+            return (2.2, .g)
         case .cholesterol:
 //            return (299.99, .mg)
             return nil

@@ -529,6 +529,123 @@ extension NutrientType {
     public var dailyValue: (Double, NutrientUnit)? {
         switch self {
         case .saturatedFat:
+            return (19.99, .g)
+        case .monounsaturatedFat:
+            /// https://news.christianacare.org/2013/04/nutrition-numbers-revealed-fat-intake/
+            return (43.99, .g)
+        case .polyunsaturatedFat:
+            /// https://news.christianacare.org/2013/04/nutrition-numbers-revealed-fat-intake/
+            return (21.99, .g)
+        case .transFat:
+            /// https://www.who.int/news-room/questions-and-answers/item/nutrition-trans-fat
+            return (2.19, .g)
+        case .cholesterol:
+            return (299.99, .mg)
+        case .dietaryFiber:
+            return (27.99, .g)
+        case .solubleFiber:
+            /// "with about one-fourth — 6 to 8 grams per day — coming from soluble fiber." https://www.ucsfhealth.org/education/increasing-fiber-intake
+            return (7, .g)
+        case .insolubleFiber:
+            /// "with about one-fourth — 6 to 8 grams per day — coming from soluble fiber." https://www.ucsfhealth.org/education/increasing-fiber-intake
+            return (21, .g)
+        case .sugars:
+            /// Adding `.addedSugars` + free sugars [from here](https://www.nhs.uk/live-well/eat-well/food-types/how-does-sugar-in-our-diet-affect-our-health/)
+            return (80, .g)
+        case .addedSugars:
+            return (50, .g)
+        case .sugarAlcohols:
+            /// https://www.goodrx.com/well-being/diet-nutrition/what-are-sugar-alcohols-and-are-they-healthy
+            return (15, .g)
+        case .calcium:
+            return (1300, .mg)
+        case .chloride:
+            return (2300, .mg)
+        case .chromium:
+            return (35, .mcg)
+        case .copper:
+            return (0.9, .mg)
+        case .iodine:
+            return (150, .mcg)
+        case .iron:
+            return (18, .mg)
+        case .magnesium:
+            return (420, .mg)
+        case .manganese:
+            return (2.3, .mg)
+        case .molybdenum:
+            return (45, .mcg)
+        case .phosphorus:
+            return (1250, .mg)
+        case .potassium:
+            return (4700, .mg)
+        case .selenium:
+            return (55, .mcg)
+        case .sodium:
+            return (2300, .mg)
+        case .zinc:
+            return (11, .mg)
+        case .vitaminA:
+            return (900, .mcgRAE)
+        case .vitaminB6_pyridoxine:
+            return (1.7, .mg)
+        case .vitaminB12_cobalamin:
+            return (2.4, .mcg)
+        case .vitaminC_ascorbicAcid:
+            return (90, .mg)
+        case .vitaminD_calciferol:
+            return (20, .mcg)
+        case .vitaminE:
+            return (15, .mgAT)
+        case .vitaminK1_phylloquinone:
+            return (120, .mcg)
+        case .vitaminB7_biotin:
+            return (30, .mcg)
+        case .choline:
+            return (550, .mg)
+        case .vitaminB9_folate:
+            return (400, .mcgDFE)
+        case .vitaminB3_niacin:
+            return (16, .mgNE)
+        case .vitaminB5_pantothenicAcid:
+            return (5, .mg)
+        case .vitaminB2_riboflavin:
+            return (1.3, .mg)
+        case .vitaminB1_thiamine:
+            return (1.2, .mg)
+        case .caffeine:
+            /// Source: https://www.hsph.harvard.edu/nutritionsource/caffeine/
+            return (400, .mg)
+        case .ethanol:
+            return nil
+        case .vitaminB9_folicAcid:
+            return (400, .mcg)
+        case .vitaminK2_menaquinone:
+            /// https://futureyouhealth.com/knowledge-centre/vitamin-k2-benefits
+            return (200, .mcg)
+        case .taurine:
+            return nil
+        case .polyols:
+            return nil
+        case .gluten:
+            /// https://www.coeliac.org.au/s/article/Gluten-Challenge
+            return (10, .g)
+        case .starch:
+            /// https://healthyeating.sfgate.com/starchy-carbohydrate-limits-1318.html
+            return (190, .g)
+        case .salt:
+            /// https://www.bhf.org.uk/informationsupport/support/healthy-living/healthy-eating/salt
+            return (6, .g)
+        default:
+            return nil
+        }
+    }
+    
+    
+    /// Taken from: https://www.fda.gov/media/135301/download, unless marked
+    public var dailyValueMax: (Double, NutrientUnit)? {
+        switch self {
+        case .saturatedFat:
             return (20, .g)
         case .monounsaturatedFat:
             /// https://news.christianacare.org/2013/04/nutrition-numbers-revealed-fat-intake/
@@ -586,7 +703,7 @@ extension NutrientType {
         case .zinc:
             return (11, .mg)
         case .vitaminA:
-            return (900, .mcgRAE)
+            return nil
         case .vitaminB6_pyridoxine:
             return (1.7, .mg)
         case .vitaminB12_cobalamin:

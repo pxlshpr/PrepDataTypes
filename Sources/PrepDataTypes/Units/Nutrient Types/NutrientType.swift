@@ -538,9 +538,11 @@ extension NutrientType {
             return (21.99, .g)
         case .transFat:
             /// https://www.who.int/news-room/questions-and-answers/item/nutrition-trans-fat
-            return (2.19, .g)
+//            return (2.19, .g)
+            return nil
         case .cholesterol:
-            return (299.99, .mg)
+//            return (299.99, .mg)
+            return nil
         case .dietaryFiber:
             return (27.99, .g)
         case .solubleFiber:
@@ -550,13 +552,11 @@ extension NutrientType {
             /// "with about one-fourth — 6 to 8 grams per day — coming from soluble fiber." https://www.ucsfhealth.org/education/increasing-fiber-intake
             return (21, .g)
         case .sugars:
-            /// Adding `.addedSugars` + free sugars [from here](https://www.nhs.uk/live-well/eat-well/food-types/how-does-sugar-in-our-diet-affect-our-health/)
-            return (80, .g)
+            return nil
         case .addedSugars:
-            return (50, .g)
+            return nil
         case .sugarAlcohols:
-            /// https://www.goodrx.com/well-being/diet-nutrition/what-are-sugar-alcohols-and-are-they-healthy
-            return (15, .g)
+            return nil
         case .calcium:
             return (1300, .mg)
         case .chloride:
@@ -570,19 +570,24 @@ extension NutrientType {
         case .iron:
             return (18, .mg)
         case .magnesium:
-            return (420, .mg)
+            /// https://www.hsph.harvard.edu/nutritionsource/magnesium/
+            return (400, .mg)
         case .manganese:
+            /// https://www.hsph.harvard.edu/nutritionsource/manganese/
             return (2.3, .mg)
         case .molybdenum:
             return (45, .mcg)
         case .phosphorus:
-            return (1250, .mg)
+            /// https://www.hsph.harvard.edu/nutritionsource/phosphorus/
+            return (700, .mg)
         case .potassium:
-            return (4700, .mg)
+            /// https://www.hsph.harvard.edu/nutritionsource/potassium/
+            return (3400, .mg)
         case .selenium:
             return (55, .mcg)
         case .sodium:
-            return (2300, .mg)
+            /// https://www.hsph.harvard.edu/nutritionsource/salt-and-sodium/
+            return (500, .mg)
         case .zinc:
             return (11, .mg)
         case .vitaminA:
@@ -628,14 +633,14 @@ extension NutrientType {
         case .polyols:
             return nil
         case .gluten:
-            /// https://www.coeliac.org.au/s/article/Gluten-Challenge
-            return (10, .g)
+            return nil
         case .starch:
-            /// https://healthyeating.sfgate.com/starchy-carbohydrate-limits-1318.html
-            return (190, .g)
+            return nil
+            
         case .salt:
-            /// https://www.bhf.org.uk/informationsupport/support/healthy-living/healthy-eating/salt
-            return (6, .g)
+            /// https://www.hsph.harvard.edu/nutritionsource/salt-and-sodium/
+            /// "t is estimated that we need about 500 mg of sodium daily for these vital functions" `500 x 2.5 = 1,250 mg`
+            return (1.25, .g)
         default:
             return nil
         }
@@ -659,13 +664,12 @@ extension NutrientType {
         case .cholesterol:
             return (300, .mg)
         case .dietaryFiber:
-            return (28, .g)
+            /// https://healthyeating.sfgate.com/maximum-fiber-intake-per-day-7061.html
+            return nil
         case .solubleFiber:
-            /// "with about one-fourth — 6 to 8 grams per day — coming from soluble fiber." https://www.ucsfhealth.org/education/increasing-fiber-intake
-            return (7, .g)
+            return nil
         case .insolubleFiber:
-            /// "with about one-fourth — 6 to 8 grams per day — coming from soluble fiber." https://www.ucsfhealth.org/education/increasing-fiber-intake
-            return (21, .g)
+            return nil
         case .sugars:
             /// Adding `.addedSugars` + free sugars [from here](https://www.nhs.uk/live-well/eat-well/food-types/how-does-sugar-in-our-diet-affect-our-health/)
             return (80, .g)
@@ -673,86 +677,113 @@ extension NutrientType {
             return (50, .g)
         case .sugarAlcohols:
             /// https://www.goodrx.com/well-being/diet-nutrition/what-are-sugar-alcohols-and-are-they-healthy
-            return (15, .g)
+            return (20, .g)
         case .calcium:
-            return (1300, .mg)
+            /// https://www.hsph.harvard.edu/nutritionsource/calcium/
+            return (2500, .mg)
         case .chloride:
-            return (2300, .mg)
+            /// https://www.hsph.harvard.edu/nutritionsource/chloride/
+            return nil
         case .chromium:
-            return (35, .mcg)
+            /// https://www.hsph.harvard.edu/nutritionsource/chromium/
+            return nil
         case .copper:
-            return (0.9, .mg)
+            /// https://www.hsph.harvard.edu/nutritionsource/copper/
+            return (10, .mg)
         case .iodine:
-            return (150, .mcg)
+            /// https://www.hsph.harvard.edu/nutritionsource/iodine/
+            return (1100, .mcg)
         case .iron:
-            return (18, .mg)
+            /// https://www.hsph.harvard.edu/nutritionsource/iron/
+            return (45, .mg)
         case .magnesium:
-            return (420, .mg)
+            /// https://www.hsph.harvard.edu/nutritionsource/magnesium/
+            /// "UL for magnesium is 350 milligrams from supplements only. Extra magnesium from food is safe because the kidneys will eliminate excess amounts in urine"
+            return nil
         case .manganese:
-            return (2.3, .mg)
+            /// https://www.hsph.harvard.edu/nutritionsource/manganese/
+            return (11, .mg)
         case .molybdenum:
-            return (45, .mcg)
+            /// https://www.hsph.harvard.edu/nutritionsource/molybdenum/
+            return (2000, .mcg)
         case .phosphorus:
-            return (1250, .mg)
+            /// https://www.hsph.harvard.edu/nutritionsource/phosphorus/
+            return (4000, .mg)
         case .potassium:
+            /// https://www.hsph.harvard.edu/nutritionsource/potassium/
             return (4700, .mg)
         case .selenium:
-            return (55, .mcg)
+            /// https://www.hsph.harvard.edu/nutritionsource/selenium/
+            return (400, .mcg)
         case .sodium:
             return (2300, .mg)
         case .zinc:
-            return (11, .mg)
+            /// https://www.hsph.harvard.edu/nutritionsource/zinc/
+            return (40, .mg)
         case .vitaminA:
-            return nil
+            /// https://www.hsph.harvard.edu/nutritionsource/vitamin-a/
+            return (3000, .mcgRAE)
         case .vitaminB6_pyridoxine:
-            return (1.7, .mg)
+            /// https://ods.od.nih.gov/factsheets/VitaminB6-Consumer/
+            return (100, .mg)
         case .vitaminB12_cobalamin:
-            return (2.4, .mcg)
+            /// https://www.hsph.harvard.edu/nutritionsource/vitamin-b12/
+            return (1000, .mcg)
         case .vitaminC_ascorbicAcid:
-            return (90, .mg)
+            /// https://www.mayoclinic.org/healthy-lifestyle/nutrition-and-healthy-eating/expert-answers/vitamin-c/faq-20058030
+            return (2000, .mg)
         case .vitaminD_calciferol:
-            return (20, .mcg)
+            /// https://www.nhs.uk/conditions/vitamins-and-minerals/vitamin-d/
+            return (100, .mcg)
         case .vitaminE:
-            return (15, .mgAT)
+            /// https://ods.od.nih.gov/factsheets/VitaminE-Consumer/
+            return (1000, .mgAT)
         case .vitaminK1_phylloquinone:
-            return (120, .mcg)
+            /// https://www.hsph.harvard.edu/nutritionsource/vitamin-k/
+            return nil
         case .vitaminB7_biotin:
-            return (30, .mcg)
+            /// https://www.humnutrition.com/blog/biotin/
+            return nil
         case .choline:
-            return (550, .mg)
+            /// https://www.hsph.harvard.edu/nutritionsource/choline/
+            return (3500, .mg)
         case .vitaminB9_folate:
-            return (400, .mcgDFE)
+            /// https://www.hsph.harvard.edu/nutritionsource/folic-acid/
+            return (1000, .mcgDFE)
         case .vitaminB3_niacin:
-            return (16, .mgNE)
+            /// https://www.hsph.harvard.edu/nutritionsource/niacin-vitamin-b3/
+            return (35, .mgNE)
         case .vitaminB5_pantothenicAcid:
-            return (5, .mg)
+            /// https://www.hsph.harvard.edu/nutritionsource/pantothenic-acid-vitamin-b5/
+            return nil
         case .vitaminB2_riboflavin:
-            return (1.3, .mg)
+            /// https://www.hsph.harvard.edu/nutritionsource/riboflavin-vitamin-b2/
+            return nil
         case .vitaminB1_thiamine:
-            return (1.2, .mg)
+            /// https://www.hsph.harvard.edu/nutritionsource/vitamin-b1/
+            return nil
         case .caffeine:
-            /// Source: https://www.hsph.harvard.edu/nutritionsource/caffeine/
-            return (400, .mg)
+            /// https://myhealth.alberta.ca/Alberta/Pages/Substance-use-caffeine.aspx
+            return (600, .mg)
         case .ethanol:
             return nil
         case .vitaminB9_folicAcid:
-            return (400, .mcg)
+            /// https://www.hsph.harvard.edu/nutritionsource/folic-acid/
+            return (1000, .mcg)
         case .vitaminK2_menaquinone:
-            /// https://futureyouhealth.com/knowledge-centre/vitamin-k2-benefits
-            return (200, .mcg)
+            /// https://www.hsph.harvard.edu/nutritionsource/vitamin-k/
+            return nil
         case .taurine:
             return nil
         case .polyols:
             return nil
         case .gluten:
-            /// https://www.coeliac.org.au/s/article/Gluten-Challenge
-            return (10, .g)
+            return nil
         case .starch:
-            /// https://healthyeating.sfgate.com/starchy-carbohydrate-limits-1318.html
-            return (190, .g)
+            return nil
         case .salt:
-            /// https://www.bhf.org.uk/informationsupport/support/healthy-living/healthy-eating/salt
-            return (6, .g)
+            /// multiplying sodium by 2.5
+            return (5.75, .g)
         default:
             return nil
         }

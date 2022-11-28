@@ -525,31 +525,38 @@ extension NutrientType {
         }
     }
     
-    /// Taken from: https://www.fda.gov/media/135301/download
+    /// Taken from: https://www.fda.gov/media/135301/download, unless marked
     public var dailyValue: (Double, NutrientUnit)? {
         switch self {
         case .saturatedFat:
             return (20, .g)
         case .monounsaturatedFat:
-            return nil
+            /// https://news.christianacare.org/2013/04/nutrition-numbers-revealed-fat-intake/
+            return (44, .g)
         case .polyunsaturatedFat:
-            return nil
+            /// https://news.christianacare.org/2013/04/nutrition-numbers-revealed-fat-intake/
+            return (22, .g)
         case .transFat:
-            return nil
+            /// https://www.who.int/news-room/questions-and-answers/item/nutrition-trans-fat
+            return (2.2, .g)
         case .cholesterol:
             return (300, .mg)
         case .dietaryFiber:
             return (28, .g)
         case .solubleFiber:
-            return nil
+            /// "with about one-fourth — 6 to 8 grams per day — coming from soluble fiber." https://www.ucsfhealth.org/education/increasing-fiber-intake
+            return (7, .g)
         case .insolubleFiber:
-            return nil
+            /// "with about one-fourth — 6 to 8 grams per day — coming from soluble fiber." https://www.ucsfhealth.org/education/increasing-fiber-intake
+            return (21, .g)
         case .sugars:
-            return nil
+            /// Adding `.addedSugars` + free sugars [from here](https://www.nhs.uk/live-well/eat-well/food-types/how-does-sugar-in-our-diet-affect-our-health/)
+            return (80, .g)
         case .addedSugars:
             return (50, .g)
         case .sugarAlcohols:
-            return nil
+            /// https://www.goodrx.com/well-being/diet-nutrition/what-are-sugar-alcohols-and-are-they-healthy
+            return (15, .g)
         case .calcium:
             return (1300, .mg)
         case .chloride:
@@ -612,19 +619,23 @@ extension NutrientType {
         case .ethanol:
             return nil
         case .vitaminB9_folicAcid:
-            return nil
+            return (400, .mcg)
         case .vitaminK2_menaquinone:
-            return nil
+            /// https://futureyouhealth.com/knowledge-centre/vitamin-k2-benefits
+            return (200, .mcg)
         case .taurine:
             return nil
         case .polyols:
             return nil
         case .gluten:
-            return nil
+            /// https://www.coeliac.org.au/s/article/Gluten-Challenge
+            return (10, .g)
         case .starch:
-            return nil
+            /// https://healthyeating.sfgate.com/starchy-carbohydrate-limits-1318.html
+            return (190, .g)
         case .salt:
-            return nil
+            /// https://www.bhf.org.uk/informationsupport/support/healthy-living/healthy-eating/salt
+            return (6, .g)
         default:
             return nil
         }

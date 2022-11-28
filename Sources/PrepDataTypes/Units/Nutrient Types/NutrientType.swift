@@ -532,18 +532,17 @@ extension NutrientType {
             return (20, .g)
         case .monounsaturatedFat:
             /// https://news.christianacare.org/2013/04/nutrition-numbers-revealed-fat-intake/
-            return (43.99, .g)
+            return (44, .g)
         case .polyunsaturatedFat:
             /// https://news.christianacare.org/2013/04/nutrition-numbers-revealed-fat-intake/
-            return (21.99, .g)
+            return (22, .g)
         case .transFat:
             /// https://www.who.int/news-room/questions-and-answers/item/nutrition-trans-fat
             return (2.2, .g)
         case .cholesterol:
-//            return (299.99, .mg)
-            return nil
+            return (300, .mg)
         case .dietaryFiber:
-            return (27.99, .g)
+            return (28, .g)
         case .solubleFiber:
             /// "with about one-fourth — 6 to 8 grams per day — coming from soluble fiber." https://www.ucsfhealth.org/education/increasing-fiber-intake
             return (7, .g)
@@ -551,11 +550,11 @@ extension NutrientType {
             /// "with about one-fourth — 6 to 8 grams per day — coming from soluble fiber." https://www.ucsfhealth.org/education/increasing-fiber-intake
             return (21, .g)
         case .sugars:
-            return nil
+            return (80, .g)
         case .addedSugars:
-            return nil
+            return (50, .g)
         case .sugarAlcohols:
-            return nil
+            return (20, .g)
         case .calcium:
             return (1300, .mg)
         case .chloride:
@@ -618,7 +617,6 @@ extension NutrientType {
         case .vitaminB1_thiamine:
             return (1.2, .mg)
         case .caffeine:
-            /// Source: https://www.hsph.harvard.edu/nutritionsource/caffeine/
             return (400, .mg)
         case .ethanol:
             return nil
@@ -762,8 +760,9 @@ extension NutrientType {
             /// https://www.hsph.harvard.edu/nutritionsource/vitamin-b1/
             return nil
         case .caffeine:
+            /// https://www.hsph.harvard.edu/nutritionsource/caffeine/
             /// https://myhealth.alberta.ca/Alberta/Pages/Substance-use-caffeine.aspx
-            return (600, .mg)
+            return (400, .mg)
         case .ethanol:
             return nil
         case .vitaminB9_folicAcid:

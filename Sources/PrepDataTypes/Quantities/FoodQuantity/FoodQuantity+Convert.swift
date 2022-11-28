@@ -472,7 +472,6 @@ extension FoodQuantity.Size {
     
     //⚠️ TODO: *** Look into the following, adding tests to try and capture them**
     /// [ ] why we're not passing in the volumePrefixUnit
-    /// [ ] why we're not considering servings below (see other TODO)
     
     /// Returns how many of the provided size are in 1 size of the size this is called upon.
     func quantityPerSize(of size: FoodQuantity.Size, in food: Food) -> Double? {
@@ -512,9 +511,13 @@ extension FoodQuantity.Size {
                     guard converted > 0 else { return nil }
                     return ourUnitVolume.value / converted
                     
-                //⚠️ TODO: *** We're not considering servings here
                 case .serving:
-                    return nil
+                    /// Since the provided size wouldn't be described in `serving`, we simply flip the sizes and call this equation again, and then return the inverse of what's calculated.
+                    guard let flipped = size.quantityPerSize(of: self, in: food),
+                          flipped > 0
+                    else { return nil }
+                    
+                    return 1/flipped
 
                 default:
                     return nil

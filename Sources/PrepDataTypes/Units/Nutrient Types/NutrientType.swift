@@ -529,7 +529,7 @@ extension NutrientType {
     public var dailyValue: (Double, NutrientUnit)? {
         switch self {
         case .saturatedFat:
-            return (19.99, .g)
+            return (20, .g)
         case .monounsaturatedFat:
             /// https://news.christianacare.org/2013/04/nutrition-numbers-revealed-fat-intake/
             return (43.99, .g)

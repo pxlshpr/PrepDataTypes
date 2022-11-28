@@ -3,10 +3,10 @@ import Foundation
 public struct Food: Identifiable, Hashable, Codable {
     public let id: UUID
     public let type: FoodType
-    public let name: String
+    public var name: String
     public let emoji: String
-    public let detail: String?
-    public let brand: String?
+    public var detail: String?
+    public var brand: String?
     public let numberOfTimesConsumedGlobally: Int
     public let numberOfTimesConsumed: Int
     public let lastUsedAt: Double?

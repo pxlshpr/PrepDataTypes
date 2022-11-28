@@ -43,4 +43,33 @@ public extension Food {
         else { return nil }
         return FoodQuantity(value: info.amount.value * serving.value, unit: unit, food: self)
     }
+    
+    /**
+     Returns the `FoodQuantity` that is best used as a default for this food.
+     
+     Usually reverts to simply returning the `amountQuantity` except for certain circumstances, such as:
+     - If there is only one size for this food, returns 1 x that size.
+     */
+    var defaultQuantity: FoodQuantity? {
+        if !usesSizeForAmountOrServing, let onlySize {
+            return FoodQuantity(1, onlySize.id, self)
+        }
+        
+        return amountQuantity
+    }
+}
+
+public extension Food {
+    var hasOneSize: Bool {
+        info.sizes.count == 1
+    }
+    
+    var onlySize: FoodSize? {
+        guard hasOneSize else { return nil }
+        return info.sizes.first
+    }
+    
+    var usesSizeForAmountOrServing: Bool {
+        info.amount.unitType == .size || info.serving?.unitType == .size
+    }
 }

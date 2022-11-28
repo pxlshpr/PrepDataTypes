@@ -24,7 +24,21 @@ extension FoodQuantityConvertTests {
 extension TestCases {
     static let Size_Serving = [
 
-       FoodQuantityTestCase(
+        FoodQuantityTestCase(
+            quantity: FoodQuantity(
+                1, "container",
+                Food(
+                    serving: .init(0.33, "bar"),
+                    sizes: [
+                        .init(1, "bar", .init(99, .g)),
+                        .init(1, "container", .init(18)),
+                    ]
+                )
+            )!,
+            equivalentServing: 18
+        ),
+        
+        FoodQuantityTestCase(
             quantity: FoodQuantity(
                 2.3, "carton",  /// 102.051 mL
                 Food(

@@ -513,6 +513,8 @@ extension FoodQuantity.Size {
                     return ourUnitVolume.value / converted
                     
                 //⚠️ TODO: *** We're not considering servings here
+                case .serving:
+                    return nil
 
                 default:
                     return nil

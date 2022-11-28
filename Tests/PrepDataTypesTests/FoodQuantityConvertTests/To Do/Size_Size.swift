@@ -30,6 +30,23 @@ extension TestCases {
         /// serving-based size
         FoodQuantityTestCase(
             quantity: FoodQuantity(
+                1, "container",
+                Food(
+                    serving: .init(0.33, "bar"),
+                    sizes: [
+                        .init(1, "bar", .init(99, .g)),
+                        .init(1, "container", .init(18)),
+                    ]
+                )
+            )!,
+            equivalentSizes: [
+                (nil, "bar", 5.94),
+            ]
+        ),
+
+        /// serving-based size
+        FoodQuantityTestCase(
+            quantity: FoodQuantity(
                 2, "container",
                 Food(
                     serving: .init(30, .g),
@@ -43,7 +60,7 @@ extension TestCases {
                 (nil, "scoop", 148),
             ]
         ),
-        
+
         /// serving-based size
         FoodQuantityTestCase(
             quantity: FoodQuantity(
@@ -60,7 +77,7 @@ extension TestCases {
                 (nil, "container", 0.02027027027027),
             ]
         ),
-        
+
         /// weight-based size
         FoodQuantityTestCase(
             quantity: FoodQuantity(
@@ -100,7 +117,7 @@ extension TestCases {
                 (nil, "bottle", 4.16874054),
             ]
         ),
-        
+
         /// volume-based size
         FoodQuantityTestCase(
             quantity: FoodQuantity(

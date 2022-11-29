@@ -51,7 +51,7 @@ public extension Food {
      - If there is only one size for this food, returns 1 x that size.
      */
     var defaultQuantity: FoodQuantity? {
-        if !usesSizeForAmountOrServing, let onlySize {
+        if !usesSizeForAmountOrServing, let onlySize, info.serving == nil {¡
             return FoodQuantity(1, onlySize.id, self)
         }
         

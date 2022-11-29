@@ -26,6 +26,7 @@ public extension Notification.Name {
 
     static var didUpdateMeals: Notification.Name { return .init("didUpdateMeals") }
     static var didUpdateFoods: Notification.Name { return .init("didUpdateFoods") }
+    static var didUpdateDiet: Notification.Name { return .init("didUpdateDiet") }
 }
 
 public extension Notification {

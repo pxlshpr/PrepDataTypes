@@ -624,7 +624,7 @@ extension NutrientType {
             return (400, .mcg)
         case .vitaminK2_menaquinone:
             /// https://futureyouhealth.com/knowledge-centre/vitamin-k2-benefits
-            return (200, .mcg)
+            return (100, .mcg)
         case .taurine:
             return nil
         case .polyols:
@@ -661,12 +661,12 @@ extension NutrientType {
         case .cholesterol:
             return (300, .mg)
         case .dietaryFiber:
-            /// https://healthyeating.sfgate.com/maximum-fiber-intake-per-day-7061.html
-            return nil
+            /// https://www.integratedeating.com/blog/2020/9/21/myth-there-is-no-such-thing-as-too-much-fiber
+            return (70, .g)
         case .solubleFiber:
-            return nil
+            return (17.5, .g)
         case .insolubleFiber:
-            return nil
+            return (52.5, .g)
         case .sugars:
             /// Adding `.addedSugars` + free sugars [from here](https://www.nhs.uk/live-well/eat-well/food-types/how-does-sugar-in-our-diet-affect-our-health/)
             return (80, .g)
@@ -679,11 +679,11 @@ extension NutrientType {
             /// https://www.hsph.harvard.edu/nutritionsource/calcium/
             return (2500, .mg)
         case .chloride:
-            /// https://www.hsph.harvard.edu/nutritionsource/chloride/
-            return nil
+            /// https://www.eufic.org/en/vitamins-and-minerals/article/chloride-foods-functions-how-much-do-you-need-more
+            return (3100, .mg)
         case .chromium:
-            /// https://www.hsph.harvard.edu/nutritionsource/chromium/
-            return nil
+            /// https://www.webmd.com/diet/supplement-guide-chromium
+            return (1000, .mcg)
         case .copper:
             /// https://www.hsph.harvard.edu/nutritionsource/copper/
             return (10, .mg)
@@ -694,9 +694,8 @@ extension NutrientType {
             /// https://www.hsph.harvard.edu/nutritionsource/iron/
             return (45, .mg)
         case .magnesium:
-            /// https://www.hsph.harvard.edu/nutritionsource/magnesium/
-            /// "UL for magnesium is 350 milligrams from supplements only. Extra magnesium from food is safe because the kidneys will eliminate excess amounts in urine"
-            return nil
+            /// https://hvmn.com/blogs/blog/supplements-magnesium-supplement-guide
+            return (750, .g)
         case .manganese:
             /// https://www.hsph.harvard.edu/nutritionsource/manganese/
             return (11, .mg)
@@ -736,11 +735,11 @@ extension NutrientType {
             /// https://ods.od.nih.gov/factsheets/VitaminE-Consumer/
             return (1000, .mgAT)
         case .vitaminK1_phylloquinone:
-            /// https://www.hsph.harvard.edu/nutritionsource/vitamin-k/
-            return nil
+            /// https://www.mattilsynet.no/mat_og_vann/spesialmat_og_kosttilskudd/kosttilskudd/assessment_of_dietary_intake_of_vitamin_k_and_maximum_limits_for_vitamin_k_in_food_supplements.29756/binary/Assessment%20of%20dietary%20intake%20of%20vitamin%20K%20and%20maximum%20limits%20for%20vitamin%20K%20in%20food%20supplements
+            return (800, .mcg)
         case .vitaminB7_biotin:
-            /// https://www.humnutrition.com/blog/biotin/
-            return nil
+            /// https://drformulas.com/blogs/news/5000-mcg-of-biotin-vitamins-safe-for-hair-growth
+            return (5000, .mcg)
         case .choline:
             /// https://www.hsph.harvard.edu/nutritionsource/choline/
             return (3500, .mg)
@@ -751,26 +750,26 @@ extension NutrientType {
             /// https://www.hsph.harvard.edu/nutritionsource/niacin-vitamin-b3/
             return (35, .mgNE)
         case .vitaminB5_pantothenicAcid:
-            /// https://www.hsph.harvard.edu/nutritionsource/pantothenic-acid-vitamin-b5/
-            return nil
+            /// https://www.webmd.com/vitamins/ai/ingredientmono-853/pantothenic-acid-vitamin-b5
+            return (1000, .g)
         case .vitaminB2_riboflavin:
-            /// https://www.hsph.harvard.edu/nutritionsource/riboflavin-vitamin-b2/
-            return nil
+            /// https://www.webmd.com/vitamins/ai/ingredientmono-957/riboflavin
+            return (400, .mg)
         case .vitaminB1_thiamine:
-            /// https://www.hsph.harvard.edu/nutritionsource/vitamin-b1/
-            return nil
+            /// https://lpi.oregonstate.edu/mic/vitamins/thiamin
+            return (200, .mg)
         case .caffeine:
             /// https://www.hsph.harvard.edu/nutritionsource/caffeine/
             /// https://myhealth.alberta.ca/Alberta/Pages/Substance-use-caffeine.aspx
-            return (400, .mg)
+            return (600, .mg)
         case .ethanol:
             return nil
         case .vitaminB9_folicAcid:
             /// https://www.hsph.harvard.edu/nutritionsource/folic-acid/
             return (1000, .mcg)
         case .vitaminK2_menaquinone:
-            /// https://www.hsph.harvard.edu/nutritionsource/vitamin-k/
-            return nil
+            /// https://futureyouhealth.com/knowledge-centre/vitamin-k2-benefits
+            return (300, .mcg)
         case .taurine:
             return nil
         case .polyols:

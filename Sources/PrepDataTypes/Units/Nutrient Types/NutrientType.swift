@@ -529,18 +529,15 @@ extension NutrientType {
     public var dailyValue: (Double, NutrientUnit)? {
         switch self {
         case .saturatedFat:
-            return (20, .g)
+            return nil
         case .monounsaturatedFat:
-            /// https://news.christianacare.org/2013/04/nutrition-numbers-revealed-fat-intake/
-            return (44, .g)
+            return nil
         case .polyunsaturatedFat:
-            /// https://news.christianacare.org/2013/04/nutrition-numbers-revealed-fat-intake/
-            return (22, .g)
+            return nil
         case .transFat:
-            /// https://www.who.int/news-room/questions-and-answers/item/nutrition-trans-fat
-            return (2.2, .g)
+            return nil
         case .cholesterol:
-            return (300, .mg)
+            return nil
         case .dietaryFiber:
             return (28, .g)
         case .solubleFiber:

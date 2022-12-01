@@ -7,7 +7,7 @@ public struct GoalSet: Identifiable, Hashable, Codable {
     public var name: String
     public var emoji: String
     public var goals: [Goal] = []
-    public var isForMeal: Bool
+    public var type: GoalSetType
 
     public var syncStatus: SyncStatus
     public var updatedAt: Double
@@ -15,24 +15,26 @@ public struct GoalSet: Identifiable, Hashable, Codable {
     
     public init(
         id: UUID = UUID(),
+        type: GoalSetType = .diet,
         name: String,
         emoji: String,
         goals: [Goal] = [],
-        isForMeal: Bool = false,
         syncStatus: SyncStatus = .notSynced,
         updatedAt: Double = Date().timeIntervalSinceNow,
         deletedAt: Double? = nil
     ) {
         self.id = id
+        self.type = type
         self.name = name
         self.emoji = emoji
         self.goals = goals
-        self.isForMeal = isForMeal
         self.syncStatus = syncStatus
         self.updatedAt = updatedAt
         self.deletedAt = deletedAt
     }
 }
+
+//MARK: - Implicit (Auto-generated) Goals
 
 public extension GoalSet {
     

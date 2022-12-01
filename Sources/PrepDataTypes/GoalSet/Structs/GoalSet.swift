@@ -15,7 +15,7 @@ public struct GoalSet: Identifiable, Hashable, Codable {
     
     public init(
         id: UUID = UUID(),
-        type: GoalSetType = .diet,
+        type: GoalSetType = .day,
         name: String,
         emoji: String,
         goals: [Goal] = [],

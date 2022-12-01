@@ -1,14 +1,14 @@
 import Foundation
 
 public enum GoalSetType: Int16, Codable, Hashable {
-    case diet
-    case mealType
+    case day
+    case meal
     
     public var description: String {
         switch self {
-        case .diet:
+        case .day:
             return "Diet"
-        case .mealType:
+        case .meal:
             return "Meal Type"
         }
     }

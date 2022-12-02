@@ -43,3 +43,11 @@ public struct Meal: Identifiable, Hashable, Codable {
         self.deletedAt = deletedAt
     }
 }
+
+public extension Meal {
+    var nextSortPosition: Int {
+        let sorted = foodItems.sorted(by: { $0.sortPosition > $1.sortPosition })
+        guard let first = sorted.first else { return 1 }
+        return first.sortPosition + 1
+    }
+}

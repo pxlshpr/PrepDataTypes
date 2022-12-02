@@ -11,7 +11,6 @@ public extension Notification.Name {
     static var dateDidChange: Notification.Name { return .init("dateDidChange") }
     static var diaryWillChangeDate: Notification.Name { return .init("diaryWillChangeDate") }
     static var didPickDateOnDayView: Notification.Name { return .init("didPickDateOnDayView") }
-    static var didAddFoodItemToMeal: Notification.Name { return .init("didAddFoodItemToMeal") }
     static var summaryViewTypeChanged: Notification.Name { return .init("summaryViewTypeChanged") }
     
     static var foodItemCompletionDidChange: Notification.Name { return .init("foodItemCompletionDidChange") }
@@ -21,17 +20,25 @@ public extension Notification.Name {
     
     /// Backend related
     static var didUpdateUser: Notification.Name { return .init("didUpdateUser") }
-    static var didAddMeal: Notification.Name { return .init("didAddMeal") }
     static var didAddFood: Notification.Name { return .init("didAddFood") }
 
     static var didUpdateMeals: Notification.Name { return .init("didUpdateMeals") }
     static var didUpdateFoods: Notification.Name { return .init("didUpdateFoods") }
-    static var didUpdateDiet: Notification.Name { return .init("didUpdateDiet") }
+    static var shouldRefreshMealsDiaryWindow: Notification.Name { return .init("shouldRefreshMealsDiaryWindow") }
+    
+    static var didAddFoodItemToMeal: Notification.Name { return .init("didAddFoodItemToMeal") }
+    static var didUpdateMealFoodItem: Notification.Name { return .init("didUpdateMealFoodItem") }
+    static var didDeleteFoodItemFromMeal: Notification.Name { return .init("didDeleteFoodItemFromMeal") }
+    
+    static var didAddMeal: Notification.Name { return .init("didAddMeal") }
+    static var didDeleteMeal: Notification.Name { return .init("didDeleteMeal") }
 }
 
 public extension Notification {
     struct Keys {
+        public static let uuid = "id"
         public static let foodItem = "foodItem"
+        public static let goalSet = "goalSet"
         public static let date = "date"
         public static let summaryViewTypeRawValue = "summaryViewTypeRawValue"
         public static let sender = "sender"

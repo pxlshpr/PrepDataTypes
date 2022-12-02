@@ -5,8 +5,8 @@ import Foundation
 /// in addition to not having the `syncStatus`, `updatedAt`, `deletedAt` metadata.
 /// This is only to be used as a child of a `Meal` to be used in the UI.
 public struct MealFoodItem: Identifiable, Hashable, Codable {
-    public let id: UUID
-    public let food: Food
+    public var id: UUID
+    public var food: Food
     public var amount: FoodValue
     public var markedAsEatenAt: Double?
     public var sortPosition: Int

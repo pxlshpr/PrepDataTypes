@@ -34,6 +34,12 @@ public struct GoalSet: Identifiable, Hashable, Codable {
     }
 }
 
+public extension GoalSet {
+    var containsWorkoutDurationDependentGoal: Bool {
+        goals.contains(where: { $0.dependsOnWorkoutDuration })
+    }
+}
+
 //MARK: - Implicit (Auto-generated) Goals
 
 public extension GoalSet {

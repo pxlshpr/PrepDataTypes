@@ -410,6 +410,10 @@ public extension Goal {
     var hasUpperBoundOnly: Bool {
         upperBound != nil && lowerBound == nil
     }
+    
+    var dependsOnWorkoutDuration: Bool {
+        type.dependsOnWorkoutDuration
+    }
 }
 
 public extension Array where Element == Goal {

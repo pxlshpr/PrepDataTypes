@@ -148,7 +148,16 @@ public extension GoalType {
             return type.accessorySystemImage
         }
     }
-    
+   
+    var dependsOnWorkoutDuration: Bool {
+        guard let nutrientGoalType else { return false }
+        switch nutrientGoalType {
+        case .quantityPerWorkoutDuration:
+            return true
+        default:
+            return false
+        }
+    }    
 }
 
 #if os(iOS)

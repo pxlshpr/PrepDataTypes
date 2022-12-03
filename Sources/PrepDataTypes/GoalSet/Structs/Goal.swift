@@ -315,12 +315,13 @@ public extension Goal {
                 return nil
             }
             
-            let perEnergyInKcal: Double
-            if energyUnit == .kcal {
-                perEnergyInKcal = perEnergy
-            } else {
-                perEnergyInKcal = EnergyUnit.convertToKilocalories(fromKilojules: perEnergy)
-            }
+            let perEnergyInKcal = energyUnit.convert(perEnergy, to: .kcal)
+//            let perEnergyInKcal: Double
+//            if energyUnit == .kcal {
+//                perEnergyInKcal = perEnergy
+//            } else {
+//                perEnergyInKcal = EnergyUnit.convertToKilocalories(fromKilojules: perEnergy)
+//            }
             return (value * goalEnergyKcal) / perEnergyInKcal
         
         case .fixed:
@@ -339,7 +340,8 @@ public extension Goal {
     ) -> Double? {
         guard let energy else { return nil }
         let energyUnit = bodyProfile?.energyUnit ?? userUnits.energy
-        return energyUnit == .kcal ? energy : energy * KcalsPerKilojule
+        return energyUnit.convert(energy, to: .kcal)
+//        return energyUnit == .kcal ? energy : energy * KcalsPerKilojule
     }
 
     var energyGoalType: EnergyGoalType? {

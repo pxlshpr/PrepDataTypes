@@ -26,10 +26,6 @@ public enum FoodLabelUnit: Int, CaseIterable, Codable {
         return nil
     }
     
-    public var isEnergy: Bool {
-        self == .kcal || self == .kj
-    }
-    
     public var isAllowedInHeader: Bool {
         switch self {
         case .kcal, .mcg, .mg, .kj, .p:
@@ -133,13 +129,17 @@ extension FoodLabelUnit: CustomStringConvertible {
     }
 }
 
-extension FoodLabelUnit {
-    public var isNutrientUnit: Bool {
+public extension FoodLabelUnit {
+    var isNutrientUnit: Bool {
         switch self {
         case .mcg, .mg, .g:
             return true
         default:
             return false
         }
+    }
+    
+    var isEnergy: Bool {
+        self == .kcal || self == .kj
     }
 }

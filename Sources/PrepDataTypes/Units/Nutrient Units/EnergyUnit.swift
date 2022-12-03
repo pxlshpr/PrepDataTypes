@@ -30,15 +30,23 @@ extension EnergyUnit: DescribableUnit {
 }
 
 public extension EnergyUnit {
-    /**
-     1 kcal = 4.184 kJ
-     */
-    static func convertToKilocalories(fromKilojules kJ: Double) -> Double {
-        kJ / 4.184
-    }
-    
-    static func convertToKilojules(fromKilocalories kcal: Double) -> Double {
-        kcal * 4.184
+    func convert(_ value: Double, to unit: EnergyUnit) -> Double {
+        switch self {
+        case .kcal:
+            switch unit {
+            case .kcal:
+                return value
+            case .kJ:
+                return value * KjPerKcal
+            }
+        case .kJ:
+            switch unit {
+            case .kcal:
+                return value / KjPerKcal
+            case .kJ:
+                return value
+            }
+        }
     }
 }
 
@@ -58,11 +66,13 @@ public extension EnergyUnit {
         /// Default to male in the case not being passed a value to err on the side of larger values
         /// (as we would rather suggest larger values than is required to a female than smaller values for a male's energy)
         let sexIsFemale = params.bodyProfile?.sexIsFemale ?? false
-        switch self {
-        case .kcal:
-            return sexIsFemale ? 1200 : 1500
-        case .kJ:
-            return sexIsFemale ? (1200 * KcalsPerKilojule) : (1500 * KcalsPerKilojule)
-        }
+        let minimumKcal: Double = sexIsFemale ? 1200 : 1500
+        return EnergyUnit.kcal.convert(minimumKcal, to: self)
+//        switch self {
+//        case .kcal:
+//            return sexIsFemale ? 1200 : 1500
+//        case .kJ:
+//            return sexIsFemale ? (1200 * KcalsPerKilojule) : (1500 * KcalsPerKilojule)
+//        }
     }
 }

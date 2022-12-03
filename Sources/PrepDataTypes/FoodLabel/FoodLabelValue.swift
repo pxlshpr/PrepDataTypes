@@ -236,8 +236,9 @@ extension FoodLabelValue: CustomStringConvertible {
 public extension FoodLabelValue {
     var energyAmountInCalories: Double {
         if let unit = unit, unit == .kj {
-            return amount / KcalsPerKilojule
+            return EnergyUnit.kJ.convert(amount, to: .kcal)
         } else {
+            /// We're making the assumption that no unit implies it's in `kcal`
             return amount
         }
     }
@@ -245,7 +246,8 @@ public extension FoodLabelValue {
         if let unit = unit, unit == .kj {
             return amount
         } else {
-            return amount * KcalsPerKilojule
+            /// We're making the assumption that no unit implies it's in `kcal`
+            return EnergyUnit.kcal.convert(amount, to: .kJ)
         }
     }
 

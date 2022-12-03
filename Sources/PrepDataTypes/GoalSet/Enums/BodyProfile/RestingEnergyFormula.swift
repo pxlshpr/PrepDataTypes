@@ -103,8 +103,9 @@ public extension RestingEnergyFormula {
         default:
             return nil
         }
-        let restingEnergy = energyUnit == .kJ ? energy * KcalsPerKilojule : energy
-        return max(restingEnergy, 0)
+        let restingEnergyInKcal = energyUnit.convert(energy, to: .kcal)
+//        let restingEnergyInKcal = energyUnit == .kJ ? energy / KjPerKcal : energy
+        return max(restingEnergyInKcal, 0)
     }
 
     func calculate(age: Int, weightInKg: Double, sexIsFemale: Bool, energyUnit: EnergyUnit) -> Double? {
@@ -125,8 +126,9 @@ public extension RestingEnergyFormula {
         default:
             return nil
         }
-        let restingEnergy = energyUnit == .kJ ? energy * KcalsPerKilojule : energy
-        return max(restingEnergy, 0)
+//        let restingEnergyInKcal = energyUnit == .kJ ? energy / KjPerKcal : energy
+        let restingEnergyInKcal = energyUnit.convert(energy, to: .kcal)
+        return max(restingEnergyInKcal, 0)
     }
     
     func calculate(age: Int, weightInKg: Double, heightInCm: Double, sexIsFemale: Bool, energyUnit: EnergyUnit) -> Double? {
@@ -162,8 +164,9 @@ public extension RestingEnergyFormula {
         default:
             return nil
         }
-        let restingEnergy = energyUnit == .kJ ? energy * KcalsPerKilojule : energy
-        return max(restingEnergy, 0)
+//        let restingEnergyInKcal = energyUnit == .kJ ? energy * KcalsPerKilojule : energy
+        let restingEnergyInKcal = energyUnit.convert(energy, to: .kcal)
+        return max(restingEnergyInKcal, 0)
     }
 }
 

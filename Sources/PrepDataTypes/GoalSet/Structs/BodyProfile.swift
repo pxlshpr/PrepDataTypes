@@ -166,7 +166,8 @@ public extension BodyProfile {
 
     func tdee(in energyUnit: EnergyUnit) -> Double? {
         guard let tdeeInKcal else { return nil }
-        return energyUnit == .kcal ? tdeeInKcal : tdeeInKcal * KcalsPerKilojule
+        return EnergyUnit.kcal.convert(tdeeInKcal, to: energyUnit)
+//        return energyUnit == .kcal ? tdeeInKcal : tdeeInKcal * KcalsPerKilojule
     }
 
     var tdee: Double? {
@@ -176,10 +177,11 @@ public extension BodyProfile {
     
     var tdeeInKcal: Double? {
         guard let tdee else { return nil }
-        if energyUnit == .kcal {
-            return tdee
-        } else {
-            return tdee / KcalsPerKilojule
-        }
+        return energyUnit.convert(tdee, to: .kcal)
+//        if energyUnit == .kcal {
+//            return tdee
+//        } else {
+//            return tdee / KcalsPerKilojule
+//        }
     }
 }

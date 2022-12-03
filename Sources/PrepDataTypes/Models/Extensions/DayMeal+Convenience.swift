@@ -17,10 +17,16 @@ public extension DayMeal {
 //        return nextPlannedMeal.id == id
     }
     
-    var energyAmount: Double {
-//        foodItems.reduce(0) { $0 + $1.energyAmount }
-        //TODO: Do energyAmount and fix this
-        foodItems.reduce(0) { x, y in  x + 0 }
+    var energyValueInKcal: Double {
+        foodItems.reduce(0) {
+            $0 + $1.scaledValueForEnergyInKcal
+        }
+    }
+    
+    func scaledValueForMacro(_ macro: Macro) -> Double {
+        foodItems.reduce(0) {
+            $0 + $1.scaledValueForMacro(macro)
+        }
     }
     
 //    var timeDate: Date {

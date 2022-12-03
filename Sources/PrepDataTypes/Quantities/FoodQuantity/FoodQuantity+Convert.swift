@@ -65,8 +65,7 @@ extension FoodQuantity {
             converted = food.quantityPerServing(of: size, with: volumePrefixUnit)
             
         case .serving:
-            /// We shouldn't encounter this
-            return nil
+            return 1
         }
         /// Now multiply it by the number of servings we're converting
         guard let converted else { return nil }

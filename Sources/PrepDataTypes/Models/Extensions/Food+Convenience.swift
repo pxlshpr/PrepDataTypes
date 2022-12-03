@@ -82,3 +82,10 @@ public extension Food {
         return false
     }
 }
+
+public extension Food {
+    func quantity(for amount: FoodValue) -> FoodQuantity? {
+        guard let unit = FoodQuantity.Unit(foodValue: amount, in: self) else { return nil }
+        return FoodQuantity(value: amount.value, unit: unit, food: self)
+    }
+}

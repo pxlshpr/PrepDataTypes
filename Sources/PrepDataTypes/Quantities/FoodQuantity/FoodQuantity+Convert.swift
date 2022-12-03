@@ -475,6 +475,11 @@ extension FoodQuantity.Size {
     /// Returns how many of the provided size are in 1 size of the size this is called upon.
     func quantityPerSize(of size: FoodQuantity.Size, in food: Food) -> Double? {
         
+        /// If we're in the size we're querying, return 1
+        guard size.id != self.id else {
+            return 1
+        }
+        
         guard unitValue > 0 else {
             return nil
         }

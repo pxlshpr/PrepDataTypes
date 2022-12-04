@@ -32,6 +32,9 @@ public extension Notification.Name {
     
     static var didAddMeal: Notification.Name { return .init("didAddMeal") }
     static var didDeleteMeal: Notification.Name { return .init("didDeleteMeal") }
+    
+    static var didUpdateDayWithBodyProfile: Notification.Name { return .init("didUpdateDayWithBodyProfile") }
+
 }
 
 public extension Notification {
@@ -47,5 +50,6 @@ public extension Notification {
         public static let meals = "meals"
         public static let food = "food"
         public static let foods = "foods"
+        public static let bodyProfile = "bodyProfile"
     }
 }

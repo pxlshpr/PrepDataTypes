@@ -62,3 +62,14 @@ public extension ClosedRange<Date> {
         return days
     }
 }
+
+//TODO: Revisit this
+public extension Date {
+    var isInWeeHours: Bool {
+        Calendar.current.component(.hour, from: self) <= 5
+    }
+    
+    var atEndOfWeeHours: Date {
+        Calendar.current.date(bySettingHour: 5, minute: 55, second: 00, of: self) ?? self
+    }
+}

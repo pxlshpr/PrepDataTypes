@@ -23,6 +23,8 @@ public extension Notification.Name {
     static var didAddFood: Notification.Name { return .init("didAddFood") }
 
     static var didUpdateMeals: Notification.Name { return .init("didUpdateMeals") }
+    static var didUpdateFoodItems: Notification.Name { return .init("didUpdateFoodItems") }
+    static var didUpdateGoalSets: Notification.Name { return .init("didUpdateGoalSets") }
     static var didUpdateFoods: Notification.Name { return .init("didUpdateFoods") }
     static var shouldRefreshMealsDiaryWindow: Notification.Name { return .init("shouldRefreshMealsDiaryWindow") }
     
@@ -41,7 +43,9 @@ public extension Notification {
     struct Keys {
         public static let uuid = "id"
         public static let foodItem = "foodItem"
+        public static let foodItems = "foodItems"
         public static let goalSet = "goalSet"
+        public static let goalSets = "goalSets"
         public static let date = "date"
         public static let summaryViewTypeRawValue = "summaryViewTypeRawValue"
         public static let sender = "sender"

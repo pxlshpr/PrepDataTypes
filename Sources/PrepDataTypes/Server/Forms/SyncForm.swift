@@ -36,12 +36,13 @@ extension SyncForm {
         /// ** Sliding window of days and its childrens to keep in sync **
         public let days: [Day]?
         public let meals: [Meal]?
-        public let foodItems: [FoodItem]?
         public let quickMealItems: [QuickMealItem]?
 
         /// ** User Foods owned kept in sync **
         public let foods: [Food]?
         
+        public let foodItems: [FoodItem]?
+
         public init(
             user: User? = nil,
             days: [Day]? = nil,

@@ -11,15 +11,25 @@ public struct MealFoodItem: Identifiable, Hashable, Codable {
     public var markedAsEatenAt: Double?
     public var sortPosition: Int
 
+    public var isSoftDeleted: Bool
+
 //    public let parentFood: Food?
 //    public var meal: Meal?
 
-    public init(id: UUID = UUID(), food: Food, amount: FoodValue, markedAsEatenAt: Double? = nil, sortPosition: Int = 0) {
+    public init(
+        id: UUID = UUID(),
+        food: Food,
+        amount: FoodValue,
+        markedAsEatenAt: Double? = nil,
+        sortPosition: Int = 0,
+        isSoftDeleted: Bool
+    ) {
         self.id = id
         self.food = food
         self.amount = amount
         self.markedAsEatenAt = markedAsEatenAt
         self.sortPosition = sortPosition
+        self.isSoftDeleted = isSoftDeleted
     }
 }
 
@@ -30,7 +40,8 @@ public extension MealFoodItem {
             food: foodItem.food,
             amount: foodItem.amount,
             markedAsEatenAt: foodItem.markedAsEatenAt,
-            sortPosition: foodItem.sortPosition
+            sortPosition: foodItem.sortPosition,
+            isSoftDeleted: foodItem.deletedAt != nil && foodItem.deletedAt! > 0
         )
     }
 }

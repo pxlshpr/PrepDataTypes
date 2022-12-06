@@ -54,6 +54,7 @@ public extension Notification {
         public static let sender = "sender"
         public static let url = "url"
         public static let meal = "meal"
+        public static let dayMeal = "dayMeal"
         public static let meals = "meals"
         public static let food = "food"
         public static let foods = "foods"

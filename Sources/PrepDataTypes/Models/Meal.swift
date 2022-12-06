@@ -51,3 +51,9 @@ public extension Meal {
         return first.sortPosition + 1
     }
 }
+
+public extension Meal {
+    var isDeleted: Bool {
+        deletedAt != nil && deletedAt! > 0
+    }
+}

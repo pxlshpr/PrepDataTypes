@@ -50,3 +50,8 @@ public struct Food: Identifiable, Hashable, Codable {
     }
 }
 
+public extension Food {
+    var isDeleted: Bool {
+        deletedAt != nil && deletedAt! > 0
+    }
+}

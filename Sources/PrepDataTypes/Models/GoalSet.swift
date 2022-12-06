@@ -40,6 +40,12 @@ public extension GoalSet {
     }
 }
 
+public extension GoalSet {
+    var isDeleted: Bool {
+        deletedAt != nil && deletedAt! > 0
+    }
+}
+
 //MARK: - Implicit (Auto-generated) Goals
 
 public extension GoalSet {

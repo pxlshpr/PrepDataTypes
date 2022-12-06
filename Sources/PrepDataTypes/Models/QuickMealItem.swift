@@ -12,3 +12,9 @@ public struct QuickMealItem: Identifiable, Hashable, Codable {
     public var updatedAt: Double
     public var deletedAt: Double?
 }
+
+public extension QuickMealItem {
+    var isDeleted: Bool {
+        deletedAt != nil && deletedAt! > 0
+    }
+}

@@ -38,3 +38,9 @@ public struct FoodItem: Identifiable, Hashable, Codable {
         self.deletedAt = deletedAt
     }
 }
+
+public extension FoodItem {
+    var isDeleted: Bool {
+        deletedAt != nil && deletedAt! > 0
+    }
+}

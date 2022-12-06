@@ -35,6 +35,7 @@ public extension Notification.Name {
     static var didDeleteFoodItemFromMeal: Notification.Name { return .init("didDeleteFoodItemFromMeal") }
     
     static var didAddMeal: Notification.Name { return .init("didAddMeal") }
+    static var didUpdateMeal: Notification.Name { return .init("didUpdateMeal") }
     static var didDeleteMeal: Notification.Name { return .init("didDeleteMeal") }
     
     static var didUpdateDayWithBodyProfile: Notification.Name { return .init("didUpdateDayWithBodyProfile") }

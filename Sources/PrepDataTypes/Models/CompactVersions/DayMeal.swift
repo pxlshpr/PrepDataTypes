@@ -41,3 +41,41 @@ public extension DayMeal {
         )
     }
 }
+
+//MARK: Move these into their own
+
+public enum MealsDiaryAction {
+    case addMeal(Date?)
+    case editMeal(DayMeal)
+    case addFood(DayMeal)
+    case editFoodItem(MealFoodItem, DayMeal)
+    case toggleCompletion(MealFoodItem, DayMeal)
+}
+
+public enum HomeViewFullScreenSheet: String, Identifiable {
+    case foodForm
+    case search
+    case mealFoodItemEdit
+    
+    public var id: String {
+        rawValue
+    }
+}
+
+public enum HomeViewSheet: String, Identifiable {
+    case barcodeScanner
+    case foodLabelCamera
+    case addMeal
+    case mealEdit
+    case settings
+    case useTemplate
+    case myFoods
+    case diets
+    case mealTypes
+    case bodyProfileForm
+    case daySummary
+    
+    public var id: String {
+        rawValue
+    }
+}

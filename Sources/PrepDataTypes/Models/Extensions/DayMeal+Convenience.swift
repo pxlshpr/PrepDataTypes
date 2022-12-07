@@ -3,8 +3,9 @@ import Foundation
 public extension DayMeal {
     
     var isCompleted: Bool {
-        markedAsEatenAt != nil
-        && markedAsEatenAt != 0
+        foodItems.allSatisfy({ $0.isCompleted })
+        //TODO: Do we need this per meal?
+//        markedAsEatenAt != nil && markedAsEatenAt != 0
     }
 
     var isNextPlannedMeal: Bool {

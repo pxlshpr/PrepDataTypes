@@ -45,3 +45,9 @@ public extension MealFoodItem {
         )
     }
 }
+
+public extension MealFoodItem {
+    var isCompleted: Bool {
+        markedAsEatenAt != nil && markedAsEatenAt! > 0
+    }
+}

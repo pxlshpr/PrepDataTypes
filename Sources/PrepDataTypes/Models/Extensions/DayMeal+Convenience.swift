@@ -3,7 +3,7 @@ import Foundation
 public extension DayMeal {
     
     var isCompleted: Bool {
-        foodItems.allSatisfy({ $0.isCompleted })
+        !foodItems.isEmpty && foodItems.allSatisfy({ $0.isCompleted })
         //TODO: Do we need this per meal?
 //        markedAsEatenAt != nil && markedAsEatenAt != 0
     }
@@ -30,11 +30,9 @@ public extension DayMeal {
         }
     }
     
-//    var timeDate: Date {
-//        get { Date(timeIntervalSince1970: TimeInterval(time)) }
-//        set { time = Int64(newValue.timeIntervalSince1970) }
-//    }
-
+    var timeDate: Date {
+        Date(timeIntervalSince1970: time)
+    }
 }
 
 

@@ -62,6 +62,7 @@ public enum NutrientType: Int16, CaseIterable, Codable {
     case gluten
     case starch
     case salt
+    case creatine
     
     /// **For internal-use only**
     case energyWithoutDietaryFibre
@@ -120,7 +121,7 @@ extension NutrientType {
             return .minerals
         case .vitaminA, .vitaminB1_thiamine, .vitaminB2_riboflavin, .vitaminB3_niacin, .vitaminB5_pantothenicAcid, .vitaminB6_pyridoxine, .vitaminB7_biotin, .vitaminB9_folate, .vitaminB9_folicAcid, .vitaminB12_cobalamin, .vitaminC_ascorbicAcid, .vitaminD_calciferol, .vitaminE, .vitaminK1_phylloquinone, .vitaminK2_menaquinone:
             return .vitamins
-        case .caffeine, .ethanol, .taurine, .polyols, .gluten, .starch, .salt, .choline:
+        case .caffeine, .ethanol, .taurine, .polyols, .gluten, .starch, .salt, .choline, .creatine:
             return .misc
         default:
             return nil
@@ -191,13 +192,14 @@ extension NutrientType {
             .vitaminK1_phylloquinone,
             .vitaminK2_menaquinone,
             .caffeine,
+            .choline,
+            .creatine,
             .ethanol,
             .gluten,
             .polyols,
             .salt,
             .starch,
             .taurine,
-            .choline,
         ]
         guard let index = orderedArray.firstIndex(of: self) else {
             return 0
@@ -482,6 +484,8 @@ extension NutrientType {
             return "Starch"
         case .salt:
             return "Salt"
+        case .creatine:
+            return "Creatine"
             
         case .choline:
             return "Choline"
@@ -630,6 +634,8 @@ extension NutrientType {
             return nil
         case .starch:
             return nil
+        case .creatine:
+            return (3, .g)
             
         case .salt:
             /// https://www.hsph.harvard.edu/nutritionsource/salt-and-sodium/
@@ -778,6 +784,9 @@ extension NutrientType {
         case .salt:
             /// multiplying sodium by 2.5
             return (5.75, .g)
+        case .creatine:
+            return (5, .g)
+            
         default:
             return nil
         }

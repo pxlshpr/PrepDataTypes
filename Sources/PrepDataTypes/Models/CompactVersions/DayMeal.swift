@@ -83,4 +83,9 @@ public enum HomeViewSheet: String, Identifiable {
 public struct FastingTimerState {
     public var lastMealTime: Date
     public var nextMealTime: Date?
+    
+    public init(lastMealTime: Date, nextMealTime: Date? = nil) {
+        self.lastMealTime = lastMealTime
+        self.nextMealTime = nextMealTime
+    }
 }

@@ -30,13 +30,18 @@ public extension FastingTimerState {
     }
 
     var nextUp: (String, String, Date, Double)? {
-        if let nextMeal, let progressToNextMeal {
-            return ("🍽", nextMeal.name, Date(timeIntervalSince1970: nextMeal.time), progressToNextMeal)
+        if let nextMeal, let progressToNextMeal, let nextMealMilestoneEmoji {
+            return (nextMealMilestoneEmoji, nextMeal.name, Date(timeIntervalSince1970: nextMeal.time), progressToNextMeal)
         }
         if let nextMilestone, let nextMilestoneTime, let progressToNextMilestone {
             return (nextMilestone.emoji, nextMilestone.name, nextMilestoneTime, progressToNextMilestone)
         }
         return nil
+    }
+    
+    var nextMealMilestoneEmoji: String? {
+        guard let timeIntervalFromLastMealToNextMeal else { return nil }
+        return FastingMilestone(timeInterval: timeIntervalFromLastMealToNextMeal).emoji
     }
     
     var nextMilestoneTime: Date? {

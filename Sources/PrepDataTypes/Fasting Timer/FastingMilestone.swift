@@ -21,7 +21,13 @@ public enum FastingMilestone: Int, CaseIterable {
     }
     
     public init(time: Date) {
-        let hours = Int(Date().timeIntervalSince(time) / 3600.0)
+//        let hours = Int(Date().timeIntervalSince(time) / 3600.0)
+//        self.init(hours: hours)
+        self.init(timeInterval: Date().timeIntervalSince(time))
+    }
+    
+    public init(timeInterval: TimeInterval) {
+        let hours = Int(timeInterval / 3600.0)
         self.init(hours: hours)
     }
 }

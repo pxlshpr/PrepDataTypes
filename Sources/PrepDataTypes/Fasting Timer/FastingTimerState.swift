@@ -1,6 +1,6 @@
 import Foundation
 
-public struct FastingTimerState {
+public struct FastingTimerState: Codable, Hashable {
     public var lastMealTime: Date
     public var nextMealTime: Date?
     

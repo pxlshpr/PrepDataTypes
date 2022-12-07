@@ -79,3 +79,8 @@ public enum HomeViewSheet: String, Identifiable {
         rawValue
     }
 }
+
+public struct FastingTimerState {
+    public var lastMealTime: Date
+    public var nextMealTime: Date?
+}

@@ -77,6 +77,14 @@ public extension FastingMilestone {
         }
     }
     
+    var prefix: String {
+        switch self {
+        case .anabolic, .catabolic, .ketosis, .heavyKetosis:
+            return "in"
+        case .autophagy, .peakHGH, .minimumInsulin, .immuneRegeneration:
+            return "reached"
+        }
+    }
     var name: String {
         switch self {
         case .anabolic:

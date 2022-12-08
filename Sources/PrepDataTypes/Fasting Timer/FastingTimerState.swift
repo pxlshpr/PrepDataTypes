@@ -2,11 +2,13 @@ import Foundation
 
 public struct FastingTimerState: Codable, Hashable {
     public var lastMealTime: Date
-    public var nextMeal: DayMeal?
-    
+    public var nextMealName: String?
+    public var nextMealTime: Date?
+
     public init(lastMealTime: Date, nextMeal: DayMeal? = nil) {
         self.lastMealTime = lastMealTime
-        self.nextMeal = nextMeal
+        self.nextMealName = nextMeal?.name
+        self.nextMealTime = nextMeal?.timeDate
     }
 }
 
@@ -30,8 +32,8 @@ public extension FastingTimerState {
     }
 
     var nextUp: (String, String, Date, Double)? {
-        if let nextMeal, let progressToNextMeal, let nextMealMilestoneEmoji {
-            return (nextMealMilestoneEmoji, nextMeal.name, Date(timeIntervalSince1970: nextMeal.time), progressToNextMeal)
+        if let nextMealName, let nextMealTime, let progressToNextMeal, let nextMealMilestoneEmoji {
+            return (nextMealMilestoneEmoji, nextMealName, nextMealTime, progressToNextMeal)
         }
         if let nextMilestone, let nextMilestoneTime, let progressToNextMilestone {
             return (nextMilestone.emoji, nextMilestone.name, nextMilestoneTime, progressToNextMilestone)
@@ -84,8 +86,8 @@ public extension FastingTimerState {
     }
     
     var timeIntervalFromLastMealToNextMeal: TimeInterval? {
-        guard let nextMeal else { return nil }
-        return nextMeal.timeDate.timeIntervalSince(lastMealTime)
+        guard let nextMealTime else { return nil }
+        return nextMealTime.timeIntervalSince(lastMealTime)
     }
 
     var progressToNextMeal: Double? {

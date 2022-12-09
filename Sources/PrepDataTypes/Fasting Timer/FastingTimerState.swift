@@ -15,6 +15,18 @@ public struct FastingTimerState: Codable, Hashable {
 
     public init(
         lastMealTime: Date,
+        nextMealName: String? = nil,
+        nextMealTime: Date?,
+        countdownType: FastingTimerCountdownType = .nextMeal
+    ) {
+        self.lastMealTime = lastMealTime
+        self.nextMealName = nextMealName
+        self.nextMealTime = nextMealTime
+        self.countdownType = countdownType
+    }
+
+    public init(
+        lastMealTime: Date,
         nextMeal: DayMeal? = nil,
         countdownType: FastingTimerCountdownType = .nextMeal
     ) {

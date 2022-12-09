@@ -55,6 +55,17 @@ public extension FastingTimerState {
     var height: CGFloat {
         haveNextUp ? 140 : 70
     }
+    
+    var elapsedHoursFromLastMilestone: Int {
+        Int(elapsedFromLastMilestone / 3600)
+    }
+    
+    var elapsedHoursFromLastMilestoneIfAfterFirst: Int? {
+        guard
+            lastMilestone != .anabolic
+        else { return nil }
+        return elapsedHoursFromLastMilestone
+    }
 
     var nextUp: (String, String, Date, Double)? {
         if let nextMealName, let nextMealTime, let progressToNextMeal, let nextMealMilestoneEmoji {

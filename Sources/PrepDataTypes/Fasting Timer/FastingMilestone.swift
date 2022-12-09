@@ -59,13 +59,13 @@ public extension FastingMilestone {
     var emoji: String {
         switch self {
         case .anabolic:
-            return "🛠"
+            return "🔋" //🛠😋
         case .catabolic:
-            return "⚡️"
+            return "🪫" //⚡️
         case .ketosis:
-            return "🔥"   //"🥑"
+            return "🔥" //🥑
         case .heavyKetosis:
-            return "🌋"   //"🔥"
+            return "💥" //🌋🔥
         case .autophagy:
             return "♻️"
         case .peakHGH:
@@ -139,7 +139,7 @@ public extension FastingMilestone {
     var detail: String {
         switch self {
         case .anabolic:
-            return "This is when our body is digesting or absorbing food."
+            return "This is when your body is digesting or absorbing food."
         case .catabolic:
             return "As your blood glucose continues to drop, stored nutrients like glycogen and fat are being put to use."
         case .ketosis:

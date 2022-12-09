@@ -32,7 +32,8 @@ extension SyncForm {
         /// ** Always synced **
         public let user: User?
         public let goalSets: [GoalSet]?
-        
+        public let fastingActivities: [FastingActivity]?
+
         /// ** Sliding window of days and its childrens to keep in sync **
         public let days: [Day]?
         public let meals: [Meal]?
@@ -42,7 +43,7 @@ extension SyncForm {
         public let foods: [Food]?
         
         public let foodItems: [FoodItem]?
-
+        
         public init(
             user: User? = nil,
             days: [Day]? = nil,
@@ -50,7 +51,8 @@ extension SyncForm {
             foodItems: [FoodItem]? = nil,
             goalSets: [GoalSet]? = nil,
             meals: [Meal]? = nil,
-            quickMealItems: [QuickMealItem]? = nil
+            quickMealItems: [QuickMealItem]? = nil,
+            fastingActivities: [FastingActivity]? = nil
         ) {
             self.user = user
             self.days = days
@@ -59,10 +61,12 @@ extension SyncForm {
             self.goalSets = goalSets
             self.meals = meals
             self.quickMealItems = quickMealItems
+            self.fastingActivities = fastingActivities
         }
     }
 }
 
+//TODO: Remove this
 extension SyncForm {
     public struct Deletions: Codable {
         public let dayIds: [String]?

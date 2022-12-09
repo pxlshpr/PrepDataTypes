@@ -53,6 +53,7 @@ public struct FastingActivity: Identifiable, Hashable, Codable {
     }
 }
 
+
 public extension FastingActivity {
     var isDeleted: Bool {
         deletedAt != nil && deletedAt! > 0

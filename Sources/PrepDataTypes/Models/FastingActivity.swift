@@ -34,6 +34,23 @@ public struct FastingActivity: Identifiable, Hashable, Codable {
         self.updatedAt = updatedAt
         self.deletedAt = deletedAt
     }
+    
+    public init(
+        fastingTimerState: FastingTimerState,
+        pushToken: String
+    ) {
+        self.init(
+            id: UUID(),
+            pushToken: pushToken,
+            lastMealAt: fastingTimerState.lastMealTime.timeIntervalSince1970,
+            nextMealAt: fastingTimerState.nextMealTime?.timeIntervalSince1970,
+            nextMealName: fastingTimerState.nextMealName,
+            countdownType: fastingTimerState.countdownType,
+            syncStatus: .notSynced,
+            updatedAt: Date().timeIntervalSince1970,
+            deletedAt: nil
+        )
+    }
 }
 
 public extension FastingActivity {

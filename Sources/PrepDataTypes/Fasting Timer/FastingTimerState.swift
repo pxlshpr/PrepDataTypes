@@ -1,23 +1,27 @@
 import Foundation
 
+public enum FastingTimerCountdownType: Int16, Codable {
+    case nextMeal
+    case nextMilestone
+    case none
+}
+
 public struct FastingTimerState: Codable, Hashable {
     public var lastMealTime: Date
     public var nextMealName: String?
     public var nextMealTime: Date?
     
-    /// If set to true, uses `nextMealName` and `nextMealTime` (if available) instead of the next `FastingMilestone`
-    /// when displaying the progress bar and the countdown. Otherwise, always uses the next `FastingMilestone`.
-    public var showRemainingTimeToNextMealWhenAvailable: Bool
+    public var countdownType: FastingTimerCountdownType
 
     public init(
         lastMealTime: Date,
         nextMeal: DayMeal? = nil,
-        showRemainingTimeToNextMealWhenAvailable: Bool = true
+        countdownType: FastingTimerCountdownType = .nextMeal
     ) {
         self.lastMealTime = lastMealTime
         self.nextMealName = nextMeal?.name
         self.nextMealTime = nextMeal?.timeDate
-        self.showRemainingTimeToNextMealWhenAvailable = showRemainingTimeToNextMealWhenAvailable
+        self.countdownType = countdownType
     }
 }
 

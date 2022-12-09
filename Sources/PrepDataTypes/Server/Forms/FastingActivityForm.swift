@@ -1,6 +1,6 @@
 import Foundation
 
-public struct FastingTimerForm: Codable {
+public struct FastingActivityForm: Codable {
 
     public let lastMealAt: Double?
     public let nextMealName: String?

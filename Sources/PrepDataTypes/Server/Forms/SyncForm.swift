@@ -153,6 +153,7 @@ public extension SyncForm.Updates {
         if let goalSets { count += goalSets.count }
         if let meals { count += meals.count }
         if let quickMealItems { count += quickMealItems.count }
+        if let fastingActivities { count += fastingActivities.count }
         return count
     }
 }

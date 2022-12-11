@@ -69,7 +69,8 @@ public extension FastingTimerState {
 
     var nextUp: (String, String, Date, Double)? {
         if let nextMealName, let nextMealTime, let progressToNextMeal, let nextMealMilestoneEmoji {
-            return (nextMealMilestoneEmoji, nextMealName, nextMealTime, progressToNextMeal)
+//            return (nextMealMilestoneEmoji, nextMealName, nextMealTime, progressToNextMeal)
+            return ("🍽", nextMealName, nextMealTime, progressToNextMeal)
         }
         if let nextMilestone, let nextMilestoneTime, let progressToNextMilestone {
             return (nextMilestone.emoji, nextMilestone.name, nextMilestoneTime, progressToNextMilestone)

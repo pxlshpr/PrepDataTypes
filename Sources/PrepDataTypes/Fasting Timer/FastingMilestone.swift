@@ -59,9 +59,9 @@ public extension FastingMilestone {
     var emoji: String {
         switch self {
         case .anabolic:
-            return "😋" //🔋🛠
+            return "🍽" //😋🔋🛠
         case .catabolic:
-            return "🪫" //⚡️
+            return "🔋" //🪫⚡️
         case .ketosis:
             return "🔥" //🥑
         case .heavyKetosis:

@@ -88,9 +88,9 @@ public extension FastingMilestone {
     var name: String {
         switch self {
         case .anabolic:
-            return "Anabolic Phase"
+            return "Anabolic State"
         case .catabolic:
-            return "Catabolic Phase"
+            return "Catabolic State"
         case .ketosis:
             return "Ketosis"
         case .heavyKetosis:

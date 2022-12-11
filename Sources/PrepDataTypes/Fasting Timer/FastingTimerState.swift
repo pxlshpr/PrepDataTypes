@@ -43,8 +43,23 @@ extension FastingMilestone {
     }
 }
 
-public extension FastingTimerState {
+public struct FastingActivityNextUp {
+    public let emoji: String
+    
+    public let time: Date?
+    public let name: String?
+    public let progress: Double
 
+    public let startTime: Date
+    
+    public var shouldShowDays: Bool {
+        guard let time else { return true }
+        return time.numberOfDaysFrom(startTime) > 0
+    }
+}
+
+public extension FastingTimerState {
+    
     var lastMilestoneTime: Date {
         lastMilestone.time(from: lastMealTime)
     }
@@ -66,16 +81,65 @@ public extension FastingTimerState {
         else { return nil }
         return elapsedHoursFromLastMilestone
     }
+    
+    var nextUp: FastingActivityNextUp {
+        if let nextMealName, let nextMealTime, let progressToNextMeal {
+            return .init(
+                emoji: "🍽",
+                time: nextMealTime,
+                name: nextMealName,
+                progress: progressToNextMeal,
+                startTime: lastMealTime
+            )
+        } else if let nextMilestone, let nextMilestoneTime, let progressToNextMilestone {
+            return .init(
+                emoji: nextMilestone.emoji,
+                time: nextMilestoneTime,
+                name: nextMilestone.name,
+                progress: progressToNextMilestone,
+                startTime: lastMealTime
+            )
+        } else {
+            return .init(
+                emoji: "🌈",
+                time: nil,
+                name: nil,
+                progress: 1.0,
+                startTime: lastMealTime
+            )
+        }
+    }
 
-    var nextUp: (String, String, Date, Double)? {
-        if let nextMealName, let nextMealTime, let progressToNextMeal, let nextMealMilestoneEmoji {
-//            return (nextMealMilestoneEmoji, nextMealName, nextMealTime, progressToNextMeal)
-            return ("🍽", nextMealName, nextMealTime, progressToNextMeal)
+    var nextUp_legacy: (String, String, Date, Double, Bool, Date)? {
+        if let nextMealName, let nextMealTime, let progressToNextMeal {
+            return (
+                "🍽",
+                nextMealName,
+                nextMealTime,
+                progressToNextMeal,
+                nextMealTime.numberOfDaysFrom(lastMealTime) > 0,
+                lastMealTime
+            )
         }
         if let nextMilestone, let nextMilestoneTime, let progressToNextMilestone {
-            return (nextMilestone.emoji, nextMilestone.name, nextMilestoneTime, progressToNextMilestone)
+            return (
+                nextMilestone.emoji,
+                nextMilestone.name,
+                nextMilestoneTime,
+                progressToNextMilestone,
+                nextMilestoneTime.numberOfDaysFrom(lastMealTime) > 0,
+                lastMealTime
+            )
+        } else {
+            return (
+                "🌈",
+                "No more",
+                Date(),
+                1.0,
+                true,
+                lastMealTime
+            )
         }
-        return nil
     }
     
     var nextMealMilestoneEmoji: String? {
@@ -113,7 +177,7 @@ public extension FastingTimerState {
     var progress: Double {
         progressToNextMeal ?? progressToNextMilestone ?? 1.0
     }
-    
+
     var lastMilestone: FastingMilestone {
         FastingMilestone(hours: numberOfHours)
     }
@@ -133,7 +197,11 @@ public extension FastingTimerState {
     }
     
     var progressToNextMilestone: Double? {
-        guard let timeIntervalToNextMilestone = lastMilestone.timeIntervalToNextMilestone else { return nil }
-        return elapsedFromLastMilestone / timeIntervalToNextMilestone
+//        guard let timeIntervalToNextMilestone = lastMilestone.timeIntervalToNextMilestone else { return nil }
+//        return elapsedFromLastMilestone / timeIntervalToNextMilestone
+        
+        guard let nextMilestone = nextMilestone else { return nil }
+        let timeInterval = nextMilestone.startTimeInterval
+        return elapsed / timeInterval
     }
 }

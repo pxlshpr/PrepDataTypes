@@ -1,6 +1,6 @@
 import Foundation
 
-public struct USDAFoodForm: Codable {
+public struct PresetFoodForm: Codable {
     public let id: String
     public let food: Food
 }

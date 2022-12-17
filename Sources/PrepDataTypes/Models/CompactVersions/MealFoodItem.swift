@@ -1,4 +1,5 @@
 import Foundation
+import SwiftSugar
 
 /// This is a summarised version of a `FoodItem` to be placed inside a `Meal` object
 /// It is stripped off the relation back to the `Meal` so as to not clear a cyclical recursion error,
@@ -12,6 +13,7 @@ public struct MealFoodItem: Identifiable, Hashable, Codable {
     public var sortPosition: Int
 
     public var isSoftDeleted: Bool
+    public var macrosIndicatorWidth: CGFloat
 
 //    public let parentFood: Food?
 //    public var meal: Meal?
@@ -22,7 +24,8 @@ public struct MealFoodItem: Identifiable, Hashable, Codable {
         amount: FoodValue,
         markedAsEatenAt: Double? = nil,
         sortPosition: Int = 0,
-        isSoftDeleted: Bool
+        isSoftDeleted: Bool,
+        macrosIndicatorWidth: CGFloat = 0
     ) {
         self.id = id
         self.food = food
@@ -30,6 +33,7 @@ public struct MealFoodItem: Identifiable, Hashable, Codable {
         self.markedAsEatenAt = markedAsEatenAt
         self.sortPosition = sortPosition
         self.isSoftDeleted = isSoftDeleted
+        self.macrosIndicatorWidth = macrosIndicatorWidth
     }
 }
 

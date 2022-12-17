@@ -11,6 +11,8 @@ public struct DayMeal: Identifiable, Hashable, Codable {
     public var markedAsEatenAt: Double?
     public var goalSet: GoalSet?
     public var foodItems: [MealFoodItem]
+    
+    public var macrosIndicatorWidth: CGFloat
 
     public init(
         id: UUID = UUID(),
@@ -18,7 +20,8 @@ public struct DayMeal: Identifiable, Hashable, Codable {
         time: Double,
         markedAsEatenAt: Double? = nil,
         goalSet: GoalSet? = nil,
-        foodItems: [MealFoodItem] = []
+        foodItems: [MealFoodItem] = [],
+        macrosIndicatorWidth: CGFloat = 0
     ) {
         self.id = id
         self.name = name
@@ -26,6 +29,7 @@ public struct DayMeal: Identifiable, Hashable, Codable {
         self.markedAsEatenAt = markedAsEatenAt
         self.goalSet = goalSet
         self.foodItems = foodItems
+        self.macrosIndicatorWidth = macrosIndicatorWidth
     }
 }
 
@@ -37,7 +41,74 @@ public extension DayMeal {
             time: meal.time,
             markedAsEatenAt: meal.markedAsEatenAt,
             goalSet: meal.goalSet,
-            foodItems: meal.foodItems
+            foodItems: meal.foodItems,
+            macrosIndicatorWidth: meal.macrosIndicatorWidth
         )
     }
+}
+
+public extension Meal {
+    var macrosIndicatorWidth: CGFloat {
+        day.macrosIndicatorWidth(for: energyValueInKcal)
+    }
+    
+    var energyValueInKcal: Double {
+        foodItems.reduce(0) {
+            $0 + $1.scaledValueForEnergyInKcal
+        }
+    }
+}
+
+public extension Day {
+    func macrosIndicatorWidth(for energyInKcal: CGFloat) -> CGFloat {
+        calculateMacrosIndicatorWidth(
+            for: energyInKcal,
+            largest: largestEnergyInKcal,
+            smallest: smallestEnergyInKcal
+        )
+    }
+    
+    var energyValuesInKcalDecreasing: [Double] {
+        meals
+            .filter { !$0.foodItems.isEmpty }
+            .map { $0.energyValueInKcal }
+            .sorted { $0 > $1 }
+    }
+    var largestEnergyInKcal: Double {
+        energyValuesInKcalDecreasing.first ?? 0
+    }
+    
+    var smallestEnergyInKcal: Double {
+        energyValuesInKcalDecreasing.last ?? 0
+    }
+}
+
+public func calculateMacrosIndicatorWidth(
+    for value: Double,
+    largest: Double,
+    smallest: Double,
+    maxWidth: CGFloat = 150
+) -> CGFloat {
+    
+    let DefaultWidth: CGFloat = 30
+
+    let min = DefaultWidth
+    let max: CGFloat = maxWidth
+    
+    guard largest > 0, smallest > 0, value <= largest, value >= smallest else {
+        return DefaultWidth
+    }
+    
+    /// First try and scale values such that smallest value gets the DefaultWidth and everything else scales accordingly
+    /// But first see if this results in the largest value crossing the MaxWidth, and if so
+    guard (largest/smallest) * min <= max else {
+        /// scale values such that largest value gets the MaxWidth and everything else scales accordingly
+        let percent = value/largest
+        let width = percent * max
+        return width
+    }
+    
+    let percent = value/smallest
+    let width = percent * min
+    return width
 }

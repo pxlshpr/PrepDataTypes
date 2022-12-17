@@ -33,21 +33,6 @@ public extension FoodItem {
 }
 
 public extension Meal {
-    var isNextPlannedMeal: Bool {
-        return false
-//        guard let day = day,
-//              day.isToday,
-//              let nextPlannedMeal = day.nextPlannedMeal else {
-//            return false
-//        }
-//        return nextPlannedMeal.id == id
-    }
-    
-    var energyAmount: Double {
-        //TODO: Do this
-//        foodItems.reduce(0) { $0 + $1.energyAmount }
-        foodItems.reduce(0) { x, y in x + 0 }
-    }
     
 #if os(iOS)
     var timeString: String {

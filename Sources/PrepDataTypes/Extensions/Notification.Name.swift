@@ -40,7 +40,6 @@ public extension Notification.Name {
     
     static var didUpdateDayWithBodyProfile: Notification.Name { return .init("didUpdateDayWithBodyProfile") }
 
-    static var didCalculateFoodItemMacrosIndicatorWidth: Notification.Name { return .init("didCalculateFoodItemMacrosIndicatorWidth") }
     static var didCalculateMealMacrosIndicatorWidth: Notification.Name { return .init("didCalculateMealMacrosIndicatorWidth") }
 }
 
@@ -61,7 +60,5 @@ public extension Notification {
         public static let food = "food"
         public static let foods = "foods"
         public static let bodyProfile = "bodyProfile"
-        
-        public static let macrosIndicatorWidth = "macrosIndicatorWidth"
     }
 }

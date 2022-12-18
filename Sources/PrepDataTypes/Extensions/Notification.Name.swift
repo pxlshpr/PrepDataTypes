@@ -6,7 +6,7 @@ public extension Notification.Name {
     static var weekPagerDidChangeDate: Notification.Name { return .init("weekPagerDidChangeDate") }
     
     static var diarySummaryDetentChangedToMedium: Notification.Name { return .init("diarySummaryDetentChangedToMedium") }
-
+    
     /// To move to PrepDataTypes
     static var dateDidChange: Notification.Name { return .init("dateDidChange") }
     static var diaryWillChangeDate: Notification.Name { return .init("diaryWillChangeDate") }
@@ -21,13 +21,13 @@ public extension Notification.Name {
     /// Backend related
     static var didUpdateUser: Notification.Name { return .init("didUpdateUser") }
     static var didAddFood: Notification.Name { return .init("didAddFood") }
-
+    
     static var didUpdateMeals: Notification.Name { return .init("didUpdateMeals") }
     static var didUpdateFoodItems: Notification.Name { return .init("didUpdateFoodItems") }
     static var didUpdateGoalSets: Notification.Name { return .init("didUpdateGoalSets") }
     static var didUpdateFoods: Notification.Name { return .init("didUpdateFoods") }
     static var didUpdateDays: Notification.Name { return .init("didUpdateDays") }
-
+    
     static var shouldRefreshMealsDiaryWindow: Notification.Name { return .init("shouldRefreshMealsDiaryWindow") }
     
     static var didUpdateMealFoodItem: Notification.Name { return .init("didUpdateMealFoodItem") }
@@ -39,8 +39,14 @@ public extension Notification.Name {
     static var didDeleteMeal: Notification.Name { return .init("didDeleteMeal") }
     
     static var didUpdateDayWithBodyProfile: Notification.Name { return .init("didUpdateDayWithBodyProfile") }
-
+    
     static var didCalculateMealMacrosIndicatorWidth: Notification.Name { return .init("didCalculateMealMacrosIndicatorWidth") }
+
+    static var didInvalidateBadgeWidths: Notification.Name { return .init("didInvalidateBadgeWidths") }
+    
+    static var didBeginDraggingNutrientsSummaryPager: Notification.Name { return .init("didBeginDraggingNutrientsSummaryPager") }
+    static var didEndDraggingNutrientsSummaryPager: Notification.Name { return .init("didEndDraggingNutrientsSummaryPager") }
+
 }
 
 public extension Notification {
@@ -60,5 +66,7 @@ public extension Notification {
         public static let food = "food"
         public static let foods = "foods"
         public static let bodyProfile = "bodyProfile"
+        
+        public static let mealId = "mealId"
     }
 }

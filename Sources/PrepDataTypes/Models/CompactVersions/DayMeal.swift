@@ -83,12 +83,17 @@ public extension Day {
     }
 }
 
+//TODO: Move this out of DataTypes into PrepViews.FoodBadge
+import SwiftUI
+
 public func calculateMacrosIndicatorWidth(
     for value: Double,
     largest: Double,
     smallest: Double,
-    maxWidth: CGFloat = 150
+    maxWidth: CGFloat? = nil
 ) -> CGFloat {
+    
+    let maxWidth = maxWidth ?? (0.34883721 * UIScreen.main.bounds.width)
     
     let DefaultWidth: CGFloat = 30
 

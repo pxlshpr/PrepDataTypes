@@ -55,3 +55,35 @@ public extension Food {
         deletedAt != nil && deletedAt! > 0
     }
 }
+
+public extension Food {
+    var primaryMacro: Macro {
+        let carb = info.nutrients.carb
+        let fat = info.nutrients.fat
+        let protein = info.nutrients.protein
+        let carbCalories = carb * 4.0
+        let fatCalories = fat * 9.0
+        let proteinCalories = protein * 4.0
+        if carbCalories > fatCalories && carbCalories > proteinCalories {
+            return .carb
+        }
+        if fatCalories > carbCalories && fatCalories > proteinCalories {
+            return .fat
+        }
+//        if proteinCalories > fatCalories && proteinCalories > carbCalories {
+//            return .protein
+//        }
+        return .protein
+    }
+    
+    var hasDetail: Bool {
+        detail != nil && !detail!.isEmpty
+    }
+    var hasBrand: Bool {
+        brand != nil && !brand!.isEmpty
+    }
+
+    var hasDetails: Bool {
+        hasDetail || hasBrand
+    }
+}

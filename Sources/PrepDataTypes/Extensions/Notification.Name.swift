@@ -47,6 +47,7 @@ public extension Notification.Name {
     static var didBeginDraggingNutrientsSummaryPager: Notification.Name { return .init("didBeginDraggingNutrientsSummaryPager") }
     static var didEndDraggingNutrientsSummaryPager: Notification.Name { return .init("didEndDraggingNutrientsSummaryPager") }
 
+    static var didPickDayMeal: Notification.Name { return .init("didPickDayMeal") }
 }
 
 public extension Notification {

@@ -9,7 +9,6 @@ public extension Notification.Name {
     static var summaryDetentExpanded: Notification.Name { return .init("summaryDetentExpanded") }
     static var expandSummaryDetent: Notification.Name { return .init("expandSummaryDetent") }
     static var collapseSummaryDetent: Notification.Name { return .init("collapseSummaryDetent") }
-    static var summaryOffsetDidChange: Notification.Name { return .init("summaryOffsetDidChange") }
 
     static var dateDidChange: Notification.Name { return .init("dateDidChange") }
     static var diaryWillChangeDate: Notification.Name { return .init("diaryWillChangeDate") }
@@ -72,7 +71,5 @@ public extension Notification {
         public static let bodyProfile = "bodyProfile"
         
         public static let mealId = "mealId"
-        
-        public static let offset = "offset"
     }
 }

@@ -5,8 +5,11 @@ public extension Notification.Name {
     static var weekPagerWillChangeDate: Notification.Name { return .init("weekPagerWillChangeDate") }
     static var weekPagerDidChangeDate: Notification.Name { return .init("weekPagerDidChangeDate") }
     
-    static var diarySummaryDetentChangedToMedium: Notification.Name { return .init("diarySummaryDetentChangedToMedium") }
-    
+    static var summaryDetentCollapsed: Notification.Name { return .init("summaryDetentCollapsed") }
+    static var summaryDetentExpanded: Notification.Name { return .init("summaryDetentExpanded") }
+    static var expandSummaryDetent: Notification.Name { return .init("expandSummaryDetent") }
+    static var collapseSummaryDetent: Notification.Name { return .init("collapseSummaryDetent") }
+
     /// To move to PrepDataTypes
     static var dateDidChange: Notification.Name { return .init("dateDidChange") }
     static var diaryWillChangeDate: Notification.Name { return .init("diaryWillChangeDate") }

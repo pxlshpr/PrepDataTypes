@@ -50,6 +50,8 @@ public extension Notification.Name {
     static var didEndDraggingNutrientsSummaryPager: Notification.Name { return .init("didEndDraggingNutrientsSummaryPager") }
 
     static var didPickDayMeal: Notification.Name { return .init("didPickDayMeal") }
+    
+    static var didToggleNutrientReport: Notification.Name { return .init("didToggleNutrientReport") }
 }
 
 public extension Notification {
@@ -71,5 +73,8 @@ public extension Notification {
         public static let bodyProfile = "bodyProfile"
         
         public static let mealId = "mealId"
+        
+        public static let bool = "bool"
+        public static let nutrientMeterComponent = "nutrientMeterComponent"
     }
 }

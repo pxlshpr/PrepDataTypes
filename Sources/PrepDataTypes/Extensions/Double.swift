@@ -45,9 +45,17 @@ public extension Double {
         "\(Int(self.rounded()))"
     }
     
+    var formattedReportNutrient: String {
+        formatted(decimalValuesDisplayedUnder: 10)
+    }
+    
     /// commas, only rounded off if greater than 100, otherwise 1 decimal place
     var formattedGoalValue: String {
-        if self >= 100 {
+        formatted(decimalValuesDisplayedUnder: 100)
+    }
+
+    func formatted(decimalValuesDisplayedUnder decimalMax: Double) -> String {
+        if self >= decimalMax {
             let rounded = self.rounded()
             
             let numberFormatter = NumberFormatter()
@@ -62,5 +70,4 @@ public extension Double {
             return self.rounded(toPlaces: 1).cleanAmount
         }
     }
-
 }

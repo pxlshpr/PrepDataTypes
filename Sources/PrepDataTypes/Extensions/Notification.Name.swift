@@ -52,6 +52,10 @@ public extension Notification.Name {
     static var didPickDayMeal: Notification.Name { return .init("didPickDayMeal") }
     
     static var didToggleNutrientReport: Notification.Name { return .init("didToggleNutrientReport") }
+    
+    static var deselectChart: Notification.Name { return .init("deselectChart") }
+    
+    static var debugNotification: Notification.Name { return .init("debugNotification") }
 }
 
 public extension Notification {

@@ -56,6 +56,7 @@ public extension Notification.Name {
     static var deselectChart: Notification.Name { return .init("deselectChart") }
     
     static var debugNotification: Notification.Name { return .init("debugNotification") }
+    static var shouldRefreshWindow: Notification.Name { return .init("shouldRefreshWindow") }
 }
 
 public extension Notification {

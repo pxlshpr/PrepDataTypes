@@ -49,6 +49,7 @@ public extension Notification.Name {
     static var didBeginDraggingNutrientsSummaryPager: Notification.Name { return .init("didBeginDraggingNutrientsSummaryPager") }
     static var didEndDraggingNutrientsSummaryPager: Notification.Name { return .init("didEndDraggingNutrientsSummaryPager") }
 
+    /// Possibly clean these up
     static var didPickDayMeal: Notification.Name { return .init("didPickDayMeal") }
     
     static var didToggleNutrientReport: Notification.Name { return .init("didToggleNutrientReport") }
@@ -57,6 +58,8 @@ public extension Notification.Name {
     
     static var debugNotification: Notification.Name { return .init("debugNotification") }
     static var shouldRefreshWindow: Notification.Name { return .init("shouldRefreshWindow") }
+    
+    static var didChangeDateOutsideDiaryView: Notification.Name { return .init("didChangeDateOutsideDiaryView") }
 }
 
 public extension Notification {

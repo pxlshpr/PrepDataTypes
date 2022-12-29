@@ -6,4 +6,5 @@ public struct UserDefaultsKeys {
     public static let showingFoodEmojis = "showingFoodEmojis"
     public static let fastingTimerPushToken = "fastingTimerPushToken"
     public static let reportType = "reportType"
+    public static let reportBrowsePath = "reportBrowsePath"
 }

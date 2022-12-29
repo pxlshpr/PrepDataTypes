@@ -20,6 +20,16 @@ public enum FastingMilestone: Int, CaseIterable {
         self = .anabolic
     }
     
+    public init?(atHour hour: Int) {
+        for milestone in Self.allCases.reversed() {
+            if hour == milestone.startHour {
+                self = milestone
+                return
+            }
+        }
+        return nil
+    }
+    
     public init(time: Date) {
 //        let hours = Int(Date().timeIntervalSince(time) / 3600.0)
 //        self.init(hours: hours)

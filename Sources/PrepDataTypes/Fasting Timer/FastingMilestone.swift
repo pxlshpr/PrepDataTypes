@@ -137,6 +137,12 @@ public extension FastingMilestone {
         }
     }
     
+    static var allStartingHours: [Int] {
+        Self.allCases
+            .map { $0.startHour }
+            .sorted { $0 < $1 }
+    }
+    
     var startTimeInterval: TimeInterval {
         Double(startHour) * 3600.0
     }

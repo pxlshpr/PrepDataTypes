@@ -7,4 +7,5 @@ public struct UserDefaultsKeys {
     public static let fastingTimerPushToken = "fastingTimerPushToken"
     public static let reportType = "reportType"
     public static let reportBrowsePath = "reportBrowsePath"
+    public static let chartPeriod = "chartPeriod"
 }

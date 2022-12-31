@@ -60,6 +60,7 @@ public extension Notification.Name {
     static var shouldRefreshWindow: Notification.Name { return .init("shouldRefreshWindow") }
     
     static var didChangeDateOutsideDiaryView: Notification.Name { return .init("didChangeDateOutsideDiaryView") }
+    static var popBrowseReport: Notification.Name { return .init("popBrowseReport") }
 }
 
 public extension Notification {

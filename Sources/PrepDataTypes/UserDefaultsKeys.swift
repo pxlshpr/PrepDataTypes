@@ -8,4 +8,5 @@ public struct UserDefaultsKeys {
     public static let reportType = "reportType"
     public static let reportBrowsePath = "reportBrowsePath"
     public static let chartPeriod = "chartPeriod"
+    public static let showingMacrosForEnergyReport = "showingMacrosForEnergyReport"
 }

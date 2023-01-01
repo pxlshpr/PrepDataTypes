@@ -43,14 +43,13 @@ extension SyncForm {
         public let foods: [Food]?
         
         public let foodItems: [FoodItem]?
-        public let foodUsages: [FoodUsage]?
+//        public let foodUsages: [FoodUsage]?
 
         public init(
             user: User? = nil,
             days: [Day]? = nil,
             foods: [Food]? = nil,
             foodItems: [FoodItem]? = nil,
-            foodUsages: [FoodUsage]? = nil,
             goalSets: [GoalSet]? = nil,
             meals: [Meal]? = nil,
             quickMealItems: [QuickMealItem]? = nil,
@@ -60,7 +59,6 @@ extension SyncForm {
             self.days = days
             self.foods = foods
             self.foodItems = foodItems
-            self.foodUsages = foodUsages
             self.goalSets = goalSets
             self.meals = meals
             self.quickMealItems = quickMealItems
@@ -153,7 +151,7 @@ public extension SyncForm.Updates {
         if let days { count += days.count }
         if let foods { count += foods.count }
         if let foodItems { count += foodItems.count }
-        if let foodUsages { count += foodUsages.count }
+//        if let foodUsages { count += foodUsages.count }
         if let goalSets { count += goalSets.count }
         if let meals { count += meals.count }
         if let quickMealItems { count += quickMealItems.count }

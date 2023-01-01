@@ -33,6 +33,8 @@ public struct DayMeal: Identifiable, Hashable, Codable {
     }
 }
 
+#if os(iOS)
+
 public extension DayMeal {
     init(from meal: Meal) {
         self.init(
@@ -83,9 +85,6 @@ public extension Day {
     }
 }
 
-#if os(iOS)
-
-//TODO: Move this out of DataTypes into PrepViews.FoodBadge
 import SwiftUI
 
 public func calculateMacrosIndicatorWidth(

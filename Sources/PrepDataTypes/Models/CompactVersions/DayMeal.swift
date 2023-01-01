@@ -83,6 +83,8 @@ public extension Day {
     }
 }
 
+#if os(iOS)
+
 //TODO: Move this out of DataTypes into PrepViews.FoodBadge
 import SwiftUI
 
@@ -117,3 +119,5 @@ public func calculateMacrosIndicatorWidth(
     let width = percent * min
     return width
 }
+
+#endif

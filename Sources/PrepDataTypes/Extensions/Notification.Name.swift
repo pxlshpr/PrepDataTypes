@@ -61,6 +61,8 @@ public extension Notification.Name {
     
     static var didChangeDateOutsideDiaryView: Notification.Name { return .init("didChangeDateOutsideDiaryView") }
     static var popBrowseReport: Notification.Name { return .init("popBrowseReport") }
+    
+    static var didPassMidnight: Notification.Name { return .init("didPassMidnight") }
 }
 
 public extension Notification {

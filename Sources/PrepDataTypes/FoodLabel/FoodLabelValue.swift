@@ -158,9 +158,6 @@ public extension FoodLabelValue {
             }
         }
         
-        if string == "O" {
-            string = "0"
-        }
         /// Commented out in favor of the function based approach below (with additional ones with spaces)
 //        if string.hasSuffix("Og") {
 //            string = string.replacingLastOccurrence(of: "Og", with: "0g")
@@ -172,16 +169,32 @@ public extension FoodLabelValue {
 //            string = string.replacingLastOccurrence(of: "Omcg", with: "0mcg")
 //        }
         //TODO: Use regex for these, also include ones with simple "o"
-        func replace(_ incorrects: [String], with correct: String) {
+        func suffixReplace(_ incorrects: [String], with correct: String) {
             for incorrect in incorrects {
                 if string.hasSuffix(incorrect) {
                     string = string.replacingLastOccurrence(of: incorrect, with: correct)
+                    break
                 }
             }
         }
-        replace(["Og", "O g"], with: "0g")
-        replace(["Omg", "O mg"], with: "0mg")
-        replace(["Omcg", "O mcg"], with: "0mcg")
+        suffixReplace(["Og", "O g"], with: "0g")
+        suffixReplace(["Omg", "O mg"], with: "0mg")
+        suffixReplace(["Omcg", "O mcg"], with: "0mcg")
+
+        
+        func replace(_ incorrects: [String], with correct: String) {
+            for incorrect in incorrects {
+                if string == incorrect {
+                    string = correct
+                    break
+                }
+            }
+        }
+//        if string == "O" {
+//            string = "0"
+//        }
+        replace(["O"], with: "0")
+        replace(["O a"], with: "0g")
 
         /// Replaces fractional values with their true values
         string = string.replacingOccurrences(of: "1/2", with: "0.5")

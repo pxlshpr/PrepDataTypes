@@ -262,6 +262,15 @@ extension FoodLabelValue: CustomStringConvertible {
             return "\(amount.cleanAmount)"
         }
     }
+    
+    public var descriptionWithoutRounding: String {
+        if let unit = unit {
+            return "\(amount.cleanWithoutRounding) \(unit.description)"
+        } else {
+            return "\(amount.cleanWithoutRounding)"
+        }
+    }
+
 }
 
 public extension FoodLabelValue {

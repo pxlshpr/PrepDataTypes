@@ -6,7 +6,7 @@ import SwiftSugar
  This comprises of an amount and an optional `FoodLabelUnit`.
  */
 public struct FoodLabelValue: Codable {
-    public let amount: Double
+    public var amount: Double
     public var unit: FoodLabelUnit?
     
     public static let zero = Self.init(amount: 0)

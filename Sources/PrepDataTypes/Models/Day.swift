@@ -13,6 +13,7 @@ public struct Day: Identifiable, Hashable, Codable {
     public var syncStatus: SyncStatus
     public var updatedAt: Double
     
+    
     public init(
         id: String,
         calendarDayString: String,

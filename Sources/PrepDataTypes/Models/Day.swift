@@ -6,6 +6,7 @@ public struct Day: Identifiable, Hashable, Codable {
     
     public var goalSet: GoalSet?
     public var bodyProfile: BodyProfile?
+    public var markedAsFasted: Bool
     
     public var meals: [DayMeal]
     
@@ -17,6 +18,7 @@ public struct Day: Identifiable, Hashable, Codable {
         calendarDayString: String,
         goalSet: GoalSet? = nil,
         bodyProfile: BodyProfile? = nil,
+        markedAsFasted: Bool = false,
         meals: [DayMeal],
         syncStatus: SyncStatus,
         updatedAt: Double
@@ -25,6 +27,7 @@ public struct Day: Identifiable, Hashable, Codable {
         self.calendarDayString = calendarDayString
         self.goalSet = goalSet
         self.bodyProfile = bodyProfile
+        self.markedAsFasted = markedAsFasted
         self.meals = meals
         self.syncStatus = syncStatus
         self.updatedAt = updatedAt

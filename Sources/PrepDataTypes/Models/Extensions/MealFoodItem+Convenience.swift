@@ -26,5 +26,5 @@ public extension Food {
         case .protein:
             return info.nutrients.protein
         }
-    }
+    }    
 }

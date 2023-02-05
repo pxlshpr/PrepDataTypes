@@ -54,4 +54,32 @@ public extension MealFoodItem {
     var isCompleted: Bool {
         markedAsEatenAt != nil && markedAsEatenAt! > 0
     }
+    
+    var description: String {
+        "\(amount.value.cleanAmount) \(amount.unitDescription(sizes: food.info.sizes))"
+    }
+    
+    /// Used for `FoodLabel`
+    var microsDict: [NutrientType : FoodLabelValue] {
+        var dict: [NutrientType : FoodLabelValue] = [:]
+        for nutrient in food.info.nutrients.micros {
+            guard let nutrientType = nutrient.nutrientType
+            else { continue }
+            dict[nutrientType] = FoodLabelValue(
+                amount:
+                    nutrient.value * nutrientScaleFactor,
+                unit:
+                    nutrient.nutrientUnit.foodLabelUnit
+                    ?? nutrientType.defaultUnit.foodLabelUnit
+                    ?? .g
+            )
+        }
+        return dict
+    }
+}
+
+extension NutrientType {
+    var defaultUnit: NutrientUnit {
+        units.first ?? .g
+    }
 }

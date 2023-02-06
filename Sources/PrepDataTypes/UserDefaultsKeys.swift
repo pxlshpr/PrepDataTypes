@@ -9,4 +9,6 @@ public struct UserDefaultsKeys {
     public static let reportBrowsePath = "reportBrowsePath"
     public static let chartPeriod = "chartPeriod"
     public static let showingMacrosForEnergyReport = "showingMacrosForEnergyReport"
+    
+    public static let initialSyncCompleted = "initialSyncCompleted"
 }

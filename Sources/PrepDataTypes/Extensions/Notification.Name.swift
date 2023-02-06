@@ -1,6 +1,9 @@
 import Foundation
 
 public extension Notification.Name {
+    
+    static var initialSyncCompleted: Notification.Name { return .init("initialSyncCompleted") }
+    
     static var dayPagerWillChangeDate: Notification.Name { return .init("dayPagerWillChangeDate") }
     static var weekPagerWillChangeDate: Notification.Name { return .init("weekPagerWillChangeDate") }
     static var weekPagerDidChangeDate: Notification.Name { return .init("weekPagerDidChangeDate") }

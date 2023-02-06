@@ -1,6 +1,6 @@
 import Foundation
 
 public struct PrepConstants {
-    static let bottomBarHeight: CGFloat = 95
+    public static let bottomBarHeight: CGFloat = 95
 }
 

@@ -5,5 +5,6 @@ public enum MealsDiaryAction {
     case editMeal(DayMeal)
     case addFood(DayMeal)
     case editFoodItem(MealFoodItem, DayMeal)
-    case toggleCompletion(MealFoodItem, DayMeal)
+    case toggleItemCompletion(MealFoodItem)
+    case toggleMealCompletion(DayMeal)
 }

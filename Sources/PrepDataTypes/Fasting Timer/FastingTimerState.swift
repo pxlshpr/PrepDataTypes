@@ -65,7 +65,8 @@ public extension FastingTimerState {
     }
     
     var haveNextUp: Bool {
-        nextUp != nil
+        true
+//        nextUp != nil
     }
     var height: CGFloat {
         haveNextUp ? 140 : 70

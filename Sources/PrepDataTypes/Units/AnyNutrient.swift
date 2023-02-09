@@ -1,6 +1,6 @@
 import Foundation
 
-public enum AnyNutrient {
+public enum AnyNutrient: Hashable {
     case energy
     case macro(Macro)
     case micro(NutrientType)

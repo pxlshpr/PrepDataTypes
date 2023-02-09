@@ -11,4 +11,6 @@ public struct UserDefaultsKeys {
     public static let showingMacrosForEnergyReport = "showingMacrosForEnergyReport"
     
     public static let initialSyncCompleted = "initialSyncCompleted"
+    
+    public static let showingRDA = "showingRDA"
 }

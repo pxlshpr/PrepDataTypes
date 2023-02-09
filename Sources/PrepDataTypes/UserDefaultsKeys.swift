@@ -13,4 +13,5 @@ public struct UserDefaultsKeys {
     public static let initialSyncCompleted = "initialSyncCompleted"
     
     public static let showingRDA = "showingRDA"
+    public static let usingDietGoalsInsteadOfRDA = "usingDietGoalsInsteadOfRDA"
 }

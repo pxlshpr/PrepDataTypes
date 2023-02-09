@@ -8,7 +8,7 @@ public struct GoalSet: Identifiable, Hashable, Codable {
     public var emoji: String
     public var goals: [Goal] = []
     public var type: GoalSetType
-
+    
     public var syncStatus: SyncStatus
     public var updatedAt: Double
     public var deletedAt: Double?
@@ -31,6 +31,31 @@ public struct GoalSet: Identifiable, Hashable, Codable {
         self.syncStatus = syncStatus
         self.updatedAt = updatedAt
         self.deletedAt = deletedAt
+    }
+}
+
+public extension GoalSet {
+    
+    func hasSameData(as other: GoalSet) -> Bool {
+        self.id == other.id
+        && self.name == other.name
+        && self.emoji == other.emoji
+        && self.goals == other.goals
+        && self.type == other.type
+        && self.isDeleted == other.isDeleted
+    }
+}
+
+public extension Array where Element == GoalSet {
+    func hasSameData(as other: [GoalSet]) -> Bool {
+        guard self.count == other.count else { return false }
+        for index in self.indices {
+            guard index < other.count,
+                self[index].hasSameData(as: other[index]) else {
+                return false
+            }
+        }
+        return true
     }
 }
 

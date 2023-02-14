@@ -6,3 +6,9 @@ public struct PrepConstants {
     public static let numberOfRecents = 10
 }
 
+/// ** Conditional Print ** Prints if a certain condition is met
+public func cprint(_ string: String) {
+    if true {
+        print(string)
+    }
+}

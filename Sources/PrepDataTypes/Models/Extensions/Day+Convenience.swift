@@ -7,7 +7,7 @@ public extension Day {
     
     var date: Date {
         guard let date = Date(fromCalendarDayString: calendarDayString) else {
-            print("Error: we couldn't get a date for: \(calendarDayString)")
+            cprint("Error: we couldn't get a date for: \(calendarDayString)")
             return Date()
         }
         

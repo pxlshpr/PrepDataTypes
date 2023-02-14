@@ -39,7 +39,7 @@ public struct MealFoodItem: Identifiable, Hashable, Codable {
 
 public extension MealFoodItem {
     init(from foodItem: FoodItem) {
-//        print(foodItem)
+//        cprint(foodItem)
         self.init(
             id: foodItem.id,
             food: foodItem.food,

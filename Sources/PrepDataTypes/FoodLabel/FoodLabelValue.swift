@@ -208,7 +208,7 @@ public extension FoodLabelValue {
 //        }
         
         var array: [(value: FoodLabelValue, positionOfMatch: Int)] = []
-//        print("🔢      👁 detecting values in: \(string)")
+//        cprint("🔢      👁 detecting values in: \(string)")
 
         let specialValuesArray = [
             "(?<!not detected )(?:not detected)",
@@ -223,10 +223,10 @@ public extension FoodLabelValue {
             
             for match in matches {
                 guard let value = FoodLabelValue(fromString: match.string) else {
-//                    print("🔢      👁   - '\(match.string)' @ \(match.position): ⚠️ Couldn't get value")
+//                    cprint("🔢      👁   - '\(match.string)' @ \(match.position): ⚠️ Couldn't get value")
                     continue
                 }
-//                print("🔢      👁   - '\(match.string)' @ \(match.position): \(value.description)")
+//                cprint("🔢      👁   - '\(match.string)' @ \(match.position): \(value.description)")
                 array.append((value, match.position))
             }
         }

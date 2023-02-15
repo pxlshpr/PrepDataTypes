@@ -15,9 +15,9 @@ public struct MealFoodItem: Identifiable, Hashable, Codable, Equatable {
     public var isSoftDeleted: Bool
     public var macrosIndicatorWidth: CGFloat
 
-    public static func ==(lhs: Self, rhs: Self) -> Bool {
-        lhs.id == rhs.id
-    }
+//    public static func ==(lhs: Self, rhs: Self) -> Bool {
+//        lhs.id == rhs.id
+//    }
 //    public let parentFood: Food?
 //    public var meal: Meal?
 

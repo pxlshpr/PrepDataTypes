@@ -28,7 +28,7 @@ public struct DayMeal: Identifiable, Hashable, Codable {
         self.time = time
         self.markedAsEatenAt = markedAsEatenAt
         self.goalSet = goalSet
-        self.foodItems = foodItems
+        self.foodItems = foodItems.sorted(by: { $0.sortPosition < $1.sortPosition })
         self.macrosIndicatorWidth = macrosIndicatorWidth
     }
 }
@@ -43,7 +43,7 @@ public extension DayMeal {
             time: meal.time,
             markedAsEatenAt: meal.markedAsEatenAt,
             goalSet: meal.goalSet,
-            foodItems: meal.foodItems,
+            foodItems: meal.foodItems.sorted(by: { $0.sortPosition < $1.sortPosition }),
             macrosIndicatorWidth: meal.macrosIndicatorWidth
         )
     }

@@ -5,6 +5,7 @@ public enum LogAction {
     case editMeal(DayMeal)
     case addFood(DayMeal)
     case editFoodItem(MealFoodItem, DayMeal)
+    case deleteFoodItem(MealFoodItem, DayMeal)
     case toggleItemCompletion(MealFoodItem)
     case toggleMealCompletion(DayMeal)
 }

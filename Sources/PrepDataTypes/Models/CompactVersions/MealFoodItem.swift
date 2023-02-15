@@ -5,7 +5,7 @@ import SwiftSugar
 /// It is stripped off the relation back to the `Meal` so as to not clear a cyclical recursion error,
 /// in addition to not having the `syncStatus`, `updatedAt`, `deletedAt` metadata.
 /// This is only to be used as a child of a `Meal` to be used in the UI.
-public struct MealFoodItem: Identifiable, Hashable, Codable {
+public struct MealFoodItem: Identifiable, Hashable, Codable, Equatable {
     public var id: UUID
     public var food: Food
     public var amount: FoodValue
@@ -15,6 +15,9 @@ public struct MealFoodItem: Identifiable, Hashable, Codable {
     public var isSoftDeleted: Bool
     public var macrosIndicatorWidth: CGFloat
 
+    public static func ==(lhs: Self, rhs: Self) -> Bool {
+        lhs.id == rhs.id
+    }
 //    public let parentFood: Food?
 //    public var meal: Meal?
 

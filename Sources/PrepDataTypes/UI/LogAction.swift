@@ -1,6 +1,6 @@
 import Foundation
 
-public enum MealsDiaryAction {
+public enum LogAction {
     case addMeal(Date?)
     case editMeal(DayMeal)
     case addFood(DayMeal)

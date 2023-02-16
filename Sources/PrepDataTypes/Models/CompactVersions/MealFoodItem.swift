@@ -13,7 +13,7 @@ public struct MealFoodItem: Identifiable, Hashable, Codable, Equatable {
     public var sortPosition: Int
 
     public var isSoftDeleted: Bool
-    public var macrosIndicatorWidth: CGFloat
+    public var badgeWidth: CGFloat
 
 //    public static func ==(lhs: Self, rhs: Self) -> Bool {
 //        lhs.id == rhs.id
@@ -28,7 +28,7 @@ public struct MealFoodItem: Identifiable, Hashable, Codable, Equatable {
         markedAsEatenAt: Double? = nil,
         sortPosition: Int = 0,
         isSoftDeleted: Bool,
-        macrosIndicatorWidth: CGFloat = 0
+        badgeWidth: CGFloat = 0
     ) {
         self.id = id
         self.food = food
@@ -36,7 +36,7 @@ public struct MealFoodItem: Identifiable, Hashable, Codable, Equatable {
         self.markedAsEatenAt = markedAsEatenAt
         self.sortPosition = sortPosition
         self.isSoftDeleted = isSoftDeleted
-        self.macrosIndicatorWidth = macrosIndicatorWidth
+        self.badgeWidth = badgeWidth
     }
 }
 

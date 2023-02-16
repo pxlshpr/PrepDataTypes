@@ -11,6 +11,8 @@ public struct Meal: Identifiable, Hashable, Codable {
     public var goalSet: GoalSet?
     public var goalWorkoutMinutes: Int?
 
+    public var badgeWidth: Double?
+    
     public var foodItems: [MealFoodItem]
 
     public var syncStatus: SyncStatus
@@ -25,6 +27,7 @@ public struct Meal: Identifiable, Hashable, Codable {
         markedAsEatenAt: Double? = nil,
         goalSet: GoalSet? = nil,
         goalWorkoutMinutes: Int? = nil,
+        badgeWidth: Double = 0,
         foodItems: [MealFoodItem],
         syncStatus: SyncStatus,
         updatedAt: Double,
@@ -37,6 +40,7 @@ public struct Meal: Identifiable, Hashable, Codable {
         self.markedAsEatenAt = markedAsEatenAt
         self.goalSet = goalSet
         self.goalWorkoutMinutes = goalWorkoutMinutes
+        self.badgeWidth = badgeWidth
         self.foodItems = foodItems
         self.syncStatus = syncStatus
         self.updatedAt = updatedAt

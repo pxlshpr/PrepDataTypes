@@ -12,7 +12,7 @@ public struct DayMeal: Identifiable, Hashable, Codable {
     public var goalSet: GoalSet?
     public var foodItems: [MealFoodItem]
     
-    public var macrosIndicatorWidth: CGFloat
+    public var badgeWidth: CGFloat
 
     public init(
         id: UUID = UUID(),
@@ -21,7 +21,7 @@ public struct DayMeal: Identifiable, Hashable, Codable {
         markedAsEatenAt: Double? = nil,
         goalSet: GoalSet? = nil,
         foodItems: [MealFoodItem] = [],
-        macrosIndicatorWidth: CGFloat = 0
+        badgeWidth: CGFloat = 0
     ) {
         self.id = id
         self.name = name
@@ -29,7 +29,7 @@ public struct DayMeal: Identifiable, Hashable, Codable {
         self.markedAsEatenAt = markedAsEatenAt
         self.goalSet = goalSet
         self.foodItems = foodItems.sorted(by: { $0.sortPosition < $1.sortPosition })
-        self.macrosIndicatorWidth = macrosIndicatorWidth
+        self.badgeWidth = badgeWidth
     }
 }
 
@@ -44,7 +44,7 @@ public extension DayMeal {
             markedAsEatenAt: meal.markedAsEatenAt,
             goalSet: meal.goalSet,
             foodItems: meal.foodItems.sorted(by: { $0.sortPosition < $1.sortPosition }),
-            macrosIndicatorWidth: meal.macrosIndicatorWidth
+            badgeWidth: meal.badgeWidth ?? 0
         )
     }
 }

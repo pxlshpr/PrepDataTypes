@@ -68,6 +68,9 @@ public extension Notification.Name {
     static var didPassMidnight: Notification.Name { return .init("didPassMidnight") }
     
     static var shouldUpdateUpcomingMeal: Notification.Name { return .init("shouldUpdateUpcomingMeal") }
+    
+    static var homeButtonsShouldRefresh: Notification.Name { return .init("homeDidDismissSheet") }
+    static var didSetBadgeWidths: Notification.Name { return .init("didSetBadgeWidths") }
 }
 
 public extension Notification {

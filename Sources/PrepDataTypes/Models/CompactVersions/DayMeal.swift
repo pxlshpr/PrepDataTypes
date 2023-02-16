@@ -11,6 +11,7 @@ public struct DayMeal: Identifiable, Hashable, Codable {
     public var markedAsEatenAt: Double?
     public var goalSet: GoalSet?
     public var foodItems: [MealFoodItem]
+
     
     public var badgeWidth: CGFloat
 

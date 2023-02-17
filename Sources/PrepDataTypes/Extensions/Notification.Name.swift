@@ -71,6 +71,8 @@ public extension Notification.Name {
     
     static var homeButtonsShouldRefresh: Notification.Name { return .init("homeDidDismissSheet") }
     static var didSetBadgeWidths: Notification.Name { return .init("didSetBadgeWidths") }
+    
+    static var shouldRefreshDay: Notification.Name { return .init("shouldRefreshDay") }
 }
 
 public extension Notification {

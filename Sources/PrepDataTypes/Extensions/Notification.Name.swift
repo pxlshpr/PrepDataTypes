@@ -73,6 +73,7 @@ public extension Notification.Name {
     static var didSetBadgeWidths: Notification.Name { return .init("didSetBadgeWidths") }
     
     static var shouldRefreshDay: Notification.Name { return .init("shouldRefreshDay") }
+    static var shouldUpdateMetrics: Notification.Name { return .init("shouldUpdateMetrics") }
 }
 
 public extension Notification {

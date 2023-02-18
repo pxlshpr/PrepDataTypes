@@ -74,6 +74,8 @@ public extension Notification.Name {
     
     static var shouldRefreshDay: Notification.Name { return .init("shouldRefreshDay") }
     static var shouldUpdateMetrics: Notification.Name { return .init("shouldUpdateMetrics") }
+    
+    static var shouldPopSettingsToRoot: Notification.Name { return .init("shouldPopSettingsToRoot") }
 }
 
 public extension Notification {

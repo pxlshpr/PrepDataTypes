@@ -10,12 +10,12 @@ extension SyncForm {
         }
     }
 
-    public func log() {
+    public func log(emoji: String, isRequest: Bool) {
         Task.detached(priority: .utility) {
             guard let updates, !isEmpty else {
                 return
             }
-            Logger.log("📱→ [SyncForm] updates: \(updates.count), device: \(deviceModelName), requestedVersion: \(versionTimestamp.timeStringAtGMT5)", printToConsole: true)
+            Logger.log("\(emoji)→ [SyncForm] updates: \(updates.count), device: \(deviceModelName), \(isRequest ? "requestedVersion" : "receivedVersion"): \(versionTimestamp.timeStringAtGMT5)", printToConsole: true)
 
             if let days = updates.days {
                 for day in days {

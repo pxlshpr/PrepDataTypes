@@ -14,6 +14,8 @@ extension SyncForm {
         Task.detached(priority: .utility) {
             
             Logger.log("\(emoji)→ [\(isRequest ? "Request" : "Response") SyncForm] updates: \(updates?.count ?? 0), device: \(deviceModelName), \(isRequest ? "requestedVersion" : "receivedVersion"): \(versionTimestamp.timeStringAtGMT5)", printToConsole: true)
+            
+            guard !isInitialSync else { return }
 
             if let days = updates?.days {
                 for day in days {
@@ -246,7 +248,7 @@ public class Logger {
             } else {
                 try string.write(to: logFile, atomically: true, encoding: String.Encoding.utf8)
             }
-            print("Wrote to: \(logFile)")
+//            print("Wrote to: \(logFile)")
         } catch {
             print("Could not write to: \(logFile) – \(error)")
         }

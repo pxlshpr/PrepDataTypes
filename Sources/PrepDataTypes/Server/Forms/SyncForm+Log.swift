@@ -12,42 +12,40 @@ extension SyncForm {
 
     public func log(emoji: String, isRequest: Bool) {
         Task.detached(priority: .utility) {
-            guard let updates, !isEmpty else {
-                return
-            }
-            Logger.log("\(emoji)→ [\(isRequest ? "Request" : "Response") SyncForm] updates: \(updates.count), device: \(deviceModelName), \(isRequest ? "requestedVersion" : "receivedVersion"): \(versionTimestamp.timeStringAtGMT5)", printToConsole: true)
+            
+            Logger.log("\(emoji)→ [\(isRequest ? "Request" : "Response") SyncForm] updates: \(updates?.count ?? 0), device: \(deviceModelName), \(isRequest ? "requestedVersion" : "receivedVersion"): \(versionTimestamp.timeStringAtGMT5)", printToConsole: true)
 
-            if let days = updates.days {
+            if let days = updates?.days {
                 for day in days {
                     day.log()
                 }
             }
 
-            if let meals = updates.meals {
+            if let meals = updates?.meals {
                 for meal in meals {
                     meal.log()
                 }
             }
 
-            if let foodItems = updates.foodItems {
+            if let foodItems = updates?.foodItems {
                 for foodItem in foodItems {
                     foodItem.log()
                 }
             }
 
-            if let foods = updates.foods {
+            if let foods = updates?.foods {
                 for food in foods {
                     food.log()
                 }
             }
 
-            if let goalSets = updates.goalSets {
+            if let goalSets = updates?.goalSets {
                 for goalSet in goalSets {
                     goalSet.log()
                 }
             }
             
-            if let activities = updates.fastingActivities {
+            if let activities = updates?.fastingActivities {
                 for activity in activities {
                     activity.log()
                 }

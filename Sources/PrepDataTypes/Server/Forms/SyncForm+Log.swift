@@ -2,7 +2,7 @@ import Foundation
 
 extension SyncForm {
     
-    func log() {
+    public func log() {
         Task.detached(priority: .utility) {
             guard let updates, !isEmpty else {
                 return

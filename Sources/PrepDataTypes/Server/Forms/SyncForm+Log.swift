@@ -64,7 +64,7 @@ extension Double {
     }
 }
 
-extension Food {
+public extension Food {
     func log() {
         Logger.log("    [Food] name: \(name)")
         if let deletedAt, deletedAt > 0 {
@@ -73,7 +73,7 @@ extension Food {
     }
 }
 
-extension FastingActivity {
+public extension FastingActivity {
     func log() {
         Logger.log("    [FastingActivity] lastMealAt: \(lastMealAt.timeStringAtGMT5)")
         if let deletedAt, deletedAt > 0 {
@@ -82,7 +82,7 @@ extension FastingActivity {
     }
 }
 
-extension PrepDataTypes.GoalSet {
+public extension PrepDataTypes.GoalSet {
     func log() {
         Logger.log("    [GoalSet] name: \(name), goals: \(goals.count)")
         if let deletedAt, deletedAt > 0 {
@@ -91,7 +91,7 @@ extension PrepDataTypes.GoalSet {
     }
 }
 
-extension PrepDataTypes.Day {
+public extension PrepDataTypes.Day {
     func log() {
         Logger.log("    [Day] \(calendarDayString)")
         if let goalSet {
@@ -110,7 +110,7 @@ extension PrepDataTypes.Day {
     }
 }
 
-extension PrepDataTypes.FoodItem {
+public extension PrepDataTypes.FoodItem {
     func log() {
         Logger.log("    [FoodItem] food: \(food.name), amount: \(amount.description), sort: \(sortPosition)")
         if let meal {
@@ -144,7 +144,7 @@ extension FoodValue {
     }
 }
 
-extension PrepDataTypes.Meal {
+public extension PrepDataTypes.Meal {
     func log() {
         Logger.log("    [Meal] name: \(name), time: \(time.timeStringAtGMT5)")
         if let deletedAt, deletedAt > 0 {
@@ -153,7 +153,7 @@ extension PrepDataTypes.Meal {
     }
 }
 
-extension BodyProfile {
+public extension BodyProfile {
     func log() {
         Logger.log("          - energyUnit: \(energyUnit.description)")
         Logger.log("          - weightUnit: \(weightUnit.description)")

@@ -2,12 +2,15 @@ import Foundation
 
 public struct SyncForm: Codable {
     public let updates: Updates?
+    public let userId: UUID
+    public let versionTimestamp: Double
+    //TODO: Add deviceModel
+
+    /// Legacy
     public let deletions: Deletions?
     /// ** Describes range of sliding window ** that user would like updates for—using explicit `calendarDayString`'s of the dates
     public let daysLowerBound: String?
     public let daysUpperBound: String?
-    public let userId: UUID
-    public let versionTimestamp: Double
 
     public init(
         updates: Updates? = nil,

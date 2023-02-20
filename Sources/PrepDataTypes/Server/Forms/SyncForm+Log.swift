@@ -15,7 +15,7 @@ extension SyncForm {
             guard let updates, !isEmpty else {
                 return
             }
-            Logger.log("\(emoji)→ [SyncForm] updates: \(updates.count), device: \(deviceModelName), \(isRequest ? "requestedVersion" : "receivedVersion"): \(versionTimestamp.timeStringAtGMT5)", printToConsole: true)
+            Logger.log("\(emoji)→ [\(isRequest ? "Request" : "Response") SyncForm] updates: \(updates.count), device: \(deviceModelName), \(isRequest ? "requestedVersion" : "receivedVersion"): \(versionTimestamp.timeStringAtGMT5)", printToConsole: true)
 
             if let days = updates.days {
                 for day in days {

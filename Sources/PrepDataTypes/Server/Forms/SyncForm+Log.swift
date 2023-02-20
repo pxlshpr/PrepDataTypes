@@ -199,17 +199,22 @@ import Foundation
 public class Logger {
 
     static var directoryURL: URL? {
-        let directoryPath = "\(FileManager.default.currentDirectoryPath)/Logs"
-        if !FileManager.default.fileExists(atPath: directoryPath) {
-            do {
-                print("Creating: \(directoryPath)")
-                try FileManager.default.createDirectory(atPath: directoryPath, withIntermediateDirectories: true, attributes: nil)
-            } catch {
-                print("Error creating directory: \(error.localizedDescription)");
+        if FileManager.default.currentDirectoryPath != "/" {
+            let directoryPath = "\(FileManager.default.currentDirectoryPath)/Logs"
+            if !FileManager.default.fileExists(atPath: directoryPath) {
+                do {
+                    print("Creating: \(directoryPath)")
+                    try FileManager.default.createDirectory(atPath: directoryPath, withIntermediateDirectories: true, attributes: nil)
+                } catch {
+                    print("Error creating directory: \(error.localizedDescription)");
+                }
             }
+            return URL(fileURLWithPath: directoryPath)
+        } else {
+            let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+            let documentsDirectory = paths[0]
+            return documentsDirectory
         }
-
-        return URL(fileURLWithPath: directoryPath)
     }
 
     static var logFile: URL? {
@@ -218,7 +223,9 @@ public class Logger {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         let dateString = formatter.string(from: Date())
-        let fileName = "server_\(dateString).log"
+        
+        let prefix = FileManager.default.currentDirectoryPath == "/" ? "device" : "server"
+        let fileName = "\(prefix)_\(dateString).log"
 
         return directoryURL.appendingPathComponent(fileName)
     }
@@ -248,7 +255,7 @@ public class Logger {
             } else {
                 try string.write(to: logFile, atomically: true, encoding: String.Encoding.utf8)
             }
-//            print("Wrote to: \(logFile)")
+            print("💾 Wrote to: \(logFile)")
         } catch {
             print("Could not write to: \(logFile) – \(error)")
         }

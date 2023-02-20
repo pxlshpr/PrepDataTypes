@@ -52,6 +52,7 @@ extension SyncForm {
                     activity.log()
                 }
             }
+            Logger.log(" ")
         }
     }
 }

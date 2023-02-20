@@ -178,7 +178,7 @@ public extension SyncForm.Deletions {
 
 
 extension SyncForm {
-    mutating func removeRedundantUpdates(from other: SyncForm) {
+    public mutating func removeRedundantUpdates(from other: SyncForm) {
         if let otherUpdates = other.updates {
             self.updates?.removeRedundantUpdates(from: otherUpdates)
         }

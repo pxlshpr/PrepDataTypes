@@ -3,6 +3,7 @@ import Foundation
 public struct SyncForm: Codable {
     public let updates: Updates?
     public let userId: UUID
+    public let deviceModelName: String
     public let versionTimestamp: Double
     //TODO: Add deviceModel
 
@@ -18,6 +19,7 @@ public struct SyncForm: Codable {
         daysLowerBound: String? = nil,
         daysUpperBound: String? = nil,
         userId: UUID,
+        deviceModelName: String,
         versionTimestamp: Double
     ) {
         self.updates = updates
@@ -25,6 +27,7 @@ public struct SyncForm: Codable {
         self.daysLowerBound = daysLowerBound
         self.daysUpperBound = daysUpperBound
         self.userId = userId
+        self.deviceModelName = deviceModelName
         self.versionTimestamp = versionTimestamp
     }
 }

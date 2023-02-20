@@ -11,49 +11,46 @@ extension SyncForm {
     }
 
     public func log(emoji: String, isRequest: Bool, includeBreakdown: Bool) {
-        Task.detached(priority: .utility) {
-            
-            Logger.log("\(emoji)→ [\(isRequest ? "Request" : "Response") SyncForm] updates: \(updates?.count ?? 0), device: \(deviceModelName), \(isRequest ? "requestedVersion" : "receivedVersion"): \(versionTimestamp.timeStringAtGMT5)", printToConsole: true)
-            
-            guard includeBreakdown else { return }
+        Logger.log("\(emoji)→ [\(isRequest ? "Request" : "Response") SyncForm] updates: \(updates?.count ?? 0), device: \(deviceModelName), \(isRequest ? "requestedVersion" : "receivedVersion"): \(versionTimestamp.timeStringAtGMT5)", printToConsole: true)
+        
+        guard includeBreakdown else { return }
 
-            if let days = updates?.days {
-                for day in days {
-                    day.log()
-                }
+        if let days = updates?.days {
+            for day in days {
+                day.log()
             }
-
-            if let meals = updates?.meals {
-                for meal in meals {
-                    meal.log()
-                }
-            }
-
-            if let foodItems = updates?.foodItems {
-                for foodItem in foodItems {
-                    foodItem.log()
-                }
-            }
-
-            if let foods = updates?.foods {
-                for food in foods {
-                    food.log()
-                }
-            }
-
-            if let goalSets = updates?.goalSets {
-                for goalSet in goalSets {
-                    goalSet.log()
-                }
-            }
-            
-            if let activities = updates?.fastingActivities {
-                for activity in activities {
-                    activity.log()
-                }
-            }
-            Logger.log(" ")
         }
+
+        if let meals = updates?.meals {
+            for meal in meals {
+                meal.log()
+            }
+        }
+
+        if let foodItems = updates?.foodItems {
+            for foodItem in foodItems {
+                foodItem.log()
+            }
+        }
+
+        if let foods = updates?.foods {
+            for food in foods {
+                food.log()
+            }
+        }
+
+        if let goalSets = updates?.goalSets {
+            for goalSet in goalSets {
+                goalSet.log()
+            }
+        }
+        
+        if let activities = updates?.fastingActivities {
+            for activity in activities {
+                activity.log()
+            }
+        }
+        Logger.log(" ")
     }
 }
 
@@ -197,6 +194,31 @@ extension BodyProfile {
 import Foundation
 
 public class Logger {
+    
+    public static let serialQueue = DispatchQueue(label: "serialQueue")
+    public static let group = DispatchGroup()
+//    group.enter()
+//    serialQueue.async{  //call this whenever you need to add a new work item to your queue
+//        fetchA{
+//            //in the completion handler call
+//            group.leave()
+//        }
+//    }
+//    serialQueue.async{
+//        group.wait()
+//        group.enter()
+//        fetchB{
+//            //in the completion handler call
+//            group.leave()
+//        }
+//    }
+//    serialQueue.async{
+//        group.wait()
+//        group.enter()
+//        fetchC{
+//            group.leave()
+//        }
+//    }
 
     static var directoryURL: URL? {
         if FileManager.default.currentDirectoryPath != "/" {
@@ -231,35 +253,45 @@ public class Logger {
     }
 
     public static func log(_ message: String, printToConsole: Bool = false) {
-        if printToConsole {
-            print(message)
-        }
+        serialQueue.async {
+            group.wait()
+            group.enter()
 
-        guard let logFile else {
-            return
-        }
-
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm:ss"
-        formatter.timeZone = .init(secondsFromGMT: 5 * 3600)
-        let timestamp = formatter.string(from: Date())
-        let string =  "\(timestamp): " + message + "\n"
-        guard let data = string.data(using: String.Encoding.utf8) else { return }
-
-        do {
-            if FileManager.default.fileExists(atPath: logFile.path) {
-                let fileHandle = try FileHandle(forWritingTo: logFile)
-                fileHandle.seekToEndOfFile()
-                fileHandle.write(data)
-                fileHandle.closeFile()
-            } else {
-                try string.write(to: logFile, atomically: true, encoding: String.Encoding.utf8)
+            if printToConsole {
+                print(message)
             }
-            
-//            print("💾 Wrote to: \(logFile)")
-            
-        } catch {
-            print("Could not write to: \(logFile) – \(error)")
+
+            guard let logFile else {
+                group.leave()
+                return
+            }
+
+            let formatter = DateFormatter()
+            formatter.dateFormat = "HH:mm:ss"
+            formatter.timeZone = .init(secondsFromGMT: 5 * 3600)
+            let timestamp = formatter.string(from: Date())
+            let string =  "\(timestamp): " + message + "\n"
+            guard let data = string.data(using: String.Encoding.utf8) else {
+                group.leave()
+                return
+            }
+
+            do {
+                if FileManager.default.fileExists(atPath: logFile.path) {
+                    let fileHandle = try FileHandle(forWritingTo: logFile)
+                    fileHandle.seekToEndOfFile()
+                    fileHandle.write(data)
+                    fileHandle.closeFile()
+                } else {
+                    try string.write(to: logFile, atomically: true, encoding: String.Encoding.utf8)
+                }
+                
+    //            print("💾 Wrote to: \(logFile)")
+                
+            } catch {
+                print("Could not write to: \(logFile) – \(error)")
+            }
+            group.leave()
         }
     }
 }

@@ -98,9 +98,9 @@ extension SyncForm {
 public extension SyncForm {
     var description: String {
         if isEmpty {
-            return "Version: \(Int(versionTimestamp))"
+            return "Version: \(versionTimestamp.timeStringAtGMT5)"
         } else {
-            return "Updates: \(updates?.count ?? 0), Deletions: \(deletions?.count ?? 0), Version: \(versionTimestamp)"
+            return "Updates: \(updates?.count ?? 0) Version: \(versionTimestamp.timeStringAtGMT5)"
         }
     }
     
@@ -173,3 +173,4 @@ public extension SyncForm.Deletions {
         return count
     }
 }
+

@@ -194,7 +194,7 @@ extension BodyProfile {
 
 import Foundation
 
-class Logger {
+public class Logger {
 
     static var directoryURL: URL? {
         let directoryPath = "\(FileManager.default.currentDirectoryPath)/Logs"
@@ -221,7 +221,7 @@ class Logger {
         return directoryURL.appendingPathComponent(fileName)
     }
 
-    static func log(_ message: String, printToConsole: Bool = false) {
+    public static func log(_ message: String, printToConsole: Bool = false) {
         if printToConsole {
             print(message)
         }

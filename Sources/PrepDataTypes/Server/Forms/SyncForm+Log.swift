@@ -255,7 +255,9 @@ public class Logger {
             } else {
                 try string.write(to: logFile, atomically: true, encoding: String.Encoding.utf8)
             }
+            
 //            print("💾 Wrote to: \(logFile)")
+            
         } catch {
             print("Could not write to: \(logFile) – \(error)")
         }

@@ -2,12 +2,20 @@ import Foundation
 
 extension SyncForm {
     
+    public var description: String {
+        if isEmpty {
+            return "Version: \(versionTimestamp.timeStringAtGMT5)"
+        } else {
+            return "Updates: \(updates?.count ?? 0) Version: \(versionTimestamp.timeStringAtGMT5)"
+        }
+    }
+
     public func log() {
         Task.detached(priority: .utility) {
             guard let updates, !isEmpty else {
                 return
             }
-            Logger.log("📱→ Received \(description)", printToConsole: true)
+            Logger.log("📱→ [SyncForm] updates: \(updates.count), device: \(deviceModelName), requestedVersion: \(versionTimestamp.timeStringAtGMT5)", printToConsole: true)
 
             if let days = updates.days {
                 for day in days {
@@ -215,7 +223,7 @@ class Logger {
     }
 
     static func log(_ message: String, printToConsole: Bool = false) {
-        if !printToConsole {
+        if printToConsole {
             print(message)
         }
 
@@ -227,7 +235,7 @@ class Logger {
         formatter.dateFormat = "HH:mm:ss"
         formatter.timeZone = .init(secondsFromGMT: 5 * 3600)
         let timestamp = formatter.string(from: Date())
-        let string =  "[\(timestamp)] " + message + "\n"
+        let string =  "\(timestamp): " + message + "\n"
         guard let data = string.data(using: String.Encoding.utf8) else { return }
 
         do {

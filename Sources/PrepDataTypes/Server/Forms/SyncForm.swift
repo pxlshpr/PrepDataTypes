@@ -102,13 +102,6 @@ extension SyncForm {
 }
 
 public extension SyncForm {
-    var description: String {
-        if isEmpty {
-            return "Version: \(versionTimestamp.timeStringAtGMT5)"
-        } else {
-            return "Updates: \(updates?.count ?? 0) Version: \(versionTimestamp.timeStringAtGMT5)"
-        }
-    }
     
     var isEmpty: Bool {
         if let updates, updates.count > 0 { return false }

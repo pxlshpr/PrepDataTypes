@@ -217,7 +217,7 @@ public class Logger {
         }
     }
 
-    static var logFile: URL? {
+    public static var logFile: URL? {
         guard let directoryURL else { return nil }
 
         let formatter = DateFormatter()

@@ -1,7 +1,7 @@
 import Foundation
 
 public struct SyncForm: Codable {
-    public let updates: Updates?
+    public var updates: Updates?
     public let userId: UUID
     public let deviceModelName: String
     public let isInitialSync: Bool
@@ -40,18 +40,18 @@ extension SyncForm {
         
         /// ** Always synced **
         public let user: User?
-        public let goalSets: [GoalSet]?
-        public let fastingActivities: [FastingActivity]?
+        public var goalSets: [GoalSet]?
+        public var fastingActivities: [FastingActivity]?
 
         /// ** Sliding window of days and its childrens to keep in sync **
-        public let days: [Day]?
-        public let meals: [Meal]?
-        public let quickMealItems: [QuickMealItem]?
+        public var days: [Day]?
+        public var meals: [Meal]?
+        public var quickMealItems: [QuickMealItem]?
 
         /// ** User Foods owned kept in sync **
-        public let foods: [Food]?
+        public var foods: [Food]?
         
-        public let foodItems: [FoodItem]?
+        public var foodItems: [FoodItem]?
 //        public let foodUsages: [FoodUsage]?
 
         public init(
@@ -173,6 +173,135 @@ public extension SyncForm.Deletions {
         if let mealIds { count += mealIds.count }
         if let quickMealItemIds { count += quickMealItemIds.count }
         return count
+    }
+}
+
+
+extension SyncForm {
+    mutating func removeRedundantUpdates(from other: SyncForm) {
+        if let otherUpdates = other.updates {
+            self.updates?.removeRedundantUpdates(from: otherUpdates)
+        }
+    }
+}
+
+extension SyncForm.Updates {
+    mutating func removeRedundantUpdates(from other: SyncForm.Updates) {
+        if let others = other.goalSets, let goalSets {
+            self.goalSets = goalSets.filter({ !$0.isPresent(in: others) })
+        }
+        if let others = other.fastingActivities, let fastingActivities {
+            self.fastingActivities = fastingActivities.filter({ !$0.isPresent(in: others) })
+        }
+        if let others = other.days, let days {
+            self.days = days.filter({ !$0.isPresent(in: others) })
+        }
+        if let others = other.meals, let meals {
+            self.meals = meals.filter({ !$0.isPresent(in: others) })
+        }
+        if let others = other.foods, let foods {
+            self.foods = foods.filter({ !$0.isPresent(in: others) })
+        }
+        if let others = other.foodItems, let foodItems {
+            self.foodItems = foodItems.filter({ !$0.isPresent(in: others) })
+        }
+    }
+}
+
+extension Day {
+    func isPresent(in others: [Day]) -> Bool {
+        others.contains { hasSameData(as: $0) }
+    }
+    
+    func hasSameData(as other: Day) -> Bool {
+        other.id == id
+        && other.calendarDayString == calendarDayString
+        && other.goalSet?.id == goalSet?.id
+        && other.bodyProfile == bodyProfile
+        && other.markedAsFasted == markedAsFasted
+        && other.meals == meals
+    }
+}
+
+extension Food {
+    func isPresent(in others: [Food]) -> Bool {
+        others.contains { hasSameData(as: $0) }
+    }
+    
+    func hasSameData(as other: Food) -> Bool {
+        other.id == id
+        && other.type == type
+        && other.name == name
+        && other.emoji == emoji
+        && other.detail == detail
+        && other.brand == brand
+        && other.numberOfTimesConsumedGlobally == numberOfTimesConsumedGlobally
+        && other.numberOfTimesConsumed == numberOfTimesConsumed
+        && other.lastUsedAt == lastUsedAt
+        && other.firstUsedAt == firstUsedAt
+        && other.info == info
+        && other.publishStatus == publishStatus
+        && other.childrenFoods == childrenFoods
+        && other.dataset == dataset
+        && other.barcodes == barcodes
+        && other.deletedAt == deletedAt
+    }
+}
+
+extension FoodItem {
+    func isPresent(in others: [FoodItem]) -> Bool {
+        others.contains { hasSameData(as: $0) }
+    }
+    
+    func hasSameData(as other: FoodItem) -> Bool {
+        other.id == id
+        && other.food == food
+        && other.parentFood == parentFood
+        && other.meal == meal
+        && other.amount == amount
+        && other.markedAsEatenAt == markedAsEatenAt
+        && other.sortPosition == sortPosition
+        && other.deletedAt == deletedAt
+    }
+}
+
+extension Meal {
+    func isPresent(in others: [Meal]) -> Bool {
+        others.contains { hasSameData(as: $0) }
+    }
+    
+    func hasSameData(as other: Meal) -> Bool {
+        other.id == id
+        && other.day == day
+        && other.name == name
+        && other.time == time
+        && other.markedAsEatenAt == markedAsEatenAt
+        && other.goalSet == goalSet
+        && other.goalWorkoutMinutes == goalWorkoutMinutes
+        && other.foodItems == foodItems
+        && other.deletedAt == deletedAt
+    }
+}
+
+extension FastingActivity {
+    func isPresent(in others: [FastingActivity]) -> Bool {
+        others.contains { hasSameData(as: $0) }
+    }
+    
+    func hasSameData(as other: FastingActivity) -> Bool {
+        other.id == id
+        && other.pushToken == pushToken
+        && other.lastMealAt == lastMealAt
+        && other.nextMealAt == nextMealAt
+        && other.nextMealName == nextMealName
+        && other.countdownType == countdownType
+        && other.deletedAt == deletedAt
+    }
+}
+
+extension GoalSet {
+    func isPresent(in others: [GoalSet]) -> Bool {
+        others.contains { hasSameData(as: $0) }
     }
 }
 

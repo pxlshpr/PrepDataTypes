@@ -10,12 +10,12 @@ extension SyncForm {
         }
     }
 
-    public func log(emoji: String, isRequest: Bool) {
+    public func log(emoji: String, isRequest: Bool, includeBreakdown: Bool) {
         Task.detached(priority: .utility) {
             
             Logger.log("\(emoji)→ [\(isRequest ? "Request" : "Response") SyncForm] updates: \(updates?.count ?? 0), device: \(deviceModelName), \(isRequest ? "requestedVersion" : "receivedVersion"): \(versionTimestamp.timeStringAtGMT5)", printToConsole: true)
             
-            guard !isInitialSync else { return }
+            guard includeBreakdown else { return }
 
             if let days = updates?.days {
                 for day in days {

@@ -76,6 +76,10 @@ public extension Notification.Name {
     static var shouldUpdateMetrics: Notification.Name { return .init("shouldUpdateMetrics") }
     
     static var shouldPopSettingsToRoot: Notification.Name { return .init("shouldPopSettingsToRoot") }
+    
+    static var swapMealFoodItemPositions: Notification.Name { return .init("swapMealFoodItemPositions") }
+    static var removeMealFoodItemForMove: Notification.Name { return .init("removeMealFoodItemForMove") }
+    static var insertMealFoodItemForMove: Notification.Name { return .init("insertMealFoodItemForMove") }
 }
 
 public extension Notification {
@@ -100,5 +104,8 @@ public extension Notification {
         
         public static let bool = "bool"
         public static let nutrientMeterComponent = "nutrientMeterComponent"
+        
+        public static let sourceItemPosition = "sourceItemPosition"
+        public static let targetItemPosition = "targetItemPosition"
     }
 }

@@ -14,6 +14,8 @@ public struct MealFoodItem: Identifiable, Hashable, Codable, Equatable {
 
     public var isSoftDeleted: Bool
     public var badgeWidth: CGFloat
+    
+    public var mealId: UUID?
 
 //    public static func ==(lhs: Self, rhs: Self) -> Bool {
 //        lhs.id == rhs.id
@@ -28,7 +30,8 @@ public struct MealFoodItem: Identifiable, Hashable, Codable, Equatable {
         markedAsEatenAt: Double? = nil,
         sortPosition: Int = 0,
         isSoftDeleted: Bool,
-        badgeWidth: CGFloat = 0
+        badgeWidth: CGFloat = 0,
+        mealId: UUID?
     ) {
         self.id = id
         self.food = food
@@ -37,6 +40,7 @@ public struct MealFoodItem: Identifiable, Hashable, Codable, Equatable {
         self.sortPosition = sortPosition
         self.isSoftDeleted = isSoftDeleted
         self.badgeWidth = badgeWidth
+        self.mealId = mealId
     }
 }
 
@@ -49,7 +53,8 @@ public extension MealFoodItem {
             amount: foodItem.amount,
             markedAsEatenAt: foodItem.markedAsEatenAt,
             sortPosition: foodItem.sortPosition,
-            isSoftDeleted: foodItem.deletedAt != nil && foodItem.deletedAt! > 0
+            isSoftDeleted: foodItem.deletedAt != nil && foodItem.deletedAt! > 0,
+            mealId: foodItem.meal?.id
         )
     }
 }

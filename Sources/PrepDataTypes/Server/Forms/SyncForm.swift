@@ -46,7 +46,7 @@ extension SyncForm {
         /// ** Sliding window of days and its childrens to keep in sync **
         public var days: [Day]?
         public var meals: [Meal]?
-        public var quickMealItems: [QuickMealItem]?
+        public var quickItems: [QuickItem]?
 
         /// ** User Foods owned kept in sync **
         public var foods: [Food]?
@@ -61,7 +61,7 @@ extension SyncForm {
             foodItems: [FoodItem]? = nil,
             goalSets: [GoalSet]? = nil,
             meals: [Meal]? = nil,
-            quickMealItems: [QuickMealItem]? = nil,
+            quickItems: [QuickItem]? = nil,
             fastingActivities: [FastingActivity]? = nil
         ) {
             self.user = user
@@ -70,7 +70,7 @@ extension SyncForm {
             self.foodItems = foodItems
             self.goalSets = goalSets
             self.meals = meals
-            self.quickMealItems = quickMealItems
+            self.quickItems = quickItems
             self.fastingActivities = fastingActivities
         }
     }
@@ -84,7 +84,7 @@ extension SyncForm {
         public let foodItemIds: [UUID]?
         public let goalSetIds: [UUID]?
         public let mealIds: [UUID]?
-        public let quickMealItemIds: [UUID]?
+        public let quickItemIds: [UUID]?
         
         public init(
             dayIds: [String]? = nil,
@@ -92,14 +92,14 @@ extension SyncForm {
             foodItemIds: [UUID]? = nil,
             goalSetIds: [UUID]? = nil,
             mealIds: [UUID]? = nil,
-            quickMealItemIds: [UUID]? = nil
+            quickItemIds: [UUID]? = nil
         ) {
             self.dayIds = dayIds
             self.foodIds = foodIds
             self.foodItemIds = foodItemIds
             self.goalSetIds = goalSetIds
             self.mealIds = mealIds
-            self.quickMealItemIds = quickMealItemIds
+            self.quickItemIds = quickItemIds
         }
     }
 }
@@ -156,7 +156,7 @@ public extension SyncForm.Updates {
 //        if let foodUsages { count += foodUsages.count }
         if let goalSets { count += goalSets.count }
         if let meals { count += meals.count }
-        if let quickMealItems { count += quickMealItems.count }
+        if let quickItems { count += quickItems.count }
         if let fastingActivities { count += fastingActivities.count }
         
         return count
@@ -171,7 +171,7 @@ public extension SyncForm.Deletions {
         if let foodItemIds { count += foodItemIds.count }
         if let goalSetIds { count += goalSetIds.count }
         if let mealIds { count += mealIds.count }
-        if let quickMealItemIds { count += quickMealItemIds.count }
+        if let quickItemIds { count += quickItemIds.count }
         return count
     }
 }

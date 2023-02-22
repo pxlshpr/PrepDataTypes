@@ -88,6 +88,8 @@ public extension Day {
 
 import SwiftUI
 
+public let DefaultBadgeWidth: CGFloat = 30.0
+
 public func calculateMacrosIndicatorWidth(
     for value: Double,
     largest: Double,
@@ -97,13 +99,13 @@ public func calculateMacrosIndicatorWidth(
     
     let maxWidth = maxWidth ?? (0.34883721 * UIScreen.main.bounds.width)
     
-    let DefaultWidth: CGFloat = 30
+//    let DefaultWidth: CGFloat = 30
 
-    let min = DefaultWidth
+    let min = DefaultBadgeWidth
     let max: CGFloat = maxWidth
     
     guard largest > 0, smallest > 0, value <= largest, value >= smallest else {
-        return DefaultWidth
+        return DefaultBadgeWidth
     }
     
     /// First try and scale values such that smallest value gets the DefaultWidth and everything else scales accordingly

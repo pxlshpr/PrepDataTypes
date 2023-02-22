@@ -54,13 +54,18 @@ extension SyncForm {
     }
 }
 
-extension Double {
-    var timeStringAtGMT5: String {
+extension Date {
+    public var timeStringAtGMT5: String {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd-MMM-yy HH:mm:ss"
         formatter.timeZone = .init(secondsFromGMT: 5 * 3600)
-        let date = Date(timeIntervalSince1970: self)
-        return formatter.string(from: date)
+        return formatter.string(from: self)
+    }
+}
+
+extension Double {
+    public var timeStringAtGMT5: String {
+        Date(timeIntervalSince1970: self).timeStringAtGMT5
     }
 }
 

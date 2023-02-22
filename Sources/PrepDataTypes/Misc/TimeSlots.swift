@@ -19,7 +19,8 @@ public func nextAvailableTimeSlot(
     to timeSlot: Int,
     existingTimeSlots: [Int],
     ignoring timeSlotToIgnore: Int? = nil,
-    searchBackwardsIfNotFound: Bool = false
+    searchBackwardsIfNotFound: Bool = false,
+    doNotPassExistingTimeSlots: Bool = false
 ) -> Int? {
     
     func timeSlotIsAvailable(_ timeSlot: Int) -> Bool {
@@ -34,6 +35,11 @@ public func nextAvailableTimeSlot(
     for t in timeSlot..<PrepConstants.numberOfTimeSlotsInADay {
         if timeSlotIsAvailable(t) {
             return t
+        }
+        
+        /// End early if the option to not pass any existing timeslots is given
+        if doNotPassExistingTimeSlots, existingTimeSlots.contains(timeSlot) {
+            return nil
         }
     }
     
@@ -55,7 +61,8 @@ public func nextAvailableTimeSlot(
     ignoring timeToIgnoreTimeSlotFor: Date? = nil,
     existingMealTimes: [Date],
     searchBackwardsIfNotFound: Bool = false,
-    skippingFirstTimeSlot: Bool = false
+    skippingFirstTimeSlot: Bool = false,
+    doNotPassExistingTimeSlots: Bool = false
 ) -> Int? {
     let timeSlot = time.timeSlot(within: date) + (skippingFirstTimeSlot ? 1 : 0)
     let timeSlotToIgnore = timeToIgnoreTimeSlotFor?.timeSlot(within: date)
@@ -66,6 +73,7 @@ public func nextAvailableTimeSlot(
         to: timeSlot,
         existingTimeSlots: existingTimeSlots,
         ignoring: timeSlotToIgnore,
-        searchBackwardsIfNotFound: searchBackwardsIfNotFound
+        searchBackwardsIfNotFound: searchBackwardsIfNotFound,
+        doNotPassExistingTimeSlots: doNotPassExistingTimeSlots
     )
 }

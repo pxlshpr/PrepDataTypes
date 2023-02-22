@@ -1,6 +1,10 @@
 import Foundation
 
 public struct PrepConstants {
+    
+    /// Number of slots considering we have slots every 15 minutes and go till 6 am the next day
+    public static let numberOfTimeSlotsInADay = 120
+
     public static let bottomBarHeight: CGFloat = 95
     
     public static let numberOfRecents = 10

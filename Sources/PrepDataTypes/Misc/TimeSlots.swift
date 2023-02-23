@@ -15,11 +15,12 @@ public extension Date {
     }
 }
 
-public func nextAvailableTimeSlot(
+public func nearestAvailableTimeSlot(
     to timeSlot: Int,
     existingTimeSlots: [Int],
     ignoring timeSlotToIgnore: Int? = nil,
-    searchBackwardsIfNotFound: Bool = false,
+    startSearchBackwards: Bool = false,
+    searchingBothDirections: Bool = false,
     doNotPassExistingTimeSlots: Bool = false
 ) -> Int? {
     
@@ -31,23 +32,53 @@ public func nextAvailableTimeSlot(
         }
     }
     
-    /// First search forwards till the end
-    for t in timeSlot..<PrepConstants.numberOfTimeSlotsInADay {
-        if timeSlotIsAvailable(t) {
-            return t
+    if startSearchBackwards {
+        guard timeSlot >= 0 else { return nil }
+        
+        /// If we're starting search with timeSlot 0—we won't get a range, so check that by itself
+        if timeSlot == 0, timeSlotIsAvailable(0) {
+            return 0
         }
         
-        /// End early if the option to not pass any existing timeslots is given
-        if doNotPassExistingTimeSlots, existingTimeSlots.contains(timeSlot) {
-            return nil
-        }
-    }
-    
-    if searchBackwardsIfNotFound {
-        /// If we still haven't find one, go backwards
-        for t in (0..<timeSlot-1).reversed() {
+        /// First search backwards till start till the end
+        for t in (0..<timeSlot).reversed() {
             if timeSlotIsAvailable(t) {
                 return t
+            }
+            
+            /// End early if the option to not pass any existing timeslots is given
+            if doNotPassExistingTimeSlots, existingTimeSlots.contains(timeSlot) {
+                return nil
+            }
+        }
+        
+        if searchingBothDirections {
+            /// If we still haven't find one, go forwards
+            for t in timeSlot+1..<PrepConstants.numberOfTimeSlotsInADay {
+                if timeSlotIsAvailable(t) {
+                    return t
+                }
+            }
+        }
+    } else {
+        /// First search forwards till the end
+        for t in timeSlot..<PrepConstants.numberOfTimeSlotsInADay {
+            if timeSlotIsAvailable(t) {
+                return t
+            }
+            
+            /// End early if the option to not pass any existing timeslots is given
+            if doNotPassExistingTimeSlots, existingTimeSlots.contains(timeSlot) {
+                return nil
+            }
+        }
+        
+        if searchingBothDirections {
+            /// If we still haven't find one, go backwards
+            for t in (0..<timeSlot-1).reversed() {
+                if timeSlotIsAvailable(t) {
+                    return t
+                }
             }
         }
     }
@@ -55,25 +86,38 @@ public func nextAvailableTimeSlot(
     return nil
 }
 
-public func nextAvailableTimeSlot(
+public func nearestAvailableTimeSlot(
     to time: Date,
     within date: Date,
     ignoring timeToIgnoreTimeSlotFor: Date? = nil,
     existingMealTimes: [Date],
-    searchBackwardsIfNotFound: Bool = false,
+    startSearchBackwards: Bool = false,
+    searchingBothDirections: Bool = false,
     skippingFirstTimeSlot: Bool = false,
     doNotPassExistingTimeSlots: Bool = false
 ) -> Int? {
-    let timeSlot = time.timeSlot(within: date) + (skippingFirstTimeSlot ? 1 : 0)
+    let timeSlotDelta: Int
+    if skippingFirstTimeSlot {
+        timeSlotDelta = startSearchBackwards ? -1 : 1
+    } else {
+        timeSlotDelta = 0
+    }
+    let timeSlot = time.timeSlot(within: date) + timeSlotDelta
     let timeSlotToIgnore = timeToIgnoreTimeSlotFor?.timeSlot(within: date)
     let existingTimeSlots = existingMealTimes.compactMap {
         $0.timeSlot(within: date)
     }
-    return nextAvailableTimeSlot(
+    
+    if startSearchBackwards {
+        print("🟨 getting nearestAvailableTimeSlot to \(timeSlot)")
+    }
+
+    return nearestAvailableTimeSlot(
         to: timeSlot,
         existingTimeSlots: existingTimeSlots,
         ignoring: timeSlotToIgnore,
-        searchBackwardsIfNotFound: searchBackwardsIfNotFound,
+        startSearchBackwards: startSearchBackwards,
+        searchingBothDirections: searchingBothDirections,
         doNotPassExistingTimeSlots: doNotPassExistingTimeSlots
     )
 }

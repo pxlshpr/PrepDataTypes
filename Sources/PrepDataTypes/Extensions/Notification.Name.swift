@@ -13,7 +13,7 @@ public extension Notification.Name {
     static var expandSummaryDetent: Notification.Name { return .init("expandSummaryDetent") }
     static var collapseSummaryDetent: Notification.Name { return .init("collapseSummaryDetent") }
 
-    static var dateDidChange: Notification.Name { return .init("dateDidChange") }
+    static var didUpdateDietForCurrentDate: Notification.Name { return .init("didUpdateDietForCurrentDate") }
     static var diaryWillChangeDate: Notification.Name { return .init("diaryWillChangeDate") }
     static var didPickDateOnDayView: Notification.Name { return .init("didPickDateOnDayView") }
     static var summaryViewTypeChanged: Notification.Name { return .init("summaryViewTypeChanged") }
@@ -32,8 +32,6 @@ public extension Notification.Name {
     static var didUpdateGoalSets: Notification.Name { return .init("didUpdateGoalSets") }
     static var didUpdateFoods: Notification.Name { return .init("didUpdateFoods") }
     static var didUpdateDays: Notification.Name { return .init("didUpdateDays") }
-    
-    static var shouldRefreshMealsDiaryWindow: Notification.Name { return .init("shouldRefreshMealsDiaryWindow") }
     
     static var didUpdateMealFoodItem: Notification.Name { return .init("didUpdateMealFoodItem") }
     static var didAddFoodItemToMeal: Notification.Name { return .init("didAddFoodItemToMeal") }

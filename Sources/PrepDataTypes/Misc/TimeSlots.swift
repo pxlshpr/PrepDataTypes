@@ -15,6 +15,7 @@ public extension Date {
     }
 }
 
+
 public func nearestAvailableTimeSlot(
     to timeSlot: Int,
     existingTimeSlots: [Int],

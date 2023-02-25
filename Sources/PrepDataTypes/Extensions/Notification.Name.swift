@@ -81,6 +81,8 @@ public extension Notification.Name {
     
     static var sheetWasDismissedOnHome: Notification.Name { return .init("sheetWasDismissedOnHome") }
     static var sheetWasPresentedOnHome: Notification.Name { return .init("sheetWasPresentedOnHome") }
+    static var fastingTimerStateChanged: Notification.Name { return .init("fastingTimerStateChanged") }
+    static var fastingTimerStateRemoved: Notification.Name { return .init("fastingTimerStateRemoved") }
 }
 
 public extension Notification {
@@ -108,5 +110,7 @@ public extension Notification {
         
         public static let sourceItemPosition = "sourceItemPosition"
         public static let targetItemPosition = "targetItemPosition"
+        
+        public static let fastingTimerState = "fastingTimerState"
     }
 }

@@ -134,7 +134,7 @@ extension Food {
                     return nil
                 }
                 
-                let servings: Double
+//                let servings: Double
                 
                 guard quantityOfServingSizePerTargetSize > 0 else { return nil }
                 let quantityPerServing = quantityOfServingSizePerServing / quantityOfServingSizePerTargetSize
@@ -188,7 +188,7 @@ extension Food {
         switch serving.unitType {
         case .weight:
             guard let servingWeight, let sizeUnitWeight = size.unitWeight(in: self) else { return nil }
-            let converted = servingWeight.convert(to: sizeUnitWeight.unit)
+//            let converted = servingWeight.convert(to: sizeUnitWeight.unit)
             let x = servingWeight.value / sizeUnitWeight.value
             return x
         case .volume:
@@ -206,9 +206,9 @@ extension Food {
             }
 
             switch size.unit {
-            case .weight(let weightUnit):
+            case .weight(_):
                 return nil
-            case .volume(let volumeUnit):
+            case .volume(_):
                 return nil
             case .serving:
                 /// we will stop here and return it
@@ -563,7 +563,7 @@ extension FoodQuantity.Size {
             guard let servingWeight = food.servingWeight else { return nil }
             return WeightQuantity((servingWeight.value * value) / quantity, servingWeight.unit)
 
-        case .size(let sizeUnit, let volumePrefixUnit):
+        case .size(let sizeUnit, _):
             guard let unitWeight = sizeUnit.unitWeight(in: food) else { return nil }
             return WeightQuantity((unitWeight.value * value) / quantity, unitWeight.unit)
 
@@ -589,7 +589,7 @@ extension FoodQuantity.Size {
             guard let servingVolume = food.servingVolume else { return nil }
             return VolumeQuantity((servingVolume.value * value) / quantity, servingVolume.unit)
 
-        case .size(let sizeUnit, let volumePrefixUnit):
+        case .size(let sizeUnit, _):
             guard let unitVolume = sizeUnit.unitVolume(in: food) else { return nil }
             return VolumeQuantity((unitVolume.value * value) / quantity, unitVolume.unit)
 
@@ -633,7 +633,7 @@ extension FoodQuantity.Size {
         case .serving:
             return nil
 
-        case .size(let sizeUnit, let volumePrefixUnit):
+        case .size(_, _):
             return nil
 
             //TODO: What do we do about the volumePrefixUnit

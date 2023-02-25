@@ -136,15 +136,15 @@ public extension SyncForm {
     }
 }
 
-extension Date: Strideable {
-    public func distance(to other: Date) -> TimeInterval {
-        return other.timeIntervalSinceReferenceDate - self.timeIntervalSinceReferenceDate
-    }
-
-    public func advanced(by n: TimeInterval) -> Date {
-        return self + n
-    }
-}
+//extension Date: Strideable {
+//    public func distance(to other: Date) -> TimeInterval {
+//        return other.timeIntervalSinceReferenceDate - self.timeIntervalSinceReferenceDate
+//    }
+//
+//    public func advanced(by n: TimeInterval) -> Date {
+//        return self + n
+//    }
+//}
 
 public extension SyncForm.Updates {
     var count: Int {

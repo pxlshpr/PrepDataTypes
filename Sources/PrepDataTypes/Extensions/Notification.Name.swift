@@ -78,6 +78,9 @@ public extension Notification.Name {
     static var swapMealFoodItemPositions: Notification.Name { return .init("swapMealFoodItemPositions") }
     static var removeMealFoodItemForMove: Notification.Name { return .init("removeMealFoodItemForMove") }
     static var insertMealFoodItemForMove: Notification.Name { return .init("insertMealFoodItemForMove") }
+    
+    static var sheetWasDismissedOnHome: Notification.Name { return .init("sheetWasDismissedOnHome") }
+    static var sheetWasPresentedOnHome: Notification.Name { return .init("sheetWasPresentedOnHome") }
 }
 
 public extension Notification {

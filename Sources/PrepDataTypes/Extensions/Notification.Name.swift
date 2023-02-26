@@ -83,6 +83,9 @@ public extension Notification.Name {
     static var sheetWasPresentedOnHome: Notification.Name { return .init("sheetWasPresentedOnHome") }
     static var fastingTimerStateChanged: Notification.Name { return .init("fastingTimerStateChanged") }
     static var fastingTimerStateRemoved: Notification.Name { return .init("fastingTimerStateRemoved") }
+    static var didDismissExtractor: Notification.Name { return .init("didDismissExtractor") }
+    static var didExtractFoodLabel: Notification.Name { return .init("didExtractFoodLabel") }
+    static var shouldDismissFoodForm: Notification.Name { return .init("shouldDismissFoodForm") }
 }
 
 public extension Notification {
@@ -104,7 +107,9 @@ public extension Notification {
         public static let bodyProfile = "bodyProfile"
         
         public static let mealId = "mealId"
-        
+
+        public static let extractorOutput = "extractorOutput"
+
         public static let bool = "bool"
         public static let nutrientMeterComponent = "nutrientMeterComponent"
         

@@ -229,7 +229,7 @@ extension Food {
     }
     
     func hasSameData(as other: Food) -> Bool {
-        other.id == id
+        let hasSameData = other.id == id
         && other.type == type
         && other.name == name
         && other.emoji == emoji
@@ -241,27 +241,42 @@ extension Food {
         && other.firstUsedAt == firstUsedAt
         && other.info == info
         && other.publishStatus == publishStatus
-        && other.childrenFoods == childrenFoods
         && other.dataset == dataset
         && other.barcodes == barcodes
-        && other.deletedAt == deletedAt
+        && other.isDeleted == isDeleted
+        
+        if let childrenFoods {
+            guard let otherChildrenFoods = other.childrenFoods,
+                  childrenFoods.count == otherChildrenFoods.count
+            else { return false }
+            for food in childrenFoods {
+                guard otherChildrenFoods.contains(where: { $0.id == food.id })
+                else { return false }
+            }
+        }
+        
+        return hasSameData
     }
 }
 
-extension FoodItem {
+public extension FoodItem {
     func isPresent(in others: [FoodItem]) -> Bool {
         others.contains { hasSameData(as: $0) }
     }
     
-    func hasSameData(as other: FoodItem) -> Bool {
-        other.id == id
-        && other.food == food
-        && other.parentFood == parentFood
-        && other.meal == meal
+    func hasSameData(as other: FoodItem, andSameSortPosition: Bool = true) -> Bool {
+        var hasSameData = other.id == id
+        && other.food.id == food.id
         && other.amount == amount
         && other.markedAsEatenAt == markedAsEatenAt
-        && other.sortPosition == sortPosition
-        && other.deletedAt == deletedAt
+        && other.isDeleted == isDeleted
+        && other.parentFood?.id == parentFood?.id
+        && other.meal?.id == meal?.id
+        
+        guard andSameSortPosition else {
+            return hasSameData
+        }
+        return hasSameData && other.sortPosition == sortPosition
     }
 }
 
@@ -272,14 +287,14 @@ extension Meal {
     
     func hasSameData(as other: Meal) -> Bool {
         other.id == id
-        && other.day == day
+        && other.day.hasSameData(as: day)
         && other.name == name
         && other.time == time
         && other.markedAsEatenAt == markedAsEatenAt
-        && other.goalSet == goalSet
         && other.goalWorkoutMinutes == goalWorkoutMinutes
+        && other.isDeleted == isDeleted
         && other.foodItems == foodItems
-        && other.deletedAt == deletedAt
+        && other.goalSet?.id == goalSet?.id
     }
 }
 
@@ -295,7 +310,7 @@ extension FastingActivity {
         && other.nextMealAt == nextMealAt
         && other.nextMealName == nextMealName
         && other.countdownType == countdownType
-        && other.deletedAt == deletedAt
+        && other.isDeleted == isDeleted
     }
 }
 

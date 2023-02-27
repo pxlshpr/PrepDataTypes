@@ -27,5 +27,5 @@ public struct PrepConstants {
 
 /// Use this for print statements that we can disabled by commenting out one line.
 public func cprint(_ string: String) {
-//    print(string)
+    print(string)
 }

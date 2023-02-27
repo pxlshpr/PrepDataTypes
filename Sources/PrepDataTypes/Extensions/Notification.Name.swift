@@ -107,6 +107,7 @@ public extension Notification {
         public static let bodyProfile = "bodyProfile"
         
         public static let mealId = "mealId"
+        public static let foodItemId = "foodItemId"
 
         public static let extractorOutput = "extractorOutput"
 

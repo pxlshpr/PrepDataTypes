@@ -110,7 +110,7 @@ public func nearestAvailableTimeSlot(
     }
     
     if startSearchBackwards {
-        print("🟨 getting nearestAvailableTimeSlot to \(timeSlot)")
+        cprint("🟨 getting nearestAvailableTimeSlot to \(timeSlot)")
     }
 
     return nearestAvailableTimeSlot(

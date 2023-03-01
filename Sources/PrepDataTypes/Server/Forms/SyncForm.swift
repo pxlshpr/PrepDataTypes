@@ -265,7 +265,7 @@ public extension FoodItem {
     }
     
     func hasSameData(as other: FoodItem, andSameSortPosition: Bool = true) -> Bool {
-        var hasSameData = other.id == id
+        let hasSameData = other.id == id
         && other.food.id == food.id
         && other.amount == amount
         && other.markedAsEatenAt == markedAsEatenAt

@@ -1,6 +1,6 @@
 import Foundation
 
-public extension MealFoodItem {
+public extension MealItem {
     
     var nutrientScaleFactor: Double {
         guard let foodQuantity = food.quantity(for: amount) else { return 0 }

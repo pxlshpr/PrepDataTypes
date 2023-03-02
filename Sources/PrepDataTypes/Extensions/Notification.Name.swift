@@ -33,7 +33,7 @@ public extension Notification.Name {
     static var didUpdateFoods: Notification.Name { return .init("didUpdateFoods") }
     static var didUpdateDays: Notification.Name { return .init("didUpdateDays") }
     
-    static var didUpdateMealFoodItem: Notification.Name { return .init("didUpdateMealFoodItem") }
+    static var didUpdateMealItem: Notification.Name { return .init("didUpdateMealItem") }
     static var didAddFoodItemToMeal: Notification.Name { return .init("didAddFoodItemToMeal") }
     static var didDeleteFoodItemFromMeal: Notification.Name { return .init("didDeleteFoodItemFromMeal") }
     
@@ -75,9 +75,9 @@ public extension Notification.Name {
     
     static var shouldPopSettingsToRoot: Notification.Name { return .init("shouldPopSettingsToRoot") }
     
-    static var swapMealFoodItemPositions: Notification.Name { return .init("swapMealFoodItemPositions") }
-    static var removeMealFoodItemForMove: Notification.Name { return .init("removeMealFoodItemForMove") }
-    static var insertMealFoodItemForMove: Notification.Name { return .init("insertMealFoodItemForMove") }
+    static var swapMealItemPositions: Notification.Name { return .init("swapMealItemPositions") }
+    static var removeMealItemForMove: Notification.Name { return .init("removeMealItemForMove") }
+    static var insertMealItemForMove: Notification.Name { return .init("insertMealItemForMove") }
     
     static var sheetWasDismissedOnHome: Notification.Name { return .init("sheetWasDismissedOnHome") }
     static var sheetWasPresentedOnHome: Notification.Name { return .init("sheetWasPresentedOnHome") }

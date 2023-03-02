@@ -5,7 +5,7 @@ import SwiftSugar
 /// It is stripped off the relation back to the `Meal` so as to not clear a cyclical recursion error,
 /// in addition to not having the `syncStatus`, `updatedAt`, `deletedAt` metadata.
 /// This is only to be used as a child of a `Meal` to be used in the UI.
-public struct MealFoodItem: Identifiable, Hashable, Codable, Equatable {
+public struct MealItem: Identifiable, Hashable, Codable, Equatable {
     public var id: UUID
     public var food: Food
     public var amount: FoodValue
@@ -41,7 +41,7 @@ public struct MealFoodItem: Identifiable, Hashable, Codable, Equatable {
     }
 }
 
-public extension MealFoodItem {
+public extension MealItem {
     init(from foodItem: FoodItem) {
 //        cprint(foodItem)
         self.init(
@@ -57,7 +57,7 @@ public extension MealFoodItem {
     }
 }
 
-public extension MealFoodItem {
+public extension MealItem {
     var isCompleted: Bool {
         markedAsEatenAt != nil && markedAsEatenAt! > 0
     }

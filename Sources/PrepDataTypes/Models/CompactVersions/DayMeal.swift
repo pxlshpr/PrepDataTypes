@@ -10,7 +10,7 @@ public struct DayMeal: Identifiable, Hashable, Codable {
     public var time: Double
     public var markedAsEatenAt: Double?
     public var goalSet: GoalSet?
-    public var foodItems: [MealFoodItem]
+    public var foodItems: [MealItem]
 
     
     public var badgeWidth: CGFloat
@@ -21,7 +21,7 @@ public struct DayMeal: Identifiable, Hashable, Codable {
         time: Double,
         markedAsEatenAt: Double? = nil,
         goalSet: GoalSet? = nil,
-        foodItems: [MealFoodItem] = [],
+        foodItems: [MealItem] = [],
         badgeWidth: CGFloat = 0
     ) {
         self.id = id

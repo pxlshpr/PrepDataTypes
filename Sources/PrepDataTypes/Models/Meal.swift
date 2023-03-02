@@ -13,7 +13,7 @@ public struct Meal: Identifiable, Hashable, Codable {
 
     public var badgeWidth: Double?
     
-    public var foodItems: [MealFoodItem]
+    public var foodItems: [MealItem]
 
     public var syncStatus: SyncStatus
     public var updatedAt: Double
@@ -28,7 +28,7 @@ public struct Meal: Identifiable, Hashable, Codable {
         goalSet: GoalSet? = nil,
         goalWorkoutMinutes: Int? = nil,
         badgeWidth: Double = 0,
-        foodItems: [MealFoodItem],
+        foodItems: [MealItem],
         syncStatus: SyncStatus,
         updatedAt: Double,
         deletedAt: Double? = nil

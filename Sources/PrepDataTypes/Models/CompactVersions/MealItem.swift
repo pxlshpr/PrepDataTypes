@@ -90,3 +90,55 @@ extension NutrientType {
         units.first ?? .g
     }
 }
+
+
+public struct IngredientItem: Identifiable, Hashable, Codable, Equatable {
+    public var id: UUID
+    public var food: Food
+    public var amount: FoodValue
+    public var sortPosition: Int
+    public var isSoftDeleted: Bool
+    public var badgeWidth: CGFloat
+    public var energyInKcal: Double
+    
+    public var parentFoodId: UUID?
+    
+    public init(
+        id: UUID = UUID(),
+        food: Food,
+        amount: FoodValue,
+        sortPosition: Int = 0,
+        isSoftDeleted: Bool,
+        badgeWidth: CGFloat = 0,
+        energyInKcal: Double,
+        parentFoodId: UUID?
+    ) {
+        self.id = id
+        self.food = food
+        self.amount = amount
+        self.sortPosition = sortPosition
+        self.isSoftDeleted = isSoftDeleted
+        self.badgeWidth = badgeWidth
+        self.energyInKcal = energyInKcal
+        self.parentFoodId = parentFoodId
+    }
+}
+
+public extension IngredientItem {
+    var microsDict: [NutrientType : FoodLabelValue] {
+        var dict: [NutrientType : FoodLabelValue] = [:]
+        for nutrient in food.info.nutrients.micros {
+            guard let nutrientType = nutrient.nutrientType
+            else { continue }
+            dict[nutrientType] = FoodLabelValue(
+                amount:
+                    nutrient.value * nutrientScaleFactor,
+                unit:
+                    nutrient.nutrientUnit.foodLabelUnit
+                    ?? nutrientType.defaultUnit.foodLabelUnit
+                    ?? .g
+            )
+        }
+        return dict
+    }
+}

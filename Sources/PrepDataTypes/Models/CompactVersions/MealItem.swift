@@ -142,3 +142,10 @@ public extension IngredientItem {
         return dict
     }
 }
+
+
+public extension IngredientItem {
+    var quantityDescription: String {
+        amount.description(with: food)
+    }
+}

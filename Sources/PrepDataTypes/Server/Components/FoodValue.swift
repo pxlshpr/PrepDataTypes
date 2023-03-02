@@ -203,3 +203,9 @@ public enum FoodValueError: Error {
     case invalidSizeId
     case missingSizeVolumePrefixUnit
 }
+
+public extension FoodValue {
+    func description(with food: Food) -> String {
+        "\(value.cleanAmount) \(unitDescription(sizes: food.info.sizes))"
+    }
+}

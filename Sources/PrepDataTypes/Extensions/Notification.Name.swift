@@ -105,7 +105,9 @@ public extension Notification {
         public static let food = "food"
         public static let foods = "foods"
         public static let bodyProfile = "bodyProfile"
-        
+
+        public static let sourceId = "sourceId"
+
         public static let mealId = "mealId"
         public static let foodItemId = "foodItemId"
 

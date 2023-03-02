@@ -87,3 +87,25 @@ public extension Food {
         hasDetail || hasBrand
     }
 }
+
+public extension Food {
+    var energyBySummatingMacros: Double {
+        (info.nutrients.carb * KcalsPerGramOfCarb)
+        + (info.nutrients.fat * KcalsPerGramOfFat)
+        + (info.nutrients.protein * KcalsPerGramOfProtein)
+    }
+    
+    var carbPortion: Double {
+        guard energyBySummatingMacros > 0 else { return 0 }
+        return (info.nutrients.carb * KcalsPerGramOfCarb) / energyBySummatingMacros
+    }
+    var fatPortion: Double {
+        guard energyBySummatingMacros > 0 else { return 0 }
+        return (info.nutrients.fat * KcalsPerGramOfFat) / energyBySummatingMacros
+    }
+    var proteinPortion: Double {
+        guard energyBySummatingMacros > 0 else { return 0 }
+        return (info.nutrients.protein * KcalsPerGramOfProtein) / energyBySummatingMacros
+    }
+}
+

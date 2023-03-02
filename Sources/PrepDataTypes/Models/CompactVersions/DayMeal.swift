@@ -64,10 +64,14 @@ public extension Meal {
 
 public extension Day {
     func macrosIndicatorWidth(for energyInKcal: CGFloat) -> CGFloat {
+//        calculateMacrosIndicatorWidth(
+//            for: energyInKcal,
+//            largest: largestEnergyInKcal,
+//            smallest: smallestEnergyInKcal
+//        )
         calculateMacrosIndicatorWidth(
             for: energyInKcal,
-            largest: largestEnergyInKcal,
-            smallest: smallestEnergyInKcal
+            within: energyValuesInKcalDecreasing
         )
     }
     
@@ -89,6 +93,26 @@ public extension Day {
 import SwiftUI
 
 public let DefaultBadgeWidth: CGFloat = 30.0
+
+public func calculateMacrosIndicatorWidth(
+    for value: Double,
+    within values: [Double],
+    maxWidth: CGFloat? = nil
+) -> CGFloat {
+    let sorted = values
+        .filter { $0 > 0 }
+        .sorted { $0 > $1 }
+    guard let largest = sorted.first,
+          let smallest = sorted.last
+    else { return DefaultBadgeWidth }
+    
+    return calculateMacrosIndicatorWidth(
+        for: value,
+        largest: largest,
+        smallest: smallest,
+        maxWidth: maxWidth
+    )
+}
 
 public func calculateMacrosIndicatorWidth(
     for value: Double,

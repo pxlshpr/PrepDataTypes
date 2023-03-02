@@ -22,6 +22,10 @@ public struct PrepConstants {
         public static let showingBadgesForFoods = true
         public static let showingFoodDetails = false
         public static let showingFoodEmojis = true
+
+        public static let showingIngredientEmojis = true
+        public static let showingIngredientDetails = true
+        public static let showingIngredientBadges = true
     }
 }
 

@@ -17,6 +17,7 @@ public struct Food: Identifiable, Hashable, Codable {
     public let publishStatus: UserFoodPublishStatus?
     public var jsonSyncStatus: SyncStatus
     public let childrenFoods: [Food]? //TODO: Use compact version here if we'll get cyclical errors
+    public let ingredientItems: [IngredientItem]?
 
     /// `PresetFood` specific
     public let dataset: FoodDataset?
@@ -27,7 +28,7 @@ public struct Food: Identifiable, Hashable, Codable {
     public var updatedAt: Double
     public var deletedAt: Double?
     
-    public init(id: UUID, type: FoodType, name: String, emoji: String, detail: String?, brand: String?, numberOfTimesConsumedGlobally: Int, numberOfTimesConsumed: Int, lastUsedAt: Double?, firstUsedAt: Double?, info: FoodInfo, publishStatus: UserFoodPublishStatus?, jsonSyncStatus: SyncStatus, childrenFoods: [Food]?, dataset: FoodDataset?, barcodes: [Barcode]?, syncStatus: SyncStatus, updatedAt: Double, deletedAt: Double? = nil) {
+    public init(id: UUID, type: FoodType, name: String, emoji: String, detail: String?, brand: String?, numberOfTimesConsumedGlobally: Int, numberOfTimesConsumed: Int, lastUsedAt: Double?, firstUsedAt: Double?, info: FoodInfo, publishStatus: UserFoodPublishStatus?, jsonSyncStatus: SyncStatus, childrenFoods: [Food]?, ingredientItems: [IngredientItem]?, dataset: FoodDataset?, barcodes: [Barcode]?, syncStatus: SyncStatus, updatedAt: Double, deletedAt: Double? = nil) {
         self.id = id
         self.type = type
         self.name = name
@@ -42,6 +43,7 @@ public struct Food: Identifiable, Hashable, Codable {
         self.publishStatus = publishStatus
         self.jsonSyncStatus = jsonSyncStatus
         self.childrenFoods = childrenFoods
+        self.ingredientItems = ingredientItems
         self.dataset = dataset
         self.barcodes = barcodes
         self.syncStatus = syncStatus

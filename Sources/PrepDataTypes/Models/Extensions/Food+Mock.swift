@@ -43,6 +43,7 @@ public extension Food {
             publishStatus: .hidden,
             jsonSyncStatus: .synced,
             childrenFoods: nil,
+            ingredientItems: nil,
             dataset: nil,
             barcodes: nil,
             syncStatus: .synced,

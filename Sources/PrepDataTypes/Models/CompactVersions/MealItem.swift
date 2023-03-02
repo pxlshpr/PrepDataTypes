@@ -149,3 +149,18 @@ public extension IngredientItem {
         amount.description(with: food)
     }
 }
+
+
+public extension IngredientItem {
+    init(from foodItem: FoodItem) {
+        self.init(
+            id: foodItem.id,
+            food: foodItem.food,
+            amount: foodItem.amount,
+            sortPosition: foodItem.sortPosition,
+            isSoftDeleted: foodItem.deletedAt != nil && foodItem.deletedAt! > 0,
+            energyInKcal: foodItem.scaledValueForEnergyInKcal,
+            parentFoodId: foodItem.parentFood?.id
+        )
+    }
+}

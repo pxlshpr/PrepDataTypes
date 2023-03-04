@@ -110,8 +110,6 @@ extension NutrientMeterComponent: CustomStringConvertible {
     }
 }
 
-#endif
-
 extension Double {
     public var formattedWithCommas: String {
         guard self >= 1000 else {
@@ -128,6 +126,8 @@ extension Double {
         return formatted
     }
 }
+
+#endif
 
 public extension NutrientType {
     var shortestDescription: String {

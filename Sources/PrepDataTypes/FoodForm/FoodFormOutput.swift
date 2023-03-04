@@ -22,4 +22,29 @@ public struct FoodFormOutput {
         self.createForm = createForm
     }
 }
+
+/**
+ Encompasses all the data output by the `ParentFoodForm`.
+ */
+public struct ParentFoodFormOutput {
+    
+    public let createForm: UserFoodCreateForm
+    public let items: [IngredientItem]
+    public let forRecipe: Bool
+    
+    public init(
+        createForm: UserFoodCreateForm,
+        items: [IngredientItem],
+        forRecipe: Bool
+    ) {
+        self.createForm = createForm
+        self.items = items
+        self.forRecipe = forRecipe
+    }
+    
+    public var foodType: FoodType {
+        forRecipe ? .recipe : .plate
+    }
+}
+
 #endif

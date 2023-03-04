@@ -18,6 +18,7 @@ public struct UserOptions: Hashable, Codable {
         }
     }
     
+    
     public struct Log: Hashable, Codable {
         public var showingBadgesForFoods: Bool = true
         public var showingDetails: Bool = false

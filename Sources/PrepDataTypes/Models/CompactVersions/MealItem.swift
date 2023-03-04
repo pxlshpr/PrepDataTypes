@@ -94,7 +94,7 @@ extension NutrientType {
 
 public struct IngredientItem: Identifiable, Hashable, Codable, Equatable {
     public var id: UUID
-    public var food: Food
+    public var food: IngredientFood
     public var amount: FoodValue
     public var sortPosition: Int
     public var isSoftDeleted: Bool
@@ -105,7 +105,7 @@ public struct IngredientItem: Identifiable, Hashable, Codable, Equatable {
     
     public init(
         id: UUID = UUID(),
-        food: Food,
+        food: IngredientFood,
         amount: FoodValue,
         sortPosition: Int = 0,
         isSoftDeleted: Bool,
@@ -155,7 +155,7 @@ public extension IngredientItem {
     init(from foodItem: FoodItem) {
         self.init(
             id: foodItem.id,
-            food: foodItem.food,
+            food: foodItem.food.ingredientFood,
             amount: foodItem.amount,
             sortPosition: foodItem.sortPosition,
             isSoftDeleted: foodItem.deletedAt != nil && foodItem.deletedAt! > 0,

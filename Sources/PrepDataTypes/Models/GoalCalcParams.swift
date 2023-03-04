@@ -1,12 +1,12 @@
 import Foundation
 
 public struct GoalCalcParams {
-    public let userUnits: UserUnits
+    public let userOptions: UserOptions
     public let bodyProfile: BodyProfile?
     public let energyGoal: Goal?
     
-    public init(userUnits: UserUnits, bodyProfile: BodyProfile?, energyGoal: Goal?) {
-        self.userUnits = userUnits
+    public init(userOptions: UserOptions, bodyProfile: BodyProfile?, energyGoal: Goal?) {
+        self.userOptions = userOptions
         self.bodyProfile = bodyProfile
         self.energyGoal = energyGoal
     }

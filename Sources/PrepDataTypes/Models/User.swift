@@ -4,7 +4,7 @@ public struct User: Identifiable, Hashable, Codable {
     public let id: UUID
     public let cloudKitId: String?
     
-    public var units: UserUnits
+    public var units: UserOptions
     public var bodyProfile: BodyProfile?
     public var bodyProfileUpdatedAt: Double?
 
@@ -14,7 +14,7 @@ public struct User: Identifiable, Hashable, Codable {
     public init(
         id: UUID,
         cloudKitId: String?,
-        units: UserUnits,
+        units: UserOptions,
         bodyProfile: BodyProfile? = nil,
         bodyProfileUpdatedAt: Double? = nil,
         syncStatus: SyncStatus,
@@ -34,7 +34,7 @@ public extension User {
         self.init(
             id: UUID(),
             cloudKitId: cloudKitId,
-            units: UserUnits.standard,
+            units: UserOptions.standard,
             bodyProfile: nil,
             bodyProfileUpdatedAt: nil,
             syncStatus: .notSynced,

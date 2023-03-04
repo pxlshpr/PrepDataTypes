@@ -20,8 +20,8 @@ public extension MealItem {
 public extension IngredientItem {
     
     var nutrientScaleFactor: Double {
-        guard let foodQuantity = food.quantity(for: amount) else { return 0 }
-        return food.nutrientScaleFactor(for: foodQuantity) ?? 0
+        guard let foodQuantity = food.detachedFood.quantity(for: amount) else { return 0 }
+        return food.detachedFood.nutrientScaleFactor(for: foodQuantity) ?? 0
     }
     
     var scaledValueForEnergyInKcal: Double {
@@ -29,7 +29,7 @@ public extension IngredientItem {
     }
     
     func scaledValueForMacro(_ macro: Macro) -> Double {
-        food.valueForMacro(macro) * nutrientScaleFactor
+        food.detachedFood.valueForMacro(macro) * nutrientScaleFactor
     }
 }
 

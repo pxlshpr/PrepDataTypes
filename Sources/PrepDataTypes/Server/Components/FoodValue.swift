@@ -208,4 +208,8 @@ public extension FoodValue {
     func description(with food: Food) -> String {
         "\(value.cleanAmount) \(unitDescription(sizes: food.info.sizes))"
     }
+    
+    func description(with ingredientFood: IngredientFood) -> String {
+        "\(value.cleanAmount) \(unitDescription(sizes: ingredientFood.info.sizes))"
+    }
 }

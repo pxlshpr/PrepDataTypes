@@ -25,12 +25,12 @@ public struct Goal: Identifiable, Hashable, Codable {
 }
 
 public extension Goal {
-    func equivalentUnitString(userUnits: UserUnits) -> String? {
+    func equivalentUnitString(userOptions: UserOptions) -> String? {
         switch type {
         case .energy(let type):
             switch type {
             default:
-                return userUnits.energy.shortDescription
+                return userOptions.energy.shortDescription
             }
         case .macro(let type, _):
             switch type {
@@ -70,7 +70,7 @@ public extension Goal {
                 from: trueLowerBound,
                 energy: energyValue,
                 bodyProfile: params.bodyProfile,
-                userUnits: params.userUnits
+                userOptions: params.userOptions
             )
 
         case .micro:
@@ -78,7 +78,7 @@ public extension Goal {
                 from: trueLowerBound,
                 energy: energyValue,
                 bodyProfile: params.bodyProfile,
-                userUnits: params.userUnits
+                userOptions: params.userOptions
             )
         default:
             return nil
@@ -103,14 +103,14 @@ public extension Goal {
                 from: trueUpperBound,
                 energy: energyValue,
                 bodyProfile: params.bodyProfile,
-                userUnits: params.userUnits
+                userOptions: params.userOptions
             )
         case .micro:
             return calculateMicroValue(
                 from: trueUpperBound,
                 energy: energyValue,
                 bodyProfile: params.bodyProfile,
-                userUnits: params.userUnits
+                userOptions: params.userOptions
             )
         default:
             return nil
@@ -230,7 +230,7 @@ public extension Goal {
         from value: Double?,
         energy: Double?,
         bodyProfile: BodyProfile?,
-        userUnits: UserUnits
+        userOptions: UserOptions
     ) -> Double? {
         
         guard let nutrientGoalType, nutrientGoalType.isPercentageOfEnergy else {
@@ -238,7 +238,7 @@ public extension Goal {
                 from: value,
                 energy: energy,
                 bodyProfile: bodyProfile,
-                userUnits: userUnits
+                userOptions: userOptions
             )
         }
         
@@ -247,7 +247,7 @@ public extension Goal {
               let energyInKcal = convertEnergyToKcal(
                     energy,
                     usingBodyProfile: bodyProfile,
-                    orUserUnits: userUnits
+                    orUserUnits: userOptions
               )
         else { return nil }
         
@@ -258,7 +258,7 @@ public extension Goal {
         from value: Double?,
         energy: Double?,
         bodyProfile: BodyProfile?,
-        userUnits: UserUnits
+        userOptions: UserOptions
     ) -> Double? {
         
         guard let nutrientGoalType, nutrientGoalType.isPercentageOfEnergy else {
@@ -266,7 +266,7 @@ public extension Goal {
                 from: value,
                 energy: energy,
                 bodyProfile: bodyProfile,
-                userUnits: userUnits
+                userOptions: userOptions
             )
         }
 
@@ -275,7 +275,7 @@ public extension Goal {
               let energyInKcal = convertEnergyToKcal(
                     energy,
                     usingBodyProfile: bodyProfile,
-                    orUserUnits: userUnits
+                    orUserUnits: userOptions
               )
         else { return nil }
         
@@ -286,7 +286,7 @@ public extension Goal {
         from value: Double?,
         energy: Double?,
         bodyProfile: BodyProfile?,
-        userUnits: UserUnits
+        userOptions: UserOptions
     ) -> Double? {
         guard let value, let nutrientGoalType else { return nil }
         
@@ -310,7 +310,7 @@ public extension Goal {
             guard let goalEnergyKcal = convertEnergyToKcal(
                 energy,
                 usingBodyProfile: bodyProfile,
-                orUserUnits: userUnits
+                orUserUnits: userOptions
             ) else {
                 return nil
             }
@@ -336,10 +336,10 @@ public extension Goal {
     func convertEnergyToKcal(
         _ energy: Double?,
         usingBodyProfile bodyProfile: BodyProfile?,
-        orUserUnits userUnits: UserUnits
+        orUserUnits userOptions: UserOptions
     ) -> Double? {
         guard let energy else { return nil }
-        let energyUnit = bodyProfile?.energyUnit ?? userUnits.energy
+        let energyUnit = bodyProfile?.energyUnit ?? userOptions.energy
         return energyUnit.convert(energy, to: .kcal)
 //        return energyUnit == .kcal ? energy : energy * KcalsPerKilojule
     }
@@ -388,7 +388,7 @@ public extension Goal {
     func minimumLowerBoundForAutoGoal(with params: GoalCalcParams) -> Double? {
         switch self.type {
         case .energy:
-            return params.userUnits.energy.minimumValueForAutoGoals(params: params)
+            return params.userOptions.energy.minimumValueForAutoGoals(params: params)
         case .macro(_, let macro):
             return macro.minimumValueForAutoGoals
         default:

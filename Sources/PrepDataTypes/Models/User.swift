@@ -34,7 +34,7 @@ public extension User {
         self.init(
             id: UUID(),
             cloudKitId: cloudKitId,
-            options: UserOptions.standard,
+            options: UserOptions.defaultOptions,
             bodyProfile: nil,
             bodyProfileUpdatedAt: nil,
             syncStatus: .notSynced,

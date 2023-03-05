@@ -16,17 +16,6 @@ public struct PrepConstants {
 
     public static let dayIndices = Array(0..<slidingWindowFullSize)
 //    public static let dayIndices = [0, 1, 2, 3]
-    
-    
-    public struct DefaultPreferences {
-        public static let showingBadgesForFoods = true
-        public static let showingFoodDetails = false
-        public static let showingFoodEmojis = true
-
-        public static let showingIngredientEmojis = true
-        public static let showingIngredientDetails = true
-        public static let showingIngredientBadges = true
-    }
 }
 
 /// Use this for print statements that we can disabled by commenting out one line.

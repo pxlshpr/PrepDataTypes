@@ -1,6 +1,6 @@
 import Foundation
 
-public enum MetersType: Int, CaseIterable, Codable {
+public enum PortionPage: Int, CaseIterable, Codable {
     case nutrients = 1
     case diet
     case meal

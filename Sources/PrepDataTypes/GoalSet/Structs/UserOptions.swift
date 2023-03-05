@@ -32,16 +32,16 @@ public struct UserOptions: Hashable, Codable {
     }
     
     public struct Metrics: Hashable, Codable {
-        public var lastSelectedTab: Int = 1
+        public var page: MetricsPage = .overview
     }
     
-    public struct Nutrition: Hashable, Codable {
-        public var chartPeriod: Int = 1
+    public struct Charts: Hashable, Codable {
+        public var period: ChartPeriod = .day
         public var showingMacrosForEnergy: Bool = true
     }
     
     public struct Portion: Hashable, Codable {
-        public var type: MetersType = .nutrients
+        public var page: PortionPage = .nutrients
         public var showingLegend: Bool = true
         public var showingRDA: Bool = true
         public var usingDietGoalsInsteadOfRDA: Bool = true
@@ -51,7 +51,7 @@ public struct UserOptions: Hashable, Codable {
     public var log: Log
     public var ingredients: Ingredients
     public var metrics: Metrics
-    public var nutrition: Nutrition
+    public var charts: Charts
     public var portion: Portion
     
     public static var defaultOptions: UserOptions {
@@ -60,7 +60,7 @@ public struct UserOptions: Hashable, Codable {
             log: Log(),
             ingredients: Ingredients(),
             metrics: Metrics(),
-            nutrition: Nutrition(),
+            charts: Charts(),
             portion: Portion()
         )
     }

@@ -41,7 +41,7 @@ public struct UserOptions: Hashable, Codable {
     }
     
     public struct Portion: Hashable, Codable {
-        public var type: Int = 1
+        public var type: MetersType = .nutrients
         public var showingLegend: Bool = true
         public var showingRDA: Bool = true
         public var usingDietGoalsInsteadOfRDA: Bool = true

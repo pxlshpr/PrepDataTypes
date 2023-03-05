@@ -7,13 +7,22 @@ public struct FoodNutrients: Codable, Hashable {
     public var protein: Double
     public var fat: Double
     public var micros: [FoodNutrient]
+//    public var energy: FoodLabelValue?
  
-    public init(energyInKcal: Double, carb: Double, protein: Double, fat: Double, micros: [FoodNutrient]) {
+    public init(
+        energyInKcal: Double,
+//        energy: FoodLabelValue? = nil,
+        carb: Double,
+        protein: Double,
+        fat: Double,
+        micros: [FoodNutrient]
+    ) {
         self.energyInKcal = energyInKcal
         self.carb = carb
         self.protein = protein
         self.fat = fat
         self.micros = micros
+//        self.energy = energy
     }
 }
 

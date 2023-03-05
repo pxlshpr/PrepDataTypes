@@ -47,12 +47,18 @@ public struct UserOptions: Hashable, Codable {
         public var usingDietGoalsInsteadOfRDA: Bool = true
     }
     
+    public struct FoodList: Hashable, Codable {
+        public var sortOrder: FoodSortOrder = .name
+        public var filter: FoodFilter = .all
+    }
+    
     public var units: Units
     public var log: Log
     public var ingredients: Ingredients
     public var metrics: Metrics
     public var charts: Charts
     public var portion: Portion
+    public var foodList: FoodList
     
     public static var defaultOptions: UserOptions {
         UserOptions(
@@ -61,7 +67,8 @@ public struct UserOptions: Hashable, Codable {
             ingredients: Ingredients(),
             metrics: Metrics(),
             charts: Charts(),
-            portion: Portion()
+            portion: Portion(),
+            foodList: FoodList()
         )
     }
 }

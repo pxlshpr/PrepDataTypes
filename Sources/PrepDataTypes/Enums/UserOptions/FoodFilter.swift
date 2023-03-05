@@ -47,7 +47,7 @@ public enum FoodFilter: Int, CaseIterable, Codable {
         case .plates:
             return "fork.knife"
         case .foodsPrivate:
-            return "eye.slash"
+            return "lock.shield.fill"
         case .foodsPublicWaitingForReview:
             return "questionmark.app.dashed"
         case .foodsPublicApproved:

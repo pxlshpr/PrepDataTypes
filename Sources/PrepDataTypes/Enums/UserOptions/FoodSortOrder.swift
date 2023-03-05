@@ -14,11 +14,11 @@ public enum FoodSortOrder: Int, CaseIterable, Codable {
         case .dateCreated:
             return "Latest Added"
         case .carbPortion:
-            return "Highest Carb"
+            return "High-Carb"
         case .proteinPortion:
-            return "Highest Protein"
+            return "High-Protein"
         case .fatPortion:
-            return "Highest Fat"
+            return "High-Fat"
         }
     }
     
@@ -29,11 +29,11 @@ public enum FoodSortOrder: Int, CaseIterable, Codable {
         case .dateCreated:
             return "clock.badge"
         case .carbPortion:
-            return "c.square.fill"
+            return "c.square"
         case .proteinPortion:
-            return "p.square.fill"
+            return "p.square"
         case .fatPortion:
-            return "f.square.fill"
+            return "f.square"
         }
     }
 }

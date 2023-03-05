@@ -37,7 +37,7 @@ public struct UserOptions: Hashable, Codable {
     
     public struct Nutrition: Hashable, Codable {
         public var chartPeriod: Int = 1
-        public var showingMacrosForEnergyReport: Bool = true
+        public var showingMacrosForEnergy: Bool = true
     }
     
     public struct Portion: Hashable, Codable {

@@ -23,6 +23,7 @@ public struct UserOptions: Hashable, Codable {
         public var showingBadgesForFoods: Bool = true
         public var showingDetails: Bool = false
         public var showingEmojis: Bool = true
+        public var secondaryButton: SecondaryLogButton = .scan
     }
     
     public struct Ingredients: Hashable, Codable {

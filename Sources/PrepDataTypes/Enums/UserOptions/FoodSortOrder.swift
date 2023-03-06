@@ -1,6 +1,7 @@
 import Foundation
 
 public enum FoodSortOrder: Int, CaseIterable, Codable {
+    
     case name
     case dateCreated
     case carbPortion

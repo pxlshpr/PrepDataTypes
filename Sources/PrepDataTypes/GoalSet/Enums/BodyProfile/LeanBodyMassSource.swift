@@ -13,7 +13,7 @@ public enum LeanBodyMassSource: Int16, Codable, CaseIterable {
         case .healthApp:
             return "Sync with Health App"
         case .fatPercentage:
-            return "Convert fat percentage"
+            return "Convert fat %"
         case .userEntered:
             return "Enter manually"
         }
@@ -26,7 +26,8 @@ public enum LeanBodyMassSource: Int16, Codable, CaseIterable {
         case .formula:
             return "function"
         case .fatPercentage:
-            return "percent"
+            return "function"
+//            return "percent"
         case .userEntered:
             return "keyboard"
         }
@@ -39,7 +40,8 @@ public enum LeanBodyMassSource: Int16, Codable, CaseIterable {
         case .healthApp:
             return "Health App"
         case .fatPercentage:
-            return "Fat percentage"
+//            return "Fat percentage"
+            return "Fat %"
         case .userEntered:
             return "Enter manually"
         }

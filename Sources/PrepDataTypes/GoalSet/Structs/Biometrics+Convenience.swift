@@ -1,0 +1,108 @@
+import Foundation
+
+public extension Biometrics {
+    var updatesWithHealthApp: Bool {
+        return restingEnergy?.source == .healthApp
+        || activeEnergy?.source == .healthApp
+        || leanBodyMass?.source == .healthApp
+        || weight?.source == .healthApp
+    }
+}
+
+public extension Biometrics {
+    
+    var hasTDEE: Bool {
+        tdeeInUnit != nil
+    }
+    
+    var tdeeInUnit: Double? {
+        tdee
+    }
+    var formattedTDEEWithUnit: String? {
+        guard let tdeeInUnit else { return nil }
+        return "\(tdeeInUnit.formattedEnergy) \(energyUnit.shortDescription)"
+    }
+
+}
+
+public extension Biometrics {
+    
+    var hasDynamicRestingEnergy: Bool {
+        switch restingEnergy?.source {
+        case .healthApp:
+            return true
+        case .formula:
+            guard let formula = restingEnergy?.formula else { return false }
+            if formula.usesLeanBodyMass, hasDynamicLBM {
+                return hasDynamicLBM
+            } else {
+                return hasDynamicWeight
+            }
+        default:
+            return false
+        }
+    }
+    
+    var hasDynamicActiveEnergy: Bool {
+        switch activeEnergy?.source {
+        case .healthApp:
+            return true
+        default:
+            return false
+        }
+    }
+    
+    var hasDynamicTDEE: Bool {
+        hasDynamicRestingEnergy || hasDynamicActiveEnergy
+    }
+    
+    var hasDynamicLBM: Bool {
+        switch leanBodyMass?.source {
+        case .healthApp:
+            return true
+        case .fatPercentage, .formula:
+            /// We don't care about the height being dynamic as it hardly changes after age 18-20
+            return hasDynamicWeight
+        default:
+            return false
+        }
+    }
+    
+    var hasDynamicWeight: Bool {
+        weight?.source == .healthApp
+    }
+    
+    func weight(in other: WeightUnit) -> Double? {
+        guard let weight = weight?.amount else { return nil }
+        return weightUnit.convert(weight, to: other)
+    }
+    
+    func lbm(in other: WeightUnit) -> Double? {
+        guard let lbm = leanBodyMass?.amount else { return nil }
+        return weightUnit.convert(lbm, to: other)
+    }
+
+    func tdee(in energyUnit: EnergyUnit) -> Double? {
+        guard let tdeeInKcal else { return nil }
+        return EnergyUnit.kcal.convert(tdeeInKcal, to: energyUnit)
+//        return energyUnit == .kcal ? tdeeInKcal : tdeeInKcal * KcalsPerKilojule
+    }
+
+    var tdee: Double? {
+        guard let restingEnergy = restingEnergy?.amount,
+              let activeEnergy = activeEnergy?.amount
+        else { return nil }
+        
+        return restingEnergy + activeEnergy
+    }
+    
+    var tdeeInKcal: Double? {
+        guard let tdee else { return nil }
+        return energyUnit.convert(tdee, to: .kcal)
+//        if energyUnit == .kcal {
+//            return tdee
+//        } else {
+//            return tdee / KcalsPerKilojule
+//        }
+    }
+}

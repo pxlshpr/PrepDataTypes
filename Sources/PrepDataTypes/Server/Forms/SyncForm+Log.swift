@@ -160,39 +160,40 @@ public extension PrepDataTypes.Meal {
 
 public extension Biometrics {
     func log() {
-        Logger.log("          - energyUnit: \(energyUnit.description)")
-        Logger.log("          - weightUnit: \(weightUnit.description)")
-        Logger.log("          - heightUnit: \(heightUnit.description)")
-        if let restingEnergy { Logger.log("          - restingEnergy: \(restingEnergy)") }
-        if let restingEnergySource { Logger.log("          - restingEnergySource: \(restingEnergySource)") }
-        if let restingEnergyFormula { Logger.log("          - restingEnergyFormula: \(restingEnergyFormula)") }
-        if let restingEnergyPeriod { Logger.log("          - restingEnergyPeriod: \(restingEnergyPeriod)") }
-        if let restingEnergyIntervalValue { Logger.log("          - restingEnergyIntervalValue: \(restingEnergyIntervalValue)") }
-        if let restingEnergyInterval { Logger.log("          - restingEnergyInterval: \(restingEnergyInterval)") }
-        if let activeEnergy { Logger.log("          - activeEnergy: \(activeEnergy)") }
-        if let activeEnergySource { Logger.log("          - activeEnergySource: \(activeEnergySource)") }
-        if let activeEnergyActivityLevel { Logger.log("          - activeEnergyActivityLevel: \(activeEnergyActivityLevel)") }
-        if let activeEnergyPeriod { Logger.log("          - activeEnergyPeriod: \(activeEnergyPeriod)") }
-        if let activeEnergyIntervalValue { Logger.log("          - activeEnergyIntervalValue: \(activeEnergyIntervalValue)") }
-        if let activeEnergyInterval { Logger.log("          - activeEnergyInterval: \(activeEnergyInterval)") }
-        if let fatPercentage { Logger.log("          - fatPercentage: \(fatPercentage)") }
-        if let lbm { Logger.log("          - lbm: \(lbm)") }
-        if let lbmSource { Logger.log("          - lbmSource: \(lbmSource)") }
-        if let lbmFormula { Logger.log("          - lbmFormula: \(lbmFormula)") }
-        if let lbmDate { Logger.log("          - lbmDate: \(lbmDate)") }
-        if let weight { Logger.log("          - weight: \(weight)") }
-        if let weightSource { Logger.log("          - weightSource: \(weightSource)") }
-        if let weightDate { Logger.log("          - weightDate: \(weightDate)") }
-        if let height { Logger.log("          - height: \(height)") }
-        if let heightSource { Logger.log("          - heightSource: \(heightSource)") }
-        if let heightDate { Logger.log("          - heightDate: \(heightDate)") }
-        if let sexIsFemale { Logger.log("          - sexIsFemale: \(sexIsFemale)") }
-        if let sexSource { Logger.log("          - sexSource: \(sexSource)") }
-        if let age { Logger.log("          - age: \(age)") }
-        if let dobDay { Logger.log("          - dobDay: \(dobDay)") }
-        if let dobMonth { Logger.log("          - dobMonth: \(dobMonth)") }
-        if let dobYear { Logger.log("          - dobYear: \(dobYear)") }
-        if let ageSource { Logger.log("          - ageSource: \(ageSource)") }
+        Logger.log("(Biometrics.log() not implemented)")
+//        Logger.log("          - energyUnit: \(energyUnit.description)")
+//        Logger.log("          - weightUnit: \(weightUnit.description)")
+//        Logger.log("          - heightUnit: \(heightUnit.description)")
+//        if let restingEnergy { Logger.log("          - restingEnergy: \(restingEnergy)") }
+//        if let restingEnergySource { Logger.log("          - restingEnergySource: \(restingEnergySource)") }
+//        if let restingEnergyFormula { Logger.log("          - restingEnergyFormula: \(restingEnergyFormula)") }
+//        if let restingEnergyPeriod { Logger.log("          - restingEnergyPeriod: \(restingEnergyPeriod)") }
+//        if let restingEnergyIntervalValue { Logger.log("          - restingEnergyIntervalValue: \(restingEnergyIntervalValue)") }
+//        if let restingEnergyInterval { Logger.log("          - restingEnergyInterval: \(restingEnergyInterval)") }
+//        if let activeEnergy { Logger.log("          - activeEnergy: \(activeEnergy)") }
+//        if let activeEnergySource { Logger.log("          - activeEnergySource: \(activeEnergySource)") }
+//        if let activeEnergyActivityLevel { Logger.log("          - activeEnergyActivityLevel: \(activeEnergyActivityLevel)") }
+//        if let activeEnergyPeriod { Logger.log("          - activeEnergyPeriod: \(activeEnergyPeriod)") }
+//        if let activeEnergyIntervalValue { Logger.log("          - activeEnergyIntervalValue: \(activeEnergyIntervalValue)") }
+//        if let activeEnergyInterval { Logger.log("          - activeEnergyInterval: \(activeEnergyInterval)") }
+//        if let fatPercentage { Logger.log("          - fatPercentage: \(fatPercentage)") }
+//        if let lbm { Logger.log("          - lbm: \(lbm)") }
+//        if let lbmSource { Logger.log("          - lbmSource: \(lbmSource)") }
+//        if let lbmFormula { Logger.log("          - lbmFormula: \(lbmFormula)") }
+//        if let lbmDate { Logger.log("          - lbmDate: \(lbmDate)") }
+//        if let weight { Logger.log("          - weight: \(weight)") }
+//        if let weightSource { Logger.log("          - weightSource: \(weightSource)") }
+//        if let weightDate { Logger.log("          - weightDate: \(weightDate)") }
+//        if let height { Logger.log("          - height: \(height)") }
+//        if let heightSource { Logger.log("          - heightSource: \(heightSource)") }
+//        if let heightDate { Logger.log("          - heightDate: \(heightDate)") }
+//        if let sexIsFemale { Logger.log("          - sexIsFemale: \(sexIsFemale)") }
+//        if let sexSource { Logger.log("          - sexSource: \(sexSource)") }
+//        if let age { Logger.log("          - age: \(age)") }
+//        if let dobDay { Logger.log("          - dobDay: \(dobDay)") }
+//        if let dobMonth { Logger.log("          - dobMonth: \(dobMonth)") }
+//        if let dobYear { Logger.log("          - dobYear: \(dobYear)") }
+//        if let ageSource { Logger.log("          - ageSource: \(ageSource)") }
     }
 }
 

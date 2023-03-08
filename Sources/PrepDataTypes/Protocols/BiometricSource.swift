@@ -1,32 +1,46 @@
 import Foundation
 
 public protocol BiometricSource {
-    var fromHealthApp: Bool { get }
+    var isHealthSynced: Bool { get }
+    var isUserEntered: Bool { get }
     var pickerDescription: String { get }
     var menuDescription: String { get }
     var systemImage: String { get }
 }
 
 extension LeanBodyMassSource: BiometricSource {
-    public var fromHealthApp: Bool {
+    public var isHealthSynced: Bool {
         self == .healthApp
+    }
+    
+    public var isUserEntered: Bool {
+        self == .userEntered
     }
 }
 
 extension ActiveEnergySource: BiometricSource {
-    public var fromHealthApp: Bool {
+    public var isHealthSynced: Bool {
         self == .healthApp
+    }
+    public var isUserEntered: Bool {
+        self == .userEntered
     }
 }
 
 extension RestingEnergySource: BiometricSource {
-    public var fromHealthApp: Bool {
+    public var isHealthSynced: Bool {
         self == .healthApp
+    }
+    public var isUserEntered: Bool {
+        self == .userEntered
     }
 }
 
 extension  MeasurementSource: BiometricSource {
-    public var fromHealthApp: Bool {
+    public var isHealthSynced: Bool {
         self == .healthApp
+    }
+    public var isUserEntered: Bool {
+        self == .userEntered
     }
 }

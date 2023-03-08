@@ -2,10 +2,67 @@ import Foundation
 
 public struct Biometrics: Hashable, Codable {
     
+    public struct RestingEnergy: Codable {
+        public var amount: Double?
+        public var unit: EnergyUnit
+        public var source: RestingEnergySource?
+        public var formula: RestingEnergyFormula?
+        public var period: HealthPeriodOption?
+        public var intervalValue: Int?
+        public var interval: HealthAppInterval?
+    }
+
+    public struct ActiveEnergyEnergy: Codable {
+        public var amount: Double?
+        public var unit: EnergyUnit
+        public var source: ActiveEnergySource?
+        public var activityLevel: ActivityLevel?
+        public var period: HealthPeriodOption?
+        public var intervalValue: Int?
+        public var interval: HealthAppInterval?
+    }
+
+    struct LeanBodyMass: Codable {
+        public var amount: Double?
+        public var unit: WeightUnit
+        public var source: LeanBodyMassSource?
+        public var formula: LeanBodyMassFormula?
+        public var date: Date?
+    }
+    
+    struct Weight: Codable {
+        public var amount: Double?
+        public var unit: WeightUnit
+        public var source: MeasurementSource?
+        public var date: Date?
+    }
+
+    struct Height: Codable {
+        public var amount: Double?
+        public var unit: HeightUnit
+        public var source: MeasurementSource?
+        public var date: Date?
+    }
+
+    struct Sex: Codable {
+        public var value: BiometricSex?
+        public var source: MeasurementSource
+    }
+
+    struct Age: Codable {
+        public var value: Int?
+        public var dobDay: Int?
+        public var dobMonth: Int?
+        public var dobYear: Int?
+        public var source: MeasurementSource?
+    }
+
+    //TODO: Remove these
     public let energyUnit: EnergyUnit
     public let weightUnit: WeightUnit
     public let heightUnit: HeightUnit
 
+    //TODO: Make these structs
     public var restingEnergy: Double?
     public var restingEnergySource: RestingEnergySource?
     public var restingEnergyFormula: RestingEnergyFormula?
@@ -26,7 +83,7 @@ public struct Biometrics: Hashable, Codable {
     public var lbmSource: LeanBodyMassSource?
     public var lbmFormula: LeanBodyMassFormula?
     public var lbmDate: Date?
-
+    
     public var weight: Double?
     public var weightSource: MeasurementSource?
     public var weightDate: Date?
@@ -185,3 +242,10 @@ public extension Biometrics {
 //        }
     }
 }
+
+public enum BiometricSex: Int16, Codable, CaseIterable {
+    case female = 1
+    case male
+    case other
+}
+

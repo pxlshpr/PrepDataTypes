@@ -339,7 +339,7 @@ public extension Goal {
         orUserUnits userUnits: UserOptions.Units
     ) -> Double? {
         guard let energy else { return nil }
-        let energyUnit = biometrics?.energyUnit ?? userUnits.energy
+        let energyUnit = biometrics?.restingEnergy?.unit ?? userUnits.energy
         return energyUnit.convert(energy, to: .kcal)
 //        return energyUnit == .kcal ? energy : energy * KcalsPerKilojule
     }

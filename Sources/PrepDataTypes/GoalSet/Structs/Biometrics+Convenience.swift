@@ -19,7 +19,9 @@ public extension Biometrics {
         tdee
     }
     var formattedTDEEWithUnit: String? {
-        guard let tdeeInUnit else { return nil }
+        guard let tdeeInUnit,
+              let energyUnit = restingEnergy?.unit
+        else { return nil }
         return "\(tdeeInUnit.formattedEnergy) \(energyUnit.shortDescription)"
     }
 
@@ -73,13 +75,20 @@ public extension Biometrics {
     }
     
     func weight(in other: WeightUnit) -> Double? {
-        guard let weight = weight?.amount else { return nil }
-        return weightUnit.convert(weight, to: other)
+        guard let amount = weight?.amount,
+              let unit = weight?.unit
+        else { return nil }
+        
+        return unit.convert(amount, to: other)
     }
     
     func lbm(in other: WeightUnit) -> Double? {
-        guard let lbm = leanBodyMass?.amount else { return nil }
-        return weightUnit.convert(lbm, to: other)
+        guard let amount = leanBodyMass?.amount,
+              let unit = leanBodyMass?.unit
+              
+        else { return nil }
+        
+        return unit.convert(amount, to: other)
     }
 
     func tdee(in energyUnit: EnergyUnit) -> Double? {
@@ -97,8 +106,11 @@ public extension Biometrics {
     }
     
     var tdeeInKcal: Double? {
-        guard let tdee else { return nil }
-        return energyUnit.convert(tdee, to: .kcal)
+        guard let tdee,
+              let unit = restingEnergy?.unit
+        else { return nil }
+        
+        return unit.convert(tdee, to: .kcal)
 //        if energyUnit == .kcal {
 //            return tdee
 //        } else {

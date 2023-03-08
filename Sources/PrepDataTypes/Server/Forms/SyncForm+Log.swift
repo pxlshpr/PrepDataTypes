@@ -104,11 +104,11 @@ public extension PrepDataTypes.Day {
         } else {
             Logger.log("      - goalSet: nil")
         }
-        if let bodyProfile {
-            Logger.log("      - bodyProfile: [BodyProfile]")
-            bodyProfile.log()
+        if let biometrics {
+            Logger.log("      - biometrics: [Biometrics]")
+            biometrics.log()
         } else {
-            Logger.log("      - bodyProfile: nil")
+            Logger.log("      - biometrics: nil")
         }
         Logger.log("      - markedAsFasted: \(markedAsFasted)")
 
@@ -158,7 +158,7 @@ public extension PrepDataTypes.Meal {
     }
 }
 
-public extension BodyProfile {
+public extension Biometrics {
     func log() {
         Logger.log("          - energyUnit: \(energyUnit.description)")
         Logger.log("          - weightUnit: \(weightUnit.description)")

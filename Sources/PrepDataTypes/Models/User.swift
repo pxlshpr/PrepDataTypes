@@ -5,8 +5,8 @@ public struct User: Identifiable, Hashable, Codable {
     public let cloudKitId: String?
     
     public var options: UserOptions
-    public var bodyProfile: BodyProfile?
-    public var bodyProfileUpdatedAt: Double?
+    public var biometrics: Biometrics?
+    public var biometricsUpdatedAt: Double?
 
     public var updatedAt: Double
     public var syncStatus: SyncStatus
@@ -15,15 +15,15 @@ public struct User: Identifiable, Hashable, Codable {
         id: UUID,
         cloudKitId: String?,
         options: UserOptions,
-        bodyProfile: BodyProfile? = nil,
-        bodyProfileUpdatedAt: Double? = nil,
+        biometrics: Biometrics? = nil,
+        biometricsUpdatedAt: Double? = nil,
         syncStatus: SyncStatus,
         updatedAt: Double
     ) {
         self.id = id
         self.cloudKitId = cloudKitId
         self.options = options
-        self.bodyProfile = bodyProfile
+        self.biometrics = biometrics
         self.syncStatus = syncStatus
         self.updatedAt = updatedAt
     }
@@ -35,8 +35,8 @@ public extension User {
             id: UUID(),
             cloudKitId: cloudKitId,
             options: UserOptions.defaultOptions,
-            bodyProfile: nil,
-            bodyProfileUpdatedAt: nil,
+            biometrics: nil,
+            biometricsUpdatedAt: nil,
             syncStatus: .notSynced,
             updatedAt: Date().timeIntervalSince1970
         )

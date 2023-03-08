@@ -222,7 +222,7 @@ extension Day {
         other.id == id
         && other.calendarDayString == calendarDayString
         && other.goalSet?.id == goalSet?.id
-        && other.bodyProfile == bodyProfile
+        && other.biometrics == biometrics
         && other.markedAsFasted == markedAsFasted
         && other.meals == meals
     }

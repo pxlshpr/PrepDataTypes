@@ -1,6 +1,6 @@
 import Foundation
 
-public struct BodyProfile: Hashable, Codable {
+public struct Biometrics: Hashable, Codable {
     
     public let energyUnit: EnergyUnit
     public let weightUnit: WeightUnit
@@ -81,7 +81,7 @@ public struct BodyProfile: Hashable, Codable {
     }
 }
 
-public extension BodyProfile {
+public extension Biometrics {
     var updatesWithHealthApp: Bool {
         return restingEnergySource == .healthApp
         || activeEnergySource == .healthApp
@@ -90,7 +90,7 @@ public extension BodyProfile {
     }
 }
 
-public extension BodyProfile {
+public extension Biometrics {
     
     var hasTDEE: Bool {
         tdeeInUnit != nil
@@ -106,7 +106,7 @@ public extension BodyProfile {
 
 }
 
-public extension BodyProfile {
+public extension Biometrics {
     
     var hasDynamicRestingEnergy: Bool {
         switch restingEnergySource {

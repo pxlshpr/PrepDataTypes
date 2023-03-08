@@ -58,7 +58,7 @@ public extension Goal {
             return calculateEnergyValue(
                 from: lowerBound,
                 deficitBound: largerBound ?? lowerBound,
-                tdee: params.bodyProfile?.tdeeInUnit
+                tdee: params.biometrics?.tdeeInUnit
             )
         }
         
@@ -69,7 +69,7 @@ public extension Goal {
             return calculateMacroValue(
                 from: trueLowerBound,
                 energy: energyValue,
-                bodyProfile: params.bodyProfile,
+                biometrics: params.biometrics,
                 userUnits: params.userUnits
             )
 
@@ -77,7 +77,7 @@ public extension Goal {
             return calculateMicroValue(
                 from: trueLowerBound,
                 energy: energyValue,
-                bodyProfile: params.bodyProfile,
+                biometrics: params.biometrics,
                 userUnits: params.userUnits
             )
         default:
@@ -91,7 +91,7 @@ public extension Goal {
             return calculateEnergyValue(
                 from: upperBound,
                 deficitBound: smallerBound ?? upperBound,
-                tdee: params.bodyProfile?.tdeeInUnit
+                tdee: params.biometrics?.tdeeInUnit
             )
         }
         
@@ -102,14 +102,14 @@ public extension Goal {
             return calculateMacroValue(
                 from: trueUpperBound,
                 energy: energyValue,
-                bodyProfile: params.bodyProfile,
+                biometrics: params.biometrics,
                 userUnits: params.userUnits
             )
         case .micro:
             return calculateMicroValue(
                 from: trueUpperBound,
                 energy: energyValue,
-                bodyProfile: params.bodyProfile,
+                biometrics: params.biometrics,
                 userUnits: params.userUnits
             )
         default:
@@ -229,7 +229,7 @@ public extension Goal {
     func calculateMacroValue(
         from value: Double?,
         energy: Double?,
-        bodyProfile: BodyProfile?,
+        biometrics: Biometrics?,
         userUnits: UserOptions.Units
     ) -> Double? {
         
@@ -237,7 +237,7 @@ public extension Goal {
             return calculateNutrientValue(
                 from: value,
                 energy: energy,
-                bodyProfile: bodyProfile,
+                biometrics: biometrics,
                 userUnits: userUnits
             )
         }
@@ -246,7 +246,7 @@ public extension Goal {
               let value,
               let energyInKcal = convertEnergyToKcal(
                     energy,
-                    usingBodyProfile: bodyProfile,
+                    usingBIometrics: biometrics,
                     orUserUnits: userUnits
               )
         else { return nil }
@@ -257,7 +257,7 @@ public extension Goal {
     func calculateMicroValue(
         from value: Double?,
         energy: Double?,
-        bodyProfile: BodyProfile?,
+        biometrics: Biometrics?,
         userUnits: UserOptions.Units
     ) -> Double? {
         
@@ -265,7 +265,7 @@ public extension Goal {
             return calculateNutrientValue(
                 from: value,
                 energy: energy,
-                bodyProfile: bodyProfile,
+                biometrics: biometrics,
                 userUnits: userUnits
             )
         }
@@ -274,7 +274,7 @@ public extension Goal {
               let value,
               let energyInKcal = convertEnergyToKcal(
                     energy,
-                    usingBodyProfile: bodyProfile,
+                    usingBIometrics: biometrics,
                     orUserUnits: userUnits
               )
         else { return nil }
@@ -285,7 +285,7 @@ public extension Goal {
     func calculateNutrientValue(
         from value: Double?,
         energy: Double?,
-        bodyProfile: BodyProfile?,
+        biometrics: Biometrics?,
         userUnits: UserOptions.Units
     ) -> Double? {
         guard let value, let nutrientGoalType else { return nil }
@@ -295,12 +295,12 @@ public extension Goal {
         case .quantityPerBodyMass(let bodyMass, let weightUnit):
             switch bodyMass {
             case .weight:
-                guard let weight = bodyProfile?.weight(in: weightUnit)
+                guard let weight = biometrics?.weight(in: weightUnit)
                 else { return nil }
                 return value * weight
                 
             case .leanMass:
-                guard let lbm = bodyProfile?.lbm(in: weightUnit)
+                guard let lbm = biometrics?.lbm(in: weightUnit)
                 else { return nil}
                 return value * lbm
                 
@@ -309,7 +309,7 @@ public extension Goal {
         case .quantityPerEnergy(let perEnergy, let energyUnit):
             guard let goalEnergyKcal = convertEnergyToKcal(
                 energy,
-                usingBodyProfile: bodyProfile,
+                usingBIometrics: biometrics,
                 orUserUnits: userUnits
             ) else {
                 return nil
@@ -335,11 +335,11 @@ public extension Goal {
     //MARK: - Helpers
     func convertEnergyToKcal(
         _ energy: Double?,
-        usingBodyProfile bodyProfile: BodyProfile?,
+        usingBIometrics biometrics: Biometrics?,
         orUserUnits userUnits: UserOptions.Units
     ) -> Double? {
         guard let energy else { return nil }
-        let energyUnit = bodyProfile?.energyUnit ?? userUnits.energy
+        let energyUnit = biometrics?.energyUnit ?? userUnits.energy
         return energyUnit.convert(energy, to: .kcal)
 //        return energyUnit == .kcal ? energy : energy * KcalsPerKilojule
     }

@@ -5,7 +5,8 @@ public struct User: Identifiable, Hashable, Codable {
     public let cloudKitId: String?
     
     public var options: UserOptions
-    public var biometrics: Biometrics
+//    public var biometrics: Biometrics
+    public var biometrics: Biometrics?
     public var biometricsUpdatedAt: Double?
 
     public var updatedAt: Double
@@ -15,7 +16,8 @@ public struct User: Identifiable, Hashable, Codable {
         id: UUID,
         cloudKitId: String?,
         options: UserOptions,
-        biometrics: Biometrics,
+//        biometrics: Biometrics,
+        biometrics: Biometrics? = nil,
         biometricsUpdatedAt: Double? = nil,
         syncStatus: SyncStatus,
         updatedAt: Double
@@ -36,7 +38,8 @@ public extension User {
             id: UUID(),
             cloudKitId: cloudKitId,
             options: UserOptions.defaultOptions,
-            biometrics: Biometrics(),
+//            biometrics: Biometrics(),
+            biometrics: nil,
             biometricsUpdatedAt: nil,
             syncStatus: .notSynced,
             updatedAt: Date().timeIntervalSince1970

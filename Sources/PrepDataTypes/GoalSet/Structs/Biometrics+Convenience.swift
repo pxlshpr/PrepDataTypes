@@ -2,10 +2,12 @@ import Foundation
 
 public extension Biometrics {
     var updatesWithHealthApp: Bool {
-        return restingEnergy?.source == .healthApp
-        || activeEnergy?.source == .healthApp
-        || leanBodyMass?.source == .healthApp
-        || weight?.source == .healthApp
+        //TODO: Biometrics
+        return true
+//        return restingEnergy?.source == .healthApp
+//        || activeEnergy?.source == .healthApp
+//        || leanBodyMass?.source == .healthApp
+//        || weight?.source == .healthApp
     }
 }
 
@@ -19,10 +21,12 @@ public extension Biometrics {
         tdee
     }
     var formattedTDEEWithUnit: String? {
-        guard let tdeeInUnit,
-              let energyUnit = restingEnergy?.unit
-        else { return nil }
-        return "\(tdeeInUnit.formattedEnergy) \(energyUnit.shortDescription)"
+        //TODO: Biometrics
+        nil
+//        guard let tdeeInUnit,
+//              let energyUnit = restingEnergy?.unit
+//        else { return nil }
+//        return "\(tdeeInUnit.formattedEnergy) \(energyUnit.shortDescription)"
     }
 
 }
@@ -30,28 +34,32 @@ public extension Biometrics {
 public extension Biometrics {
     
     var hasDynamicRestingEnergy: Bool {
-        switch restingEnergy?.source {
-        case .healthApp:
-            return true
-        case .formula:
-            guard let formula = restingEnergy?.formula else { return false }
-            if formula.usesLeanBodyMass, hasDynamicLBM {
-                return hasDynamicLBM
-            } else {
-                return hasDynamicWeight
-            }
-        default:
-            return false
-        }
+        //TODO: Biometrics
+        true
+//        switch restingEnergy?.source {
+//        case .healthApp:
+//            return true
+//        case .formula:
+//            guard let formula = restingEnergy?.formula else { return false }
+//            if formula.usesLeanBodyMass, hasDynamicLBM {
+//                return hasDynamicLBM
+//            } else {
+//                return hasDynamicWeight
+//            }
+//        default:
+//            return false
+//        }
     }
     
     var hasDynamicActiveEnergy: Bool {
-        switch activeEnergy?.source {
-        case .healthApp:
-            return true
-        default:
-            return false
-        }
+        //TODO: Biometrics
+        true
+//        switch activeEnergy?.source {
+//        case .healthApp:
+//            return true
+//        default:
+//            return false
+//        }
     }
     
     var hasDynamicTDEE: Bool {
@@ -59,36 +67,44 @@ public extension Biometrics {
     }
     
     var hasDynamicLBM: Bool {
-        switch leanBodyMass?.source {
-        case .healthApp:
-            return true
-        case .fatPercentage, .formula:
-            /// We don't care about the height being dynamic as it hardly changes after age 18-20
-            return hasDynamicWeight
-        default:
-            return false
-        }
+        //TODO: Biometrics
+        true
+//        switch leanBodyMass?.source {
+//        case .healthApp:
+//            return true
+//        case .fatPercentage, .formula:
+//            /// We don't care about the height being dynamic as it hardly changes after age 18-20
+//            return hasDynamicWeight
+//        default:
+//            return false
+//        }
     }
     
     var hasDynamicWeight: Bool {
-        weight?.source == .healthApp
+        //TODO: Biometrics
+        true
+//        weight?.source == .healthApp
     }
     
     func weight(in other: WeightUnit) -> Double? {
-        guard let amount = weight?.amount,
-              let unit = weight?.unit
-        else { return nil }
-        
-        return unit.convert(amount, to: other)
+        //TODO: Biometrics
+        nil
+//        guard let amount = weight?.amount,
+//              let unit = weight?.unit
+//        else { return nil }
+//
+//        return unit.convert(amount, to: other)
     }
     
     func lbm(in other: WeightUnit) -> Double? {
-        guard let amount = leanBodyMass?.amount,
-              let unit = leanBodyMass?.unit
-              
-        else { return nil }
-        
-        return unit.convert(amount, to: other)
+        //TODO: Biometrics
+        nil
+//        guard let amount = leanBodyMass?.amount,
+//              let unit = leanBodyMass?.unit
+//
+//        else { return nil }
+//
+//        return unit.convert(amount, to: other)
     }
 
     func tdee(in energyUnit: EnergyUnit) -> Double? {
@@ -98,23 +114,22 @@ public extension Biometrics {
     }
 
     var tdee: Double? {
-        guard let restingEnergy = restingEnergy?.amount,
-              let activeEnergy = activeEnergy?.amount
-        else { return nil }
-        
-        return restingEnergy + activeEnergy
+        //TODO: Biometrics
+        nil
+//        guard let restingEnergy = restingEnergy?.amount,
+//              let activeEnergy = activeEnergy?.amount
+//        else { return nil }
+//
+//        return restingEnergy + activeEnergy
     }
     
     var tdeeInKcal: Double? {
-        guard let tdee,
-              let unit = restingEnergy?.unit
-        else { return nil }
-        
-        return unit.convert(tdee, to: .kcal)
-//        if energyUnit == .kcal {
-//            return tdee
-//        } else {
-//            return tdee / KcalsPerKilojule
-//        }
+        //TODO: Biometrics
+        nil
+//        guard let tdee,
+//              let unit = restingEnergy?.unit
+//        else { return nil }
+//
+//        return unit.convert(tdee, to: .kcal)
     }
 }

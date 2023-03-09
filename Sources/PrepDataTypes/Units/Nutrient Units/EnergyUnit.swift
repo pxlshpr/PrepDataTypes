@@ -66,8 +66,8 @@ public extension EnergyUnit {
         /// Default to male in the case not being passed a value to err on the side of larger values
         /// (as we would rather suggest larger values than is required to a female than smaller values for a male's energy)
         //TODO: Biometrics
-//        let sexIsFemale = false
-        let sexIsFemale = params.biometrics?.sex?.value == .female
+//        let sexIsFemale = params.biometrics?.sex?.value == .female
+        let sexIsFemale = false
         
         let minimumKcal: Double = sexIsFemale ? 1200 : 1500
         return EnergyUnit.kcal.convert(minimumKcal, to: self)

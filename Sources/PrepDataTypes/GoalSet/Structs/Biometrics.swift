@@ -17,11 +17,11 @@ public struct Biometrics: Hashable, Codable {
         restingEnergy: RestingEnergy? = nil,
         activeEnergy: ActiveEnergy? = nil,
         fatPercentage: Double? = nil,
-        leanBodyMass: LeanBodyMass,
-        weight: Weight,
-        height: Height,
-        sex: Sex,
-        age: Age
+        leanBodyMass: LeanBodyMass? = nil,
+        weight: Weight? = nil,
+        height: Height? = nil,
+        sex: Sex? = nil,
+        age: Age? = nil
     ) {
 //        self.restingEnergy = restingEnergy
 //        self.activeEnergy = activeEnergy

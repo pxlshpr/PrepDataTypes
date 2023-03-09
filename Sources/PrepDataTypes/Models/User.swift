@@ -30,6 +30,7 @@ public struct User: Identifiable, Hashable, Codable {
 }
 
 public extension User {
+    
     init(cloudKitId: String) {
         self.init(
             id: UUID(),

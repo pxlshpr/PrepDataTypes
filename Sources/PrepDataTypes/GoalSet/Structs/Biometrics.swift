@@ -2,8 +2,6 @@ import Foundation
 
 public struct Biometrics: Hashable, Codable {
 
-//    public var dummyString = ""
-
     public var restingEnergy: RestingEnergy?
     public var activeEnergy: ActiveEnergy?
     public var fatPercentage: Double?

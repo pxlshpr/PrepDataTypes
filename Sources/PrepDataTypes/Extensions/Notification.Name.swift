@@ -41,7 +41,7 @@ public extension Notification.Name {
     static var didUpdateMeal: Notification.Name { return .init("didUpdateMeal") }
     static var didDeleteMeal: Notification.Name { return .init("didDeleteMeal") }
     
-    static var didUpdateDayWithBIometrics: Notification.Name { return .init("didUpdateDayWithBIometrics") }
+    static var didUpdateDayWithBiometrics: Notification.Name { return .init("didUpdateDayWithBiometrics") }
     
     static var didCalculateMealMacrosIndicatorWidth: Notification.Name { return .init("didCalculateMealMacrosIndicatorWidth") }
 

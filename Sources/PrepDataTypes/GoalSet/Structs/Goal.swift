@@ -246,7 +246,7 @@ public extension Goal {
               let value,
               let energyInKcal = convertEnergyToKcal(
                     energy,
-                    usingBIometrics: biometrics,
+                    usingBiometrics: biometrics,
                     orUserUnits: userUnits
               )
         else { return nil }
@@ -274,7 +274,7 @@ public extension Goal {
               let value,
               let energyInKcal = convertEnergyToKcal(
                     energy,
-                    usingBIometrics: biometrics,
+                    usingBiometrics: biometrics,
                     orUserUnits: userUnits
               )
         else { return nil }
@@ -309,7 +309,7 @@ public extension Goal {
         case .quantityPerEnergy(let perEnergy, let energyUnit):
             guard let goalEnergyKcal = convertEnergyToKcal(
                 energy,
-                usingBIometrics: biometrics,
+                usingBiometrics: biometrics,
                 orUserUnits: userUnits
             ) else {
                 return nil
@@ -335,7 +335,7 @@ public extension Goal {
     //MARK: - Helpers
     func convertEnergyToKcal(
         _ energy: Double?,
-        usingBIometrics biometrics: Biometrics?,
+        usingBiometrics biometrics: Biometrics?,
         orUserUnits userUnits: UserOptions.Units
     ) -> Double? {
         guard let energy else { return nil }

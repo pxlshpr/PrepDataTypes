@@ -47,14 +47,14 @@ extension Biometrics {
         public var unit: WeightUnit
         public var source: LeanBodyMassSource?
         public var formula: LeanBodyMassFormula?
-        public var date: Date?
+//        public var date: Date?
         
         public init(amount: Double? = nil, unit: WeightUnit, source: LeanBodyMassSource? = nil, formula: LeanBodyMassFormula? = nil, date: Date? = nil) {
             self.amount = amount
             self.unit = unit
             self.source = source
             self.formula = formula
-            self.date = date
+//            self.date = date
         }
     }
     
@@ -62,13 +62,13 @@ extension Biometrics {
         public var amount: Double?
         public var unit: WeightUnit
         public var source: MeasurementSource?
-        public var date: Date?
+//        public var date: Date?
         
         public init(amount: Double? = nil, unit: WeightUnit, source: MeasurementSource? = nil, date: Date? = nil) {
             self.amount = amount
             self.unit = unit
             self.source = source
-            self.date = date
+//            self.date = date
         }
     }
 
@@ -76,13 +76,13 @@ extension Biometrics {
         public var amount: Double?
         public var unit: HeightUnit
         public var source: MeasurementSource?
-        public var date: Date?
+//        public var date: Date?
         
         public init(amount: Double? = nil, unit: HeightUnit, source: MeasurementSource? = nil, date: Date? = nil) {
             self.amount = amount
             self.unit = unit
             self.source = source
-            self.date = date
+//            self.date = date
         }
     }
 

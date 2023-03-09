@@ -106,3 +106,24 @@ public extension WeightUnit {
         return inGrams / other.g
     }
 }
+
+#if os(iOS)
+import HealthKit
+
+public extension WeightUnit {
+    var healthKitUnit: HKUnit {
+        switch self {
+        case .g:
+            return .gram()
+        case .kg:
+            return .gramUnit(with: .kilo)
+        case .oz:
+            return .ounce()
+        case .lb:
+            return .pound()
+        case .mg:
+            return .gramUnit(with: .milli)
+        }
+    }
+}
+#endif

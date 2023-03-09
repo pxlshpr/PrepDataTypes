@@ -25,6 +25,14 @@ public extension Date {
 }
 
 public extension Date {
+    func moveHoursBy(_ hourIncrement: Int) -> Date {
+        var components = DateComponents()
+        components.hour = hourIncrement
+        return Calendar.current.date(byAdding: components, to: self)!
+    }
+}
+
+public extension Date {
     var tdeeFormat: String {
         let dayString: String
         var timeString = shortTime

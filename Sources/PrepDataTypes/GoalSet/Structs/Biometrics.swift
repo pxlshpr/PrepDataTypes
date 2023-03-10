@@ -5,7 +5,7 @@ public struct PreviousBiometrics: Hashable, Codable {
     public var didViewGoalsList: Bool
     public var didViewBiometrics: Bool
     
-    init(biometrics: Biometrics) {
+    public init(_ biometrics: Biometrics) {
         self.biometrics = biometrics
         self.didViewGoalsList = false
         self.didViewBiometrics = false

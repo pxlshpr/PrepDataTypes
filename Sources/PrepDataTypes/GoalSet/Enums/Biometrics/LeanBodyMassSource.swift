@@ -1,7 +1,7 @@
 import Foundation
 
 public enum LeanBodyMassSource: Int16, Codable, CaseIterable {
-    case healthApp = 1
+    case health = 1
     case formula
     case fatPercentage
     case userEntered
@@ -10,7 +10,7 @@ public enum LeanBodyMassSource: Int16, Codable, CaseIterable {
         switch self {
         case .formula:
             return "Calculate"
-        case .healthApp:
+        case .health:
             return "Sync with Health App"
         case .fatPercentage:
             return "Convert fat %"
@@ -21,7 +21,7 @@ public enum LeanBodyMassSource: Int16, Codable, CaseIterable {
     
     public var systemImage: String {
         switch self {
-        case .healthApp:
+        case .health:
             return "heart.fill"
         case .formula:
             return "function"
@@ -37,7 +37,7 @@ public enum LeanBodyMassSource: Int16, Codable, CaseIterable {
         switch self {
         case .formula:
             return "Calculate"
-        case .healthApp:
+        case .health:
             return "Health App"
         case .fatPercentage:
 //            return "Fat percentage"

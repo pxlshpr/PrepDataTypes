@@ -10,7 +10,7 @@ public protocol BiometricSource {
 
 extension LeanBodyMassSource: BiometricSource {
     public var isHealthSynced: Bool {
-        self == .healthApp
+        self == .health
     }
     
     public var isUserEntered: Bool {
@@ -20,7 +20,7 @@ extension LeanBodyMassSource: BiometricSource {
 
 extension ActiveEnergySource: BiometricSource {
     public var isHealthSynced: Bool {
-        self == .healthApp
+        self == .health
     }
     public var isUserEntered: Bool {
         self == .userEntered
@@ -29,7 +29,7 @@ extension ActiveEnergySource: BiometricSource {
 
 extension RestingEnergySource: BiometricSource {
     public var isHealthSynced: Bool {
-        self == .healthApp
+        self == .health
     }
     public var isUserEntered: Bool {
         self == .userEntered
@@ -38,7 +38,7 @@ extension RestingEnergySource: BiometricSource {
 
 extension  MeasurementSource: BiometricSource {
     public var isHealthSynced: Bool {
-        self == .healthApp
+        self == .health
     }
     public var isUserEntered: Bool {
         self == .userEntered

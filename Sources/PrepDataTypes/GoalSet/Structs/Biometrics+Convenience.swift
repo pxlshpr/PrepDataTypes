@@ -4,10 +4,10 @@ public extension Biometrics {
     var updatesWithHealthApp: Bool {
         //TODO: Biometrics
 //        return true
-        return restingEnergy?.source == .healthApp
-        || activeEnergy?.source == .healthApp
-        || leanBodyMass?.source == .healthApp
-        || weight?.source == .healthApp
+        return restingEnergy?.source == .health
+        || activeEnergy?.source == .health
+        || leanBodyMass?.source == .health
+        || weight?.source == .health
     }
 }
 
@@ -37,7 +37,7 @@ public extension Biometrics {
         //TODO: Biometrics
 //        true
         switch restingEnergy?.source {
-        case .healthApp:
+        case .health:
             return true
         case .formula:
             guard let formula = restingEnergy?.formula else { return false }
@@ -55,7 +55,7 @@ public extension Biometrics {
         //TODO: Biometrics
 //        true
         switch activeEnergy?.source {
-        case .healthApp:
+        case .health:
             return true
         default:
             return false
@@ -70,7 +70,7 @@ public extension Biometrics {
         //TODO: Biometrics
 //        true
         switch leanBodyMass?.source {
-        case .healthApp:
+        case .health:
             return true
         case .fatPercentage, .formula:
             /// We don't care about the height being dynamic as it hardly changes after age 18-20
@@ -83,11 +83,11 @@ public extension Biometrics {
     var syncsWeight: Bool {
         //TODO: Biometrics
 //        true
-        weight?.source == .healthApp
+        weight?.source == .health
     }
     
     var syncsHeight: Bool {
-        height?.source == .healthApp
+        height?.source == .health
     }
 
     func weight(in other: WeightUnit) -> Double? {

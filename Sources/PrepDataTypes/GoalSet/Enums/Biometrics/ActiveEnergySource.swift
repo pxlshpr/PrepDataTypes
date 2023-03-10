@@ -1,13 +1,13 @@
 import Foundation
 
 public enum ActiveEnergySource: Int16, Codable, CaseIterable {
-    case healthApp = 1
+    case health = 1
     case activityLevel
     case userEntered
     
     public var pickerDescription: String {
         switch self {
-        case .healthApp:
+        case .health:
             return "Health App"
         case .activityLevel:
             return "Activity level"
@@ -18,7 +18,7 @@ public enum ActiveEnergySource: Int16, Codable, CaseIterable {
     
     public var menuDescription: String {
         switch self {
-        case .healthApp:
+        case .health:
             return "Sync with Health App"
         case .activityLevel:
             return "Choose activity level"
@@ -29,7 +29,7 @@ public enum ActiveEnergySource: Int16, Codable, CaseIterable {
     
     public var systemImage: String {
         switch self {
-        case .healthApp:
+        case .health:
             return "heart.fill"
         case .activityLevel:
             return "dial.medium.fill"

@@ -7,7 +7,7 @@ public enum HealthPeriodOption: Int16, Codable, CaseIterable {
     public var pickerDescription: String {
         switch self {
         case .previousDay:
-            return "Previous Day"
+            return "Latest"
         case .average:
             return "Daily Average"
         }
@@ -15,7 +15,7 @@ public enum HealthPeriodOption: Int16, Codable, CaseIterable {
     public var menuDescription: String {
         switch self {
         case .previousDay:
-            return "previous day's value"
+            return "latest value"
         case .average:
             return "daily average of"
         }
@@ -24,7 +24,7 @@ public enum HealthPeriodOption: Int16, Codable, CaseIterable {
     public var energyPrefix: String {
         switch self {
         case .previousDay:
-            return "yesterday"
+            return "latest"
         case .average:
             return "currently"
         }

@@ -118,11 +118,29 @@ extension Biometrics {
         public var dobYear: Int?
         public var source: MeasurementSource?
         
-        public init(value: Int? = nil, dobDay: Int? = nil, dobMonth: Int? = nil, dobYear: Int? = nil, source: MeasurementSource? = nil) {
+        public init(
+            value: Int? = nil,
+            dobDay: Int? = nil,
+            dobMonth: Int? = nil,
+            dobYear: Int? = nil,
+            source: MeasurementSource? = nil
+        ) {
             self.value = value
             self.dobDay = dobDay
             self.dobMonth = dobMonth
             self.dobYear = dobYear
+            self.source = source
+        }
+        
+        public init(
+            value: Int,
+            components: DateComponents,
+            source: MeasurementSource
+        ) {
+            self.value = value
+            self.dobDay = components.day
+            self.dobMonth = components.month
+            self.dobYear = components.year
             self.source = source
         }
     }

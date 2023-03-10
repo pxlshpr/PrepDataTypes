@@ -86,6 +86,8 @@ public extension Notification.Name {
     static var didDismissExtractor: Notification.Name { return .init("didDismissExtractor") }
     static var didExtractFoodLabel: Notification.Name { return .init("didExtractFoodLabel") }
     static var shouldDismissFoodForm: Notification.Name { return .init("shouldDismissFoodForm") }
+    
+    static var didUpdateBiometrics: Notification.Name { return .init("didUpdateBiometrics") }
 }
 
 public extension Notification {

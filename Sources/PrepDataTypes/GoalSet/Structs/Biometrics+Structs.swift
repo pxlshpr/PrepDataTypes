@@ -2,7 +2,7 @@ import Foundation
 
 extension Biometrics {
     
-    public struct RestingEnergy: Hashable, Codable {
+    public struct RestingEnergy: Hashable, Codable, Equatable {
         public var amount: Double?
         public var unit: EnergyUnit
         public var source: RestingEnergySource?

@@ -74,7 +74,8 @@ public extension Notification.Name {
     static var shouldUpdateMetrics: Notification.Name { return .init("shouldUpdateMetrics") }
     
     static var shouldPopSettingsToRoot: Notification.Name { return .init("shouldPopSettingsToRoot") }
-    
+    static var switchedTabToGoals: Notification.Name { return .init("switchedTabToGoals") }
+
     static var swapMealItemPositions: Notification.Name { return .init("swapMealItemPositions") }
     static var removeMealItemForMove: Notification.Name { return .init("removeMealItemForMove") }
     static var insertMealItemForMove: Notification.Name { return .init("insertMealItemForMove") }

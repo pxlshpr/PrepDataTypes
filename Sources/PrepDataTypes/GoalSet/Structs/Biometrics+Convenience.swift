@@ -44,7 +44,7 @@ public extension Biometrics {
             if formula.usesLeanBodyMass, hasDynamicLBM {
                 return hasDynamicLBM
             } else {
-                return hasDynamicWeight
+                return syncsWeight
             }
         default:
             return false
@@ -74,18 +74,22 @@ public extension Biometrics {
             return true
         case .fatPercentage, .formula:
             /// We don't care about the height being dynamic as it hardly changes after age 18-20
-            return hasDynamicWeight
+            return syncsWeight
         default:
             return false
         }
     }
     
-    var hasDynamicWeight: Bool {
+    var syncsWeight: Bool {
         //TODO: Biometrics
 //        true
         weight?.source == .healthApp
     }
     
+    var syncsHeight: Bool {
+        height?.source == .healthApp
+    }
+
     func weight(in other: WeightUnit) -> Double? {
         //TODO: Biometrics
 //        nil

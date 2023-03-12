@@ -20,6 +20,12 @@ extension Biometrics {
             self.intervalValue = intervalValue
             self.interval = interval
         }
+        
+        public mutating func convert(to newUnit: EnergyUnit) {
+            guard let amount else { return }
+            self.amount = self.unit.convert(amount, to: newUnit)
+            self.unit = newUnit
+        }
     }
 
     public struct ActiveEnergy: Hashable, Codable {
@@ -40,16 +46,22 @@ extension Biometrics {
             self.intervalValue = intervalValue
             self.interval = interval
         }
+        
+        public mutating func convert(to newUnit: EnergyUnit) {
+            guard let amount else { return }
+            self.amount = self.unit.convert(amount, to: newUnit)
+            self.unit = newUnit
+        }
     }
 
     public struct LeanBodyMass: Hashable, Codable {
         public var amount: Double?
-        public var unit: WeightUnit
+        public var unit: BodyMassUnit
         public var source: LeanBodyMassSource?
         public var formula: LeanBodyMassFormula?
         public var sampledAt: Double?
 
-        public init(amount: Double? = nil, unit: WeightUnit, source: LeanBodyMassSource? = nil, formula: LeanBodyMassFormula? = nil, date: Date? = nil) {
+        public init(amount: Double? = nil, unit: BodyMassUnit, source: LeanBodyMassSource? = nil, formula: LeanBodyMassFormula? = nil, date: Date? = nil) {
             self.amount = amount
             self.unit = unit
             self.source = source
@@ -61,15 +73,21 @@ extension Biometrics {
             guard let sampledAt else { return nil }
             return Date(timeIntervalSince1970: sampledAt)
         }
+        
+        public mutating func convert(to newUnit: BodyMassUnit) {
+            guard let amount else { return }
+            self.amount = self.unit.convert(amount, to: newUnit)
+            self.unit = newUnit
+        }
     }
     
     public struct Weight: Hashable, Codable {
         public var amount: Double?
-        public var unit: WeightUnit
+        public var unit: BodyMassUnit
         public var source: MeasurementSource?
         public var sampledAt: Double?
         
-        public init(amount: Double? = nil, unit: WeightUnit, source: MeasurementSource? = nil, date: Date? = nil) {
+        public init(amount: Double? = nil, unit: BodyMassUnit, source: MeasurementSource? = nil, date: Date? = nil) {
             self.amount = amount
             self.unit = unit
             self.source = source
@@ -79,6 +97,12 @@ extension Biometrics {
         public var sampleDate: Date? {
             guard let sampledAt else { return nil }
             return Date(timeIntervalSince1970: sampledAt)
+        }
+        
+        public mutating func convert(to newUnit: BodyMassUnit) {
+            guard let amount else { return }
+            self.amount = self.unit.convert(amount, to: newUnit)
+            self.unit = newUnit
         }
     }
 
@@ -98,6 +122,12 @@ extension Biometrics {
         public var sampleDate: Date? {
             guard let sampledAt else { return nil }
             return Date(timeIntervalSince1970: sampledAt)
+        }
+        
+        public mutating func convert(to newUnit: HeightUnit) {
+            guard let amount else { return }
+            self.amount = self.unit.convert(amount, to: newUnit)
+            self.unit = newUnit
         }
     }
 

@@ -4,20 +4,19 @@ public struct UserOptions: Hashable, Codable {
 
     public struct Units: Hashable, Codable {
         public var energy: EnergyUnit
-        public var weight: WeightUnit
+        public var bodyMass: BodyMassUnit
         public var height: HeightUnit
         public var volume: UserExplicitVolumeUnits
         
         public static var defaultUnits: Units {
             Units(
                 energy: .kcal,
-                weight: .kg,
+                bodyMass: .kg,
                 height: .cm,
                 volume: .defaultUnits
             )
         }
     }
-    
     
     public struct Log: Hashable, Codable {
         public var showingBadgesForFoods: Bool = true

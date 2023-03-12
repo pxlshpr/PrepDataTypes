@@ -5,7 +5,7 @@ public enum NutrientGoalType: Codable, Hashable {
     case fixed
     
     /// Only used with Diets
-    case quantityPerBodyMass(NutrientGoalBodyMassType, WeightUnit)
+    case quantityPerBodyMass(NutrientGoalBodyMassType, BodyMassUnit)
     case percentageOfEnergy
     case quantityPerEnergy(Double, EnergyUnit) /// `Double` indicates the value we're using
 
@@ -19,8 +19,8 @@ public extension NutrientGoalType {
         switch self {
         case .fixed:
             return "\(nutrientUnit.shortDescription)"
-        case .quantityPerBodyMass(_, let weightUnit):
-            return "\(nutrientUnit.shortDescription) per \(weightUnit.shortDescription)"
+        case .quantityPerBodyMass(_, let bodyMassUnit):
+            return "\(nutrientUnit.shortDescription) per \(bodyMassUnit.shortDescription)"
         case .percentageOfEnergy:
             return "%"
         case .quantityPerWorkoutDuration(let workoutDurationUnit):
@@ -136,19 +136,19 @@ public extension NutrientGoalType {
         set {
             guard let newValue else { return }
             switch self {
-            case .quantityPerBodyMass(_, let weightUnit):
-                self = .quantityPerBodyMass(newValue, weightUnit)
+            case .quantityPerBodyMass(_, let bodyMassUnit):
+                self = .quantityPerBodyMass(newValue, bodyMassUnit)
             default:
                 break
             }
         }
     }
     
-    var bodyMassWeightUnit: WeightUnit? {
+    var bodyMassUnit: BodyMassUnit? {
         get {
             switch self {
-            case .quantityPerBodyMass(_, let weightUnit):
-                return weightUnit
+            case .quantityPerBodyMass(_, let bodyMassUnit):
+                return bodyMassUnit
             default:
                 return nil
             }

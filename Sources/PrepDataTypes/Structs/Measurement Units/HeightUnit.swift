@@ -1,5 +1,7 @@
 import Foundation
 
+public let InchesPerFoot: Double = 12
+
 public enum HeightUnit: Int, CaseIterable, Codable {
     case cm = 1
     case ft
@@ -40,6 +42,11 @@ public extension HeightUnit {
         case .m:
             return 100
         }
+    }
+    
+    func convert(_ value: Double, to other: HeightUnit) -> Double {
+        let inCm = value * self.cm
+        return inCm / other.cm
     }
 }
 

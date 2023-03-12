@@ -90,7 +90,7 @@ public extension Biometrics {
         height?.source == .health
     }
 
-    func weight(in other: WeightUnit) -> Double? {
+    func weight(in other: BodyMassUnit) -> Double? {
         //TODO: Biometrics
 //        nil
         guard let amount = weight?.amount,
@@ -100,7 +100,7 @@ public extension Biometrics {
         return unit.convert(amount, to: other)
     }
     
-    func lbm(in other: WeightUnit) -> Double? {
+    func lbm(in other: BodyMassUnit) -> Double? {
         //TODO: Biometrics
 //        nil
         guard let amount = leanBodyMass?.amount,

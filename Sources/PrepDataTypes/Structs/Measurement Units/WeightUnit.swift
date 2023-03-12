@@ -1,5 +1,89 @@
 import Foundation
 
+public let PoundsPerStone: Double = 14
+
+public enum BodyMassUnit: Int16, CaseIterable, Codable {
+    case kg = 1
+    case lb
+    case st
+    
+    public var shortDescription: String {
+        switch self {
+        case .kg:
+            return "kg"
+        case .lb:
+            return "lb"
+        case .st:
+            return "st"
+        }
+    }
+}
+
+public extension BodyMassUnit {
+    var g: Double {
+        switch self {
+        case .kg:
+            return 1000
+        case .lb:
+            return 453.59237
+        case .st:
+            return 6350.29318
+        }
+    }
+    func convert(_ value: Double, to other: BodyMassUnit) -> Double {
+        let inGrams = value * self.g
+        return inGrams / other.g
+    }
+}
+
+public extension BodyMassUnit {
+    var menuDescription: String {
+        switch self {
+        case .kg:
+            return "kilogram"
+        case .lb:
+            return "pound"
+        default:
+            return "unsupported"
+        }
+    }
+    
+    var pickerDescription: String {
+        switch self {
+        case .kg:
+            return "kilogram"
+        case .lb:
+            return "pound"
+        default:
+            return "unsupported"
+        }
+    }
+    
+    var pickerPrefix: String {
+        "per "
+    }
+}
+
+
+#if os(iOS)
+import HealthKit
+
+public extension BodyMassUnit {
+    var healthKitUnit: HKUnit {
+        switch self {
+        case .kg:
+            return .gramUnit(with: .kilo)
+        case .lb:
+            return .pound()
+        case .st:
+            return .stone()
+        }
+    }
+}
+#endif
+
+//MARK: - Weight
+
 public enum WeightUnit: Int16, CaseIterable, Codable {
     case g = 1
     case kg
@@ -73,57 +157,8 @@ extension WeightUnit: DescribableUnit {
 }
 
 public extension WeightUnit {
-    var menuDescription: String {
-        switch self {
-        case .kg:
-            return "kilogram"
-        case .lb:
-            return "pound"
-        default:
-            return "unsupported"
-        }
-    }
-    
-    var pickerDescription: String {
-        switch self {
-        case .kg:
-            return "kilogram"
-        case .lb:
-            return "pound"
-        default:
-            return "unsupported"
-        }
-    }
-    
-    var pickerPrefix: String {
-        "per "
-    }
-}
-
-public extension WeightUnit {
     func convert(_ value: Double, to other: WeightUnit) -> Double {
         let inGrams = value * self.g
         return inGrams / other.g
     }
 }
-
-#if os(iOS)
-import HealthKit
-
-public extension WeightUnit {
-    var healthKitUnit: HKUnit {
-        switch self {
-        case .g:
-            return .gram()
-        case .kg:
-            return .gramUnit(with: .kilo)
-        case .oz:
-            return .ounce()
-        case .lb:
-            return .pound()
-        case .mg:
-            return .gramUnit(with: .milli)
-        }
-    }
-}
-#endif

@@ -20,6 +20,19 @@ public enum BiometricSex: Int16, Codable, CaseIterable {
 #if os(iOS)
 import HealthKit
 
+public extension BiometricSex {
+    var hkBiologicalSex: HKBiologicalSex {
+        switch self {
+        case .female:
+            return .female
+        case .male:
+            return .male
+        case .other:
+            return .other
+        }
+    }
+}
+
 public extension HKBiologicalSex {
     var biometricSex: BiometricSex {
         switch self {

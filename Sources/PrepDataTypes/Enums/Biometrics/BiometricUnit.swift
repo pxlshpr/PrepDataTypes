@@ -2,17 +2,23 @@ import Foundation
 
 public enum BiometricUnit {
     case energy(EnergyUnit)
-    case weight(WeightUnit)
+    case bodyMass(BodyMassUnit)
     case height(HeightUnit)
+    case years
+    case percentage
     
     public var description: String {
         switch self {
         case .energy(let energyUnit):
             return energyUnit.shortDescription
-        case .weight(let weightUnit):
-            return weightUnit.shortDescription
+        case .bodyMass(let bodyMassUnit):
+            return bodyMassUnit.shortDescription
         case .height(let heightUnit):
             return heightUnit.shortDescription
+        case .years:
+            return "years"
+        case .percentage:
+            return "%"
         }
     }
     
@@ -24,10 +30,10 @@ public enum BiometricUnit {
             return nil
         }
     }
-    public var weightUnit: WeightUnit? {
+    public var bodyMassUnit: BodyMassUnit? {
         switch self {
-        case .weight(let weightUnit):
-            return weightUnit
+        case .bodyMass(let bodyMassUnit):
+            return bodyMassUnit
         default:
             return nil
         }
@@ -38,6 +44,17 @@ public enum BiometricUnit {
             return heightUnit
         default:
             return nil
+        }
+    }
+    
+    public var hasTwoComponents: Bool {
+        switch self {
+        case .bodyMass(let bodyMassUnit):
+            return bodyMassUnit == .st
+        case .height(let heightUnit):
+            return heightUnit == .ft
+        default:
+            return false
         }
     }
 }

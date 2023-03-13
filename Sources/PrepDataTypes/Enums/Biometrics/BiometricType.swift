@@ -1,6 +1,6 @@
 import Foundation
 
-public enum BiometricType {
+public enum BiometricType: CaseIterable {
     case restingEnergy
     case activeEnergy
     case sex
@@ -46,6 +46,17 @@ public enum BiometricType {
             return false
         default:
             return true
+        }
+    }
+    
+    public var systemImage: String? {
+        switch self {
+        case .restingEnergy:
+            return "bed.double.fill"
+        case .activeEnergy:
+            return "figure.walk.motion"
+        default:
+            return nil
         }
     }
 }

@@ -1,6 +1,6 @@
 import Foundation
 
-public enum HealthPeriodOption: Int16, Codable, CaseIterable {
+public enum HealthPeriodType: Int16, Codable, CaseIterable {
     case previousDay = 1
     case average
     

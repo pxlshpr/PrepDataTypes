@@ -26,7 +26,7 @@ public enum BiometricType {
         case .activeEnergy:
             return "Active Energy"
         case .sex:
-            return "Sex"
+            return "Biological Sex"
         case .age:
             return "Age"
         case .weight:

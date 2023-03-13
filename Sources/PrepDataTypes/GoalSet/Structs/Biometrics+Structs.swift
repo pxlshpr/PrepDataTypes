@@ -7,18 +7,32 @@ extension Biometrics {
         public var unit: EnergyUnit
         public var source: RestingEnergySource?
         public var formula: RestingEnergyFormula?
-        public var period: HealthPeriodOption?
-        public var intervalValue: Int?
-        public var interval: HealthAppInterval?
         
-        public init(amount: Double? = nil, unit: EnergyUnit, source: RestingEnergySource? = nil, formula: RestingEnergyFormula? = nil, period: HealthPeriodOption? = nil, intervalValue: Int? = nil, interval: HealthAppInterval? = nil) {
+        public var healthInterval: HealthInterval?
+//        public var period: HealthPeriodType?
+//        public var intervalValue: Int?
+//        public var interval: HealthPeriod?
+        
+        public init(
+            amount: Double? = nil,
+            unit: EnergyUnit,
+            source: RestingEnergySource? = nil,
+            formula: RestingEnergyFormula? = nil,
+            
+            healthInterval: HealthInterval? = nil
+//            period: HealthPeriodType? = nil,
+//            intervalValue: Int? = nil,
+//            interval: HealthPeriod? = nil
+        ) {
             self.amount = amount
             self.unit = unit
             self.source = source
             self.formula = formula
-            self.period = period
-            self.intervalValue = intervalValue
-            self.interval = interval
+            
+            self.healthInterval = healthInterval
+//            self.period = period
+//            self.intervalValue = intervalValue
+//            self.interval = interval
         }
         
         public mutating func convert(to newUnit: EnergyUnit) {
@@ -33,11 +47,11 @@ extension Biometrics {
         public var unit: EnergyUnit
         public var source: ActiveEnergySource?
         public var activityLevel: ActivityLevel?
-        public var period: HealthPeriodOption?
+        public var period: HealthPeriodType?
         public var intervalValue: Int?
-        public var interval: HealthAppInterval?
+        public var interval: HealthPeriod?
         
-        public init(amount: Double? = nil, unit: EnergyUnit, source: ActiveEnergySource? = nil, activityLevel: ActivityLevel? = nil, period: HealthPeriodOption? = nil, intervalValue: Int? = nil, interval: HealthAppInterval? = nil) {
+        public init(amount: Double? = nil, unit: EnergyUnit, source: ActiveEnergySource? = nil, activityLevel: ActivityLevel? = nil, period: HealthPeriodType? = nil, intervalValue: Int? = nil, interval: HealthPeriod? = nil) {
             self.amount = amount
             self.unit = unit
             self.source = source

@@ -1,29 +1,29 @@
 import Foundation
 
 public enum HealthPeriodType: Int16, Codable, CaseIterable {
-    case previousDay = 1
+    case latest = 1
     case average
     
     public var pickerDescription: String {
         switch self {
-        case .previousDay:
+        case .latest:
             return "Latest"
         case .average:
-            return "Daily Average"
+            return "Rolling Average"
         }
     }
     public var menuDescription: String {
         switch self {
-        case .previousDay:
+        case .latest:
             return "latest value"
         case .average:
-            return "daily average of"
+            return "rolling average of"
         }
     }
     
     public var energyPrefix: String {
         switch self {
-        case .previousDay:
+        case .latest:
             return "latest"
         case .average:
             return "currently"

@@ -72,6 +72,10 @@ public struct HealthInterval: Hashable, Codable, Equatable {
     public var period: HealthPeriod
     public var timestamp: Double?
     
+    public func equalsWithoutTimestamp(_ other: HealthInterval) -> Bool {
+        value == other.value && period == other.period
+    }
+    
     public init(_ value: Int, _ period: HealthPeriod, timestamp: Double? = nil) {
         self.value = value
         self.period = period
@@ -99,7 +103,7 @@ public struct HealthInterval: Hashable, Codable, Equatable {
     
     public var periodType: HealthPeriodType {
         value == 1 && period == .day
-        ? .previousDay
+        ? .latest
         : .average
     }
     

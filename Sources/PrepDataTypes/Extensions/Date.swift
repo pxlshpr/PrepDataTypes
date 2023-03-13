@@ -33,7 +33,33 @@ public extension Date {
 }
 
 public extension Date {
-    var tdeeFormat: String {
+    var biometricShortFormat: String {
+        let dayString: String
+        var timeString = ""
+        if Calendar.current.isDateInToday(self) {
+            dayString = "Today"
+            timeString = shortTime
+        }
+        else if Calendar.current.isDateInYesterday(self) {
+            dayString = "Yesterday"
+        }
+        else if Calendar.current.isDateInTomorrow(self) {
+            dayString = "Tomorrow"
+        }
+        else {
+            let formatter = DateFormatter()
+            let sameYear = year == Date().year
+            formatter.dateFormat = sameYear ? "d MMM" : "d MMM yy"
+            dayString = formatter.string(from: self)
+        }
+        if timeString.isEmpty {
+            return dayString
+        } else {
+            return timeString
+        }
+    }
+
+    var biometricFormat: String {
         let dayString: String
         var timeString = shortTime
         if Calendar.current.isDateInToday(self) { dayString = "Today" }
@@ -51,6 +77,20 @@ public extension Date {
         } else {
             return dayString + ", " + timeString
         }
+    }
+    
+    var biometricEnergyFormat: String {
+        let dayString: String
+        if Calendar.current.isDateInToday(self) { dayString = "Today" }
+        else if Calendar.current.isDateInYesterday(self) { dayString = "Yesterday" }
+        else if Calendar.current.isDateInTomorrow(self) { dayString = "Tomorrow" }
+        else {
+            let formatter = DateFormatter()
+            let sameYear = year == Date().year
+            formatter.dateFormat = sameYear ? "d MMM" : "d MMM yy"
+            dayString = formatter.string(from: self)
+        }
+        return dayString
     }
 }
 

@@ -14,6 +14,7 @@ public struct PreviousBiometrics: Hashable, Codable {
 
 public struct Biometrics: Hashable, Codable {
 
+    public var timestamp: Double?
     public var restingEnergy: RestingEnergy?
     public var activeEnergy: ActiveEnergy?
     public var fatPercentage: Double?
@@ -24,6 +25,7 @@ public struct Biometrics: Hashable, Codable {
     public var age: Age?
     
     public init(
+        timestamp: Double? = nil,
         restingEnergy: RestingEnergy? = nil,
         activeEnergy: ActiveEnergy? = nil,
         fatPercentage: Double? = nil,
@@ -33,6 +35,7 @@ public struct Biometrics: Hashable, Codable {
         sex: Sex? = nil,
         age: Age? = nil
     ) {
+        self.timestamp = timestamp
         self.restingEnergy = restingEnergy
         self.activeEnergy = activeEnergy
         self.fatPercentage = fatPercentage

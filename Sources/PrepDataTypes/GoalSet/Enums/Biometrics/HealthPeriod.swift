@@ -46,11 +46,11 @@ public enum HealthPeriod: Int16, Codable, CaseIterable {
         }
     }
     
-    public func dateRangeOfPast(_ value: Int) -> ClosedRange<Date>? {
+    public func dateRangeOfPast(_ value: Int, to date: Date = Date()) -> ClosedRange<Date>? {
         
         let calendar = Calendar(identifier: .gregorian)
-        let today = calendar.startOfDay(for: Date())
-        let endDate = today
+        let startOfDay = calendar.startOfDay(for: date)
+        let endDate = startOfDay
 
         guard let startDate = calendar.date(
             byAdding: calendarComponent,
@@ -70,22 +70,25 @@ public enum HealthPeriod: Int16, Codable, CaseIterable {
 public struct HealthInterval: Hashable, Codable, Equatable {
     public var value: Int
     public var period: HealthPeriod
+    public var timestamp: Double?
     
-    public init(_ value: Int, _ period: HealthPeriod) {
+    public init(_ value: Int, _ period: HealthPeriod, timestamp: Double? = nil) {
         self.value = value
         self.period = period
+        self.timestamp = timestamp
     }
     
     public var greaterIntervals: [HealthInterval] {
         let all = Self.allIntervals
-        guard let index = all.firstIndex(of: self),
+        guard let index = all.firstIndex(where: { $0.value == self.value && $0.period == self.period }),
               index + 1 < all.count
         else { return [] }
         return Array(all[index+1..<all.count])
     }
     
     static var allIntervals: [HealthInterval] {
-        var intervals: [HealthInterval] = []
+        /// Prefill `(1, .day)` because 1 isn't included in the possible values for `.day`
+        var intervals: [HealthInterval] = [.init(1, .day)]
         for period in HealthPeriod.allCases {
             for value in period.minValue...period.maxValue {
                 intervals.append(.init(value, period))
@@ -107,6 +110,14 @@ public struct HealthInterval: Hashable, Codable, Equatable {
         if value > period.maxValue {
             value = period.maxValue
         }
+    }
+    
+    public var dateRange: ClosedRange<Date>? {
+        period.dateRangeOfPast(value)
+    }
+    
+    public var isLatest: Bool {
+        value == 1 && period == .day
     }
 }
 

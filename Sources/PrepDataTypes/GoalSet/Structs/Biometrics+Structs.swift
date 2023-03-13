@@ -7,32 +7,20 @@ extension Biometrics {
         public var unit: EnergyUnit
         public var source: RestingEnergySource?
         public var formula: RestingEnergyFormula?
-        
-        public var healthInterval: HealthInterval?
-//        public var period: HealthPeriodType?
-//        public var intervalValue: Int?
-//        public var interval: HealthPeriod?
+        public var interval: HealthInterval?
         
         public init(
             amount: Double? = nil,
             unit: EnergyUnit,
             source: RestingEnergySource? = nil,
             formula: RestingEnergyFormula? = nil,
-            
-            healthInterval: HealthInterval? = nil
-//            period: HealthPeriodType? = nil,
-//            intervalValue: Int? = nil,
-//            interval: HealthPeriod? = nil
+            interval: HealthInterval? = nil
         ) {
             self.amount = amount
             self.unit = unit
             self.source = source
             self.formula = formula
-            
-            self.healthInterval = healthInterval
-//            self.period = period
-//            self.intervalValue = intervalValue
-//            self.interval = interval
+            self.interval = interval
         }
         
         public mutating func convert(to newUnit: EnergyUnit) {
@@ -47,18 +35,20 @@ extension Biometrics {
         public var unit: EnergyUnit
         public var source: ActiveEnergySource?
         public var activityLevel: ActivityLevel?
-        public var period: HealthPeriodType?
-        public var intervalValue: Int?
-        public var interval: HealthPeriod?
+        public var interval: HealthInterval?
         
-        public init(amount: Double? = nil, unit: EnergyUnit, source: ActiveEnergySource? = nil, activityLevel: ActivityLevel? = nil, period: HealthPeriodType? = nil, intervalValue: Int? = nil, interval: HealthPeriod? = nil) {
+        public init(
+            amount: Double? = nil,
+            unit: EnergyUnit,
+            source: ActiveEnergySource? = nil,
+            activityLevel: ActivityLevel? = nil,
+            interval: HealthInterval? = nil
+        ) {
             self.amount = amount
             self.unit = unit
             self.source = source
             self.activityLevel = activityLevel
-            self.period = period
-            self.intervalValue = intervalValue
-            self.interval = interval
+            self.interval =             interval
         }
         
         public mutating func convert(to newUnit: EnergyUnit) {

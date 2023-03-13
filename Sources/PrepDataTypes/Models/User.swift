@@ -7,7 +7,6 @@ public struct User: Identifiable, Hashable, Codable {
     public var options: UserOptions
     
     public var biometrics: Biometrics?
-    public var biometricsUpdatedAt: Double?
     public var previousBiometrics: PreviousBiometrics?
 
     public var updatedAt: Double
@@ -19,7 +18,6 @@ public struct User: Identifiable, Hashable, Codable {
         options: UserOptions,
 //        biometrics: Biometrics,
         biometrics: Biometrics? = nil,
-        biometricsUpdatedAt: Double? = nil,
         previousBiometrics: PreviousBiometrics? = nil,
         syncStatus: SyncStatus,
         updatedAt: Double
@@ -28,7 +26,6 @@ public struct User: Identifiable, Hashable, Codable {
         self.cloudKitId = cloudKitId
         self.options = options
         self.biometrics = biometrics
-        self.biometricsUpdatedAt = biometricsUpdatedAt
         self.previousBiometrics = previousBiometrics
         self.syncStatus = syncStatus
         self.updatedAt = updatedAt
@@ -43,7 +40,6 @@ public extension User {
             cloudKitId: cloudKitId,
             options: UserOptions.defaultOptions,
             biometrics: nil,
-            biometricsUpdatedAt: nil,
             previousBiometrics: nil,
             syncStatus: .notSynced,
             updatedAt: Date().timeIntervalSince1970

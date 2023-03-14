@@ -6,6 +6,13 @@ public protocol BiometricSource {
     var pickerDescription: String { get }
     var menuDescription: String { get }
     var systemImage: String { get }
+    var isUserEnteredAndComputed: Bool { get }
+}
+
+extension BiometricSource {
+    public var isUserEnteredAndComputed: Bool {
+        false
+    }
 }
 
 extension LeanBodyMassSource: BiometricSource {
@@ -15,6 +22,10 @@ extension LeanBodyMassSource: BiometricSource {
     
     public var isUserEntered: Bool {
         self == .userEntered
+    }
+    
+    public var isUserEnteredAndComputed: Bool {
+        self == .fatPercentage
     }
 }
 

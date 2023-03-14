@@ -50,7 +50,7 @@ public struct Biometrics: Hashable, Codable {
 public extension Biometrics {
     func updatedTypes(from other: Biometrics) -> [BiometricType] {
         var types: [BiometricType] = []
-        if restingEnergy?.amount != other.restingEnergy?.amount {
+        if restingEnergy != other.restingEnergy {
             types.append(.restingEnergy)
         }
         if activeEnergy != other.activeEnergy {

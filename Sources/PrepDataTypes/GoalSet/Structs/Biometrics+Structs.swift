@@ -2,8 +2,12 @@ import Foundation
 
 extension Biometrics {
     
-    public struct RestingEnergy: Hashable, Codable, Equatable {
-        public var amount: Double?
+    public struct RestingEnergy: Hashable, Codable {
+        public var amount: Double? {
+            didSet {
+                self.amount = self.amount?.rounded(toPlaces: 1)
+            }
+        }
         public var unit: EnergyUnit
         public var source: RestingEnergySource?
         public var formula: RestingEnergyFormula?
@@ -16,7 +20,7 @@ extension Biometrics {
             formula: RestingEnergyFormula? = nil,
             interval: HealthInterval? = nil
         ) {
-            self.amount = amount
+            self.amount = amount?.rounded(toPlaces: 1)
             self.unit = unit
             self.source = source
             self.formula = formula
@@ -31,7 +35,11 @@ extension Biometrics {
     }
 
     public struct ActiveEnergy: Hashable, Codable {
-        public var amount: Double?
+        public var amount: Double? {
+            didSet {
+                self.amount = self.amount?.rounded(toPlaces: 1)
+            }
+        }
         public var unit: EnergyUnit
         public var source: ActiveEnergySource?
         public var activityLevel: ActivityLevel?
@@ -44,11 +52,11 @@ extension Biometrics {
             activityLevel: ActivityLevel? = nil,
             interval: HealthInterval? = nil
         ) {
-            self.amount = amount
+            self.amount = amount?.rounded(toPlaces: 1)
             self.unit = unit
             self.source = source
             self.activityLevel = activityLevel
-            self.interval =             interval
+            self.interval = interval
         }
         
         public mutating func convert(to newUnit: EnergyUnit) {

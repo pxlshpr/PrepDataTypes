@@ -46,3 +46,31 @@ public struct Biometrics: Hashable, Codable {
         self.age = age
     }
 }
+
+public extension Biometrics {
+    func updatedTypes(from other: Biometrics) -> [BiometricType] {
+        var types: [BiometricType] = []
+        if restingEnergy?.amount != other.restingEnergy?.amount {
+            types.append(.restingEnergy)
+        }
+        if activeEnergy != other.activeEnergy {
+            types.append(.activeEnergy)
+        }
+        if weight != other.weight {
+            types.append(.weight)
+        }
+        if leanBodyMass != other.leanBodyMass {
+            types.append(.leanBodyMass)
+        }
+        if height != other.height {
+            types.append(.height)
+        }
+        if age != other.age {
+            types.append(.age)
+        }
+        if sex != other.sex {
+            types.append(.sex)
+        }
+        return types
+    }
+}

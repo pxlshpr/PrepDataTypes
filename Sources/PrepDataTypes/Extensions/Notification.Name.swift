@@ -1,7 +1,7 @@
 import Foundation
 
 public extension Notification.Name {
-    
+
     static var initialSyncCompleted: Notification.Name { return .init("initialSyncCompleted") }
     
     static var dayPagerWillChangeDate: Notification.Name { return .init("dayPagerWillChangeDate") }
@@ -80,8 +80,6 @@ public extension Notification.Name {
     static var removeMealItemForMove: Notification.Name { return .init("removeMealItemForMove") }
     static var insertMealItemForMove: Notification.Name { return .init("insertMealItemForMove") }
     
-    static var sheetWasDismissedOnHome: Notification.Name { return .init("sheetWasDismissedOnHome") }
-    static var sheetWasPresentedOnHome: Notification.Name { return .init("sheetWasPresentedOnHome") }
     static var fastingTimerStateChanged: Notification.Name { return .init("fastingTimerStateChanged") }
     static var fastingTimerStateRemoved: Notification.Name { return .init("fastingTimerStateRemoved") }
     static var didDismissExtractor: Notification.Name { return .init("didDismissExtractor") }

@@ -76,27 +76,11 @@ public extension Biometrics {
 }
 
 public extension Biometrics {
-    //TODO: Check what is needed
     var hasLBM: Bool {
         leanBodyMass?.amount != nil && leanBodyMass?.source != nil
     }
     
     var hasWeight: Bool {
         weight?.amount != nil && weight?.source != nil
-    }
-    
-    var weightUpdatesWithHealth: Bool {
-        weight?.source == .health
-    }
-    
-    var lbmUpdatesWithHealth: Bool {
-        switch leanBodyMass?.source {
-        case .health:
-            return true
-        case .fatPercentage, .formula:
-            return weightUpdatesWithHealth
-        default:
-            return false
-        }
     }
 }

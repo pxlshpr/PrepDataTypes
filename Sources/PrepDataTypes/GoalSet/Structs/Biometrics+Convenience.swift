@@ -30,16 +30,14 @@ public extension Biometrics {
 
 public extension Biometrics {
     
-    var hasDynamicRestingEnergy: Bool {
-        //TODO: Biometrics
-//        true
+    var syncsRestingEnergy: Bool {
         switch restingEnergy?.source {
         case .health:
             return true
         case .formula:
             guard let formula = restingEnergy?.formula else { return false }
-            if formula.usesLeanBodyMass, hasDynamicLBM {
-                return hasDynamicLBM
+            if formula.usesLeanBodyMass, syncsLeanBodyMass {
+                return syncsLeanBodyMass
             } else {
                 return syncsWeight
             }
@@ -48,9 +46,7 @@ public extension Biometrics {
         }
     }
     
-    var hasDynamicActiveEnergy: Bool {
-        //TODO: Biometrics
-//        true
+    var syncsActiveEnergy: Bool {
         switch activeEnergy?.source {
         case .health:
             return true
@@ -59,18 +55,16 @@ public extension Biometrics {
         }
     }
     
-    var hasDynamicTDEE: Bool {
-        hasDynamicRestingEnergy || hasDynamicActiveEnergy
+    var syncsMaintenanceEnergy: Bool {
+        syncsRestingEnergy || syncsActiveEnergy
     }
     
-    var hasDynamicLBM: Bool {
-        //TODO: Biometrics
-//        true
+    var syncsLeanBodyMass: Bool {
         switch leanBodyMass?.source {
         case .health:
             return true
         case .fatPercentage, .formula:
-            /// We don't care about the height being dynamic as it hardly changes after age 18-20
+            /// We purposely disregard height being synced as it hardly changes after age 18-20
             return syncsWeight
         default:
             return false
@@ -78,8 +72,6 @@ public extension Biometrics {
     }
     
     var syncsWeight: Bool {
-        //TODO: Biometrics
-//        true
         weight?.source == .health
     }
     
@@ -88,8 +80,6 @@ public extension Biometrics {
     }
 
     func weight(in other: BodyMassUnit) -> Double? {
-        //TODO: Biometrics
-//        nil
         guard let amount = weight?.amount,
               let unit = weight?.unit
         else { return nil }
@@ -98,8 +88,6 @@ public extension Biometrics {
     }
     
     func lbm(in other: BodyMassUnit) -> Double? {
-        //TODO: Biometrics
-//        nil
         guard let amount = leanBodyMass?.amount,
               let unit = leanBodyMass?.unit
 
@@ -115,8 +103,6 @@ public extension Biometrics {
     }
 
     var tdee: Double? {
-        //TODO: Biometrics
-//        nil
         guard let restingEnergy = restingEnergy?.amount,
               let activeEnergy = activeEnergy?.amount
         else { return nil }
@@ -125,8 +111,6 @@ public extension Biometrics {
     }
     
     var tdeeInKcal: Double? {
-        //TODO: Biometrics
-//        nil
         guard let tdee,
               let unit = restingEnergy?.unit
         else { return nil }

@@ -19,6 +19,27 @@ public enum BiometricType: CaseIterable {
         }
     }
     
+    public var shortDescription: String {
+        switch self {
+        case .restingEnergy:
+            return "resting energy"
+        case .activeEnergy:
+            return "active energy"
+        case .sex:
+            return "sex"
+        case .age:
+            return "age"
+        case .weight:
+            return "weight"
+        case .leanBodyMass:
+            return "lean body mass"
+        case .fatPercentage:
+            return "fat %"
+        case .height:
+            return "height"
+        }
+    }
+    
     public var description: String {
         switch self {
         case .restingEnergy:

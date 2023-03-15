@@ -39,7 +39,7 @@ public extension NutrientGoalType {
         case .quantityPerBodyMass(let bodyMass, _):
             return "of \(bodyMass.description)"
         case .quantityPerWorkoutDuration(_):
-            return "of workout time"
+            return "of workout duration"
         case .quantityPerEnergy(let energyValue, let energyUnit):
             return "per \(energyValue.cleanAmount) \(energyUnit.shortDescription)"
         }
@@ -54,7 +54,7 @@ public extension NutrientGoalType {
         case .quantityPerBodyMass(_, _):
             return "figure.arms.open"
         case .quantityPerWorkoutDuration(_):
-            return "clock"
+            return "stopwatch.fill"
         }
     }
     

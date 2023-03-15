@@ -19,7 +19,7 @@ public extension NutrientGoalBodyMassType {
     var pickerDescription: String {
         switch self {
         case .weight:
-            return "body weight"
+            return "weight"
         case .leanMass:
             return "lean body mass"
         }
@@ -32,7 +32,7 @@ public extension NutrientGoalBodyMassType {
     var  menuDescription: String {
         switch self {
         case .weight:
-            return "body weight"
+            return "weight"
         case .leanMass:
             return "lean body mass"
         }

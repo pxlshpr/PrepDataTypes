@@ -43,8 +43,8 @@ public extension BodyMassUnit {
             return "kilogram"
         case .lb:
             return "pound"
-        default:
-            return "unsupported"
+        case .st:
+            return "stone"
         }
     }
     
@@ -54,8 +54,8 @@ public extension BodyMassUnit {
             return "kilogram"
         case .lb:
             return "pound"
-        default:
-            return "unsupported"
+        case .st:
+            return "stone"
         }
     }
     

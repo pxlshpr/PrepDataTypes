@@ -9,22 +9,6 @@ public enum EnergyGoalType: Hashable, Codable {
 }
 
 public extension EnergyGoalType {
-    static func defaultDietTypes(userEnergyUnit energyUnit: EnergyUnit) -> [EnergyGoalType] {
-        [
-            .fixed(energyUnit),
-            .fromMaintenance(energyUnit, .deficit),
-            .percentFromMaintenance(.deficit)
-        ]
-    }
-    
-    static func defaultMealTypes(userEnergyUnit energyUnit: EnergyUnit) -> [EnergyGoalType] {
-        [
-            .fixed(energyUnit)
-        ]
-    }
-}
-
-public extension EnergyGoalType {
     
     var isFixed: Bool {
         switch self {

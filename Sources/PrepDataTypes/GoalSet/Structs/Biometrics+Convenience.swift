@@ -14,19 +14,16 @@ public extension Biometrics {
 public extension Biometrics {
     
     var hasTDEE: Bool {
-        tdeeInUnit != nil
+        tdee != nil
     }
     
-    var tdeeInUnit: Double? {
-        tdee
-    }
     var formattedTDEEWithUnit: String? {
         //TODO: Biometrics
 //        nil
-        guard let tdeeInUnit,
-              let energyUnit = restingEnergy?.unit
-        else { return nil }
-        return "\(tdeeInUnit.formattedEnergy) \(energyUnit.shortDescription)"
+        guard let tdee, let energyUnit = restingEnergy?.unit else {
+            return nil
+        }
+        return "\(tdee.formattedEnergy) \(energyUnit.shortDescription)"
     }
 
 }

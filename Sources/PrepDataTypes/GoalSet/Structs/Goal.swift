@@ -25,12 +25,12 @@ public struct Goal: Identifiable, Hashable, Codable {
 }
 
 public extension Goal {
-    func equivalentUnitString(userUnits: UserOptions.Units) -> String? {
+    func equivalentUnitString(_ units: UserOptions.Units) -> String? {
         switch type {
         case .energy(let type):
             switch type {
             default:
-                return userUnits.energy.shortDescription
+                return units.energy.shortDescription
             }
         case .macro(let type, _):
             switch type {
@@ -58,7 +58,7 @@ public extension Goal {
             return calculateEnergyValue(
                 from: lowerBound,
                 deficitBound: largerBound ?? lowerBound,
-                tdee: params.biometrics?.tdeeInUnit
+                tdee: params.biometrics?.tdee
             )
         }
         
@@ -70,7 +70,7 @@ public extension Goal {
                 from: trueLowerBound,
                 energy: energyValue,
                 biometrics: params.biometrics,
-                userUnits: params.userUnits
+                units: params.units
             )
 
         case .micro:
@@ -78,7 +78,7 @@ public extension Goal {
                 from: trueLowerBound,
                 energy: energyValue,
                 biometrics: params.biometrics,
-                userUnits: params.userUnits
+                units: params.units
             )
         default:
             return nil
@@ -91,7 +91,7 @@ public extension Goal {
             return calculateEnergyValue(
                 from: upperBound,
                 deficitBound: smallerBound ?? upperBound,
-                tdee: params.biometrics?.tdeeInUnit
+                tdee: params.biometrics?.tdee
             )
         }
         
@@ -103,14 +103,14 @@ public extension Goal {
                 from: trueUpperBound,
                 energy: energyValue,
                 biometrics: params.biometrics,
-                userUnits: params.userUnits
+                units: params.units
             )
         case .micro:
             return calculateMicroValue(
                 from: trueUpperBound,
                 energy: energyValue,
                 biometrics: params.biometrics,
-                userUnits: params.userUnits
+                units: params.units
             )
         default:
             return nil
@@ -230,7 +230,7 @@ public extension Goal {
         from value: Double?,
         energy: Double?,
         biometrics: Biometrics?,
-        userUnits: UserOptions.Units
+        units: UserOptions.Units
     ) -> Double? {
         
         guard let nutrientGoalType, nutrientGoalType.isPercentageOfEnergy else {
@@ -238,7 +238,7 @@ public extension Goal {
                 from: value,
                 energy: energy,
                 biometrics: biometrics,
-                userUnits: userUnits
+                units: units
             )
         }
         
@@ -247,7 +247,7 @@ public extension Goal {
               let energyInKcal = convertEnergyToKcal(
                     energy,
                     usingBiometrics: biometrics,
-                    orUserUnits: userUnits
+                    orUnits: units
               )
         else { return nil }
         
@@ -258,7 +258,7 @@ public extension Goal {
         from value: Double?,
         energy: Double?,
         biometrics: Biometrics?,
-        userUnits: UserOptions.Units
+        units: UserOptions.Units
     ) -> Double? {
         
         guard let nutrientGoalType, nutrientGoalType.isPercentageOfEnergy else {
@@ -266,7 +266,7 @@ public extension Goal {
                 from: value,
                 energy: energy,
                 biometrics: biometrics,
-                userUnits: userUnits
+                units: units
             )
         }
 
@@ -275,7 +275,7 @@ public extension Goal {
               let energyInKcal = convertEnergyToKcal(
                     energy,
                     usingBiometrics: biometrics,
-                    orUserUnits: userUnits
+                    orUnits: units
               )
         else { return nil }
         
@@ -286,7 +286,7 @@ public extension Goal {
         from value: Double?,
         energy: Double?,
         biometrics: Biometrics?,
-        userUnits: UserOptions.Units
+        units: UserOptions.Units
     ) -> Double? {
         guard let value, let nutrientGoalType else { return nil }
         
@@ -310,7 +310,7 @@ public extension Goal {
             guard let goalEnergyKcal = convertEnergyToKcal(
                 energy,
                 usingBiometrics: biometrics,
-                orUserUnits: userUnits
+                orUnits: units
             ) else {
                 return nil
             }
@@ -336,12 +336,12 @@ public extension Goal {
     func convertEnergyToKcal(
         _ energy: Double?,
         usingBiometrics biometrics: Biometrics?,
-        orUserUnits userUnits: UserOptions.Units
+        orUnits units: UserOptions.Units
     ) -> Double? {
         guard let energy else { return nil }
         //TODO: Biometrics
 //        let energyUnit = EnergyUnit.kcal
-        let energyUnit = biometrics?.restingEnergy?.unit ?? userUnits.energy
+        let energyUnit = biometrics?.restingEnergy?.unit ?? units.energy
         return energyUnit.convert(energy, to: .kcal)
 //        return energyUnit == .kcal ? energy : energy * KcalsPerKilojule
     }
@@ -390,7 +390,7 @@ public extension Goal {
     func minimumLowerBoundForAutoGoal(with params: GoalCalcParams) -> Double? {
         switch self.type {
         case .energy:
-            return params.userUnits.energy.minimumValueForAutoGoals(params: params)
+            return params.units.energy.minimumValueForAutoGoals(params: params)
         case .macro(_, let macro):
             return macro.minimumValueForAutoGoals
         default:

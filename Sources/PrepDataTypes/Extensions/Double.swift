@@ -51,7 +51,8 @@ public extension Double {
     
     /// commas, only rounded off if greater than 100, otherwise 1 decimal place
     var formattedGoalValue: String {
-        formatted(decimalValuesDisplayedUnder: 100)
+//        formatted(decimalValuesDisplayedUnder: 100)
+        formatted(decimalValuesDisplayedUnder: 10)
     }
 
     func formatted(decimalValuesDisplayedUnder decimalMax: Double) -> String {

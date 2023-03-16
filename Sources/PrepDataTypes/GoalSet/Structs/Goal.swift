@@ -57,8 +57,9 @@ public extension Goal {
         guard !type.isEnergy else {
             return calculateEnergyValue(
                 from: lowerBound,
-                deficitBound: largerBound ?? lowerBound,
-                tdee: params.biometrics?.tdee
+                boundForDeficit: largerBound ?? lowerBound,
+                tdee: params.biometrics?.tdee,
+                isLower: true
             )
         }
         
@@ -90,8 +91,9 @@ public extension Goal {
         guard !type.isEnergy else {
             return calculateEnergyValue(
                 from: upperBound,
-                deficitBound: smallerBound ?? upperBound,
-                tdee: params.biometrics?.tdee
+                boundForDeficit: smallerBound ?? upperBound,
+                tdee: params.biometrics?.tdee,
+                isLower: false
             )
         }
         
@@ -193,8 +195,9 @@ public extension Goal {
  
     func calculateEnergyValue(
         from value: Double?,
-        deficitBound: Double?,
-        tdee: Double?
+        boundForDeficit: Double?,
+        tdee: Double?,
+        isLower: Bool /// used for `.deviation`
     ) -> Double? {
         guard let value, let energyGoalType else { return nil }
         
@@ -202,23 +205,36 @@ public extension Goal {
             return value
         }
         
-        guard let deficitBound, let tdee else { return nil }
+        guard let boundForDeficit, let tdee else { return nil }
         
+        //TODO: Deviation
         switch energyGoalType {
         case .fromMaintenance(_, let delta):
             switch delta {
             case .deficit:
-                return tdee - deficitBound
+                return tdee - boundForDeficit
             case .surplus:
                 return tdee + value
+            case .deviation:
+                if isLower {
+                    return tdee - value
+                } else {
+                    return tdee + value
+                }
             }
             
         case .percentFromMaintenance(let delta):
             switch delta {
             case .deficit:
-                return tdee - ((deficitBound/100) * tdee)
+                return tdee - ((boundForDeficit/100) * tdee)
             case .surplus:
                 return tdee + ((value/100) * tdee)
+            case .deviation:
+                if isLower {
+                    return tdee - ((value/100) * tdee)
+                } else {
+                    return tdee + ((value/100) * tdee)
+                }
             }
             
         default:

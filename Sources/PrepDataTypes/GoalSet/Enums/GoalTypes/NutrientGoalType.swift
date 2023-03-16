@@ -15,32 +15,35 @@ public enum NutrientGoalType: Codable, Hashable {
 
 public extension NutrientGoalType {
     
-    func description(nutrientUnit: NutrientUnit) -> String {
+    func description(nutrientUnit: NutrientUnit, short: Bool = false) -> String {
+        let per = short ? "/" : "per"
         switch self {
         case .fixed:
             return "\(nutrientUnit.shortDescription)"
         case .quantityPerBodyMass(_, let bodyMassUnit):
-            return "\(nutrientUnit.shortDescription) per \(bodyMassUnit.shortDescription)"
+            return "\(nutrientUnit.shortDescription) \(per) \(bodyMassUnit.shortDescription)"
         case .percentageOfEnergy:
             return "%"
         case .quantityPerEnergy:
             return "\(nutrientUnit.shortDescription)"
         case .quantityPerWorkoutDuration(let workoutDurationUnit):
-            return "\(nutrientUnit.shortDescription) per \(workoutDurationUnit.menuDescription)"
+            return "\(nutrientUnit.shortDescription) \(per) \(short ? workoutDurationUnit.shortDescription : workoutDurationUnit.menuDescription)"
         }
     }
     
-    func unitDescription(nutrientUnit: NutrientUnit) -> String {
-        let description = self.description(nutrientUnit: nutrientUnit)
+    func unitStrings(nutrientUnit: NutrientUnit) -> (String, String?) {
+        let description = self.description(nutrientUnit: nutrientUnit, short: true)
         switch self {
         case .quantityPerBodyMass(let bodyMassType, _):
-            return "\(description) of \(bodyMassType.description)"
+            return ("\(description) of", "\(bodyMassType.description)")
         case .percentageOfEnergy:
-            return "\(description) of energy"
+            return ("\(description) of", "energy goal")
         case .quantityPerEnergy(let double, let energyUnit):
-            return "\(description) per \(double.formattedEnergy) \(energyUnit.shortDescription)"
+            return ("\(description) per", "\(double.formattedEnergy) \(energyUnit.shortDescription)")
+        case .quantityPerWorkoutDuration:
+            return ("\(description) of", "workout duration")
         default:
-            return description
+            return (description, nil)
         }
     }
     

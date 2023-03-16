@@ -13,6 +13,12 @@ public let HealthGradient = LinearGradient(
     endPoint: .bottom
 )
 
+public let HealthGradientHorizontal = LinearGradient(
+    colors: [HealthTopColor, HealthBottomColor],
+    startPoint: .leading,
+    endPoint: .trailing
+)
+
 public var appleHealthSymbol: some View {
     Image(systemName: "heart.fill")
         .symbolRenderingMode(.palette)
@@ -22,6 +28,9 @@ public var appleHealthSymbol: some View {
 public var appleHealthBolt: some View {
     Image(systemName: "bolt.horizontal.fill")
         .symbolRenderingMode(.palette)
-        .foregroundStyle(HealthGradient)
+//        .foregroundStyle(HealthGradient)
+//        .foregroundStyle(HealthGradientHorizontal)
+//        .foregroundStyle(HealthTopColor)
+        .foregroundStyle(.green.gradient)
 }
 #endif

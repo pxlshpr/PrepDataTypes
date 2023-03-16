@@ -194,11 +194,21 @@ public extension Goal {
     }
  
     func calculateEnergyValue(
-        from value: Double?,
+        from bound: Double?,
         boundForDeficit: Double?,
         tdee: Double?,
         isLower: Bool /// used for `.deviation`
     ) -> Double? {
+        
+        let value: Double?
+        if energyGoalType?.delta == .deviation, bound == nil {
+            /// If we're getting the calculated deviation and don't have a bound (when this is used for the upper bound),
+            /// use the `boundForDeficit` which would have the lower bound
+            value = boundForDeficit
+        } else {
+            value = bound
+        }
+        
         guard let value, let energyGoalType else { return nil }
         
         guard !energyGoalType.isFixed else {

@@ -71,4 +71,15 @@ public extension EnergyGoalType {
             return nil
         }
     }
+    
+    var unitDescription: String {
+        switch self {
+        case .fixed(let unit):
+            return unit.shortDescription
+        case .fromMaintenance(let unit, let delta):
+            return "\(unit.shortDescription) \(delta.description)"
+        case .percentFromMaintenance(let delta):
+            return "% \(delta.description)"
+        }
+    }
 }

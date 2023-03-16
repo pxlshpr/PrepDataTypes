@@ -23,10 +23,24 @@ public extension NutrientGoalType {
             return "\(nutrientUnit.shortDescription) per \(bodyMassUnit.shortDescription)"
         case .percentageOfEnergy:
             return "%"
-        case .quantityPerWorkoutDuration(let workoutDurationUnit):
-            return "\(nutrientUnit.shortDescription) per \(workoutDurationUnit.menuDescription)"
         case .quantityPerEnergy:
             return "\(nutrientUnit.shortDescription)"
+        case .quantityPerWorkoutDuration(let workoutDurationUnit):
+            return "\(nutrientUnit.shortDescription) per \(workoutDurationUnit.menuDescription)"
+        }
+    }
+    
+    func unitDescription(nutrientUnit: NutrientUnit) -> String {
+        let description = self.description(nutrientUnit: nutrientUnit)
+        switch self {
+        case .quantityPerBodyMass(let bodyMassType, _):
+            return "\(description) of \(bodyMassType.description)"
+        case .percentageOfEnergy:
+            return "\(description) of energy"
+        case .quantityPerEnergy(let double, let energyUnit):
+            return "\(description) per \(double.formattedEnergy) \(energyUnit.shortDescription)"
+        default:
+            return description
         }
     }
     

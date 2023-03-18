@@ -93,7 +93,7 @@ public extension NutrientGoalType {
         }
     }
     
-    var isGramsPerMinutesOfExercise: Bool {
+    var isQuantityPerWorkoutDuration: Bool {
         switch self {
         case .quantityPerWorkoutDuration:
             return true

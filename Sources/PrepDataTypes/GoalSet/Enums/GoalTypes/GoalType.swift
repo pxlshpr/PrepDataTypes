@@ -101,6 +101,17 @@ public extension GoalType {
         }
     }
     
+    var anyNutrient: AnyNutrient {
+        switch self {
+        case .energy:
+            return .energy
+        case .macro(_, let macro):
+            return .macro(macro)
+        case .micro(_, let nutrientType, _):
+            return .micro(nutrientType)
+        }
+    }
+    
     var isDualBounded: Bool {
         !isSingleBounded
     }

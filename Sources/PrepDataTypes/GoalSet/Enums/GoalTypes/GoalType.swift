@@ -101,6 +101,26 @@ public extension GoalType {
         }
     }
     
+    var isDualBounded: Bool {
+        !isSingleBounded
+    }
+    
+    var isSingleBounded: Bool {
+        switch self {
+        case .energy(let energyGoalType):
+            switch energyGoalType {
+            case .fromMaintenance(_, let delta):
+                return delta == .deviation
+            case .percentFromMaintenance(let delta):
+                return delta == .deviation
+            default:
+                return false
+            }
+        default:
+            return false
+        }
+    }
+    
     var showsEquivalentValues: Bool {
         switch self {
         case .energy(let energyGoalType):

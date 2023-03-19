@@ -22,6 +22,21 @@ public enum GoalRequirement {
         }
     }
     
+    public var description: String {
+        switch self {
+        case .maintenanceEnergy:
+            return "maintenance"
+        case .leanMass:
+            return "lean body mass"
+        case .weight:
+            return "body weight"
+        case .energyGoal:
+            return "energy goal"
+        case .workoutDuration:
+            return "workout duration"
+        }
+    }
+    
     public var isBiometric: Bool {
         self != .workoutDuration
     }

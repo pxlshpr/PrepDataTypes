@@ -9,7 +9,7 @@ public struct GoalTypeValue: Codable, Hashable {
     public var nutrientType: NutrientType?
     public var nutrientUnit: NutrientUnit?
     
-    public var bodyMass: NutrientGoalBodyMassType?
+    public var bodyMass: BodyMassType?
     public var weightUnit: WeightUnit?
     public var energyQuantity: Double?
     public var workoutDurationUnit: WorkoutDurationUnit?

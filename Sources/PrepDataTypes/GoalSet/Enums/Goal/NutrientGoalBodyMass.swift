@@ -1,6 +1,6 @@
 import Foundation
 
-public enum NutrientGoalBodyMassType: Int16, Hashable, Codable, CaseIterable, Identifiable {
+public enum BodyMassType: Int16, Hashable, Codable, CaseIterable, Identifiable {
     case weight = 1
     case leanMass
     

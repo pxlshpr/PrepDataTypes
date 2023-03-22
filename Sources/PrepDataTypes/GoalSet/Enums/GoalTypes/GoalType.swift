@@ -225,4 +225,15 @@ public extension GoalType {
             return false
         }
     }
+    
+    var usesEnergyGoal: Bool {
+        guard let nutrientGoalType else { return false }
+        switch nutrientGoalType {
+        case .percentageOfEnergy, .quantityPerEnergy:
+            return true
+        default:
+            return false
+        }
+    }
+
 }

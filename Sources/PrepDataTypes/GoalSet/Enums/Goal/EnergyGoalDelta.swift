@@ -21,6 +21,7 @@ public extension EnergyGoalDelta {
         case .deficit:      return "below"
         case .surplus:      return "above"
 //        case .deviation:    return "around"
+//        case .deviation:    return "from"
         case .deviation:    return "within"
         }
     }

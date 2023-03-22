@@ -180,4 +180,22 @@ public extension NutrientGoalType {
             }
         }
     }
+    
+    var workoutDurationUnit: WorkoutDurationUnit? {
+        switch self {
+        case .quantityPerWorkoutDuration(let unit):
+            return unit
+        default:
+            return nil
+        }
+    }
+    
+    var perEnergyValue: Double? {
+        switch self {
+        case .quantityPerEnergy(let value, _):
+            return value
+        default:
+            return nil
+        }
+    }
 }

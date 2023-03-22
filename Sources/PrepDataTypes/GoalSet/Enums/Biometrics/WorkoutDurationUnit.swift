@@ -1,8 +1,10 @@
 import Foundation
 
-public enum WorkoutDurationUnit: Int16, Codable, CaseIterable {
+public enum WorkoutDurationUnit: Int16, Codable, CaseIterable, Identifiable {
     case min = 1
     case hour
+    
+    public var id: Int16 { rawValue }
     
     public var pickerDescription: String {
         switch self {

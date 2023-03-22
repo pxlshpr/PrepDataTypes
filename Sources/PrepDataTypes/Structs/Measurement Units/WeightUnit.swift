@@ -2,7 +2,7 @@ import Foundation
 
 public let PoundsPerStone: Double = 14
 
-public enum BodyMassUnit: Int16, CaseIterable, Codable {
+public enum BodyMassUnit: Int16, CaseIterable, Codable, Identifiable {
     case kg = 1
     case lb
     case st
@@ -17,6 +17,8 @@ public enum BodyMassUnit: Int16, CaseIterable, Codable {
             return "st"
         }
     }
+    
+    public var id: Int16 { rawValue }
 }
 
 public extension BodyMassUnit {

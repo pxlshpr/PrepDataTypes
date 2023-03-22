@@ -1,13 +1,12 @@
 import Foundation
 
-public enum NutrientGoalBodyMassType: Int16, Hashable, Codable, CaseIterable {
+public enum NutrientGoalBodyMassType: Int16, Hashable, Codable, CaseIterable, Identifiable {
     case weight = 1
     case leanMass
-}
-
-public extension NutrientGoalBodyMassType {
     
-    var description: String {
+    public var id: Int16 { rawValue }
+    
+    public var description: String {
         switch self {
         case .weight:
             return "body weight"
@@ -16,7 +15,7 @@ public extension NutrientGoalBodyMassType {
         }
     }
     
-    var pickerDescription: String {
+    public var pickerDescription: String {
         switch self {
         case .weight:
             return "body weight"
@@ -25,11 +24,11 @@ public extension NutrientGoalBodyMassType {
         }
     }
     
-    var pickerPrefix: String {
+    public var pickerPrefix: String {
         "of "
     }
     
-    var  menuDescription: String {
+    public var menuDescription: String {
         switch self {
         case .weight:
             return "body weight"

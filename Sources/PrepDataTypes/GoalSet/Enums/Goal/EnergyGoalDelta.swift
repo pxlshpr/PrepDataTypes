@@ -11,7 +11,8 @@ public extension EnergyGoalDelta {
         switch self {
         case .deficit:      return "below maintenance"
         case .surplus:      return "above maintenance"
-        case .deviation:    return "within maintenance"
+//        case .deviation:    return "within maintenance"
+        case .deviation:    return "of maintenance"
         }
     }
     

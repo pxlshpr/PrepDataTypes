@@ -1,16 +1,13 @@
 import Foundation
 
 public enum GoalType: Hashable, Codable {
-    
     case energy(EnergyGoalType)
-    
     case macro(NutrientGoalType, Macro)
-    
     case micro(NutrientGoalType, NutrientType, NutrientUnit)
 }
 
 public extension GoalType {
-    
+ 
     /// A hash value that is independent of the associated values
     var identifyingHashValue: String {
         switch self {
@@ -34,13 +31,22 @@ public extension GoalType {
         nutrientGoalType?.dependsOnEnergy ?? false
     }
     
+    var energyGoalType: EnergyGoalType? {
+        switch self {
+        case .energy(let energyGoalType):
+            return energyGoalType
+        default:
+            return nil
+        }
+    }
+    
     var nutrientGoalType: NutrientGoalType? {
         switch self {
         case .macro(let nutrientGoalType, _):
             return nutrientGoalType
         case .micro(let nutrientGoalType, _, _):
             return nutrientGoalType
-    default:
+        default:
             return nil
         }
     }
@@ -209,3 +215,14 @@ public extension GoalType {
 }
 #endif
     
+
+public extension GoalType {
+    var usesEnergyDelta: Bool {
+        switch self {
+        case .energy(let energyGoalType):
+            return !energyGoalType.isFixed
+        default:
+            return false
+        }
+    }
+}

@@ -1,6 +1,6 @@
 import Foundation
 
-public enum HealthPeriodType: Int16, Codable, CaseIterable {
+public enum HealthIntervalType: Int16, Codable, CaseIterable {
     case latest = 1
     case average
     

@@ -101,7 +101,7 @@ public struct HealthInterval: Hashable, Codable, Equatable {
         return intervals
     }
     
-    public var periodType: HealthPeriodType {
+    public var intervalType: HealthIntervalType {
         value == 1 && period == .day
         ? .latest
         : .average

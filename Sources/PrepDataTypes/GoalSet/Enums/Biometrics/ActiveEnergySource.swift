@@ -8,9 +8,9 @@ public enum ActiveEnergySource: Int16, Codable, CaseIterable {
     public var pickerDescription: String {
         switch self {
         case .health:
-            return "Health App"
+            return "Sync with Health App"
         case .activityLevel:
-            return "Activity level"
+            return "Use Activity level"
         case .userEntered:
             return "Enter manually"
         }

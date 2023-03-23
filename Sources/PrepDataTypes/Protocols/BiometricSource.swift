@@ -47,7 +47,7 @@ extension RestingEnergySource: BiometricSource {
     }
 }
 
-extension  MeasurementSource: BiometricSource {
+extension MeasurementSource: BiometricSource {
     public var isHealthSynced: Bool {
         self == .health
     }

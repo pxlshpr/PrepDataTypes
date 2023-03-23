@@ -9,11 +9,11 @@ public enum LeanBodyMassSource: Int16, Codable, CaseIterable {
     public var pickerDescription: String {
         switch self {
         case .formula:
-            return "Calculate"
+            return "Use a formula"
         case .health:
             return "Sync with Health App"
         case .fatPercentage:
-            return "Fat Percentage"
+            return "Use Fat Percentage"
         case .userEntered:
             return "Enter manually"
         }
@@ -36,7 +36,7 @@ public enum LeanBodyMassSource: Int16, Codable, CaseIterable {
     public var menuDescription: String {
         switch self {
         case .formula:
-            return "Calculate"
+            return "Formula"
         case .health:
             return "Health App"
         case .fatPercentage:

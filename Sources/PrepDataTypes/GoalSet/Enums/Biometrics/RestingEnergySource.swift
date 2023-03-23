@@ -2,15 +2,15 @@ import Foundation
 
 public enum RestingEnergySource: Int16, Codable, CaseIterable {
     case health = 1
-    case formula
+    case equation
     case userEntered
     
     public var pickerDescription: String {
         switch self {
         case .health:
             return "Sync with Health App"
-        case .formula:
-            return "Use a formula"
+        case .equation:
+            return "Use an equation"
         case .userEntered:
             return "Enter manually"
         }
@@ -20,8 +20,8 @@ public enum RestingEnergySource: Int16, Codable, CaseIterable {
         switch self {
         case .health:
             return "Sync with Health App"
-        case .formula:
-            return "Formula"
+        case .equation:
+            return "Equation"
         case .userEntered:
             return "Enter manually"
         }
@@ -31,7 +31,7 @@ public enum RestingEnergySource: Int16, Codable, CaseIterable {
         switch self {
         case .health:
             return "heart.fill"
-        case .formula:
+        case .equation:
             return "function"
         case .userEntered:
             return "keyboard"

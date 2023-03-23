@@ -34,9 +34,9 @@ public extension Biometrics {
         switch restingEnergy?.source {
         case .health:
             return true
-        case .formula:
-            guard let formula = restingEnergy?.formula else { return false }
-            if formula.usesLeanBodyMass, syncsLeanBodyMass {
+        case .equation:
+            guard let equation = restingEnergy?.equation else { return false }
+            if equation.usesLeanBodyMass, syncsLeanBodyMass {
                 return syncsLeanBodyMass
             } else {
                 return syncsWeight
@@ -63,7 +63,7 @@ public extension Biometrics {
         switch leanBodyMass?.source {
         case .health:
             return true
-        case .fatPercentage, .formula:
+        case .fatPercentage, .equation:
             /// We purposely disregard height being synced as it hardly changes after age 18-20
             return syncsWeight
         default:

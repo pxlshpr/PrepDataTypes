@@ -1,6 +1,6 @@
 import Foundation
 
-public enum LeanBodyMassFormula: Int16, Codable, CaseIterable {
+public enum LeanBodyMassEquation: Int16, Codable, CaseIterable {
     case boer = 1
     case james
     case hume
@@ -38,7 +38,7 @@ public enum LeanBodyMassFormula: Int16, Codable, CaseIterable {
         }
     }
     
-    /// Formulas taken from: [here](https://www.calculator.net/lean-body-mass-calculator.html)
+    /// Equations taken from: [here](https://www.calculator.net/lean-body-mass-calculator.html)
     public func calculate(sexIsFemale: Bool, weightInKg weight: Double, heightInCm height: Double) -> Double {
         guard weight > 0, height > 0 else { return 0 }
         let lbm: Double

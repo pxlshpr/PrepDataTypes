@@ -10,20 +10,20 @@ extension Biometrics {
         }
         public var unit: EnergyUnit
         public var source: RestingEnergySource?
-        public var formula: RestingEnergyFormula?
+        public var equation: RestingEnergyEquation?
         public var interval: HealthInterval?
         
         public init(
             amount: Double? = nil,
             unit: EnergyUnit,
             source: RestingEnergySource? = nil,
-            formula: RestingEnergyFormula? = nil,
+            equation: RestingEnergyEquation? = nil,
             interval: HealthInterval? = nil
         ) {
             self.amount = amount?.rounded(toPlaces: 1)
             self.unit = unit
             self.source = source
-            self.formula = formula
+            self.equation = equation
             self.interval = interval
         }
         
@@ -70,14 +70,14 @@ extension Biometrics {
         public var amount: Double?
         public var unit: BodyMassUnit
         public var source: LeanBodyMassSource?
-        public var formula: LeanBodyMassFormula?
+        public var equation: LeanBodyMassEquation?
         public var sampledAt: Double?
 
-        public init(amount: Double? = nil, unit: BodyMassUnit, source: LeanBodyMassSource? = nil, formula: LeanBodyMassFormula? = nil, date: Date? = nil) {
+        public init(amount: Double? = nil, unit: BodyMassUnit, source: LeanBodyMassSource? = nil, equation: LeanBodyMassEquation? = nil, date: Date? = nil) {
             self.amount = amount
             self.unit = unit
             self.source = source
-            self.formula = formula
+            self.equation = equation
             self.sampledAt = date?.timeIntervalSince1970
         }
         

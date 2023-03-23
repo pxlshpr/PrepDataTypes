@@ -1,6 +1,6 @@
 import Foundation
 
-public enum RestingEnergyFormula: Int16, Hashable, Codable, CaseIterable {
+public enum RestingEnergyEquation: Int16, Hashable, Codable, CaseIterable {
     case katchMcardle = 1
     case henryOxford
     case mifflinStJeor
@@ -9,11 +9,11 @@ public enum RestingEnergyFormula: Int16, Hashable, Codable, CaseIterable {
     case rozaShizgal
     case harrisBenedict
 
-    public static var latest: [RestingEnergyFormula] {
+    public static var latest: [RestingEnergyEquation] {
         [.henryOxford, .katchMcardle, .mifflinStJeor, .schofield]
     }
 
-    public static var legacy: [RestingEnergyFormula] {
+    public static var legacy: [RestingEnergyEquation] {
         [.rozaShizgal, .cunningham, .harrisBenedict]
     }
 
@@ -38,7 +38,7 @@ public enum RestingEnergyFormula: Int16, Hashable, Codable, CaseIterable {
     public var pickerDescription: String {
         switch self {
         case .schofield:
-            return "Schofield (WHO)"
+            return "Schofield"
         case .henryOxford:
             return "Henry Oxford"
         case .harrisBenedict:
@@ -46,7 +46,7 @@ public enum RestingEnergyFormula: Int16, Hashable, Codable, CaseIterable {
         case .cunningham:
             return "Cunningham"
         case .rozaShizgal:
-            return "Roza-Shizgal (Harris-Benedict Revised)"
+            return "Roza-Shizgal"
         case .mifflinStJeor:
             return "Mifflin-St. Jeor"
         case .katchMcardle:
@@ -90,9 +90,20 @@ public enum RestingEnergyFormula: Int16, Hashable, Codable, CaseIterable {
             return "1996"
         }
     }
+    
+    var biometricVariables: [BiometricType] {
+        switch self {
+        case .katchMcardle, .cunningham:
+            return [.leanBodyMass]
+        case .henryOxford, .schofield:
+            return [.weight, .age, .sex]
+        case .mifflinStJeor, .rozaShizgal, .harrisBenedict:
+            return [.weight, .height, .age, .sex]
+        }
+    }
 }
 
-public extension RestingEnergyFormula {
+public extension RestingEnergyEquation {
     func calculate(lbmInKg: Double, energyUnit: EnergyUnit) -> Double? {
         let energy: Double
         switch self {

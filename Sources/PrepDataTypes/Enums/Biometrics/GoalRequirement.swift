@@ -33,7 +33,8 @@ public enum GoalRequirement {
         case .energyGoal:
             return "energy goal"
         case .workoutDuration:
-            return "workout duration"
+//            return "workout duration"
+            return "exercise"
         }
     }
     

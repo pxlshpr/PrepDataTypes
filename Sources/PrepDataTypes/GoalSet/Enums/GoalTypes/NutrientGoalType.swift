@@ -41,7 +41,7 @@ public extension NutrientGoalType {
         case .quantityPerEnergy(let double, let energyUnit):
             return ("\(description) per", "\(double.formattedEnergy) \(energyUnit.shortDescription)")
         case .quantityPerWorkoutDuration:
-            return ("\(description) of", "workout duration")
+            return ("\(description)", "of exercise")
         default:
             return (description, nil)
         }
@@ -56,7 +56,7 @@ public extension NutrientGoalType {
         case .quantityPerBodyMass(let bodyMass, _):
             return "of \(bodyMass.description)"
         case .quantityPerWorkoutDuration(_):
-            return "of workout duration"
+            return "of exercise"
         case .quantityPerEnergy(let energyValue, let energyUnit):
             return "per \(energyValue.cleanAmount) \(energyUnit.shortDescription)"
         }
@@ -67,11 +67,14 @@ public extension NutrientGoalType {
         case .fixed:
             return nil
         case .percentageOfEnergy, .quantityPerEnergy:
-            return "flame.fill"
+            return nil
+//            return "flame.fill"
         case .quantityPerBodyMass(_, _):
-            return "figure.arms.open"
+            return nil
+//            return "figure.arms.open"
         case .quantityPerWorkoutDuration(_):
-            return "stopwatch.fill"
+            return nil
+//            return "stopwatch.fill"
         }
     }
     

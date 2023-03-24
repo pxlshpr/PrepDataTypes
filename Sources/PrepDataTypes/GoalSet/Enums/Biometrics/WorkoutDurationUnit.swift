@@ -23,7 +23,16 @@ public enum WorkoutDurationUnit: Int16, Codable, CaseIterable, Identifiable {
             return "hour"
         }
     }
-    
+
+    public var menuDescriptionLong: String {
+        switch self {
+        case .min:
+            return "minute of exercise"
+        case .hour:
+            return "hour of exercise"
+        }
+    }
+
     public var shortDescription: String {
         switch self {
         case .min:

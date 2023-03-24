@@ -12,18 +12,18 @@ public enum ActiveEnergySource: Int16, Codable, CaseIterable {
         case .activityLevel:
             return "Use Activity level"
         case .userEntered:
-            return "Enter manually"
+            return "Type it in"
         }
     }
     
     public var menuDescription: String {
         switch self {
         case .health:
-            return "Sync with Health App"
+            return "Health App"
         case .activityLevel:
-            return "Choose activity level"
+            return "Activity level"
         case .userEntered:
-            return "Enter manually"
+            return "Type it in"
         }
     }
     

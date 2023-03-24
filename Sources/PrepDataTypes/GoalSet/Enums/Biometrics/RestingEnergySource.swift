@@ -12,18 +12,18 @@ public enum RestingEnergySource: Int16, Codable, CaseIterable {
         case .equation:
             return "Use an equation"
         case .userEntered:
-            return "Enter manually"
+            return "Type it in"
         }
     }
     
     public var menuDescription: String {
         switch self {
         case .health:
-            return "Sync with Health App"
+            return "Health App"
         case .equation:
             return "Equation"
         case .userEntered:
-            return "Enter manually"
+            return "Type it in"
         }
     }
     

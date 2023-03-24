@@ -9,7 +9,7 @@ public enum MeasurementSource: Int16, Codable, CaseIterable {
         case .health:
             return "Sync with Health App"
         case .userEntered:
-            return "Enter manually"
+            return "Type it in"
         }
     }
     
@@ -27,7 +27,7 @@ public enum MeasurementSource: Int16, Codable, CaseIterable {
         case .health:
             return "Health App"
         case .userEntered:
-            return "Enter manually"
+            return "Type it in"
         }
     }
 }

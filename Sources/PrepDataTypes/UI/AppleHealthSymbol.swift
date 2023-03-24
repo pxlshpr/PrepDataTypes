@@ -26,11 +26,12 @@ public var appleHealthSymbol: some View {
 }
 
 public var appleHealthBolt: some View {
-    Image(systemName: "bolt.horizontal.fill")
-        .symbolRenderingMode(.palette)
-//        .foregroundStyle(HealthGradient)
-//        .foregroundStyle(HealthGradientHorizontal)
-//        .foregroundStyle(HealthTopColor)
-        .foregroundStyle(.green.gradient)
+    appleHealthSymbol
+//    Image(systemName: "bolt.horizontal.fill")
+//        .symbolRenderingMode(.palette)
+////        .foregroundStyle(HealthGradient)
+////        .foregroundStyle(HealthGradientHorizontal)
+////        .foregroundStyle(HealthTopColor)
+//        .foregroundStyle(.green.gradient)
 }
 #endif

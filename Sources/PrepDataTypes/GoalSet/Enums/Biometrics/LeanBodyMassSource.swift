@@ -15,7 +15,7 @@ public enum LeanBodyMassSource: Int16, Codable, CaseIterable {
         case .fatPercentage:
             return "Use Fat Percentage"
         case .userEntered:
-            return "Enter manually"
+            return "Type it in"
         }
     }
     
@@ -43,7 +43,7 @@ public enum LeanBodyMassSource: Int16, Codable, CaseIterable {
 //            return "Fat percentage"
             return "Fat Percentage"
         case .userEntered:
-            return "Enter manually"
+            return "Type it in"
         }
     }
     

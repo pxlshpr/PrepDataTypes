@@ -87,6 +87,7 @@ public extension Notification.Name {
     static var shouldDismissFoodForm: Notification.Name { return .init("shouldDismissFoodForm") }
     
     static var didUpdateBiometrics: Notification.Name { return .init("didUpdateBiometrics") }
+    static var didSetBiometrics: Notification.Name { return .init("didSetBiometrics") }
 }
 
 public extension Notification {

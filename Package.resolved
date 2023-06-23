@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pxlshpr/SwiftSugar",
       "state" : {
-        "revision" : "06f08db0baa5f0f2dd650dfa35a740c91fae671e",
-        "version" : "0.0.88"
+        "revision" : "c76ad59dd4ee3385675adb0c0d7c9a11c48bed22",
+        "version" : "0.0.93"
       }
     }
   ],

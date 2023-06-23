@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Food: Identifiable, Hashable, Codable {
+public struct IngredientFood: Identifiable, Hashable, Codable {
     public let id: UUID
     public let type: FoodType
     public var name: String
@@ -13,20 +13,9 @@ public struct Food: Identifiable, Hashable, Codable {
     public let firstUsedAt: Double?
     public let info: FoodInfo
 
-    /// `UserFood` specific
     public let publishStatus: UserFoodPublishStatus?
-    public var jsonSyncStatus: SyncStatus
-    public let childrenFoods: [Food]? //TODO: Use compact version here if we'll get cyclical errors
-    public let ingredientItems: [IngredientItem]?
-
-    /// `PresetFood` specific
     public let dataset: FoodDataset?
-
     public let barcodes: [Barcode]?
-    
-    public var syncStatus: SyncStatus
-    public var updatedAt: Double
-    public var deletedAt: Double?
     
     public init(
         id: UUID,
@@ -41,14 +30,8 @@ public struct Food: Identifiable, Hashable, Codable {
         firstUsedAt: Double?,
         info: FoodInfo,
         publishStatus: UserFoodPublishStatus?,
-        jsonSyncStatus: SyncStatus,
-        childrenFoods: [Food]?,
-        ingredientItems: [IngredientItem]?,
         dataset: FoodDataset?,
-        barcodes: [Barcode]?,
-        syncStatus: SyncStatus,
-        updatedAt: Double,
-        deletedAt: Double? = nil
+        barcodes: [Barcode]?
     ) {
         self.id = id
         self.type = type
@@ -62,24 +45,12 @@ public struct Food: Identifiable, Hashable, Codable {
         self.firstUsedAt = firstUsedAt
         self.info = info
         self.publishStatus = publishStatus
-        self.jsonSyncStatus = jsonSyncStatus
-        self.childrenFoods = childrenFoods
-        self.ingredientItems = ingredientItems
         self.dataset = dataset
         self.barcodes = barcodes
-        self.syncStatus = syncStatus
-        self.updatedAt = updatedAt
-        self.deletedAt = deletedAt
     }
 }
 
-public extension Food {
-    var isDeleted: Bool {
-        deletedAt != nil && deletedAt! > 0
-    }
-}
-
-public extension Food {
+public extension IngredientFood {
     var primaryMacro: Macro {
         let carb = info.nutrients.carb
         let fat = info.nutrients.fat
@@ -93,9 +64,6 @@ public extension Food {
         if fatCalories > carbCalories && fatCalories > proteinCalories {
             return .fat
         }
-//        if proteinCalories > fatCalories && proteinCalories > carbCalories {
-//            return .protein
-//        }
         return .protein
     }
     
@@ -111,7 +79,7 @@ public extension Food {
     }
 }
 
-public extension Food {
+public extension IngredientFood {
     var energyBySummatingMacros: Double {
         (info.nutrients.carb * KcalsPerGramOfCarb)
         + (info.nutrients.fat * KcalsPerGramOfFat)
@@ -132,9 +100,15 @@ public extension Food {
     }
 }
 
-public extension Food {
-    var ingredientFood: IngredientFood {
-        IngredientFood(
+public extension IngredientFood {
+    /// This 'detached' food is essentially a `Food` created from an `IngredientFood`, to use in places where a `Food`
+    /// is required and cannot be swapped in with an `IngredientFood`.
+    ///
+    /// Since `IngredientFood` is a stripped-out version of `Food` to begin with—this re-creates that same `Food`, but
+    /// with only the stripped out data. Things like the `ingredientItems`, and metadata like `syncStatus` and timestamps
+    /// are not included.
+    var detachedFood: Food {
+        Food(
             id: id,
             type: type,
             name: name,
@@ -147,8 +121,14 @@ public extension Food {
             firstUsedAt: firstUsedAt,
             info: info,
             publishStatus: publishStatus,
+            jsonSyncStatus: .synced,
+            childrenFoods: nil,
+            ingredientItems: nil,
             dataset: dataset,
-            barcodes: barcodes
+            barcodes: barcodes,
+            syncStatus: .synced,
+            updatedAt: 0
         )
     }
 }
+

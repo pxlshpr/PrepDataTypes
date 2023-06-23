@@ -213,3 +213,10 @@ public extension FoodValue {
         "\(value.cleanAmount) \(unitDescription(sizes: ingredientFood.info.sizes))"
     }
 }
+
+extension FoodValue {
+    /// returns either the volume prefix of the size or the volume unit
+    var descriptiveVolumeUnit: VolumeExplicitUnit? {
+        sizeUnitVolumePrefixExplicitUnit ?? volumeExplicitUnit
+    }
+}

@@ -34,13 +34,6 @@ public extension Food {
     }
 }
 
-extension FoodValue {
-    /// returns either the volume prefix of the size or the volume unit
-    var descriptiveVolumeUnit: VolumeExplicitUnit? {
-        sizeUnitVolumePrefixExplicitUnit ?? volumeExplicitUnit
-    }
-}
-
 public extension Food {
     var canBeMeasuredInWeight: Bool {
         if info.density != nil {

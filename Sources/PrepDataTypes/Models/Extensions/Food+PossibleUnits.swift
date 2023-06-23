@@ -38,13 +38,3 @@ public extension Food {
         return units
     }
 }
-
-extension FoodQuantity.Size {
-    public var id: String {
-        if let volumePrefixExplicitUnit {
-            return "\(name)\(volumePrefixExplicitUnit.volumeUnit.rawValue)"
-        } else {
-            return name
-        }
-    }
-}

@@ -11,7 +11,7 @@ extension SyncForm {
     }
 
     public func log(emoji: String, isRequest: Bool, includeBreakdown: Bool) {
-        Logger.log("\(emoji)→ [\(isRequest ? "Request" : "Response") SyncForm] updates: \(updates?.count ?? 0), device: \(deviceModelName), \(isRequest ? "requestedVersion" : "receivedVersion"): \(versionTimestamp.timeStringAtGMT5)", printToConsole: true)
+//        Logger.log("\(emoji)→ [\(isRequest ? "Request" : "Response") SyncForm] updates: \(updates?.count ?? 0), device: \(deviceModelName), \(isRequest ? "requestedVersion" : "receivedVersion"): \(versionTimestamp.timeStringAtGMT5)", printToConsole: true)
         
         guard includeBreakdown else { return }
 
@@ -50,7 +50,7 @@ extension SyncForm {
                 activity.log()
             }
         }
-        Logger.log(" ")
+//        Logger.log(" ")
     }
 }
 
@@ -71,58 +71,58 @@ extension Double {
 
 public extension Food {
     func log() {
-        Logger.log("    [Food] name: \(name)")
+//        Logger.log("    [Food] name: \(name)")
         if let deletedAt, deletedAt > 0 {
-            Logger.log("      - deletedAt: \(deletedAt.timeStringAtGMT5)")
+//            Logger.log("      - deletedAt: \(deletedAt.timeStringAtGMT5)")
         }
     }
 }
 
 public extension FastingActivity {
     func log() {
-        Logger.log("    [FastingActivity] lastMealAt: \(lastMealAt.timeStringAtGMT5)")
+//        Logger.log("    [FastingActivity] lastMealAt: \(lastMealAt.timeStringAtGMT5)")
         if let deletedAt, deletedAt > 0 {
-            Logger.log("      - deletedAt: \(deletedAt.timeStringAtGMT5)")
+//            Logger.log("      - deletedAt: \(deletedAt.timeStringAtGMT5)")
         }
     }
 }
 
 public extension PrepDataTypes.GoalSet {
     func log() {
-        Logger.log("    [GoalSet] name: \(name), goals: \(goals.count)")
+//        Logger.log("    [GoalSet] name: \(name), goals: \(goals.count)")
         if let deletedAt, deletedAt > 0 {
-            Logger.log("      - deletedAt: \(deletedAt.timeStringAtGMT5)")
+//            Logger.log("      - deletedAt: \(deletedAt.timeStringAtGMT5)")
         }
     }
 }
 
 public extension PrepDataTypes.Day {
     func log() {
-        Logger.log("    [Day] \(calendarDayString)")
+//        Logger.log("    [Day] \(calendarDayString)")
         if let goalSet {
-            Logger.log("      - goalSet: \(goalSet.name), goals: \(goalSet.goals.count)")
+//            Logger.log("      - goalSet: \(goalSet.name), goals: \(goalSet.goals.count)")
         } else {
-            Logger.log("      - goalSet: nil")
+//            Logger.log("      - goalSet: nil")
         }
         if let biometrics {
-            Logger.log("      - biometrics: [Biometrics]")
+//            Logger.log("      - biometrics: [Biometrics]")
             biometrics.log()
         } else {
-            Logger.log("      - biometrics: nil")
+//            Logger.log("      - biometrics: nil")
         }
-        Logger.log("      - markedAsFasted: \(markedAsFasted)")
+//        Logger.log("      - markedAsFasted: \(markedAsFasted)")
 
     }
 }
 
 public extension PrepDataTypes.FoodItem {
     func log() {
-        Logger.log("    [FoodItem] food: \(food.name), amount: \(amount.description), sort: \(sortPosition)")
+//        Logger.log("    [FoodItem] food: \(food.name), amount: \(amount.description), sort: \(sortPosition)")
         if let meal {
-            Logger.log("      - meal: \(meal.name), time: \(meal.time.timeStringAtGMT5)")
+//            Logger.log("      - meal: \(meal.name), time: \(meal.time.timeStringAtGMT5)")
         }
         if let deletedAt, deletedAt > 0 {
-            Logger.log("      - deletedAt: \(deletedAt.timeStringAtGMT5)")
+//            Logger.log("      - deletedAt: \(deletedAt.timeStringAtGMT5)")
         }
     }
 }
@@ -151,16 +151,16 @@ extension FoodValue {
 
 public extension PrepDataTypes.Meal {
     func log() {
-        Logger.log("    [Meal] name: \(name), time: \(time.timeStringAtGMT5)")
+//        Logger.log("    [Meal] name: \(name), time: \(time.timeStringAtGMT5)")
         if let deletedAt, deletedAt > 0 {
-            Logger.log("      - deletedAt: \(deletedAt.timeStringAtGMT5)")
+//            Logger.log("      - deletedAt: \(deletedAt.timeStringAtGMT5)")
         }
     }
 }
 
 public extension Biometrics {
     func log() {
-        Logger.log("(Biometrics.log() not implemented)")
+//        Logger.log("(Biometrics.log() not implemented)")
     }
 }
 
@@ -198,10 +198,10 @@ public class Logger {
             let directoryPath = "\(FileManager.default.currentDirectoryPath)/Logs"
             if !FileManager.default.fileExists(atPath: directoryPath) {
                 do {
-                    print("Creating: \(directoryPath)")
+//                    print("Creating: \(directoryPath)")
                     try FileManager.default.createDirectory(atPath: directoryPath, withIntermediateDirectories: true, attributes: nil)
                 } catch {
-                    print("Error creating directory: \(error.localizedDescription)");
+//                    print("Error creating directory: \(error.localizedDescription)");
                 }
             }
             return URL(fileURLWithPath: directoryPath)
@@ -230,9 +230,9 @@ public class Logger {
             group.wait()
             group.enter()
 
-            if printToConsole {
-                print(message)
-            }
+//            if printToConsole {
+//                print(message)
+//            }
 
             guard let logFile else {
                 group.leave()
@@ -262,7 +262,7 @@ public class Logger {
     //            print("💾 Wrote to: \(logFile)")
                 
             } catch {
-                print("Could not write to: \(logFile) – \(error)")
+//                print("Could not write to: \(logFile) – \(error)")
             }
             group.leave()
         }

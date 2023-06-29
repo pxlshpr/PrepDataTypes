@@ -14,6 +14,9 @@ public struct FoodItem: Identifiable, Hashable, Codable {
     public var updatedAt: Double
     public var deletedAt: Double?
     
+    public var badgeWidth: Double?
+    public var energyInKcal: Double?
+    
     public init(
         id: UUID,
         food: Food,
@@ -24,7 +27,9 @@ public struct FoodItem: Identifiable, Hashable, Codable {
         sortPosition: Int,
         syncStatus: SyncStatus,
         updatedAt: Double,
-        deletedAt: Double? = nil
+        deletedAt: Double? = nil,
+        badgeWidth: Double? = nil,
+        energyInKcal: Double? = nil
     ) {
         self.id = id
         self.food = food
@@ -36,6 +41,8 @@ public struct FoodItem: Identifiable, Hashable, Codable {
         self.syncStatus = syncStatus
         self.updatedAt = updatedAt
         self.deletedAt = deletedAt
+        self.badgeWidth = badgeWidth
+        self.energyInKcal = energyInKcal
     }
 }
 

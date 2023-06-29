@@ -1,5 +1,6 @@
 #if os(iOS)
 import SwiftUI
+import ColorSugar
 
 public let HealthBottomColorHex = "fc2e1d"
 public let HealthTopColorHex = "fe5fab"

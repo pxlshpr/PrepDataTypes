@@ -33,6 +33,8 @@ extension Macro: CustomStringConvertible {
 import SwiftUI
 import SwiftSugar
 
+import ColorSugar
+
 public extension Macro {
 
     func fillColor(for colorScheme: ColorScheme) -> Color {
